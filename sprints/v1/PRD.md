@@ -1,130 +1,123 @@
-# PRD — Kowa Website + RAG Chatbot (v1)
+# PRD — Kowa Website Migration + RAG Agent Chatbot (v1)
 
-## 1) Product Goal
-Build a redesigned Kowa corporate website with an embedded RAG chatbot, preserving and modernizing content from the legacy site (`https://kowatrade.com/`) and enabling grounded Q&A with citations.
+## 1) Product Summary
+Build a new Kowa website as a modern replacement of the legacy site, with an **agent-based RAG chatbot embedded on the main landing page**.
 
-## 2) Mandatory Inputs for v1
-1. **Legacy content migration is mandatory**
-   - Crawl/scrape all reachable legacy pages from `kowatrade.com`.
-   - Extract bilingual corporate profile data (JP/EN) and preserve factual company information.
-   - Build a structured content inventory before UI implementation.
-
-2. **Design benchmarking is mandatory (Perplexity-based)**
-   - Use Perplexity research to benchmark top elegant trading/chatbot experiences.
-   - Selected references for v1 visual/system direction:
-     - **TrendSpider** (AI assistant-led, product-driven sectioning)
-     - **Interactive Brokers IBot** (trust + utility + trading-assistant framing)
-
-3. **Frontend quality is mandatory**
-   - Use high-design frontend direction (clean corporate premium, strong typography, credible trust cues).
-   - Avoid generic chatbot landing style.
-
-4. **RAG grounding is mandatory**
-   - Answers must be grounded in approved Kowa sources only.
-   - Explicit abstention when evidence is missing.
+The project is a **legacy website migration** plus **new AI capability** rollout.
 
 ---
 
-## 3) Legacy Website Crawl & Content Migration Spec
-
-### 3.1 Crawl Targets
-- Primary domain: `https://kowatrade.com/`
-- Crawl policy: domain-only, HTML pages + key downloadable docs (if any), skip binary media except linked company docs.
-
-### 3.2 Output Artifacts (required before build)
-- `content-inventory.csv`
-  - `url`, `title`, `lang`, `content_type`, `status_code`, `notes`
-- `content-normalized.json`
-  - Structured company data fields (name, address, tel/fax, management, capital, established year, affiliates)
-- `migration-map.md`
-  - old URL -> new IA destination (new page/section)
-
-### 3.3 Content Rules
-- Do not invent company facts.
-- Preserve legal/company identity data exactly (with normalization only for formatting).
-- Flag uncertain/garbled legacy text for manual verification.
+## 2) Business Goal
+- Modernize brand presence and UX quality
+- Preserve and migrate legacy website content accurately
+- Add a grounded chatbot for instant Q&A using trusted company sources
+- Create a scalable base for future content and automation
 
 ---
 
-## 4) Design Direction (derived from benchmark references)
+## 3) Core Scope (Must Have)
 
-### 4.1 Visual Principles
-- Premium corporate trust first, chatbot second
-- Strong information hierarchy (company credibility -> capabilities -> chatbot utility)
-- Sparse, elegant whitespace and polished typography
-- Subtle motion, no noisy effects
+### A. Legacy Website Migration
+- Input: old website URL (provided by stakeholder)
+- Crawl and scrape all reachable pages/content from old website
+- Build migration artifacts:
+  - `content-inventory.csv`
+  - `content-normalized.json`
+  - `migration-map.md`
+- Preserve factual company information and key corporate data
+- Flag ambiguous/garbled legacy text for manual review
 
-### 4.2 IA / Page Structure (v1)
-1. Home (hero + trust + capability overview)
-2. About / Company Profile (legacy facts modernized)
-3. Services / Trading Domains
-4. RAG Chat Assistant page/section
-5. Contact
+### B. New Website Build
+- Rebuild website with modern architecture and premium UI/UX
+- New IA includes at minimum:
+  - Home (landing)
+  - About/Company Profile
+  - Services
+  - Contact
+- Main landing page includes RAG chatbot section/widget
 
-### 4.3 Chatbot UX Principles
-- Prominent but non-intrusive entry point
-- Suggested prompts for first-time users
-- Citation panel with source and page/section metadata
-- Clear “I don’t know based on available Kowa sources.” fallback
+### C. RAG Agent-Based Chatbot on Landing Page
+- Chatbot available directly on home page
+- Agent-based orchestration with grounded retrieval
+- Responses must include citations when evidence exists
+- If evidence missing: explicit abstention response
+- No synthetic/hallucinated citations
 
----
-
-## 5) MVP Scope
-
-### In Scope
-- New website shell + modern UI
-- Legacy content migration and normalization
-- RAG chatbot UI + backend endpoint
-- PDF/source ingestion for knowledge base
-- Citation rendering and grounding guardrails
-- Basic admin ingestion controls (upload/disable source)
-
-### Out of Scope
-- Full CMS authoring workflows
-- Advanced analytics dashboards
-- Enterprise SSO
-- Multi-brand theming
+### D. Supabase Support
+- Integrate Supabase for:
+  - website operational data
+  - chat session metadata/history
+  - source/index metadata
+  - vector retrieval support via pgvector
+- Design schema for migration content and RAG sources
 
 ---
 
-## 6) Functional Requirements
-1. Legacy crawl pipeline and migration artifacts generated before UI freeze.
-2. Users can ask questions and receive grounded responses with citations.
-3. Citations must be from verified indexed sources only.
-4. Admin can upload and disable sources.
-5. Chat must support JA/EN UI baseline and language steering.
+## 4) Design Direction (Frontend Execution Mandate)
+- Implement using **frontend-design skill quality standard**:
+  - elegant, distinctive, non-generic visual system
+  - strong typography and trust-oriented composition
+  - premium corporate aesthetic
+  - responsive and accessible
+- Avoid cookie-cutter AI landing patterns
+- Home page must balance:
+  1) corporate credibility
+  2) service clarity
+  3) visible AI-assistant utility
 
 ---
 
-## 7) Non-Functional Requirements
-- P95 response latency < 8s (MVP target)
-- No sensitive keys pushed to repo
-- Secure object storage + least privilege access
-- Auditability: request, retrieval set, and citation provenance logs
+## 5) Functional Requirements
+1. Legacy crawler runs on provided old URL and generates migration artifacts.
+2. Content from legacy site is mapped into new IA sections.
+3. Landing page contains active chatbot entry.
+4. Chat endpoint supports retrieval-grounded answers.
+5. Citation UI renders source title/link/page metadata.
+6. Supabase integration supports storage/query requirements.
+7. Basic admin ingestion controls for source updates.
 
 ---
 
-## 8) Technical Direction (v1)
+## 6) Non-Functional Requirements
+- Mobile-first responsive behavior
+- Secure handling of environment variables (no secrets in repo)
+- P95 chatbot response target under 8 seconds (MVP)
+- Auditability for retrieval set and citations
+- Maintainable project structure for rapid iteration
+
+---
+
+## 7) Technical Direction (v1)
 - Frontend: Next.js + TypeScript
-- Styling/UX: frontend-design quality standard
+- Styling system: custom premium UI layer
 - Backend: Next.js API routes (MVP)
-- DB/Vector: Supabase Postgres + pgvector
-- Storage: S3-compatible object storage
-- Orchestration: LangGraph/LangChain
+- Agentic layer: LangGraph + LangChain
+- Database/vector: Supabase Postgres + pgvector
+- File/object storage: S3-compatible storage (as needed for source docs)
 
 ---
 
-## 9) Success Metrics
-- 100% legacy reachable pages inventoried in crawl output
+## 8) Success Metrics
+- 100% reachable legacy pages inventoried in crawl output
+- >90% successful migration mapping coverage
 - >80% grounded answers include valid citations when evidence exists
 - <5% citation-link failures
-- >90% successful ingestion runs
-- Stakeholder design acceptance on benchmark alignment (TrendSpider/IBot-inspired structure, Kowa-branded execution)
+- Stakeholder acceptance on redesigned visual quality
 
 ---
 
-## 10) Milestones
-- **v1.1**: Legacy crawl + content inventory + migration map
-- **v1.2**: New website IA + premium frontend implementation
-- **v1.3**: RAG chatbot + citations + admin ingestion
-- **v1.4**: QA hardening + pilot release
+## 9) Risks & Controls
+- **Legacy encoding issues** → add normalization + manual review queue
+- **Content loss during migration** → inventory + migration map validation gate
+- **Hallucinations** → strict grounded retrieval + abstention policy
+- **Design drift to generic UI** → enforce frontend-design review criteria
+
+---
+
+## 10) Delivery Phases
+1. Discovery + crawl + migration artifacts
+2. IA + high-fidelity design system
+3. Frontend implementation (core pages)
+4. RAG chatbot integration on landing page
+5. Supabase integration + validation
+6. QA + launch readiness
