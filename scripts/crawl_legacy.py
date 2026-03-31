@@ -133,7 +133,20 @@ def main():
         f.write("|---|---|---|\n")
         for row in inventory:
             legacy = row[0]
-            f.write(f"| {legacy} | /legacy | Migrated legacy excerpt available |\n")
+            target = '/legacy'
+            if legacy.endswith('index.html') or legacy == START_URL:
+                target = '/'
+            elif legacy.endswith('new1.html'):
+                target = '/welcome'
+            elif legacy.endswith('productsindex2.html'):
+                target = '/business'
+            elif legacy.endswith('form1.html'):
+                target = '/inquiry'
+            elif legacy.endswith('history1.html'):
+                target = '/factory'
+            elif legacy.endswith('access1.html'):
+                target = '/access'
+            f.write(f"| {legacy} | {target} | Migrated legacy excerpt available |\n")
 
     migrated_pages = []
     for row in inventory:

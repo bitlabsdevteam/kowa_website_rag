@@ -1,13 +1,16 @@
 import profile from '@/sprints/v1/artifacts/content-normalized.json';
 import { ChatWidget } from '@/components/chat-widget';
 import { AuthControls } from '@/components/auth-controls';
+import { TopMenu } from '@/components/top-menu';
 
 export default function HomePage() {
   return (
     <main className="page">
-      <section className="card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <strong>Kowa Trade</strong>
-        <AuthControls />
+      <section className="card" style={{ display: 'grid', gap: 12 }}>
+        <TopMenu />
+        <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <AuthControls />
+        </div>
       </section>
 
       <section className="hero">
