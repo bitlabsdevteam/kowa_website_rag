@@ -1,0 +1,40 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+coverage/
+
+# Env and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.crt
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build artifacts
+*.tsbuildinfo
+dist/
+
+# Testing / playwright
+playwright-report/
+test-results/
+
+# Local tooling
+.venv/
+venv/
+*.sqlite
