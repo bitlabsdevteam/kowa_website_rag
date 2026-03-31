@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import csv
 import json
+import os
 import re
 from collections import deque
 from urllib.parse import urljoin, urlparse
@@ -76,6 +77,9 @@ def normalize_profile(text: str):
 
 
 def main():
+    os.makedirs('sprints/v1/artifacts', exist_ok=True)
+    os.makedirs('data', exist_ok=True)
+
     visited = set()
     q = deque([START_URL])
     inventory = []
@@ -129,7 +133,23 @@ def main():
         f.write("|---|---|---|\n")
         for row in inventory:
             legacy = row[0]
-            f.write(f"| {legacy} | /about/company-profile | Verify JP/EN content fidelity |\n")
+            f.write(f"| {legacy} | /legacy | Migrated legacy excerpt available |\n")
+
+    migrated_pages = []
+    for row in inventory:
+        url = row[0]
+        text = re.sub(r"\s+", " ", page_texts.get(url, "")).strip()
+        migrated_pages.append(
+            {
+                "url": url,
+                "title": row[1],
+                "lang": row[2],
+                "excerpt": text[:1200],
+            }
+        )
+
+    with open("data/legacy-pages.json", "w", encoding="utf-8") as f:
+        json.dump(migrated_pages, f, ensure_ascii=False, indent=2)
 
 
 if __name__ == "__main__":

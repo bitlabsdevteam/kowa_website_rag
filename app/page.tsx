@@ -1,9 +1,15 @@
 import profile from '@/sprints/v1/artifacts/content-normalized.json';
 import { ChatWidget } from '@/components/chat-widget';
+import { AuthControls } from '@/components/auth-controls';
 
 export default function HomePage() {
   return (
     <main className="page">
+      <section className="card" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <strong>Kowa Trade</strong>
+        <AuthControls />
+      </section>
+
       <section className="hero">
         <span className="badge">Kowa Website Migration v1</span>
         <h1>Kowa Trade & Commerce</h1>

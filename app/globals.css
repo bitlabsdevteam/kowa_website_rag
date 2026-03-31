@@ -49,4 +49,6 @@ body {
 .input-row input { flex: 1; background: #0a1016; border: 1px solid var(--line); color: var(--text); border-radius: 12px; padding: 12px; }
 .input-row button { border: 1px solid rgba(213,179,108,0.5); background: rgba(213,179,108,0.15); color: var(--gold); border-radius: 12px; padding: 0 16px; }
 
+.field { background: #0a1016; border: 1px solid var(--line); color: var(--text); border-radius: 10px; padding: 10px 12px; }
+
 @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
