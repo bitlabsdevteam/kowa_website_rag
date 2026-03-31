@@ -1,33 +1,23 @@
 import { NextResponse } from 'next/server';
 
-import { KNOWLEDGE } from '@/lib/knowledge';
+import { retrieveTopSource } from '@/lib/retrieval';
 import type { ChatRequest, ChatResponse } from '@/lib/contracts';
 
-function groundedAnswer(message: string): ChatResponse {
-  const q = message.toLowerCase();
-  const source = KNOWLEDGE[0];
+function heuristics(sourceContent: string, query: string): string | null {
+  const q = query.toLowerCase();
+  const c = sourceContent;
 
-  if (q.includes('establish') || q.includes('when') || q.includes('year')) {
-    return {
-      answer: 'Kowa Trade And Commerce was established in 1994.',
-      grounded: true,
-      citations: [{ id: source.id, title: source.title, href: source.href, excerpt: 'Established : 1994' }],
-    };
+  if (q.includes('establish') || q.includes('year')) {
+    const m = c.match(/Established\s*:\s*([^\.\n]+)/i);
+    if (m) return `Kowa was established in ${m[1].trim()}.`;
   }
 
   if (q.includes('address') || q.includes('where')) {
-    return {
-      answer: 'Kowa address is Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073, JAPAN.',
-      grounded: true,
-      citations: [{ id: source.id, title: source.title, href: source.href, excerpt: 'Reoma Bldg. 5F, 2-10-6, Mita...' }],
-    };
+    const m = c.match(/Reoma Bldg\.[^\.\n]+/i);
+    if (m) return `Kowa address is ${m[0].trim()}.`;
   }
 
-  return {
-    answer: "I don't know based on the available Kowa sources.",
-    grounded: false,
-    citations: [],
-  };
+  return null;
 }
 
 export async function POST(request: Request) {
@@ -37,6 +27,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'message is required' }, { status: 400 });
   }
 
-  const res = groundedAnswer(body.message.trim());
-  return NextResponse.json(res);
+  const source = await retrieveTopSource(body.message.trim());
+  if (!source) {
+    const out: ChatResponse = { answer: "I don't know based on the available Kowa sources.", grounded: false, citations: [] };
+    return NextResponse.json(out);
+  }
+
+  const concise = heuristics(source.content, body.message.trim()) ?? `Based on available Kowa sources, relevant information is: ${source.content.slice(0, 180)}...`;
+
+  const out: ChatResponse = {
+    answer: concise,
+    grounded: true,
+    citations: [{ id: source.id, title: source.title, href: source.href, excerpt: source.content.slice(0, 160) }],
+  };
+
+  return NextResponse.json(out);
 }
