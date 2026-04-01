@@ -4,20 +4,31 @@ import { useState } from 'react';
 
 import type { ChatResponse } from '@/lib/contracts';
 
-type Msg = { role: 'user' | 'assistant'; text: string; citations?: ChatResponse['citations'] };
+type Msg = {
+  role: 'user' | 'assistant';
+  text: string;
+  grounded?: boolean;
+  citations?: ChatResponse['citations'];
+};
+
+const PROMPTS = ['When was Kowa established?', 'Where is Kowa located?', 'What does Kowa handle?'];
 
 export function ChatWidget() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Msg[]>([
-    { role: 'assistant', text: 'Welcome to Kowa AI Assistant. Ask me about company profile information.' },
+    {
+      role: 'assistant',
+      text: 'Ask about Kowa company details, address, source coverage, or migrated business information.',
+      grounded: true,
+    },
   ]);
   const [loading, setLoading] = useState(false);
 
-  const send = async () => {
-    const text = input.trim();
+  const submit = async (rawText?: string) => {
+    const text = (rawText ?? input).trim();
     if (!text || loading) return;
 
-    setMessages((m) => [...m, { role: 'user', text }]);
+    setMessages((current) => [...current, { role: 'user', text }]);
     setInput('');
     setLoading(true);
 
@@ -28,37 +39,68 @@ export function ChatWidget() {
     });
 
     const payload = (await res.json()) as ChatResponse;
-    setMessages((m) => [...m, { role: 'assistant', text: payload.answer, citations: payload.citations }]);
+    setMessages((current) => [
+      ...current,
+      {
+        role: 'assistant',
+        text: payload.answer,
+        grounded: payload.grounded,
+        citations: payload.citations,
+      },
+    ]);
     setLoading(false);
   };
 
   return (
     <div className="chat-shell">
-      {messages.map((m, i) => (
-        <div key={i} className={`chat-bubble ${m.role === 'user' ? 'user' : 'bot'}`}>
-          <div>{m.text}</div>
-          {m.citations?.length ? (
-            <div style={{ marginTop: 8 }}>
-              {m.citations.map((c) => (
-                <a key={c.id} href={c.href} target="_blank" rel="noreferrer" style={{ color: '#d5b36c' }}>
-                  Source: {c.title}
-                </a>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ))}
+      <div className="chat-intro">
+        <strong>Grounded assistant</strong>
+        <p>Answers stay tied to approved Kowa sources. Start with one of these prompts or ask your own question.</p>
+      </div>
+
+      <div className="chat-prompts">
+        {PROMPTS.map((prompt) => (
+          <button key={prompt} type="button" className="prompt-chip" onClick={() => void submit(prompt)} disabled={loading}>
+            {prompt}
+          </button>
+        ))}
+      </div>
+
+      <div className="chat-messages">
+        {messages.map((message, index) => (
+          <div key={index} className={`chat-bubble ${message.role === 'user' ? 'user' : 'bot'}`}>
+            <div>{message.text}</div>
+            {message.role === 'assistant' ? (
+              <div className={`chat-status ${message.grounded ? 'grounded' : 'ungrounded'}`}>
+                {message.grounded ? 'Grounded response' : 'No grounded answer'}
+              </div>
+            ) : null}
+            {message.citations?.length ? (
+              <div className="chat-citations">
+                {message.citations.map((citation) => (
+                  <a key={citation.id} href={citation.href} target="_blank" rel="noreferrer" className="citation-card">
+                    <span className="citation-label">Source</span>
+                    <span className="citation-title">{citation.title}</span>
+                    <span className="citation-excerpt">{citation.excerpt}</span>
+                  </a>
+                ))}
+              </div>
+            ) : null}
+          </div>
+        ))}
+      </div>
+
       <div className="input-row">
         <input
           placeholder="Ask a grounded question..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') void send();
+            if (e.key === 'Enter') void submit();
           }}
         />
-        <button onClick={() => void send()} disabled={loading}>
-          {loading ? '...' : 'Send'}
+        <button type="button" onClick={() => void submit()} disabled={loading} className="field-button">
+          {loading ? 'Thinking...' : 'Send'}
         </button>
       </div>
     </div>

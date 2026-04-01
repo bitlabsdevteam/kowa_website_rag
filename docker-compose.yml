@@ -1,0 +1,13 @@
+services:
+  kowa_website_rag:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kowa_website_rag
+    ports:
+      - '3000:3000'
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_PUBLIC_SUPABASE_URL: ${NEXT_PUBLIC_SUPABASE_URL:-}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${NEXT_PUBLIC_SUPABASE_ANON_KEY:-}

@@ -22,25 +22,29 @@ export default function LoginPage() {
         setError(authError.message);
         return;
       }
-      router.push('/');
+      router.push('/admin');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Login failed');
     }
   };
 
   return (
-    <main className="page">
-      <section className="card" style={{ maxWidth: 540, margin: '0 auto' }}>
-        <span className="badge">Supabase Authentication</span>
-        <h1 style={{ marginTop: 0 }}>Login</h1>
-        <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12 }}>
+    <main className="page shell">
+      <section className="hero-panel" style={{ maxWidth: 720, margin: '0 auto' }}>
+        <span className="eyebrow">Supabase authentication</span>
+        <h1 className="page-title">Admin login</h1>
+        <p className="lead">Sign in to access source operations, health visibility, and the upcoming reindex and publish controls.</p>
+      </section>
+
+      <section className="card" style={{ maxWidth: 720, margin: '0 auto' }}>
+        <form onSubmit={onSubmit} className="form-grid">
           <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" required className="field" />
           <input value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" type="password" required className="field" />
-          <button type="submit" style={{ borderRadius: 10, padding: '10px 14px' }}>
+          <button type="submit" className="field-button">
             Sign in
           </button>
         </form>
-        {error ? <p style={{ color: '#ff8f8f' }}>{error}</p> : null}
+        {error ? <p style={{ color: '#9f4b44' }}>{error}</p> : null}
       </section>
     </main>
   );

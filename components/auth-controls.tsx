@@ -24,17 +24,17 @@ export function AuthControls() {
   };
 
   return (
-    <div style={{ display: 'flex', gap: 10 }}>
-      <Link href="/legacy" style={{ color: '#9cb0c4' }}>
-        Legacy Data
+    <div className="auth-controls">
+      <Link href="/legacy" className="auth-link">
+        Legacy data
       </Link>
       {isLoggedIn ? (
-        <button onClick={() => void logout()} style={{ borderRadius: 8, padding: '6px 10px' }}>
+        <button type="button" onClick={() => void logout()} className="auth-pill">
           Logout
         </button>
       ) : (
-        <Link href="/login" style={{ color: '#d5b36c' }}>
-          Login
+        <Link href="/login" className="auth-pill accent">
+          Admin login
         </Link>
       )}
     </div>
