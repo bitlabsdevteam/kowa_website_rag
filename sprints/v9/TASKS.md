@@ -75,9 +75,10 @@
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
   - Completed: 2026-04-01 - Added route-wide Playwright coverage for footer structure on `/`, `/news`, `/products`, and `/company_profile`, including explicit no-Shopify assertion and screenshot evidence.
 
-- [ ] Task 16: Add E2E coverage for homepage legacy fact-block removal (P1)
+- [x] Task 16: Add E2E coverage for homepage legacy fact-block removal (P1)
   - Acceptance: Playwright asserts no homepage block containing `Established`, `Address`, `Main line` labels in legacy footer section.
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
+  - Completed: 2026-04-01 - Added dedicated homepage Playwright regression spec asserting legacy fact labels and `.footer-facts` block are absent, with screenshot evidence.
 
 - [ ] Task 17: Add E2E coverage for homepage extra-divider removal (P1)
   - Acceptance: Playwright asserts homepage footer area renders without duplicate bottom horizontal lines.
