@@ -1,54 +1,84 @@
 # v5 TASKS — Anthropic-Inspired UI + Beautiful Top Menu + Admin + Docker Runtime
 
-- [ ] Task 1: Refine v5 PRD and lock acceptance criteria for Anthropic-inspired UI, top navigation, admin workflows, and Docker runtime
-- [ ] Task 2: Build shared design-system foundation
+- [x] Task 1: Refine v5 PRD and lock acceptance criteria for Anthropic-inspired UI, top navigation, admin workflows, and Docker runtime
+  - Acceptance: locked criteria in `sprints/v5/PRD.md` section 10
+  - Files: `sprints/v5/PRD.md`, `sprints/v5/TASKS.md`, `tests/unit/v5-task1-prd-acceptance.test.mjs`
+  - Completed: 2026-04-01 — acceptance criteria baselined for UI, navigation, admin, and Docker runtime delivery
+- [x] Task 2: Build shared design-system foundation
   - centralize visual tokens in stylesheet/theme primitives
   - align typography, spacing, surfaces, and interaction states
   - apply the system consistently across landing, content, login, and chat views
-- [ ] Task 3: Redesign landing page to follow Anthropic-inspired editorial layout principles
+  - Acceptance: shared token primitives and cross-view coverage validated in `tests/e2e/v5-task2-design-system.spec.ts`
+  - Files: `app/globals.css`, `app/login/page.tsx`, `app/legacy/page.tsx`, `components/chat-widget.tsx`, `components/top-menu.tsx`, `tests/e2e/v5-task2-design-system.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — tokenized style foundation and shared surface patterns applied across landing/content/login/chat
+- [x] Task 3: Redesign landing page to follow Anthropic-inspired editorial layout principles
   - calm neutral palette
   - premium readability
   - trust-first narrative structure
   - stronger chatbot onboarding and CTA hierarchy
-- [ ] Task 4: Rebuild the top menu as a polished responsive navigation system
+  - Acceptance: editorial landing flow, CTA hierarchy, trust pillars, and onboarding validated in `tests/e2e/v5-task3-landing-redesign.spec.ts`
+  - Files: `app/page.tsx`, `app/globals.css`, `sprints/v5/artifacts/legacy-business-facts.md`, `tests/e2e/v5-task3-landing-redesign.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — landing narrative and chatbot onboarding updated with legacy-aligned business scope
+- [x] Task 4: Rebuild the top menu as a polished responsive navigation system
   - elegant desktop navigation
   - visible hover and active states
   - mobile menu behavior
   - persistent CTA
   - all nav links resolve to real routes
-- [ ] Task 5: Implement `/admin` route and authenticated admin workflows
+  - Acceptance: desktop active-state semantics, mobile reveal, persistent CTA, and route resolution validated in `tests/e2e/v5-task4-top-menu.spec.ts`
+  - Files: `components/top-menu.tsx`, `next.config.ts`, `tests/e2e/v5-task4-top-menu.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — top menu upgraded with accessible active-state and responsive interaction coverage
+- [x] Task 5: Implement `/admin` route and authenticated admin workflows
   - source create/edit
   - publish/unpublish
   - reindex action
   - source health and ingestion visibility
   - guarded confirmations for state-changing actions
-- [ ] Task 6: Replace file-based runtime source flow with persistent source management
+  - Acceptance: auth-gated admin access and source workflows validated in `tests/e2e/v5-task5-admin-workflows.spec.ts`
+  - Files: `app/admin/page.tsx`, `app/admin/admin-console.tsx`, `app/login/page.tsx`, `components/auth-controls.tsx`, `lib/admin-auth.ts`, `app/globals.css`, `tests/e2e/v5-task5-admin-workflows.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — shipped authenticated admin workflow surface with create/edit/publish/unpublish/reindex and confirmation guards
+- [x] Task 6: Replace file-based runtime source flow with persistent source management
   - remove production dependence on `data/sources.json`
   - use Supabase-backed source and retrieval records
   - add environment validation for required runtime settings
-- [ ] Task 7: Complete trust UX in chat
+  - Acceptance: runtime source/retrieval flow and env health checks validated in `tests/e2e/v5-task6-runtime-source-flow.spec.ts` and `tests/unit/v5-task6-no-file-runtime.test.mjs`
+  - Files: `lib/retrieval.ts`, `lib/source-runtime.ts`, `lib/runtime-config.ts`, `app/api/ingest/route.ts`, `app/api/chat/route.ts`, `app/api/runtime/health/route.ts`, `supabase/migrations/0002_source_runtime.sql`, `tests/e2e/v5-task6-runtime-source-flow.spec.ts`, `tests/unit/v5-task6-no-file-runtime.test.mjs`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — runtime retrieval moved off `data/sources.json` with Supabase-compatible persistent store and env validation surface
+- [x] Task 7: Complete trust UX in chat
   - grounding status display
   - citation cards with clearer metadata
   - no-answer and low-confidence recovery guidance
   - stronger first-prompt onboarding
-- [ ] Task 8: Add retrieval evaluation and regression gate
+  - Acceptance: onboarding, low-confidence cues, citation metadata, and no-answer recovery validated in `tests/e2e/v5-task7-chat-trust-ux.spec.ts`
+  - Files: `components/chat-widget.tsx`, `app/api/chat/route.ts`, `lib/contracts.ts`, `app/globals.css`, `tests/e2e/v5-task7-chat-trust-ux.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — trust UX completed with confidence states, richer citation metadata, and recovery guidance flows
+- [x] Task 8: Add retrieval evaluation and regression gate
   - versioned golden-query set
   - grounded/citation/correctness scoring
   - unanswered-cluster tracking
   - release threshold enforcement
-- [ ] Task 9: Add containerized runtime support
+  - Acceptance: retrieval gate report, threshold enforcement, and unanswered-cluster tracking validated in `tests/unit/v5-task8-retrieval-gate.test.mjs`
+  - Files: `data/evals/golden-queries.v1.json`, `scripts/eval_retrieval_gate.mjs`, `package.json`, `README.md`, `sprints/v5/artifacts/retrieval-eval-latest.json`, `tests/unit/v5-task8-retrieval-gate.test.mjs`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — retrieval regression gate shipped with versioned golden set and release threshold checks
+- [x] Task 9: Add containerized runtime support
   - `Dockerfile`
   - `docker-compose.yml`
   - documented env requirements
   - successful local boot in containerized workflow
-- [ ] Task 10: Expand validation, release artifacts, and walkthrough
+  - Acceptance: container runtime env/docs validated in `tests/unit/v5-task9-docker-runtime.test.mjs`; `docker build .` and `docker compose up --build -d` both completed with app responding on `http://127.0.0.1:3000`
+  - Files: `Dockerfile`, `docker-compose.yml`, `.env.example`, `README.md`, `tests/unit/v5-task9-docker-runtime.test.mjs`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — container build and compose boot flow verified with required Supabase and Dify env wiring
+- [x] Task 10: Expand validation, release artifacts, and walkthrough
   - Playwright coverage for landing, nav, login, admin, and grounded chat
   - release checklist
   - smoke-test playbook
   - `sprints/v5/WALKTHROUGH.md`
+  - Acceptance: release smoke coverage and artifact completeness validated in `tests/e2e/v5-task10-release-smoke.spec.ts` and `tests/unit/v5-task10-release-artifacts.test.mjs`
+  - Files: `tests/e2e/v5-task10-release-smoke.spec.ts`, `tests/unit/v5-task10-release-artifacts.test.mjs`, `sprints/v5/artifacts/release-checklist.md`, `sprints/v5/artifacts/smoke-test-playbook.md`, `sprints/v5/WALKTHROUGH.md`, `tests/e2e/sprints.spec.ts`, `tests/e2e/v5-task4-top-menu.spec.ts`, `sprints/v5/TASKS.md`
+  - Completed: 2026-04-01 — expanded release smoke coverage and finalized walkthrough/checklist artifacts with full Playwright regression alignment
 
 ## Validation Proof
-- `npm run build` ☐
-- `npx playwright test` ☐
-- `docker build .` ☐
-- `docker compose up` ☐
+- `npm run build` ✅
+- `npx playwright test` ✅
+- `docker build .` ✅
+- `docker compose up` ✅

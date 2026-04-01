@@ -3,12 +3,18 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { clearLocalAdminAuth, getLocalAdminAuth } from '@/lib/admin-auth';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
 export function AuthControls() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    if (getLocalAdminAuth()) {
+      setIsLoggedIn(true);
+      return;
+    }
+
     try {
       const supabase = createBrowserSupabaseClient();
       supabase.auth.getSession().then(({ data }) => setIsLoggedIn(Boolean(data.session)));
@@ -18,8 +24,13 @@ export function AuthControls() {
   }, []);
 
   const logout = async () => {
-    const supabase = createBrowserSupabaseClient();
-    await supabase.auth.signOut();
+    clearLocalAdminAuth();
+    try {
+      const supabase = createBrowserSupabaseClient();
+      await supabase.auth.signOut();
+    } catch {
+      // local-auth fallback mode
+    }
     setIsLoggedIn(false);
   };
 

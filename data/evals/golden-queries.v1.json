@@ -1,0 +1,43 @@
+{
+  "version": "v1",
+  "thresholds": {
+    "groundedMin": 0.75,
+    "citationValidMin": 0.75,
+    "correctOrPartialMin": 0.75,
+    "unansweredClusterRateMax": 0.35
+  },
+  "queries": [
+    {
+      "id": "q-established",
+      "cluster": "company-profile",
+      "query": "When was Kowa established?",
+      "expectGrounded": true,
+      "requiredKeywords": ["1994"],
+      "citationDomain": "kowatrade.com"
+    },
+    {
+      "id": "q-address",
+      "cluster": "company-profile",
+      "query": "Where is Kowa located?",
+      "expectGrounded": true,
+      "requiredKeywords": ["Mita", "Tokyo"],
+      "citationDomain": "kowatrade.com"
+    },
+    {
+      "id": "q-business",
+      "cluster": "business-items",
+      "query": "What does Kowa handle?",
+      "expectGrounded": true,
+      "requiredKeywords": ["Kowa"],
+      "citationDomain": "kowatrade.com"
+    },
+    {
+      "id": "q-out-of-scope",
+      "cluster": "out-of-scope",
+      "query": "Quantum lettuce orbital tariff",
+      "expectGrounded": false,
+      "requiredKeywords": ["don't know"],
+      "citationDomain": ""
+    }
+  ]
+}

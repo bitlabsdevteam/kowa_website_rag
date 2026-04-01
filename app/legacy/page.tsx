@@ -9,11 +9,11 @@ export default function LegacyPage() {
         <p>All reachable legacy pages were crawled and transformed into structured excerpts for migration into the new site.</p>
       </section>
 
-      <section className="grid" style={{ gridTemplateColumns: '1fr' }}>
+      <section className="grid">
         {legacyPages.map((p) => (
           <article key={p.url} className="card">
-            <h3 style={{ marginTop: 0 }}>{p.title || p.url}</h3>
-            <p style={{ marginTop: 0, fontSize: 13 }}>{p.url}</p>
+            <h3 className="legacy-title">{p.title || p.url}</h3>
+            <p className="legacy-url">{p.url}</p>
             <p>{p.excerpt || 'No readable text extracted from this asset.'}</p>
           </article>
         ))}

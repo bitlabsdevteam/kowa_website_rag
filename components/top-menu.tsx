@@ -5,14 +5,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 
 const MENU = [
-  { href: '/', label: 'Overview' },
-  { href: '/welcome', label: 'Welcome' },
-  { href: '/business', label: 'Business' },
-  { href: '/inquiry', label: 'Inquiry' },
-  { href: '/factory', label: 'Factory' },
-  { href: '/access', label: 'Access' },
-  { href: '/legacy', label: 'Sources' },
-  { href: '/admin', label: 'Admin' },
+  { href: '/', label: 'Overview', id: 'overview' },
+  { href: '/business', label: 'Business', id: 'business' },
 ];
 
 export function TopMenu() {
@@ -31,6 +25,7 @@ export function TopMenu() {
         className="mobile-menu-toggle"
         aria-expanded={open}
         aria-label="Toggle navigation"
+        data-testid="mobile-menu-toggle"
         onClick={() => setOpen((value) => !value)}
       >
         {open ? 'Close' : 'Menu'}
@@ -42,16 +37,14 @@ export function TopMenu() {
             key={item.href}
             href={item.href}
             className={`top-menu-link ${pathname === item.href ? 'active' : ''}`}
+            aria-current={pathname === item.href ? 'page' : undefined}
+            data-testid={`top-menu-link-${item.id}`}
             onClick={() => setOpen(false)}
           >
             {item.label}
           </Link>
         ))}
       </div>
-
-      <Link href="/#assistant" className="top-menu-cta" onClick={() => setOpen(false)}>
-        Ask the assistant
-      </Link>
     </nav>
   );
 }

@@ -1,0 +1,79 @@
+{
+  "goldenSetVersion": "v1",
+  "generatedAt": "2026-04-01T01:48:54.989Z",
+  "thresholds": {
+    "groundedMin": 0.75,
+    "citationValidMin": 0.75,
+    "correctOrPartialMin": 0.75,
+    "unansweredClusterRateMax": 0.35
+  },
+  "summary": {
+    "total": 4,
+    "groundedRate": 1,
+    "citationPresentRate": 0.75,
+    "citationValidRate": 1,
+    "correctRate": 1,
+    "correctOrPartialRate": 1,
+    "unansweredClusterRate": 0,
+    "pass": true
+  },
+  "unansweredClusters": [],
+  "results": [
+    {
+      "id": "q-established",
+      "cluster": "company-profile",
+      "query": "When was Kowa established?",
+      "grounded": true,
+      "citationsCount": 1,
+      "answerPreview": "Kowa was established in 1994.",
+      "scores": {
+        "grounded": true,
+        "citationPresent": true,
+        "citationValid": true,
+        "correctness": "correct"
+      }
+    },
+    {
+      "id": "q-address",
+      "cluster": "company-profile",
+      "query": "Where is Kowa located?",
+      "grounded": true,
+      "citationsCount": 1,
+      "answerPreview": "Kowa address is Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073, JAPAN.",
+      "scores": {
+        "grounded": true,
+        "citationPresent": true,
+        "citationValid": true,
+        "correctness": "correct"
+      }
+    },
+    {
+      "id": "q-business",
+      "cluster": "business-items",
+      "query": "What does Kowa handle?",
+      "grounded": true,
+      "citationsCount": 1,
+      "answerPreview": "Based on available Kowa sources, relevant information is: KOWA TRADE AND COMMERCE CO.,LTD. handles trade and commerce related operations.",
+      "scores": {
+        "grounded": true,
+        "citationPresent": true,
+        "citationValid": true,
+        "correctness": "correct"
+      }
+    },
+    {
+      "id": "q-out-of-scope",
+      "cluster": "out-of-scope",
+      "query": "Quantum lettuce orbital tariff",
+      "grounded": false,
+      "citationsCount": 0,
+      "answerPreview": "I don't know based on the available Kowa sources.",
+      "scores": {
+        "grounded": true,
+        "citationPresent": false,
+        "citationValid": true,
+        "correctness": "correct"
+      }
+    }
+  ]
+}

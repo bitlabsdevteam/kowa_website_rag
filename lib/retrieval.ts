@@ -1,5 +1,4 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import { insertRuntimeSource, listRuntimeSources } from '@/lib/source-runtime';
 
 export type SourceDoc = {
   id: string;
@@ -9,15 +8,20 @@ export type SourceDoc = {
   tags?: string[];
 };
 
-const DATA_PATH = path.join(process.cwd(), 'data', 'sources.json');
-
 export async function loadSources(): Promise<SourceDoc[]> {
-  const raw = await fs.readFile(DATA_PATH, 'utf8');
-  return JSON.parse(raw) as SourceDoc[];
+  return listRuntimeSources();
 }
 
 export async function saveSources(sources: SourceDoc[]): Promise<void> {
-  await fs.writeFile(DATA_PATH, JSON.stringify(sources, null, 2), 'utf8');
+  for (const source of sources) {
+    await insertRuntimeSource({
+      id: source.id,
+      title: source.title,
+      href: source.href,
+      content: source.content,
+      tags: source.tags ?? [],
+    });
+  }
 }
 
 export async function retrieveTopSource(query: string): Promise<SourceDoc | null> {

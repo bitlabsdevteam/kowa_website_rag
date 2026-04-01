@@ -13,4 +13,6 @@ export type ChatResponse = {
   answer: string;
   grounded: boolean;
   citations: Citation[];
+  confidence: 'high' | 'low' | 'none';
+  recoveryGuidance?: string[];
 };

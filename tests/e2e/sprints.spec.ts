@@ -3,8 +3,8 @@ import { expect, test } from '@playwright/test';
 test('v1 landing page renders migrated company profile and chatbot shell', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { name: 'Kowa Trade & Commerce' })).toBeVisible();
-  await expect(page.getByText('RAG Assistant', { exact: true })).toBeVisible();
-  await expect(page.getByText('Company Profile', { exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Start with a grounded prompt' })).toBeVisible();
+  await expect(page.locator('[data-testid="landing-primary-box"]')).toBeVisible();
 });
 
 test('v1/v2 legacy migration page loads crawled dataset', async ({ page }) => {

@@ -124,3 +124,29 @@ v4 defined the right product direction, but the current implementation still has
 - v5.3 Authenticated admin console + operational actions
 - v5.4 Trust UX completion + citation upgrades
 - v5.5 Docker runtime + Compose workflow + eval/release gate enforcement
+
+## 10) Locked Acceptance Criteria for v5 Task 1
+
+### AC-UI Anthropic-Inspired UI System
+- A shared tokenized design system exists and is applied to landing, content pages, login, and chat surfaces.
+- The UI presents an editorial, calm, premium style with clear reading hierarchy and restrained color contrast.
+- Core page shells use consistent spacing scale, typography scale, and component surface styles.
+- The landing page includes a clear trust-first narrative and a primary chatbot CTA above the fold on desktop.
+
+### AC-NAV Top Navigation
+- Top navigation renders all primary destinations with implemented route targets; no dead links are allowed.
+- Desktop navigation visibly communicates hover and active states for each primary menu item.
+- Mobile navigation supports low-friction reveal/dismiss behavior and preserves clear information hierarchy.
+- A persistent CTA entry point to chat or equivalent primary action is visible in both desktop and mobile nav contexts.
+
+### AC-ADMIN Admin Workflow
+- `/admin` exists as a real route and enforces authenticated access before privileged actions.
+- Admin users can create and edit source records through the shipped UI without direct file editing.
+- Admin users can publish/unpublish and trigger reindex operations with explicit confirmation on state-changing actions.
+- Admin surfaces expose source health and last ingestion/reindex outcomes for operational visibility.
+
+### AC-DOCKER Docker Runtime
+- `docker build .` completes successfully using the repository's `Dockerfile`.
+- `docker compose up --build` boots the application with documented required environment variables.
+- Container runtime does not depend on editable local source files for core source/retrieval operations.
+- Docker workflow and required environment settings are documented in sprint artifacts/release docs.
