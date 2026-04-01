@@ -1,51 +1,65 @@
+'use client';
+
+import { useMemo, useState } from 'react';
+
 import { ChatPopup } from '@/components/chat-popup';
 import { TopMenu } from '@/components/top-menu';
+import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import profile from '@/sprints/v1/artifacts/content-normalized.json';
 
 export default function HomePage() {
+  const [locale, setLocale] = useState<Locale>('en');
+  const copy = useMemo(() => SITE_COPY[locale], [locale]);
+
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu />
+        <TopMenu labels={copy.menu} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <section className="landing-single">
+      <section id="about" className="landing-single">
         <article className="hero-panel landing-main" data-testid="landing-primary-box">
           <div className="hero-copy">
-            <span className="eyebrow">Overview</span>
-            <h1 className="hero-title">Kowa Trade &amp; Commerce</h1>
-            <p className="lead landing-subtitle">Editorial clarity for trade operations, recycling capability, and source-grounded assistant answers.</p>
+            <h1 className="hero-title">{copy.hero.title}</h1>
+            <p className="lead landing-subtitle">{copy.hero.lead}</p>
             <p className="body-copy" data-testid="landing-narrative">
-              Kowa handles synthetic resin raw materials, recycled plastics processing, battery pack development support, and industrial machinery
-              import/export operations. This overview keeps the core business context in one place so users can move directly into grounded Q&amp;A.
+              {copy.hero.body}
             </p>
-            <div className="hero-actions">
-              <ChatPopup />
+            <div className="video-embed hero-video-embed" aria-label={copy.hero.videoTitle}>
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4"
+                title={copy.hero.videoTitle}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
-            <div className="fact-row">
-              <div className="fact-item">
-                <strong>Established</strong>
-                <span>{profile.normalized_profile.established}</span>
-              </div>
-              <div className="fact-item">
-                <strong>Address</strong>
-                <span>{profile.normalized_profile.address_en}</span>
-              </div>
-              <div className="fact-item">
-                <strong>Main line</strong>
-                <span>{profile.normalized_profile.tel}</span>
-              </div>
+            <div className="hero-actions">
+              <ChatPopup triggerLabel={copy.hero.cta} />
             </div>
           </div>
-
-          <section className="landing-assistant">
-            <h2 className="section-title">Start with a grounded prompt</h2>
-            <p className="body-copy">
-              Ask about establishment, address, service areas, or migrated business details. Click the Talk to Aya button to open the popup assistant.
-            </p>
-          </section>
         </article>
       </section>
+
+      <footer className="site-footer">
+        <div className="footer-facts">
+          <p>
+            <strong>Established</strong>
+            <span>{profile.normalized_profile.established}</span>
+          </p>
+          <p>
+            <strong>Address</strong>
+            <span>{profile.normalized_profile.address_en}</span>
+          </p>
+          <p>
+            <strong>Main line</strong>
+            <span>{profile.normalized_profile.tel}</span>
+          </p>
+        </div>
+        <p>{copy.footer.note}</p>
+        <p>{copy.footer.rights}</p>
+      </footer>
     </main>
   );
 }

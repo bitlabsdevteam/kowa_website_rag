@@ -26,15 +26,16 @@ export function ChatPopup({ triggerLabel = 'Talk to Aya' }: ChatPopupProps) {
         className="button-primary"
         data-testid="landing-primary-cta"
         onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
       >
         {triggerLabel}
       </button>
 
       {open ? (
         <section className="chat-popup-panel" role="dialog" aria-label="Aya assistant popup" data-testid="chat-popup-panel">
-          <header className="chat-popup-header">
-            <strong>Aya Assistant</strong>
-          </header>
+          <button type="button" className="chat-popup-close" aria-label="Close chat" onClick={() => setOpen(false)}>
+            ×
+          </button>
           <ChatWidget />
         </section>
       ) : null}

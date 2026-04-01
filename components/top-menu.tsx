@@ -1,49 +1,84 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useState } from 'react';
 
-const MENU = [
-  { href: '/', label: 'Overview', id: 'overview' },
-  { href: '/business', label: 'Business', id: 'business' },
-];
+import { KowaLogo } from '@/components/kowa-logo';
 
-export function TopMenu() {
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
+type TopMenuLabels = {
+  about: string;
+  news: string;
+  products: string;
+  login: string;
+  onlineShop: string;
+};
 
+type TopMenuProps = {
+  labels: TopMenuLabels;
+  localeLabel: string;
+  locale: 'en' | 'ja' | 'zh';
+  onLocaleChange: (locale: 'en' | 'ja' | 'zh') => void;
+};
+
+function UserIcon() {
   return (
-    <nav className="top-menu" aria-label="Main" data-open={open}>
-      <Link href="/" className="top-menu-brand" onClick={() => setOpen(false)}>
-        <span className="top-menu-brand-mark">K</span>
-        <span>Kowa AI</span>
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M12 12.5a4.5 4.5 0 1 0-4.5-4.5 4.5 4.5 0 0 0 4.5 4.5Zm0 2.2c-4.1 0-7.5 2.2-7.5 4.9v.4h15v-.4c0-2.7-3.4-4.9-7.5-4.9Z" />
+    </svg>
+  );
+}
+
+function BagIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path d="M8 7V6a4 4 0 1 1 8 0v1h2a1 1 0 0 1 1 .9l1 11a1 1 0 0 1-1 1.1H5A1 1 0 0 1 4 19l1-11A1 1 0 0 1 6 7Zm2 0h4V6a2 2 0 1 0-4 0Z" />
+    </svg>
+  );
+}
+
+export function TopMenu({ labels, localeLabel, locale, onLocaleChange }: TopMenuProps) {
+  return (
+    <nav className="top-menu" aria-label="Main navigation">
+      <Link href="/" className="top-menu-brand" aria-label="Kowa Trade and Commerce home">
+        <KowaLogo />
       </Link>
 
-      <button
-        type="button"
-        className="mobile-menu-toggle"
-        aria-expanded={open}
-        aria-label="Toggle navigation"
-        data-testid="mobile-menu-toggle"
-        onClick={() => setOpen((value) => !value)}
-      >
-        {open ? 'Close' : 'Menu'}
-      </button>
-
       <div className="top-menu-links">
-        {MENU.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`top-menu-link ${pathname === item.href ? 'active' : ''}`}
-            aria-current={pathname === item.href ? 'page' : undefined}
-            data-testid={`top-menu-link-${item.id}`}
-            onClick={() => setOpen(false)}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <Link href="/" className="top-menu-link" data-testid="top-menu-link-about">
+          {labels.about}
+        </Link>
+        <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news">
+          {labels.news}
+        </Link>
+        <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products">
+          {labels.products}
+        </Link>
+      </div>
+
+      <div className="top-menu-actions">
+        <label className="locale-control" htmlFor="locale-select">
+          <span>{localeLabel}</span>
+          <select id="locale-select" value={locale} onChange={(event) => onLocaleChange(event.target.value as 'en' | 'ja' | 'zh')}>
+            <option value="en">EN</option>
+            <option value="ja">JP</option>
+            <option value="zh">中文</option>
+          </select>
+        </label>
+
+        <Link href="/login" className="auth-pill icon-pill" aria-label={labels.login} title={labels.login}>
+          <UserIcon />
+        </Link>
+
+        <a
+          href="https://store.gasbook.tokyo/ja"
+          target="_blank"
+          rel="noreferrer"
+          className="auth-pill accent icon-pill"
+          data-testid="online-shopping-button"
+          aria-label={labels.onlineShop}
+          title={labels.onlineShop}
+        >
+          <BagIcon />
+        </a>
       </div>
     </nav>
   );
