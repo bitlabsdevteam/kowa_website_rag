@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import { ChatPopup } from '@/components/chat-popup';
+import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import profile from '@/sprints/v1/artifacts/content-normalized.json';
@@ -77,8 +78,7 @@ export default function HomePage() {
             <span>{profile.normalized_profile.tel}</span>
           </p>
         </div>
-        <p>{copy.footer.note}</p>
-        <p>{copy.footer.rights}</p>
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
       </footer>
     </main>
   );

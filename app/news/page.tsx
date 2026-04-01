@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 
 import { TopMenu } from '@/components/top-menu';
+import { SiteFooterBar } from '@/components/site-footer-bar';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 
 export default function NewsPage() {
@@ -26,8 +27,7 @@ export default function NewsPage() {
       </section>
 
       <footer className="site-footer">
-        <p>{copy.footer.note}</p>
-        <p>{copy.footer.rights}</p>
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
       </footer>
     </main>
   );

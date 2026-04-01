@@ -48,8 +48,8 @@ export type SiteCopy = {
     entries: Array<{ name: string; detail: string }>;
   };
   footer: {
-    note: string;
-    rights: string;
+    copyright: string;
+    termsLabel: string;
   };
 };
 
@@ -153,8 +153,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       ],
     },
     footer: {
-      note: 'KOWA TRADE AND COMMERCE CO.,LTD. · Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073,JAPAN',
-      rights: 'All rights reserved.',
+      copyright: '© 2026 KOWA TRADE AND COMMERCE CO.,LTD.',
+      termsLabel: 'Terms',
     },
   },
   ja: {
@@ -249,8 +249,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       ],
     },
     footer: {
-      note: 'KOWA TRADE AND COMMERCE CO.,LTD. · 東京都港区三田2-10-6 レオマビル5F',
-      rights: '無断転載を禁じます。',
+      copyright: '© 2026 KOWA TRADE AND COMMERCE CO.,LTD.',
+      termsLabel: '利用規約',
     },
   },
   zh: {
@@ -345,8 +345,8 @@ export const SITE_COPY: Record<Locale, SiteCopy> = {
       ],
     },
     footer: {
-      note: 'KOWA TRADE AND COMMERCE CO.,LTD. · 日本东京都港区三田 2-10-6 Reoma 大楼 5F',
-      rights: '版权所有。',
+      copyright: '© 2026 KOWA TRADE AND COMMERCE CO.,LTD.',
+      termsLabel: '使用条款',
     },
   },
 };
