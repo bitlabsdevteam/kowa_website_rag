@@ -2,8 +2,10 @@
 
 import { useMemo, useState } from 'react';
 
+import { ProductCarousel } from '@/components/product-carousel';
 import { TopMenu } from '@/components/top-menu';
 import { SiteFooterBar } from '@/components/site-footer-bar';
+import { PRODUCT_MEDIA } from '@/lib/product-media';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 
 export default function ProductsPage() {
@@ -27,6 +29,7 @@ export default function ProductsPage() {
             </article>
           ))}
         </div>
+        <ProductCarousel items={PRODUCT_MEDIA} />
       </section>
 
       <footer className="site-footer">
