@@ -85,9 +85,10 @@
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
   - Completed: 2026-04-01 - Added dedicated homepage Playwright assertion for single top divider in footer area (`site-footer` no divider, `site-footer-bar` divider present), with screenshot evidence.
 
-- [ ] Task 18: Add E2E coverage for products carousel + paging behavior (P1)
+- [x] Task 18: Add E2E coverage for products carousel + paging behavior (P1)
   - Acceptance: Playwright validates carousel navigation, active-page indicator updates, and mobile swipe/next behavior.
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
+  - Completed: 2026-04-01 - Added dedicated desktop/mobile Playwright coverage for carousel navigation, page-indicator state updates, mobile swipe gesture progression, and next-button behavior with screenshot evidence.
 
 - [ ] Task 19: Validate build/lint/v9 regressions + security and publish walkthrough (P2)
   - Acceptance: `npm run build`, `npm run lint`, targeted v9 E2E, `semgrep`, and `npm audit --omit=dev` pass; walkthrough is published.
