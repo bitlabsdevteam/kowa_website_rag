@@ -186,6 +186,34 @@ a:focus-visible {
   align-content: start;
 }
 
+.hero-overview-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.88fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.hero-overview-text {
+  display: grid;
+  gap: 18px;
+}
+
+.business-hero-visual {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: transparent;
+  align-self: start;
+}
+
+.business-hero-visual img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
 .landing-main {
   min-height: 100%;
 }
@@ -1129,6 +1157,10 @@ a:focus-visible {
   .section-split,
   .content-grid,
   .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-overview-row {
     grid-template-columns: 1fr;
   }
 

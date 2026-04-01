@@ -20,11 +20,18 @@ export default function HomePage() {
       <section id="about" className="landing-single">
         <article className="hero-panel landing-main" data-testid="landing-primary-box">
           <div className="hero-copy">
-            <h1 className="hero-title">{copy.hero.title}</h1>
-            <p className="lead landing-subtitle">{copy.hero.lead}</p>
-            <p className="body-copy" data-testid="landing-narrative">
-              {copy.hero.body}
-            </p>
+            <div className="hero-overview-row">
+              <div className="hero-overview-text">
+                <h1 className="hero-title">{copy.hero.title}</h1>
+                <p className="lead landing-subtitle">{copy.hero.lead}</p>
+                <p className="body-copy" data-testid="landing-narrative">
+                  {copy.hero.body}
+                </p>
+              </div>
+              <figure className="business-hero-visual" aria-label="Kowa business visual">
+                <img src="/images/kowa-business-visual.svg" alt="Kowa business overview visual" />
+              </figure>
+            </div>
             <section className="business-section" aria-label={copy.business.title} data-testid="business-section">
               <h2 className="section-title">{copy.business.title}</h2>
               <p className="body-copy">{copy.business.intro}</p>
