@@ -80,9 +80,10 @@
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
   - Completed: 2026-04-01 - Added dedicated homepage Playwright regression spec asserting legacy fact labels and `.footer-facts` block are absent, with screenshot evidence.
 
-- [ ] Task 17: Add E2E coverage for homepage extra-divider removal (P1)
+- [x] Task 17: Add E2E coverage for homepage extra-divider removal (P1)
   - Acceptance: Playwright asserts homepage footer area renders without duplicate bottom horizontal lines.
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
+  - Completed: 2026-04-01 - Added dedicated homepage Playwright assertion for single top divider in footer area (`site-footer` no divider, `site-footer-bar` divider present), with screenshot evidence.
 
 - [ ] Task 18: Add E2E coverage for products carousel + paging behavior (P1)
   - Acceptance: Playwright validates carousel navigation, active-page indicator updates, and mobile swipe/next behavior.
