@@ -25,6 +25,26 @@ export default function HomePage() {
             <p className="body-copy" data-testid="landing-narrative">
               {copy.hero.body}
             </p>
+            <section className="business-section" aria-label={copy.business.title} data-testid="business-section">
+              <h2 className="section-title">{copy.business.title}</h2>
+              <p className="body-copy">{copy.business.intro}</p>
+              <div className="business-pillar-grid">
+                {copy.business.pillars.map((pillar) => (
+                  <article key={pillar.title} className="business-pillar-card">
+                    <h3>{pillar.title}</h3>
+                    <p>{pillar.detail}</p>
+                  </article>
+                ))}
+              </div>
+              <div className="business-flow">
+                <p className="business-flow-title">{copy.business.flowTitle}</p>
+                <ol>
+                  {copy.business.flowSteps.map((step) => (
+                    <li key={step}>{step}</li>
+                  ))}
+                </ol>
+              </div>
+            </section>
             <div className="video-embed hero-video-embed" aria-label={copy.hero.videoTitle}>
               <iframe
                 src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4"

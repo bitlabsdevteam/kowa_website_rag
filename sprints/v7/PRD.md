@@ -115,3 +115,12 @@ User opens /news or /products
 ### AC-CONTENT Legacy Alignment
 - English corporate footer copy aligns with normalized legacy profile facts from `sprints/v1/artifacts/content-normalized.json`.
 - Baseline facts include company name format and Mita (`Reoma Bldg. 5F, 2-10-6`) address reference.
+
+## 8) Addendum for Next Sprint Planning (PDF Company Profile Expansion)
+The following scope was raised after v7 baseline and must be carried into v8 planning and execution:
+- Read company-profile PDFs under `pdfs/` as primary content references.
+- Introduce a homepage section under the `Kowa Trade & Commerce` hero titled `WHAT IS KOWA'S BUSINESS?`.
+- Present that section in a strong visual format (for example: business pillars grid, flowline, or capability timeline) while keeping editorial clarity.
+- Add a new top navigation menu item `Company profile`.
+- Create route `/company_profile` and place structured company profile content sourced from PDFs.
+- Ensure this expansion does not regress v7 requirements for popup chat, locale behavior, and `/news` + `/products` route separation.

@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-04-01T10:56:32.063650Z",
+  "tessdata_dir": "/Users/davidbong/Documents/kowa_repo/kowa_rag/kowa_website_rag/.tessdata",
+  "pdfs": [
+    {
+      "pdf": "pdfs/Kowa Company profile.pdf",
+      "output_dir": "sprints/v8/artifacts/pdf-extraction/Kowa_Company_profile",
+      "pages": 6,
+      "chars": {
+        "pypdf": 5299,
+        "fitz": 5342,
+        "ocr": 5043
+      },
+      "embedded_images": 64,
+      "rendered_pages": 6
+    },
+    {
+      "pdf": "pdfs/広和通商会社案内.pdf",
+      "output_dir": "sprints/v8/artifacts/pdf-extraction/広和通商会社案内",
+      "pages": 6,
+      "chars": {
+        "pypdf": 4518,
+        "fitz": 2732,
+        "ocr": 3772
+      },
+      "embedded_images": 6,
+      "rendered_pages": 6
+    }
+  ]
+}

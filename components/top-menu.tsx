@@ -8,6 +8,7 @@ type TopMenuLabels = {
   about: string;
   news: string;
   products: string;
+  companyProfile: string;
   login: string;
   onlineShop: string;
 };
@@ -51,6 +52,9 @@ export function TopMenu({ labels, localeLabel, locale, onLocaleChange }: TopMenu
         </Link>
         <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products">
           {labels.products}
+        </Link>
+        <Link href="/company_profile" className="top-menu-link" data-testid="top-menu-link-company-profile">
+          {labels.companyProfile}
         </Link>
       </div>
 

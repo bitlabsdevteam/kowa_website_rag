@@ -5,6 +5,22 @@
 - Visual direction: clean, editorial, and premium, inspired by Anthropic-style patterns (generous spacing, strong typography, minimal but expressive color).
 - Primary experience: a beautiful marketing site with a prominent **Agentic RAG chatbot UI** (user phrasing: “Gentic Rack chatbot UI”).
 
+## Project Objective
+- Deliver a premium multilingual marketing site that communicates Kowa's real business scope clearly before users enter chat.
+- Keep the homepage narrative grounded in verified company profile content, then let the Aya assistant handle deeper Q&A.
+- Maintain clear information architecture: high-level context on `/`, deeper profile content in dedicated pages, and non-blocking popup chat.
+
+## Company Profile Source of Truth
+- Treat local PDFs in `pdfs/` as primary company-profile sources for profile copy and business taxonomy:
+  - `pdfs/Kowa Company profile.pdf`
+  - `pdfs/広和通商会社案内.pdf`
+- For homepage and profile-page copy updates, first map claims to these PDF sources, then validate against `https://kowatrade.com/` and existing normalized artifacts.
+- Required content placement:
+  - Add `WHAT IS KOWA'S BUSINESS?` content block under the main `Kowa Trade & Commerce` hero narrative on `/`.
+  - Add a `Company profile` top menu item that routes to `/company_profile`.
+  - Populate `/company_profile` using structured company-profile content derived from PDFs.
+- If any PDF is image-only or extraction-limited in local tooling, record extraction gaps explicitly in sprint artifacts and avoid inventing unverifiable facts.
+
 ## Legacy Business Reference
 - Use the old website as a primary reference for Kova business context: `https://kowatrade.com/`.
 - Before changing homepage copy, service descriptions, or chatbot prompts, verify alignment with legacy business information from this site.
