@@ -90,6 +90,7 @@
   - Files: `tests/e2e/` (new v9 spec), `tests/screenshots/`
   - Completed: 2026-04-01 - Added dedicated desktop/mobile Playwright coverage for carousel navigation, page-indicator state updates, mobile swipe gesture progression, and next-button behavior with screenshot evidence.
 
-- [ ] Task 19: Validate build/lint/v9 regressions + security and publish walkthrough (P2)
+- [x] Task 19: Validate build/lint/v9 regressions + security and publish walkthrough (P2)
   - Acceptance: `npm run build`, `npm run lint`, targeted v9 E2E, `semgrep`, and `npm audit --omit=dev` pass; walkthrough is published.
   - Files: `sprints/v9/WALKTHROUGH.md`
+  - Completed: 2026-04-01 - Ran build/lint, full targeted v9 Playwright suite (`17 passed`), semgrep, and npm audit (`0 vulnerabilities`); published v9 walkthrough with evidence and residual notes.
