@@ -6,7 +6,6 @@ import { ChatPopup } from '@/components/chat-popup';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
-import profile from '@/sprints/v1/artifacts/content-normalized.json';
 
 export default function HomePage() {
   const [locale, setLocale] = useState<Locale>('en');
@@ -64,20 +63,6 @@ export default function HomePage() {
       </section>
 
       <footer className="site-footer">
-        <div className="footer-facts">
-          <p>
-            <strong>Established</strong>
-            <span>{profile.normalized_profile.established}</span>
-          </p>
-          <p>
-            <strong>Address</strong>
-            <span>{profile.normalized_profile.address_en}</span>
-          </p>
-          <p>
-            <strong>Main line</strong>
-            <span>{profile.normalized_profile.tel}</span>
-          </p>
-        </div>
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
       </footer>
     </main>
