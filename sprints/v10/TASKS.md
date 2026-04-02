@@ -15,9 +15,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating multilingual language/status enums, content upload metadata fields, translation uniqueness constraint, and per-user ownership policies for content tables.
 
-- [ ] Task 4: Add RAG document/chunk schema with vector index (P0)
+- [x] Task 4: Add RAG document/chunk schema with vector index (P0)
   - Acceptance: `rag_documents_v2` and `rag_chunks_v2` support chunk ordering, embedding storage, and retrieval index.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating document/chunk schema constraints, embedding column contract, and cosine ivfflat retrieval index presence.
 
 - [ ] Task 5: Add conversation/message/feedback schema for authenticated users (P0)
   - Acceptance: `rag_conversations`, `rag_messages`, and `rag_feedback` store full thread history, citations, and feedback tied to users.
