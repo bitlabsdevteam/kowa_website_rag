@@ -20,9 +20,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating document/chunk schema constraints, embedding column contract, and cosine ivfflat retrieval index presence.
 
-- [ ] Task 5: Add conversation/message/feedback schema for authenticated users (P0)
+- [x] Task 5: Add conversation/message/feedback schema for authenticated users (P0)
   - Acceptance: `rag_conversations`, `rag_messages`, and `rag_feedback` store full thread history, citations, and feedback tied to users.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating conversation/message/feedback schema constraints, citation/model telemetry fields, rating contract, and user ownership policy coverage.
 
 - [ ] Task 6: Add `updated_at` trigger function and table triggers (P0)
   - Acceptance: Relevant mutable tables auto-maintain `updated_at` on update.
