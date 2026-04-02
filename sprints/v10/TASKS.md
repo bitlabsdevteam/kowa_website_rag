@@ -40,9 +40,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage for CRUD policy completeness and ownership-bound expressions across profile/content/rag tables; patched missing `user_profiles_delete_own` policy.
 
-- [ ] Task 9: Add storage bucket and folder-scoped object policies (P0)
+- [x] Task 9: Add storage bucket and folder-scoped object policies (P0)
   - Acceptance: Bucket `rag-content` exists and users can only access objects under their own folder prefix.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating `rag-content` bucket creation contract and folder-scoped `storage.objects` read/insert/update/delete policies tied to `auth.uid()`.
 
 - [ ] Task 10: Add migration compatibility adjustment for legacy chat sessions (P1)
   - Acceptance: `chat_sessions` includes `user_uuid` FK for bridge compatibility with authenticated user identity.
