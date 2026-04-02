@@ -10,9 +10,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating `user_profiles` auth linkage, locale/timezone defaults, timestamp lifecycle, RLS ownership policies, and update trigger contract.
 
-- [ ] Task 3: Add multilingual content upload schema (P0)
+- [x] Task 3: Add multilingual content upload schema (P0)
   - Acceptance: `content_items` and `content_translations` support `en/ja/zh`, upload metadata, processing status, and translation uniqueness.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating multilingual language/status enums, content upload metadata fields, translation uniqueness constraint, and per-user ownership policies for content tables.
 
 - [ ] Task 4: Add RAG document/chunk schema with vector index (P0)
   - Acceptance: `rag_documents_v2` and `rag_chunks_v2` support chunk ordering, embedding storage, and retrieval index.
