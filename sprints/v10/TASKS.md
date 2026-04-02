@@ -35,9 +35,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating RLS enablement on all user-owned v10 tables and confirming policy families exist for each secured table.
 
-- [ ] Task 8: Add per-user CRUD RLS policies for profiles/content/rag tables (P0)
+- [x] Task 8: Add per-user CRUD RLS policies for profiles/content/rag tables (P0)
   - Acceptance: Policies enforce ownership via `auth.uid()` and prevent cross-user reads/writes.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage for CRUD policy completeness and ownership-bound expressions across profile/content/rag tables; patched missing `user_profiles_delete_own` policy.
 
 - [ ] Task 9: Add storage bucket and folder-scoped object policies (P0)
   - Acceptance: Bucket `rag-content` exists and users can only access objects under their own folder prefix.
