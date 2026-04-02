@@ -45,9 +45,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating `rag-content` bucket creation contract and folder-scoped `storage.objects` read/insert/update/delete policies tied to `auth.uid()`.
 
-- [ ] Task 10: Add migration compatibility adjustment for legacy chat sessions (P1)
+- [x] Task 10: Add migration compatibility adjustment for legacy chat sessions (P1)
   - Acceptance: `chat_sessions` includes `user_uuid` FK for bridge compatibility with authenticated user identity.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating additive `chat_sessions.user_uuid` FK bridge contract and supporting index, with non-destructive migration assertions.
 
 - [ ] Task 11: Add migration verification tests for schema + policy contract (P1)
   - Acceptance: Automated checks assert required tables/types/policies/indexes are present in migration text.
