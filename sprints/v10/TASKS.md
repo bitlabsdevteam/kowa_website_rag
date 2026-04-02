@@ -25,9 +25,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating conversation/message/feedback schema constraints, citation/model telemetry fields, rating contract, and user ownership policy coverage.
 
-- [ ] Task 6: Add `updated_at` trigger function and table triggers (P0)
+- [x] Task 6: Add `updated_at` trigger function and table triggers (P0)
   - Acceptance: Relevant mutable tables auto-maintain `updated_at` on update.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating reusable `set_updated_at()` trigger function contract and trigger wiring on mutable v10 tables.
 
 - [ ] Task 7: Enable RLS for all new user-owned tables (P0)
   - Acceptance: RLS is enabled and default access is denied without policies.
