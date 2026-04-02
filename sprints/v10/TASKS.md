@@ -50,9 +50,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating additive `chat_sessions.user_uuid` FK bridge contract and supporting index, with non-destructive migration assertions.
 
-- [ ] Task 11: Add migration verification tests for schema + policy contract (P1)
+- [x] Task 11: Add migration verification tests for schema + policy contract (P1)
   - Acceptance: Automated checks assert required tables/types/policies/indexes are present in migration text.
   - Files: `tests/unit/` (new v10 specs), `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added consolidated migration contract regression suite covering enums, tables, compatibility bridge, indexes, triggers, RLS, and storage policy requirements.
 
 - [ ] Task 12: Publish v10 walkthrough and validation evidence (P2)
   - Acceptance: Build/lint/security checks and v10 test evidence are documented in sprint walkthrough.
