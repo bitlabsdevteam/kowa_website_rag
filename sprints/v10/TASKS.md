@@ -5,9 +5,10 @@
   - Files: `sprints/v10/PRD.md`, `sprints/v10/TASKS.md`, `supabase/migrations/`
   - Completed: 2026-04-02 - Added v10 baseline inventory artifact and unit test coverage for migration order, target schema entities, storage scope, and compatibility bridge.
 
-- [ ] Task 2: Add user profile domain model linked to `auth.users` (P0)
+- [x] Task 2: Add user profile domain model linked to `auth.users` (P0)
   - Acceptance: `user_profiles` supports display fields, preferred language, timezone, and timestamp lifecycle.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating `user_profiles` auth linkage, locale/timezone defaults, timestamp lifecycle, RLS ownership policies, and update trigger contract.
 
 - [ ] Task 3: Add multilingual content upload schema (P0)
   - Acceptance: `content_items` and `content_translations` support `en/ja/zh`, upload metadata, processing status, and translation uniqueness.
