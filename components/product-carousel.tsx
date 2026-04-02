@@ -7,9 +7,18 @@ import type { ProductMediaItem } from '@/lib/product-media';
 
 type ProductCarouselProps = {
   items: ProductMediaItem[];
+  labels: {
+    ariaLabel: string;
+    prevAriaLabel: string;
+    nextAriaLabel: string;
+    prevButton: string;
+    nextButton: string;
+    pagesAriaLabel: string;
+    goToSlideLabel: string;
+  };
 };
 
-export function ProductCarousel({ items }: ProductCarouselProps) {
+export function ProductCarousel({ items, labels }: ProductCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const startX = useRef<number | null>(null);
 
@@ -42,16 +51,16 @@ export function ProductCarousel({ items }: ProductCarouselProps) {
   if (items.length === 0) return null;
 
   return (
-    <section className="products-carousel" data-testid="products-carousel" aria-label="Product media carousel">
+    <section className="products-carousel" data-testid="products-carousel" aria-label={labels.ariaLabel}>
       <div className="products-carousel-head">
         <p className="products-carousel-position" data-testid="products-carousel-position" aria-live="polite">
           {activeIndex + 1} / {items.length}
         </p>
-        <button type="button" className="products-carousel-button" data-testid="products-carousel-prev" onClick={goPrev} aria-label="Previous product">
-          Prev
+        <button type="button" className="products-carousel-button" data-testid="products-carousel-prev" onClick={goPrev} aria-label={labels.prevAriaLabel}>
+          {labels.prevButton}
         </button>
-        <button type="button" className="products-carousel-button" data-testid="products-carousel-next" onClick={goNext} aria-label="Next product">
-          Next
+        <button type="button" className="products-carousel-button" data-testid="products-carousel-next" onClick={goNext} aria-label={labels.nextAriaLabel}>
+          {labels.nextButton}
         </button>
       </div>
 
@@ -82,14 +91,14 @@ export function ProductCarousel({ items }: ProductCarouselProps) {
         </div>
       </div>
 
-      <div className="products-carousel-pages" aria-label="Carousel pages">
+      <div className="products-carousel-pages" aria-label={labels.pagesAriaLabel}>
         {items.map((item, index) => (
           <button
             key={item.id}
             type="button"
             className="products-carousel-page"
             data-testid="products-carousel-page"
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`${labels.goToSlideLabel} ${index + 1}`}
             aria-current={activeIndex === index ? 'true' : 'false'}
             onClick={() => goTo(index)}
           >

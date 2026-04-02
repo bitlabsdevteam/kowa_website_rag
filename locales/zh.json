@@ -1,0 +1,207 @@
+{
+  "menu": {
+    "about": "关于",
+    "news": "新闻",
+    "products": "产品",
+    "companyProfile": "公司简介",
+    "login": "用户登录",
+    "onlineShop": "在线购物",
+    "localeLabel": "语言",
+    "navAria": "主导航",
+    "homeAria": "Kowa Trade and Commerce 首页",
+    "localeOptions": {
+      "en": "EN",
+      "ja": "JP",
+      "zh": "中文"
+    }
+  },
+  "hero": {
+    "eyebrow": "关于",
+    "title": "Kowa Trade & Commerce",
+    "lead": "来自东京的高端贸易伙伴，专注树脂原料、再生塑料、电池包开发支持与工业机械流通。",
+    "body": "以编辑级清晰度与业务执行力打造统一入口，集中展示产品、采购与联系信息，并由Aya助手提供可追溯问答。",
+    "cta": "联系 Aya",
+    "videoTitle": "Kowa 视频短片",
+    "visualAria": "Kowa 业务可视图",
+    "visualAlt": "Kowa 业务概览图"
+  },
+  "business": {
+    "title": "KOWA 的业务是什么？",
+    "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
+    "pillars": [
+      {
+        "title": "树脂与再生材料贸易",
+        "detail": "经营合成树脂原料与再生塑料的采购与销售，保持稳定供货路线。"
+      },
+      {
+        "title": "加工与再资源化",
+        "detail": "提供分选、粉碎、混配、造粒等处理能力，将损耗料和废塑料再利用。"
+      },
+      {
+        "title": "电池与机械支持",
+        "detail": "支持电池包开发，并提供食品加工设备、粉碎机和机床的进出口销售。"
+      },
+      {
+        "title": "全球分销执行",
+        "detail": "覆盖国内外流通与报关流程，并开展日本优质商品的海外分销。"
+      }
+    ],
+    "flowTitle": "资源循环流程",
+    "flowSteps": [
+      "采购与回收",
+      "按材料特性分选",
+      "粉碎/混配/造粒",
+      "国内销售与出口（含报关）"
+    ]
+  },
+  "companyProfile": {
+    "title": "公司简介",
+    "summary": "Kowa 连接贸易能力与再生加工能力，在国内外市场推动资源循环和稳定供应。",
+    "blocks": [
+      {
+        "heading": "核心业务",
+        "points": [
+          "合成树脂原料与再生塑料贸易。",
+          "再生塑料处理：分选、粉碎、混配、造粒与转运。",
+          "电池包开发、设计与制造支持。",
+          "食品加工设备、粉碎设备与机床的进出口销售。",
+          "日本消费品的跨境分销。"
+        ]
+      },
+      {
+        "heading": "运营模式",
+        "points": [
+          "提供从采购、分选、加工到报关和出口的一体化服务。",
+          "依托仓储与供应网络，保障稳定采购和供货。",
+          "强调有限资源的有效再利用与可持续循环。"
+        ]
+      },
+      {
+        "heading": "公司信息",
+        "points": [
+          "成立: 1994 年",
+          "地址: 日本东京都港区三田 2-10-6 Reoma 大楼 5F",
+          "电话: +81-3-3455-1699",
+          "关联公司: G.P. Polymer Co.,Ltd.; Green-Eco-Technology Co.,Ltd."
+        ]
+      }
+    ]
+  },
+  "news": {
+    "title": "新闻",
+    "entries": [
+      "第二季度采购更新：面向区域客户扩大再生树脂接收能力。",
+      "电池包支持计划新增快速原型可行性评估。",
+      "新增工业机械进出口通道，支持更灵活的排期。"
+    ]
+  },
+  "products": {
+    "title": "产品",
+    "entries": [
+      {
+        "name": "合成树脂原料",
+        "detail": "为制造伙伴提供稳定、质量优先的供给体系。"
+      },
+      {
+        "name": "再生塑料处理",
+        "detail": "面向循环运营的回收与加工路径。"
+      },
+      {
+        "name": "电池包开发支持",
+        "detail": "从方案咨询到量产准备的跨团队支持。"
+      }
+    ],
+    "carousel": {
+      "ariaLabel": "产品媒体轮播",
+      "prevAriaLabel": "上一个产品",
+      "nextAriaLabel": "下一个产品",
+      "prevButton": "上一项",
+      "nextButton": "下一项",
+      "pagesAriaLabel": "轮播分页",
+      "goToSlideLabel": "跳转到第"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
+    "termsLabel": "使用条款",
+    "social": {
+      "groupAria": "社交链接",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "x": "X"
+    }
+  },
+  "brand": {
+    "ariaLabel": "Kowa Trade and Commerce",
+    "name": "Kowa Trade & Commerce",
+    "location": "东京，日本"
+  },
+  "chat": {
+    "popupAriaLabel": "Aya 助手弹窗",
+    "closeAriaLabel": "关闭聊天",
+    "promoTitle": "通过聊天联系我们",
+    "promoBody": "如果您有任何问题，请发送消息给我们。我们会尽快回复您。",
+    "messagePlaceholder": "输入消息",
+    "typeMessageAriaLabel": "输入消息",
+    "connectionIssue": "连接异常，请稍后再试。"
+  },
+  "loginPage": {
+    "eyebrow": "Supabase 身份认证",
+    "title": "管理员登录",
+    "lead": "登录后可访问来源管理、健康状态可视化，以及后续的重建索引与发布控制。",
+    "emailPlaceholder": "邮箱",
+    "passwordPlaceholder": "密码",
+    "submit": "登录",
+    "fallbackError": "登录失败"
+  },
+  "adminPage": {
+    "loadingEyebrow": "管理控制台",
+    "loadingTitle": "正在加载管理工作流...",
+    "deniedEyebrow": "管理员认证",
+    "deniedTitle": "需要管理员认证",
+    "deniedLead": "登录后可访问来源创建/编辑、发布/取消发布、重建索引等工作流。",
+    "goToLogin": "前往登录",
+    "returnHome": "返回首页",
+    "heroEyebrow": "管理控制台",
+    "heroTitle": "来源运维现已整合到主产品界面。",
+    "headingEdit": "编辑所选来源，保存后再执行发布或重建索引操作。",
+    "headingCreate": "在同一运维界面中完成来源创建、发布与重建索引，并带确认步骤。",
+    "logout": "退出登录",
+    "workflowBadge": "来源工作流",
+    "sourceHealthBadge": "来源健康状态",
+    "sourceTitlePlaceholder": "来源标题",
+    "sourceUrlPlaceholder": "来源 URL",
+    "sourceContentPlaceholder": "来源内容预览",
+    "saveEdit": "保存编辑",
+    "cancelEdit": "取消编辑",
+    "createSource": "创建来源",
+    "statusPublished": "已发布",
+    "statusDraft": "草稿",
+    "lastIngestionPrefix": "最近一次摄取",
+    "never": "从未",
+    "edit": "编辑",
+    "unpublish": "取消发布",
+    "publish": "发布",
+    "reindex": "重建索引",
+    "confirmPublish": "确认发布该来源？",
+    "confirmUnpublish": "确认取消发布该来源？",
+    "confirmReindex": "确认对该来源触发重建索引？",
+    "noSources": "暂无来源。请先创建来源，再进行发布和重建索引。"
+  },
+  "migratedPages": {
+    "businessBadge": "Business Items（已迁移）",
+    "businessTitle": "Business Items",
+    "factoryBadge": "群马门店 / 工厂（已迁移）",
+    "factoryTitle": "群马门店 / 工厂",
+    "welcomeBadge": "Welcome Note（已迁移）",
+    "welcomeTitle": "Welcome",
+    "accessBadge": "Access（已迁移）",
+    "accessTitle": "Access",
+    "inquiryBadge": "Inquiry（已迁移）",
+    "inquiryTitle": "Inquiry",
+    "legacyBadge": "已迁移旧站内容",
+    "legacyTitle": "旧站抓取数据集",
+    "legacyLead": "所有可访问的旧站页面已被抓取并转换为结构化摘要，用于迁移到新网站。",
+    "legacyNoExcerpt": "该资源未提取到可读文本。"
+  }
+}

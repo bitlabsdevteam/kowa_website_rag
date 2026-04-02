@@ -1,12 +1,14 @@
 import legacyPages from '@/data/legacy-pages.json';
+import { SITE_COPY } from '@/lib/site-copy';
 
 export default function LegacyPage() {
+  const copy = SITE_COPY.en.migratedPages;
   return (
     <main className="page">
       <section className="hero">
-        <span className="badge">Migrated Legacy Content</span>
-        <h1>Legacy Website Crawl Dataset</h1>
-        <p>All reachable legacy pages were crawled and transformed into structured excerpts for migration into the new site.</p>
+        <span className="badge">{copy.legacyBadge}</span>
+        <h1>{copy.legacyTitle}</h1>
+        <p>{copy.legacyLead}</p>
       </section>
 
       <section className="grid">
@@ -14,7 +16,7 @@ export default function LegacyPage() {
           <article key={p.url} className="card">
             <h3 className="legacy-title">{p.title || p.url}</h3>
             <p className="legacy-url">{p.url}</p>
-            <p>{p.excerpt || 'No readable text extracted from this asset.'}</p>
+            <p>{p.excerpt || copy.legacyNoExcerpt}</p>
           </article>
         ))}
       </section>

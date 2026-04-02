@@ -1,0 +1,207 @@
+{
+  "menu": {
+    "about": "会社情報",
+    "news": "ニュース",
+    "products": "製品",
+    "companyProfile": "会社案内",
+    "login": "ログイン",
+    "onlineShop": "オンラインショップ",
+    "localeLabel": "言語",
+    "navAria": "メインナビゲーション",
+    "homeAria": "Kowa Trade and Commerce ホーム",
+    "localeOptions": {
+      "en": "EN",
+      "ja": "JP",
+      "zh": "中文"
+    }
+  },
+  "hero": {
+    "eyebrow": "会社情報",
+    "title": "Kowa Trade & Commerce",
+    "lead": "樹脂原料、再生プラスチック、バッテリーパック支援、産業機械流通に対応する東京発のトレードパートナー。",
+    "body": "エディトリアルな読みやすさと実務精度を両立し、製品・調達・問い合わせ情報を一画面に集約。Ayaアシスタントが根拠付きQ&Aをサポートします。",
+    "cta": "Ayaに相談",
+    "videoTitle": "Kowa ビデオクリップ",
+    "visualAria": "Kowa 事業ビジュアル",
+    "visualAlt": "Kowa 事業概要ビジュアル"
+  },
+  "business": {
+    "title": "KOWAの事業とは？",
+    "intro": "Kowaは、プラスチック再資源化を軸に、商流・加工・輸出入を一体で運用する資源循環型の商社です。",
+    "pillars": [
+      {
+        "title": "樹脂・再生材トレード",
+        "detail": "各種合成樹脂原料と再生プラスチックの売買を、安定した調達ルートで支えます。"
+      },
+      {
+        "title": "加工・再資源化",
+        "detail": "選別、粉砕、ブレンド、ペレット化まで対応し、ロス材や廃プラを再利用可能な原料へ転換します。"
+      },
+      {
+        "title": "電池・機械ソリューション",
+        "detail": "電池パックの開発支援と、食品加工機械・破砕粉砕機・工作機械の輸出入販売を提供します。"
+      },
+      {
+        "title": "国内外流通",
+        "detail": "通関を含む輸出入実務と、海外向け日本商品の流通を運用します。"
+      }
+    ],
+    "flowTitle": "資源循環フロー",
+    "flowSteps": [
+      "仕入・回収",
+      "素材特性に応じた選別",
+      "粉砕・混合・ペレット化",
+      "国内販売・輸出（通関対応）"
+    ]
+  },
+  "companyProfile": {
+    "title": "会社案内",
+    "summary": "Kowaは商社機能と再生加工機能を接続し、国内外で資源を循環させる実務を担います。",
+    "blocks": [
+      {
+        "heading": "主要事業",
+        "points": [
+          "合成樹脂原料および再生プラスチックの売買。",
+          "再生プラスチックの選別・粉砕・ブレンド・ペレット化・積替え。",
+          "電池パックの開発・設計・製造支援。",
+          "食品加工機械、粉砕破砕機、工作機械の輸出入販売。",
+          "日本商品の海外向け流通販売。"
+        ]
+      },
+      {
+        "heading": "運用モデル",
+        "points": [
+          "仕入から選別、加工、通関、輸出までを一体で提供する「まるごとサービス」。",
+          "国内外メーカーとの連携と流通倉庫ネットワークで安定供給を実現。",
+          "限りある資源の有効活用と次世代への継承を重視。"
+        ]
+      },
+      {
+        "heading": "会社情報",
+        "points": [
+          "設立: 1994年",
+          "住所: 東京都港区三田2-10-6 レオマビル5F",
+          "代表電話: 03-3455-1699",
+          "関連会社: ジーピーポリマー株式会社 / GREEN ECO TECHNOLOGY CO.,LTD."
+        ]
+      }
+    ]
+  },
+  "news": {
+    "title": "ニュース",
+    "entries": [
+      "Q2調達アップデート: 地域顧客向け再生樹脂受入れ体制を拡張。",
+      "バッテリーパック支援プログラムに試作評価レビューを追加。",
+      "産業機械の輸出入レーンを増設し、柔軟なスケジューリングを実現。"
+    ]
+  },
+  "products": {
+    "title": "製品",
+    "entries": [
+      {
+        "name": "合成樹脂原料",
+        "detail": "品質重視の運用で製造パートナーへ安定供給。"
+      },
+      {
+        "name": "再生プラスチック加工",
+        "detail": "循環型オペレーションに合わせた回収・加工フロー。"
+      },
+      {
+        "name": "バッテリーパック開発支援",
+        "detail": "構想段階から量産準備まで横断的に支援。"
+      }
+    ],
+    "carousel": {
+      "ariaLabel": "製品メディアカルーセル",
+      "prevAriaLabel": "前の製品",
+      "nextAriaLabel": "次の製品",
+      "prevButton": "前へ",
+      "nextButton": "次へ",
+      "pagesAriaLabel": "カルーセルページ",
+      "goToSlideLabel": "スライドへ移動"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
+    "termsLabel": "利用規約",
+    "social": {
+      "groupAria": "ソーシャルリンク",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "x": "X"
+    }
+  },
+  "brand": {
+    "ariaLabel": "Kowa Trade and Commerce",
+    "name": "Kowa Trade & Commerce",
+    "location": "東京、日本"
+  },
+  "chat": {
+    "popupAriaLabel": "Aya アシスタント ポップアップ",
+    "closeAriaLabel": "チャットを閉じる",
+    "promoTitle": "チャットで問い合わせる",
+    "promoBody": "ご質問がございましたら、こちらへどうぞ。メッセージを送ってください。できるだけ早くご連絡いたします。",
+    "messagePlaceholder": "メッセージを書く",
+    "typeMessageAriaLabel": "メッセージを入力",
+    "connectionIssue": "接続に問題があります。しばらくしてから再度お試しください。"
+  },
+  "loginPage": {
+    "eyebrow": "Supabase 認証",
+    "title": "管理者ログイン",
+    "lead": "ソース運用、ヘルス可視化、再インデックスおよび公開制御にアクセスするにはサインインしてください。",
+    "emailPlaceholder": "メールアドレス",
+    "passwordPlaceholder": "パスワード",
+    "submit": "サインイン",
+    "fallbackError": "ログインに失敗しました"
+  },
+  "adminPage": {
+    "loadingEyebrow": "管理コンソール",
+    "loadingTitle": "管理ワークフローを読み込み中...",
+    "deniedEyebrow": "管理者認証",
+    "deniedTitle": "管理者認証が必要です",
+    "deniedLead": "ソースの作成/編集、公開/非公開、再インデックス操作にアクセスするにはサインインしてください。",
+    "goToLogin": "ログインへ",
+    "returnHome": "ホームへ戻る",
+    "heroEyebrow": "管理コンソール",
+    "heroTitle": "ソース運用はメインプロダクト画面に統合されています。",
+    "headingEdit": "選択したソースを編集し、公開または再インデックス操作の前に保存してください。",
+    "headingCreate": "1つの運用画面でソースの作成・公開・再インデックスを実行できます。",
+    "logout": "ログアウト",
+    "workflowBadge": "ソースワークフロー",
+    "sourceHealthBadge": "ソースヘルス",
+    "sourceTitlePlaceholder": "ソースタイトル",
+    "sourceUrlPlaceholder": "ソースURL",
+    "sourceContentPlaceholder": "ソース内容プレビュー",
+    "saveEdit": "編集を保存",
+    "cancelEdit": "編集をキャンセル",
+    "createSource": "ソースを作成",
+    "statusPublished": "公開済み",
+    "statusDraft": "下書き",
+    "lastIngestionPrefix": "最終取り込み",
+    "never": "未実行",
+    "edit": "編集",
+    "unpublish": "非公開",
+    "publish": "公開",
+    "reindex": "再インデックス",
+    "confirmPublish": "このソースを公開しますか？",
+    "confirmUnpublish": "このソースを非公開にしますか？",
+    "confirmReindex": "このソースの再インデックスを実行しますか？",
+    "noSources": "ソースがまだありません。公開や再インデックスを始めるには作成してください。"
+  },
+  "migratedPages": {
+    "businessBadge": "Business Items（移行済み）",
+    "businessTitle": "Business Items",
+    "factoryBadge": "群馬ストア / 工場（移行済み）",
+    "factoryTitle": "群馬ストア / 工場",
+    "welcomeBadge": "Welcome Note（移行済み）",
+    "welcomeTitle": "Welcome",
+    "accessBadge": "Access（移行済み）",
+    "accessTitle": "Access",
+    "inquiryBadge": "Inquiry（移行済み）",
+    "inquiryTitle": "Inquiry",
+    "legacyBadge": "移行済みレガシーコンテンツ",
+    "legacyTitle": "レガシーサイトクロールデータセット",
+    "legacyLead": "到達可能なレガシーページをクロールし、新サイト移行向けに構造化した抜粋へ変換しました。",
+    "legacyNoExcerpt": "このアセットから読み取り可能なテキストを抽出できませんでした。"
+  }
+}

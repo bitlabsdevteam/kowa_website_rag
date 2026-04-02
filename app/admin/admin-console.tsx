@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
 import { clearLocalAdminAuth, getLocalAdminAuth, readLocalAdminSources, writeLocalAdminSources } from '@/lib/admin-auth';
+import { SITE_COPY } from '@/lib/site-copy';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
 type SourceRecord = {
@@ -19,6 +20,7 @@ type SourceRecord = {
 type GateState = 'loading' | 'denied' | 'allowed';
 
 export function AdminConsole() {
+  const copy = SITE_COPY.en.adminPage;
   const [gate, setGate] = useState<GateState>('loading');
   const [sources, setSources] = useState<SourceRecord[]>([]);
   const [title, setTitle] = useState('');
@@ -96,7 +98,7 @@ export function AdminConsole() {
   };
 
   const publishToggle = (id: string, publish: boolean) => {
-    const confirmed = window.confirm(publish ? 'Publish this source?' : 'Unpublish this source?');
+      const confirmed = window.confirm(publish ? copy.confirmPublish : copy.confirmUnpublish);
     if (!confirmed) return;
 
     const next = sources.map((source) => (source.id === id ? { ...source, published: publish } : source));
@@ -104,7 +106,7 @@ export function AdminConsole() {
   };
 
   const reindex = (id: string) => {
-    const confirmed = window.confirm('Trigger reindex for this source?');
+    const confirmed = window.confirm(copy.confirmReindex);
     if (!confirmed) return;
 
     const now = new Date().toISOString();
@@ -128,17 +130,17 @@ export function AdminConsole() {
   const heading = useMemo(
     () =>
       editingId
-        ? 'Edit the selected source, then save before running publish or reindex actions.'
-        : 'Create, publish, and reindex sources from one operational surface with explicit confirmations.',
-    [editingId]
+        ? copy.headingEdit
+        : copy.headingCreate,
+    [copy.headingCreate, copy.headingEdit, editingId]
   );
 
   if (gate === 'loading') {
     return (
       <main className="page shell">
         <section className="hero-panel admin-hero">
-          <span className="eyebrow">Admin console</span>
-          <h1 className="page-title">Loading admin workflow...</h1>
+          <span className="eyebrow">{copy.loadingEyebrow}</span>
+          <h1 className="page-title">{copy.loadingTitle}</h1>
         </section>
       </main>
     );
@@ -148,15 +150,15 @@ export function AdminConsole() {
     return (
       <main className="page shell">
         <section className="hero-panel admin-hero">
-          <span className="eyebrow">Admin authentication</span>
-          <h1 className="page-title">Admin authentication required</h1>
-          <p className="lead">Sign in to access source create/edit, publish/unpublish, and reindex workflows.</p>
+          <span className="eyebrow">{copy.deniedEyebrow}</span>
+          <h1 className="page-title">{copy.deniedTitle}</h1>
+          <p className="lead">{copy.deniedLead}</p>
           <div className="hero-actions">
             <Link href="/login" className="button-primary">
-              Go to login
+              {copy.goToLogin}
             </Link>
             <Link href="/" className="button-secondary">
-              Return home
+              {copy.returnHome}
             </Link>
           </div>
         </section>
@@ -167,60 +169,60 @@ export function AdminConsole() {
   return (
     <main className="page shell">
       <section className="hero-panel admin-hero">
-        <span className="eyebrow">Admin console</span>
-        <h1 className="page-title">Source operations are now part of the main product surface.</h1>
+        <span className="eyebrow">{copy.heroEyebrow}</span>
+        <h1 className="page-title">{copy.heroTitle}</h1>
         <p className="lead">{heading}</p>
         <div className="hero-actions">
           <button type="button" className="button-secondary" onClick={() => void logout()}>
-            Logout
+            {copy.logout}
           </button>
         </div>
       </section>
 
       <section className="dashboard-grid">
         <article className="card">
-          <span className="badge">Source workflow</span>
+          <span className="badge">{copy.workflowBadge}</span>
           <div className="form-grid">
             <input
               className="field"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
-              placeholder="Source title"
+              placeholder={copy.sourceTitlePlaceholder}
               data-testid="admin-source-title"
             />
             <input
               className="field"
               value={url}
               onChange={(event) => setUrl(event.target.value)}
-              placeholder="Source URL"
+              placeholder={copy.sourceUrlPlaceholder}
               data-testid="admin-source-url"
             />
             <textarea
               className="text-area"
               value={content}
               onChange={(event) => setContent(event.target.value)}
-              placeholder="Source content preview"
+              placeholder={copy.sourceContentPlaceholder}
               data-testid="admin-source-content"
             />
             {editingId ? (
               <div className="admin-button-row">
                 <button type="button" className="field-button" onClick={submit} data-testid="admin-save-edit">
-                  Save edit
+                  {copy.saveEdit}
                 </button>
                 <button type="button" className="button-secondary" onClick={resetForm}>
-                  Cancel edit
+                  {copy.cancelEdit}
                 </button>
               </div>
             ) : (
               <button type="button" className="field-button" onClick={submit} data-testid="admin-create-source">
-                Create source
+                {copy.createSource}
               </button>
             )}
           </div>
         </article>
 
         <article className="card">
-          <span className="badge">Source health</span>
+          <span className="badge">{copy.sourceHealthBadge}</span>
           {sources.length ? (
             <div className="admin-source-list">
               {sources.map((source, index) => (
@@ -228,17 +230,17 @@ export function AdminConsole() {
                   <div className="admin-source-head">
                     <strong>{source.title}</strong>
                     <span className="admin-health" data-testid={`source-status-${index}`}>
-                      {source.published ? 'Published' : 'Draft'}
+                      {source.published ? copy.statusPublished : copy.statusDraft}
                     </span>
                   </div>
                   <p>{source.url}</p>
                   <p>{source.content}</p>
                   <p data-testid={`source-last-ingested-${index}`}>
-                    Last ingestion: {source.lastIngestedAt ?? 'Never'} ({source.lastIngestionResult})
+                    {copy.lastIngestionPrefix}: {source.lastIngestedAt ?? copy.never} ({source.lastIngestionResult})
                   </p>
                   <div className="admin-actions-row">
                     <button type="button" className="button-secondary" onClick={() => startEdit(source)} data-testid={`source-edit-${index}`}>
-                      Edit
+                      {copy.edit}
                     </button>
                     {source.published ? (
                       <button
@@ -247,7 +249,7 @@ export function AdminConsole() {
                         onClick={() => publishToggle(source.id, false)}
                         data-testid={`source-unpublish-${index}`}
                       >
-                        Unpublish
+                        {copy.unpublish}
                       </button>
                     ) : (
                       <button
@@ -256,7 +258,7 @@ export function AdminConsole() {
                         onClick={() => publishToggle(source.id, true)}
                         data-testid={`source-publish-${index}`}
                       >
-                        Publish
+                        {copy.publish}
                       </button>
                     )}
                     <button
@@ -265,14 +267,14 @@ export function AdminConsole() {
                       onClick={() => reindex(source.id)}
                       data-testid={`source-reindex-${index}`}
                     >
-                      Reindex
+                      {copy.reindex}
                     </button>
                   </div>
                 </article>
               ))}
             </div>
           ) : (
-            <p className="footer-note">No sources yet. Create one to begin publish and reindex workflows.</p>
+            <p className="footer-note">{copy.noSources}</p>
           )}
         </article>
       </section>

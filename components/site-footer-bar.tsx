@@ -1,6 +1,12 @@
 type SiteFooterBarProps = {
   copyright: string;
   termsLabel: string;
+  social: {
+    groupAria: string;
+    facebook: string;
+    instagram: string;
+    x: string;
+  };
 };
 
 function FacebookIcon() {
@@ -27,19 +33,19 @@ function XIcon() {
   );
 }
 
-export function SiteFooterBar({ copyright, termsLabel }: SiteFooterBarProps) {
+export function SiteFooterBar({ copyright, termsLabel, social }: SiteFooterBarProps) {
   return (
     <div className="site-footer-bar">
       <p>{copyright}</p>
       <span>{termsLabel}</span>
-      <div className="site-footer-social" aria-label="Social links">
-        <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="Facebook">
+      <div className="site-footer-social" aria-label={social.groupAria}>
+        <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label={social.facebook}>
           <FacebookIcon />
         </a>
-        <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="Instagram">
+        <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label={social.instagram}>
           <InstagramIcon />
         </a>
-        <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="X">
+        <a href="https://x.com" target="_blank" rel="noreferrer" aria-label={social.x}>
           <XIcon />
         </a>
       </div>

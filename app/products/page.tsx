@@ -15,7 +15,7 @@ export default function ProductsPage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={copy.menu} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
+        <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
       <section className="card product-grid page-surface" data-testid="products-page-content">
@@ -29,11 +29,11 @@ export default function ProductsPage() {
             </article>
           ))}
         </div>
-        <ProductCarousel items={PRODUCT_MEDIA} />
+        <ProductCarousel items={PRODUCT_MEDIA} labels={copy.products.carousel} />
       </section>
 
       <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
     </main>
   );

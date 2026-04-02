@@ -6,9 +6,18 @@ import { ChatWidget } from '@/components/chat-widget';
 
 type ChatPopupProps = {
   triggerLabel?: string;
+  popupAriaLabel: string;
+  closeAriaLabel: string;
+  chatLabels: {
+    promoTitle: string;
+    promoBody: string;
+    messagePlaceholder: string;
+    typeMessageAriaLabel: string;
+    connectionIssue: string;
+  };
 };
 
-export function ChatPopup({ triggerLabel = 'Talk to Aya' }: ChatPopupProps) {
+export function ChatPopup({ triggerLabel = 'Talk to Aya', popupAriaLabel, closeAriaLabel, chatLabels }: ChatPopupProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -32,11 +41,11 @@ export function ChatPopup({ triggerLabel = 'Talk to Aya' }: ChatPopupProps) {
       </button>
 
       {open ? (
-        <section className="chat-popup-panel" role="dialog" aria-label="Aya assistant popup" data-testid="chat-popup-panel">
-          <button type="button" className="chat-popup-close" aria-label="Close chat" onClick={() => setOpen(false)}>
+        <section className="chat-popup-panel" role="dialog" aria-label={popupAriaLabel} data-testid="chat-popup-panel">
+          <button type="button" className="chat-popup-close" aria-label={closeAriaLabel} onClick={() => setOpen(false)}>
             ×
           </button>
-          <ChatWidget />
+          <ChatWidget labels={chatLabels} />
         </section>
       ) : null}
     </div>

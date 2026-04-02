@@ -14,7 +14,7 @@ export default function HomePage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={copy.menu} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
+        <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
       <section id="about" className="landing-single">
@@ -28,8 +28,8 @@ export default function HomePage() {
                   {copy.hero.body}
                 </p>
               </div>
-              <figure className="business-hero-visual" aria-label="Kowa business visual">
-                <img src="/images/kowa-business-visual.svg" alt="Kowa business overview visual" />
+              <figure className="business-hero-visual" aria-label={copy.hero.visualAria}>
+                <img src="/images/kowa-business-visual.svg" alt={copy.hero.visualAlt} />
               </figure>
             </div>
             <section className="business-section" aria-label={copy.business.title} data-testid="business-section">
@@ -63,14 +63,19 @@ export default function HomePage() {
               />
             </div>
             <div className="hero-actions">
-              <ChatPopup triggerLabel={copy.hero.cta} />
+              <ChatPopup
+                triggerLabel={copy.hero.cta}
+                popupAriaLabel={copy.chat.popupAriaLabel}
+                closeAriaLabel={copy.chat.closeAriaLabel}
+                chatLabels={copy.chat}
+              />
             </div>
           </div>
         </article>
       </section>
 
       <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
     </main>
   );

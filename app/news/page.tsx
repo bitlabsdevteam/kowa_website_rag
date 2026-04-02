@@ -13,7 +13,7 @@ export default function NewsPage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={copy.menu} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
+        <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
       <section className="card stack-list page-surface" data-testid="news-page-content">
@@ -27,7 +27,7 @@ export default function NewsPage() {
       </section>
 
       <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
     </main>
   );

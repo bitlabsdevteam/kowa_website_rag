@@ -1,0 +1,207 @@
+{
+  "menu": {
+    "about": "ABOUT",
+    "news": "NEWS",
+    "products": "PRODUCTS",
+    "companyProfile": "COMPANY PROFILE",
+    "login": "User Login",
+    "onlineShop": "Online Shopping",
+    "localeLabel": "Lang",
+    "navAria": "Main navigation",
+    "homeAria": "Kowa Trade and Commerce home",
+    "localeOptions": {
+      "en": "EN",
+      "ja": "JP",
+      "zh": "中文"
+    }
+  },
+  "hero": {
+    "eyebrow": "ABOUT",
+    "title": "Kowa Trade & Commerce",
+    "lead": "A premium Tokyo trading partner for resin, recycled materials, battery-pack support, and industrial machinery flow.",
+    "body": "Built with editorial clarity and operational precision, this experience keeps product, sourcing, and contact context in one place while the Aya assistant supports grounded Q&A.",
+    "cta": "Talk to Aya",
+    "videoTitle": "Kowa Video Clip",
+    "visualAria": "Kowa business visual",
+    "visualAlt": "Kowa business overview visual"
+  },
+  "business": {
+    "title": "WHAT IS KOWA'S BUSINESS?",
+    "intro": "Kowa runs a resource-circulation trading model centered on plastics recycling, industrial support, and cross-border supply operations.",
+    "pillars": [
+      {
+        "title": "Resin and Recycling Trade",
+        "detail": "Sale and purchasing of synthetic resin raw materials and recycled plastics with stable sourcing routes."
+      },
+      {
+        "title": "Processing and Regeneration",
+        "detail": "Sorting, crushing, blending, pelletization, and regeneration of production-loss and waste plastic."
+      },
+      {
+        "title": "Engineering and Machinery",
+        "detail": "Battery-pack development support plus import/export of processing, crushing, and machine-tool equipment."
+      },
+      {
+        "title": "Global Distribution",
+        "detail": "Domestic and overseas distribution, including export/customs workflows and selected Japanese product channels."
+      }
+    ],
+    "flowTitle": "Resource circulation flow",
+    "flowSteps": [
+      "Purchase and collect production-loss and waste plastics.",
+      "Sort and assess by resin type, shape, additives, and deposits.",
+      "Process through crushing, blending, and pelletization.",
+      "Route to domestic sales and export with customs handling."
+    ]
+  },
+  "companyProfile": {
+    "title": "Company Profile",
+    "summary": "Kowa connects trading, recycling, and operational execution so materials can circulate as usable resources across domestic and overseas markets.",
+    "blocks": [
+      {
+        "heading": "Core Business Domains",
+        "points": [
+          "Synthetic resin raw materials and recycled plastics trading.",
+          "Recycled plastics processing: sorting, crushing, blending, pelletization, and transshipment.",
+          "Battery-pack development, design, and manufacturing support.",
+          "Import/export of food-processing machines, crushers, and machine tools.",
+          "Cross-border distribution of selected Japanese products."
+        ]
+      },
+      {
+        "heading": "Operational Model",
+        "points": [
+          "Kowa provides a whole-service path from material purchase and classification to processing, logistics, customs, and export.",
+          "Distribution warehouse partnerships support stable procurement and regular supply.",
+          "The model focuses on effective reuse of limited resources and practical circularity."
+        ]
+      },
+      {
+        "heading": "Company Facts",
+        "points": [
+          "Established: 1994",
+          "Address: Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073, Japan",
+          "Main line: +81-3-3455-1699",
+          "Related companies: G.P. Polymer Co.,Ltd.; Green-Eco-Technology Co.,Ltd."
+        ]
+      }
+    ]
+  },
+  "news": {
+    "title": "NEWS",
+    "entries": [
+      "Q2 sourcing update: expanded recycled resin intake capability for regional clients.",
+      "Battery-pack support program now includes rapid prototype feasibility reviews.",
+      "Industrial machinery lane added for flexible import and export scheduling."
+    ]
+  },
+  "products": {
+    "title": "PRODUCTS",
+    "entries": [
+      {
+        "name": "Synthetic Resin Raw Materials",
+        "detail": "Stable procurement for manufacturing partners with quality-first handling."
+      },
+      {
+        "name": "Recycled Plastics Processing",
+        "detail": "Material recovery and processing paths designed for circular operations."
+      },
+      {
+        "name": "Battery Pack Development Support",
+        "detail": "Cross-functional support from concept consultation to production readiness."
+      }
+    ],
+    "carousel": {
+      "ariaLabel": "Product media carousel",
+      "prevAriaLabel": "Previous product",
+      "nextAriaLabel": "Next product",
+      "prevButton": "Prev",
+      "nextButton": "Next",
+      "pagesAriaLabel": "Carousel pages",
+      "goToSlideLabel": "Go to slide"
+    }
+  },
+  "footer": {
+    "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
+    "termsLabel": "Terms",
+    "social": {
+      "groupAria": "Social links",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "x": "X"
+    }
+  },
+  "brand": {
+    "ariaLabel": "Kowa Trade and Commerce",
+    "name": "Kowa Trade & Commerce",
+    "location": "Tokyo, Japan"
+  },
+  "chat": {
+    "popupAriaLabel": "Aya assistant popup",
+    "closeAriaLabel": "Close chat",
+    "promoTitle": "Contact us by chat",
+    "promoBody": "If you have any questions, please send us a message. We will get back to you as soon as possible.",
+    "messagePlaceholder": "Write a message",
+    "typeMessageAriaLabel": "Type message",
+    "connectionIssue": "Connection issue. Please try again in a moment."
+  },
+  "loginPage": {
+    "eyebrow": "Supabase authentication",
+    "title": "Admin login",
+    "lead": "Sign in to access source operations, health visibility, and the upcoming reindex and publish controls.",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "submit": "Sign in",
+    "fallbackError": "Login failed"
+  },
+  "adminPage": {
+    "loadingEyebrow": "Admin console",
+    "loadingTitle": "Loading admin workflow...",
+    "deniedEyebrow": "Admin authentication",
+    "deniedTitle": "Admin authentication required",
+    "deniedLead": "Sign in to access source create/edit, publish/unpublish, and reindex workflows.",
+    "goToLogin": "Go to login",
+    "returnHome": "Return home",
+    "heroEyebrow": "Admin console",
+    "heroTitle": "Source operations are now part of the main product surface.",
+    "headingEdit": "Edit the selected source, then save before running publish or reindex actions.",
+    "headingCreate": "Create, publish, and reindex sources from one operational surface with explicit confirmations.",
+    "logout": "Logout",
+    "workflowBadge": "Source workflow",
+    "sourceHealthBadge": "Source health",
+    "sourceTitlePlaceholder": "Source title",
+    "sourceUrlPlaceholder": "Source URL",
+    "sourceContentPlaceholder": "Source content preview",
+    "saveEdit": "Save edit",
+    "cancelEdit": "Cancel edit",
+    "createSource": "Create source",
+    "statusPublished": "Published",
+    "statusDraft": "Draft",
+    "lastIngestionPrefix": "Last ingestion",
+    "never": "Never",
+    "edit": "Edit",
+    "unpublish": "Unpublish",
+    "publish": "Publish",
+    "reindex": "Reindex",
+    "confirmPublish": "Publish this source?",
+    "confirmUnpublish": "Unpublish this source?",
+    "confirmReindex": "Trigger reindex for this source?",
+    "noSources": "No sources yet. Create one to begin publish and reindex workflows."
+  },
+  "migratedPages": {
+    "businessBadge": "Business Items (Migrated)",
+    "businessTitle": "Business Items",
+    "factoryBadge": "Gunma Store / Factory (Migrated)",
+    "factoryTitle": "Gunma Store / Factory",
+    "welcomeBadge": "Welcome Note (Migrated)",
+    "welcomeTitle": "Welcome",
+    "accessBadge": "Access (Migrated)",
+    "accessTitle": "Access",
+    "inquiryBadge": "Inquiry (Migrated)",
+    "inquiryTitle": "Inquiry",
+    "legacyBadge": "Migrated Legacy Content",
+    "legacyTitle": "Legacy Website Crawl Dataset",
+    "legacyLead": "All reachable legacy pages were crawled and transformed into structured excerpts for migration into the new site.",
+    "legacyNoExcerpt": "No readable text extracted from this asset."
+  }
+}

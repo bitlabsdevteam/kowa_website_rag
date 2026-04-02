@@ -11,10 +11,22 @@ type TopMenuLabels = {
   companyProfile: string;
   login: string;
   onlineShop: string;
+  navAria: string;
+  homeAria: string;
+  localeOptions: {
+    en: string;
+    ja: string;
+    zh: string;
+  };
 };
 
 type TopMenuProps = {
   labels: TopMenuLabels;
+  brand: {
+    ariaLabel: string;
+    name: string;
+    location: string;
+  };
   localeLabel: string;
   locale: 'en' | 'ja' | 'zh';
   onLocaleChange: (locale: 'en' | 'ja' | 'zh') => void;
@@ -36,11 +48,11 @@ function BagIcon() {
   );
 }
 
-export function TopMenu({ labels, localeLabel, locale, onLocaleChange }: TopMenuProps) {
+export function TopMenu({ labels, brand, localeLabel, locale, onLocaleChange }: TopMenuProps) {
   return (
-    <nav className="top-menu" aria-label="Main navigation">
-      <Link href="/" className="top-menu-brand" aria-label="Kowa Trade and Commerce home">
-        <KowaLogo />
+    <nav className="top-menu" aria-label={labels.navAria}>
+      <Link href="/" className="top-menu-brand" aria-label={labels.homeAria}>
+        <KowaLogo ariaLabel={brand.ariaLabel} name={brand.name} location={brand.location} />
       </Link>
 
       <div className="top-menu-links">
@@ -62,9 +74,9 @@ export function TopMenu({ labels, localeLabel, locale, onLocaleChange }: TopMenu
         <label className="locale-control" htmlFor="locale-select">
           <span>{localeLabel}</span>
           <select id="locale-select" value={locale} onChange={(event) => onLocaleChange(event.target.value as 'en' | 'ja' | 'zh')}>
-            <option value="en">EN</option>
-            <option value="ja">JP</option>
-            <option value="zh">中文</option>
+            <option value="en">{labels.localeOptions.en}</option>
+            <option value="ja">{labels.localeOptions.ja}</option>
+            <option value="zh">{labels.localeOptions.zh}</option>
           </select>
         </label>
 

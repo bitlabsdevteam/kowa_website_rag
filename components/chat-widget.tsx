@@ -9,7 +9,19 @@ type Msg = {
   text: string;
 };
 
-export function ChatWidget() {
+type ChatWidgetLabels = {
+  promoTitle: string;
+  promoBody: string;
+  messagePlaceholder: string;
+  typeMessageAriaLabel: string;
+  connectionIssue: string;
+};
+
+type ChatWidgetProps = {
+  labels: ChatWidgetLabels;
+};
+
+export function ChatWidget({ labels }: ChatWidgetProps) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Msg[]>([]);
   const [loading, setLoading] = useState(false);
@@ -32,7 +44,7 @@ export function ChatWidget() {
       const payload = (await res.json()) as ChatResponse;
       setMessages((current) => [...current, { role: 'assistant', text: payload.answer }]);
     } catch {
-      setMessages((current) => [...current, { role: 'assistant', text: 'Connection issue. Please try again in a moment.' }]);
+      setMessages((current) => [...current, { role: 'assistant', text: labels.connectionIssue }]);
     } finally {
       setLoading(false);
     }
@@ -41,11 +53,8 @@ export function ChatWidget() {
   return (
     <div className="chat-shell compact">
       <div className="chat-promo" data-testid="chat-popup-style">
-        <h3>チャットで問い合わせる</h3>
-        <p>
-          ご質問がございましたら、こちらへどうぞ。If you have questions, please send us a message. We will get back to you as soon as
-          possible.
-        </p>
+        <h3>{labels.promoTitle}</h3>
+        <p>{labels.promoBody}</p>
       </div>
 
       {messages.length > 0 ? (
@@ -60,13 +69,13 @@ export function ChatWidget() {
 
       <div className="chat-mini-input-row">
         <input
-          placeholder="メッセージを書く"
+          placeholder={labels.messagePlaceholder}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === 'Enter') void submit();
           }}
-          aria-label="Type message"
+          aria-label={labels.typeMessageAriaLabel}
         />
         <button type="button" onClick={() => void submit()} disabled={loading} className="chat-mini-send" data-testid="chat-send">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">

@@ -13,7 +13,7 @@ export default function CompanyProfilePage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={copy.menu} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
+        <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
       <section className="card page-surface company-profile-surface" data-testid="company-profile-page-content">
@@ -36,7 +36,7 @@ export default function CompanyProfilePage() {
       </section>
 
       <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} />
+        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
     </main>
   );
