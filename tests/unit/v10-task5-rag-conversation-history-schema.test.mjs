@@ -64,7 +64,7 @@ test('v10 task5: migration includes ownership rls policies for rag conversation 
   }
 });
 
-test('v10 task5: task tracker still has follow-up tasks after task5', () => {
+test('v10 task5: task tracker includes task5 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 6:/);
+  assert.match(tasks, /Task 5: Add conversation\/message\/feedback schema for authenticated users/);
 });

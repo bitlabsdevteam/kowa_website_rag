@@ -37,7 +37,7 @@ test('v10 task9: migration defines folder-scoped storage object policies for rag
   }
 });
 
-test('v10 task9: task tracker still has follow-up tasks after task9', () => {
+test('v10 task9: task tracker includes task9 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 10:/);
+  assert.match(tasks, /Task 9: Add storage bucket and folder-scoped object policies/);
 });

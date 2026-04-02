@@ -27,7 +27,7 @@ test('v10 task10: compatibility bridge remains additive and non-destructive', ()
   assert.ok(!sql.includes('alter table public.chat_sessions drop column'), 'Migration must not drop columns from chat_sessions');
 });
 
-test('v10 task10: task tracker still has follow-up tasks after task10', () => {
+test('v10 task10: task tracker includes task10 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 11:/);
+  assert.match(tasks, /Task 10: Add migration compatibility adjustment for legacy chat sessions/);
 });

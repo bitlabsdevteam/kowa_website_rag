@@ -48,7 +48,7 @@ test('v10 task1: baseline inventory artifact captures migration order and target
   }
 });
 
-test('v10 task1: tasks file still has unchecked follow-up tasks after task1', () => {
+test('v10 task1: task tracker includes task1 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 2:/);
+  assert.match(tasks, /Task 1: Baseline v10 scope and schema inventory/);
 });

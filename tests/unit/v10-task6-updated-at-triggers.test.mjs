@@ -40,7 +40,7 @@ test('v10 task6: migration applies updated_at triggers to mutable tables', () =>
   }
 });
 
-test('v10 task6: task tracker still has follow-up tasks after task6', () => {
+test('v10 task6: task tracker includes task6 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 7:/);
+  assert.match(tasks, /Task 6: Add `updated_at` trigger function and table triggers/);
 });

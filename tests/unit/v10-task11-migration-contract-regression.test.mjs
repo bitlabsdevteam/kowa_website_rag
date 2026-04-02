@@ -88,7 +88,7 @@ test('v10 task11: migration contains required RLS and storage policy coverage', 
   );
 });
 
-test('v10 task11: task tracker still has follow-up tasks after task11', () => {
+test('v10 task11: task tracker includes task11 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 12:/);
+  assert.match(tasks, /Task 11: Add migration verification tests for schema \+ policy contract/);
 });

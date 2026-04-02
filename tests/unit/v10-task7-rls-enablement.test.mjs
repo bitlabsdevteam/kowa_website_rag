@@ -43,7 +43,7 @@ test('v10 task7: migration includes at least one policy for each rls-enabled use
   }
 });
 
-test('v10 task7: task tracker still has follow-up tasks after task7', () => {
+test('v10 task7: task tracker includes task7 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 8:/);
+  assert.match(tasks, /Task 7: Enable RLS for all new user-owned tables/);
 });

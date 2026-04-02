@@ -64,7 +64,7 @@ test('v10 task8: policy expressions enforce auth uid ownership boundaries', () =
   }
 });
 
-test('v10 task8: task tracker still has follow-up tasks after task8', () => {
+test('v10 task8: task tracker includes task8 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 9:/);
+  assert.match(tasks, /Task 8: Add per-user CRUD RLS policies for profiles\/content\/rag tables/);
 });

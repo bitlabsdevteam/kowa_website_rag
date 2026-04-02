@@ -43,7 +43,7 @@ test('v10 task4: migration defines retrieval indexes for rag chunks and vector s
   }
 });
 
-test('v10 task4: task tracker still has follow-up tasks after task4', () => {
+test('v10 task4: task tracker includes task4 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 5:/);
+  assert.match(tasks, /Task 4: Add RAG document\/chunk schema with vector index/);
 });

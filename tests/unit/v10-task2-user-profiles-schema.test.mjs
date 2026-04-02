@@ -42,7 +42,7 @@ test('v10 task2: migration enables rls + own-profile policies + update trigger f
   }
 });
 
-test('v10 task2: task tracker still has follow-up tasks after task2', () => {
+test('v10 task2: task tracker includes task2 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 3:/);
+  assert.match(tasks, /Task 2: Add user profile domain model linked to `auth\.users`/);
 });

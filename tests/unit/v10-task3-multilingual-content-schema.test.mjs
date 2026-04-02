@@ -56,7 +56,7 @@ test('v10 task3: migration includes ownership rls policies for content items and
   }
 });
 
-test('v10 task3: task tracker still has follow-up tasks after task3', () => {
+test('v10 task3: task tracker includes task3 entry', () => {
   const tasks = readFileSync(TASKS_PATH, 'utf8');
-  assert.match(tasks, /- \[ \] Task 4:/);
+  assert.match(tasks, /Task 3: Add multilingual content upload schema/);
 });
