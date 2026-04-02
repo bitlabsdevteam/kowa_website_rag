@@ -30,9 +30,10 @@
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
   - Completed: 2026-04-02 - Added unit coverage validating reusable `set_updated_at()` trigger function contract and trigger wiring on mutable v10 tables.
 
-- [ ] Task 7: Enable RLS for all new user-owned tables (P0)
+- [x] Task 7: Enable RLS for all new user-owned tables (P0)
   - Acceptance: RLS is enabled and default access is denied without policies.
   - Files: `supabase/migrations/0003_v10_multilingual_auth_rag.sql`
+  - Completed: 2026-04-02 - Added unit coverage validating RLS enablement on all user-owned v10 tables and confirming policy families exist for each secured table.
 
 - [ ] Task 8: Add per-user CRUD RLS policies for profiles/content/rag tables (P0)
   - Acceptance: Policies enforce ownership via `auth.uid()` and prevent cross-user reads/writes.
