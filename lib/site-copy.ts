@@ -171,6 +171,11 @@ export type SiteCopy = {
     inboxIntentPrefix: string;
     inboxAssigneePrefix: string;
     inboxUpdatedPrefix: string;
+    metricsBadge: string;
+    metricsSessions: string;
+    metricsTurns: string;
+    metricsConfirmed: string;
+    metricsRateLimited: string;
   };
   migratedPages: {
     businessBadge: string;

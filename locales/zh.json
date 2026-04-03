@@ -222,7 +222,12 @@
     "inboxSessionPrefix": "会话",
     "inboxIntentPrefix": "意图",
     "inboxAssigneePrefix": "负责人",
-    "inboxUpdatedPrefix": "更新于"
+    "inboxUpdatedPrefix": "更新于",
+    "metricsBadge": "助手指标",
+    "metricsSessions": "会话数",
+    "metricsTurns": "轮次数",
+    "metricsConfirmed": "已确认转交",
+    "metricsRateLimited": "限流次数"
   },
   "migratedPages": {
     "businessBadge": "Business Items（已迁移）",

@@ -81,6 +81,27 @@ export type AdminQueueNote = {
   createdAt: string;
 };
 
+export type AssistantMetricEvent =
+  | 'session_created'
+  | 'turn_processed'
+  | 'handoff_previewed'
+  | 'handoff_confirmed'
+  | 'queue_status_updated'
+  | 'queue_note_added'
+  | 'rate_limited'
+  | 'invalid_payload';
+
+export type AssistantMetricsSummary = {
+  sessionsCreated: number;
+  turnsProcessed: number;
+  handoffsPreviewed: number;
+  handoffsConfirmed: number;
+  queueStatusUpdates: number;
+  queueNotesAdded: number;
+  rateLimitedRequests: number;
+  invalidPayloads: number;
+};
+
 export type AdminQueueItem = {
   id: string;
   sessionId: string;

@@ -1,5 +1,7 @@
 import type {
   AdminQueueItem,
+  AssistantMetricEvent,
+  AssistantMetricsSummary,
   AssistantMessageRecord,
   AssistantSessionRecord,
   AssistantSessionRequest,
@@ -16,6 +18,8 @@ type AssistantGlobalState = {
   messages: Map<string, AssistantMessageRecord[]>;
   events: AssistantTurnEvent[];
   queue: AdminQueueItem[];
+  metrics: AssistantMetricsSummary;
+  rateLimits: Map<string, string[]>;
 };
 
 const GLOBAL_KEY = '__KOWA_ASSISTANT_STORE__';
@@ -28,6 +32,17 @@ function getState(): AssistantGlobalState {
       messages: new Map<string, AssistantMessageRecord[]>(),
       events: [],
       queue: [],
+      metrics: {
+        sessionsCreated: 0,
+        turnsProcessed: 0,
+        handoffsPreviewed: 0,
+        handoffsConfirmed: 0,
+        queueStatusUpdates: 0,
+        queueNotesAdded: 0,
+        rateLimitedRequests: 0,
+        invalidPayloads: 0,
+      },
+      rateLimits: new Map<string, string[]>(),
     };
   }
   return container[GLOBAL_KEY] as AssistantGlobalState;
@@ -66,6 +81,7 @@ export function createAssistantSession(
   const state = getState();
   state.sessions.set(sessionId, record);
   state.messages.set(conversationId, []);
+  recordAssistantMetric('session_created');
 
   return {
     sessionId,
@@ -142,4 +158,54 @@ export function updateAdminQueueItem(id: string, updater: (current: AdminQueueIt
   const next = updater(state.queue[index]);
   state.queue[index] = next;
   return next;
+}
+
+export function recordAssistantMetric(event: AssistantMetricEvent) {
+  const metrics = getState().metrics;
+  switch (event) {
+    case 'session_created':
+      metrics.sessionsCreated += 1;
+      return;
+    case 'turn_processed':
+      metrics.turnsProcessed += 1;
+      return;
+    case 'handoff_previewed':
+      metrics.handoffsPreviewed += 1;
+      return;
+    case 'handoff_confirmed':
+      metrics.handoffsConfirmed += 1;
+      return;
+    case 'queue_status_updated':
+      metrics.queueStatusUpdates += 1;
+      return;
+    case 'queue_note_added':
+      metrics.queueNotesAdded += 1;
+      return;
+    case 'rate_limited':
+      metrics.rateLimitedRequests += 1;
+      return;
+    case 'invalid_payload':
+      metrics.invalidPayloads += 1;
+      return;
+  }
+}
+
+export function getAssistantMetrics(): AssistantMetricsSummary {
+  return { ...getState().metrics };
+}
+
+export function checkAndConsumeRateLimit(key: string, limit: number, windowMs: number) {
+  const state = getState();
+  const now = Date.now();
+  const current = state.rateLimits.get(key) ?? [];
+  const valid = current.filter((entry) => now - Date.parse(entry) < windowMs);
+  if (valid.length >= limit) {
+    recordAssistantMetric('rate_limited');
+    state.rateLimits.set(key, valid);
+    return false;
+  }
+
+  valid.push(new Date(now).toISOString());
+  state.rateLimits.set(key, valid);
+  return true;
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
-import type { AdminQueueItem, AdminQueueStatus } from '@/lib/assistant/types';
+import type { AdminQueueItem, AdminQueueStatus, AssistantMetricsSummary } from '@/lib/assistant/types';
 import {
   clearLocalAdminAuth,
   getAdminRequestHeaders,
@@ -33,6 +33,7 @@ export function AdminConsole() {
   const [queueItems, setQueueItems] = useState<AdminQueueItem[]>([]);
   const [selectedQueueId, setSelectedQueueId] = useState<string | null>(null);
   const [queueLoading, setQueueLoading] = useState(false);
+  const [metrics, setMetrics] = useState<AssistantMetricsSummary | null>(null);
   const [assignee, setAssignee] = useState('');
   const [noteBody, setNoteBody] = useState('');
   const [title, setTitle] = useState('');
@@ -67,11 +68,29 @@ export function AdminConsole() {
     }
   };
 
+  const loadMetrics = async () => {
+    try {
+      const res = await fetch('/api/admin/assistant-metrics', {
+        headers: getAdminRequestHeaders(),
+      });
+
+      if (!res.ok) {
+        throw new Error('Unable to load assistant metrics');
+      }
+
+      const payload = (await res.json()) as { metrics: AssistantMetricsSummary };
+      setMetrics(payload.metrics);
+    } catch {
+      setMetrics(null);
+    }
+  };
+
   useEffect(() => {
     if (getLocalAdminAuth()) {
       setGate('allowed');
       setSources(readLocalAdminSources<SourceRecord>());
       void loadQueue();
+      void loadMetrics();
       return;
     }
 
@@ -82,6 +101,7 @@ export function AdminConsole() {
           setGate('allowed');
           setSources(readLocalAdminSources<SourceRecord>());
           void loadQueue();
+          void loadMetrics();
           return;
         }
         setGate('denied');
@@ -257,10 +277,32 @@ export function AdminConsole() {
           <button type="button" className="button-secondary" onClick={() => void loadQueue()}>
             Refresh inbox
           </button>
+          <button type="button" className="button-secondary" onClick={() => void loadMetrics()}>
+            Refresh metrics
+          </button>
           <button type="button" className="button-secondary" onClick={() => void logout()}>
             {copy.logout}
           </button>
         </div>
+      </section>
+
+      <section className="kpi-row">
+        <article className="kpi">
+          <strong>{metrics?.sessionsCreated ?? 0}</strong>
+          <span>{copy.metricsSessions}</span>
+        </article>
+        <article className="kpi">
+          <strong>{metrics?.turnsProcessed ?? 0}</strong>
+          <span>{copy.metricsTurns}</span>
+        </article>
+        <article className="kpi">
+          <strong>{metrics?.handoffsConfirmed ?? 0}</strong>
+          <span>{copy.metricsConfirmed}</span>
+        </article>
+        <article className="kpi">
+          <strong>{metrics?.rateLimitedRequests ?? 0}</strong>
+          <span>{copy.metricsRateLimited}</span>
+        </article>
       </section>
 
       <section className="dashboard-grid">

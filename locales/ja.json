@@ -222,7 +222,12 @@
     "inboxSessionPrefix": "セッション",
     "inboxIntentPrefix": "意図",
     "inboxAssigneePrefix": "担当",
-    "inboxUpdatedPrefix": "更新"
+    "inboxUpdatedPrefix": "更新",
+    "metricsBadge": "アシスタント指標",
+    "metricsSessions": "セッション数",
+    "metricsTurns": "ターン数",
+    "metricsConfirmed": "確定引き継ぎ数",
+    "metricsRateLimited": "制限発生数"
   },
   "migratedPages": {
     "businessBadge": "Business Items（移行済み）",

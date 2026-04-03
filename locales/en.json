@@ -222,7 +222,12 @@
     "inboxSessionPrefix": "Session",
     "inboxIntentPrefix": "Intent",
     "inboxAssigneePrefix": "Assignee",
-    "inboxUpdatedPrefix": "Updated"
+    "inboxUpdatedPrefix": "Updated",
+    "metricsBadge": "Assistant metrics",
+    "metricsSessions": "Sessions",
+    "metricsTurns": "Turns",
+    "metricsConfirmed": "Confirmed handoffs",
+    "metricsRateLimited": "Rate-limited"
   },
   "migratedPages": {
     "businessBadge": "Business Items (Migrated)",

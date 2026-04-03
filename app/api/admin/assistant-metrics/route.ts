@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 
-import { listOfficeQueue } from '@/lib/assistant/service';
-import { assertRuntimeEnvForProduction, getAssistantRuntimeConfig } from '@/lib/runtime-config';
+import { getOfficeMetrics } from '@/lib/assistant/service';
 import { isAuthorizedAdminRequest } from '@/lib/admin-auth';
+import { assertRuntimeEnvForProduction, getAssistantRuntimeConfig } from '@/lib/runtime-config';
 
 export async function GET(request: Request) {
   try {
@@ -21,5 +21,5 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: 'admin authorization required' }, { status: 401 });
   }
 
-  return NextResponse.json({ items: listOfficeQueue() });
+  return NextResponse.json({ metrics: getOfficeMetrics() });
 }

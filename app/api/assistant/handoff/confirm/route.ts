@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
 
-import { confirmHandoff } from '@/lib/assistant/service';
+import { assertAssistantRateLimit, confirmHandoff } from '@/lib/assistant/service';
 import type { HandoffConfirmRequest } from '@/lib/assistant/types';
-import { assertRuntimeEnvForProduction } from '@/lib/runtime-config';
+import { assertRuntimeEnvForProduction, getAssistantRuntimeConfig } from '@/lib/runtime-config';
 
 export async function POST(request: Request) {
   try {
     assertRuntimeEnvForProduction();
+    if (!getAssistantRuntimeConfig().flags.handoffEnabled) {
+      return NextResponse.json({ error: 'handoff is disabled' }, { status: 503 });
+    }
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : 'Runtime configuration error' },
@@ -14,12 +17,17 @@ export async function POST(request: Request) {
     );
   }
 
-  const body = (await request.json()) as HandoffConfirmRequest;
+  const body = ((await request.json().catch(() => null)) ?? null) as HandoffConfirmRequest | null;
+  if (!body) {
+    return NextResponse.json({ error: 'invalid JSON payload' }, { status: 400 });
+  }
+
   if (!body?.sessionId?.trim()) {
     return NextResponse.json({ error: 'sessionId is required' }, { status: 400 });
   }
 
   try {
+    assertAssistantRateLimit(`handoff-confirm:${body.sessionId}`);
     const response = confirmHandoff(body);
     return NextResponse.json(response);
   } catch (error) {

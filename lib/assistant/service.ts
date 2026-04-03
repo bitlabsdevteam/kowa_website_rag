@@ -3,12 +3,15 @@ import { retrieveTopSource } from '@/lib/retrieval';
 import { recordRetrievalEvent } from '@/lib/source-runtime';
 import {
   appendAssistantMessage,
+  checkAndConsumeRateLimit,
   createAssistantSession,
   getAdminQueueItem,
+  getAssistantMetrics,
   getAssistantSession,
   insertAdminQueueItem,
   listAssistantMessages,
   listAdminQueueItems,
+  recordAssistantMetric,
   recordAssistantTurnEvent,
   updateAdminQueueItem,
   updateAssistantSession,
@@ -33,6 +36,7 @@ import type {
   HandoffDraft,
   VisitorProfile,
 } from '@/lib/assistant/types';
+import { getAssistantRuntimeConfig } from '@/lib/runtime-config';
 
 const FOLLOW_UP_PATTERNS = [
   /^and\b/i,
@@ -291,6 +295,26 @@ export function createAssistantSessionRecord(input: AssistantSessionRequest): As
   });
 }
 
+export function validateAssistantPayload(input: { message?: string; note?: string }) {
+  const runtime = getAssistantRuntimeConfig();
+  if (input.message && input.message.trim().length > runtime.limits.maxMessageChars) {
+    recordAssistantMetric('invalid_payload');
+    throw new Error(`message exceeds ${runtime.limits.maxMessageChars} characters`);
+  }
+  if (input.note && input.note.trim().length > runtime.limits.maxNoteChars) {
+    recordAssistantMetric('invalid_payload');
+    throw new Error(`note exceeds ${runtime.limits.maxNoteChars} characters`);
+  }
+}
+
+export function assertAssistantRateLimit(key: string) {
+  const runtime = getAssistantRuntimeConfig();
+  const allowed = checkAndConsumeRateLimit(key, runtime.limits.maxRequestsPerMinute, 60_000);
+  if (!allowed) {
+    throw new Error('rate limit exceeded');
+  }
+}
+
 export async function runAssistantTurn(input: AssistantTurnRequest): Promise<AssistantTurnResponse> {
   const message = input.message.trim();
   if (!message) {
@@ -382,6 +406,7 @@ export async function runAssistantTurn(input: AssistantTurnRequest): Promise<Ass
     provider: 'fallback',
     createdAt: new Date().toISOString(),
   });
+  recordAssistantMetric('turn_processed');
 
   return {
     sessionId: session.sessionId,
@@ -455,6 +480,7 @@ export function previewHandoff(input: {
     citations: [],
     createdAt: new Date().toISOString(),
   });
+  recordAssistantMetric('handoff_previewed');
 
   return {
     sessionId: session.sessionId,
@@ -500,6 +526,7 @@ export function confirmHandoff(input: { sessionId: string; conversationId?: stri
   };
 
   insertAdminQueueItem(queueItem);
+  recordAssistantMetric('handoff_confirmed');
   updateAssistantSession(session.sessionId, {
     pendingHandoffDraft: null,
     stage: 'answering',
@@ -547,6 +574,7 @@ export function updateOfficeQueueStatus(id: string, input: AdminQueueStatusReque
     throw new Error('queue item not found');
   }
 
+  recordAssistantMetric('queue_status_updated');
   return next;
 }
 
@@ -574,6 +602,7 @@ export function addOfficeQueueNote(id: string, input: AdminQueueNoteRequest): Ad
     throw new Error('queue item not found');
   }
 
+  recordAssistantMetric('queue_note_added');
   return next;
 }
 
@@ -583,4 +612,8 @@ export function getOfficeQueueItem(id: string): AdminQueueItem {
     throw new Error('queue item not found');
   }
   return item;
+}
+
+export function getOfficeMetrics() {
+  return getAssistantMetrics();
 }
