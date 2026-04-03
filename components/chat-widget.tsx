@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import type { ChatResponse } from '@/lib/contracts';
+import type { AssistantSessionResponse, AssistantTurnResponse, VisitorProfile } from '@/lib/assistant/types';
 
 type Msg = {
   role: 'user' | 'assistant';
@@ -25,6 +25,55 @@ export function ChatWidget({ labels }: ChatWidgetProps) {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Msg[]>([]);
   const [loading, setLoading] = useState(false);
+  const [session, setSession] = useState<AssistantSessionResponse | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = window.sessionStorage.getItem('kowa-assistant-session');
+      if (!raw) return;
+      setSession(JSON.parse(raw) as AssistantSessionResponse);
+    } catch {
+      // ignore invalid cached session state
+    }
+  }, []);
+
+  const ensureSession = async () => {
+    if (session) return session;
+
+    const anonymousId = window.localStorage.getItem('kowa-assistant-anon-id') ?? crypto.randomUUID();
+    window.localStorage.setItem('kowa-assistant-anon-id', anonymousId);
+
+    const res = await fetch('/api/assistant/session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        locale: document.documentElement.lang === 'ja' ? 'ja' : document.documentElement.lang === 'zh' ? 'zh' : 'en',
+        entryPage: window.location.pathname,
+        referrer: document.referrer || null,
+        anonymousId,
+        channel: 'website',
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error('Unable to create assistant session');
+    }
+
+    const created = (await res.json()) as AssistantSessionResponse;
+    setSession(created);
+    window.sessionStorage.setItem('kowa-assistant-session', JSON.stringify(created));
+    return created;
+  };
+
+  const inferVisitorProfile = (text: string): VisitorProfile => {
+    const emailMatch = text.match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+    const phoneMatch = text.match(/\+?[0-9][0-9\s\-()]{7,}/);
+
+    return {
+      email: emailMatch?.[0],
+      phone: phoneMatch?.[0],
+    };
+  };
 
   const submit = async () => {
     const text = input.trim();
@@ -35,14 +84,27 @@ export function ChatWidget({ labels }: ChatWidgetProps) {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/chat', {
+      const currentSession = await ensureSession();
+      const res = await fetch('/api/assistant/turn', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({
+          sessionId: currentSession.sessionId,
+          conversationId: currentSession.conversationId,
+          message: text,
+          visitorProfile: inferVisitorProfile(text),
+        }),
       });
 
-      const payload = (await res.json()) as ChatResponse;
-      setMessages((current) => [...current, { role: 'assistant', text: payload.answer }]);
+      if (!res.ok) {
+        throw new Error('Unable to process assistant turn');
+      }
+
+      const payload = (await res.json()) as AssistantTurnResponse;
+      const supplemental = payload.requestedFields.length
+        ? `\nNeeded for office routing: ${payload.requestedFields.join(', ')}.`
+        : '';
+      setMessages((current) => [...current, { role: 'assistant', text: `${payload.answer}${supplemental}` }]);
     } catch {
       setMessages((current) => [...current, { role: 'assistant', text: labels.connectionIssue }]);
     } finally {

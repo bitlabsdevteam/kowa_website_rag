@@ -1,0 +1,118 @@
+import type {
+  AssistantMessageRecord,
+  AssistantSessionRecord,
+  AssistantSessionRequest,
+  AssistantSessionResponse,
+  AssistantTurnEvent,
+  AssistantIntent,
+  AssistantLanguage,
+  AssistantStage,
+  VisitorProfile,
+} from '@/lib/assistant/types';
+
+type AssistantGlobalState = {
+  sessions: Map<string, AssistantSessionRecord>;
+  messages: Map<string, AssistantMessageRecord[]>;
+  events: AssistantTurnEvent[];
+};
+
+const GLOBAL_KEY = '__KOWA_ASSISTANT_STORE__';
+
+function getState(): AssistantGlobalState {
+  const container = globalThis as typeof globalThis & { [GLOBAL_KEY]?: AssistantGlobalState };
+  if (!container[GLOBAL_KEY]) {
+    container[GLOBAL_KEY] = {
+      sessions: new Map<string, AssistantSessionRecord>(),
+      messages: new Map<string, AssistantMessageRecord[]>(),
+      events: [],
+    };
+  }
+  return container[GLOBAL_KEY] as AssistantGlobalState;
+}
+
+function now() {
+  return new Date().toISOString();
+}
+
+export function createAssistantSession(
+  input: AssistantSessionRequest & {
+    language: AssistantLanguage;
+    sessionId?: string;
+    conversationId?: string;
+  },
+): AssistantSessionResponse {
+  const createdAt = now();
+  const sessionId = input.sessionId ?? crypto.randomUUID();
+  const conversationId = input.conversationId ?? crypto.randomUUID();
+  const record: AssistantSessionRecord = {
+    sessionId,
+    conversationId,
+    language: input.language,
+    stage: 'intake',
+    channel: input.channel ?? 'website',
+    createdAt,
+    updatedAt: createdAt,
+    entryPage: input.entryPage ?? null,
+    referrer: input.referrer ?? null,
+    anonymousId: input.anonymousId ?? null,
+    visitorProfile: {},
+    lastIntent: null,
+  };
+
+  const state = getState();
+  state.sessions.set(sessionId, record);
+  state.messages.set(conversationId, []);
+
+  return {
+    sessionId,
+    conversationId,
+    language: record.language,
+    stage: record.stage,
+    channel: record.channel,
+    createdAt,
+  };
+}
+
+export function getAssistantSession(sessionId: string): AssistantSessionRecord | null {
+  return getState().sessions.get(sessionId) ?? null;
+}
+
+export function updateAssistantSession(
+  sessionId: string,
+  input: {
+    language?: AssistantLanguage;
+    stage?: AssistantStage;
+    lastIntent?: AssistantIntent;
+    visitorProfile?: VisitorProfile;
+  },
+): AssistantSessionRecord | null {
+  const current = getAssistantSession(sessionId);
+  if (!current) return null;
+
+  const next: AssistantSessionRecord = {
+    ...current,
+    language: input.language ?? current.language,
+    stage: input.stage ?? current.stage,
+    lastIntent: input.lastIntent ?? current.lastIntent,
+    visitorProfile: input.visitorProfile ?? current.visitorProfile,
+    updatedAt: now(),
+  };
+
+  getState().sessions.set(sessionId, next);
+  return next;
+}
+
+export function appendAssistantMessage(conversationId: string, message: AssistantMessageRecord) {
+  const state = getState();
+  const current = state.messages.get(conversationId) ?? [];
+  current.push(message);
+  state.messages.set(conversationId, current);
+}
+
+export function listAssistantMessages(conversationId: string): AssistantMessageRecord[] {
+  return [...(getState().messages.get(conversationId) ?? [])];
+}
+
+export function recordAssistantTurnEvent(event: AssistantTurnEvent) {
+  getState().events.unshift(event);
+}
