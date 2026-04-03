@@ -5,6 +5,7 @@ import {
   appendAssistantMessage,
   createAssistantSession,
   getAssistantSession,
+  listAssistantMessages,
   recordAssistantTurnEvent,
   updateAssistantSession,
 } from '@/lib/assistant/store';
@@ -24,18 +25,146 @@ import type {
   VisitorProfile,
 } from '@/lib/assistant/types';
 
-function heuristics(sourceContent: string, query: string): string | null {
-  const q = query.toLowerCase();
-  const c = sourceContent;
+const FOLLOW_UP_PATTERNS = [
+  /^and\b/i,
+  /^what about\b/i,
+  /^how about\b/i,
+  /^then\b/i,
+  /^also\b/i,
+  /^それ/i,
+  /^では/i,
+  /^あと/i,
+  /^他には/i,
+  /^那/i,
+  /^还有/i,
+  /^那地址/i,
+];
 
-  if (q.includes('establish') || q.includes('year')) {
+const RETRIEVAL_KEYWORD_MAP: Array<{ pattern: RegExp; replacement: string }> = [
+  { pattern: /(住所|所在地|地址|哪里|どこ|where)/i, replacement: ' address location tokyo office ' },
+  { pattern: /(設立|創業|成立|year|establish)/i, replacement: ' established year founded 1994 ' },
+  { pattern: /(電話|連絡|contact|phone|tel|電話番号|联系电话)/i, replacement: ' contact phone telephone tel fax ' },
+  { pattern: /(事業|業務|business|scope|service|业务)/i, replacement: ' business company profile trade recycling machinery ' },
+  { pattern: /(樹脂|再生|plastic|plastics|recycled|pellet|树脂|塑料)/i, replacement: ' resin recycled plastics pellet processing ' },
+];
+
+const FIELD_LABELS: Record<'en' | 'ja' | 'zh', Record<keyof VisitorProfile, string>> = {
+  en: {
+    name: 'name',
+    company: 'company',
+    email: 'email',
+    phone: 'phone',
+    country: 'country',
+    notes: 'notes',
+  },
+  ja: {
+    name: 'お名前',
+    company: '会社名',
+    email: 'メールアドレス',
+    phone: '電話番号',
+    country: '国名',
+    notes: '補足',
+  },
+  zh: {
+    name: '姓名',
+    company: '公司名称',
+    email: '邮箱',
+    phone: '电话',
+    country: '国家',
+    notes: '备注',
+  },
+};
+
+function questionKind(query: string): 'established' | 'address' | 'phone' | 'general' {
+  const q = query.toLowerCase();
+  if (/(設立|創業|成立|year|establish)/i.test(q)) return 'established';
+  if (/(住所|所在地|地址|哪里|どこ|where|address)/i.test(q)) return 'address';
+  if (/(電話|連絡|contact|phone|tel|電話番号|联系电话)/i.test(q)) return 'phone';
+  return 'general';
+}
+
+function localizeText(
+  language: 'en' | 'ja' | 'zh',
+  key:
+    | 'unknown'
+    | 'answer_prefix'
+    | 'follow_up_prefix'
+    | 'grounded_low_1'
+    | 'grounded_low_2'
+    | 'unknown_1'
+    | 'unknown_2'
+    | 'qualification_done'
+    | 'qualification_need'
+    | 'established'
+    | 'address'
+    | 'phone',
+  value?: string,
+): string {
+  const dictionaries = {
+    en: {
+      unknown: "I don't know based on the available Kowa sources.",
+      answer_prefix: 'Based on available Kowa sources, the most relevant information is:',
+      follow_up_prefix: 'Following up on your earlier question:',
+      grounded_low_1: 'The answer is grounded but low confidence. Confirm details using the citation reference.',
+      grounded_low_2: 'If you need a quote or sourcing discussion, tell me the product, market, and timeline.',
+      unknown_1: 'Try asking about Kowa company profile details such as establishment, address, contact information, or business scope.',
+      unknown_2: 'Ask about recycled plastics, resin trading, machinery, or international logistics support.',
+      qualification_done: 'I have enough contact detail to prepare an office handoff in the next sprint.',
+      qualification_need: 'To route this properly to the Kowa office team, please share your',
+      established: `Kowa was established in ${value}.`,
+      address: `Kowa address is ${value}.`,
+      phone: `Kowa contact line is ${value}.`,
+    },
+    ja: {
+      unknown: '利用可能なKowaソースの範囲では確認できません。',
+      answer_prefix: 'Kowaの公開ソースに基づく関連情報は次のとおりです:',
+      follow_up_prefix: '前のご質問に続けてお答えします:',
+      grounded_low_1: '根拠はありますが確度は高くありません。引用情報で詳細をご確認ください。',
+      grounded_low_2: '見積や調達の相談であれば、製品名・市場・希望時期を教えてください。',
+      unknown_1: '設立年、所在地、連絡先、事業内容などの会社情報についてお尋ねください。',
+      unknown_2: '再生プラスチック、樹脂取引、機械、国際物流支援についても対応できます。',
+      qualification_done: '次のスプリントで社内引き継ぎを準備できるだけの連絡情報は揃っています。',
+      qualification_need: 'Kowa社内チームへ正確に連携するため、次の情報をご共有ください:',
+      established: `Kowaの設立は${value}です。`,
+      address: `Kowaの所在地は${value}です。`,
+      phone: `Kowaの連絡先は${value}です。`,
+    },
+    zh: {
+      unknown: '根据当前可用的 Kowa 资料，我无法确认这一点。',
+      answer_prefix: '根据现有 Kowa 资料，最相关的信息是：',
+      follow_up_prefix: '继续上一轮问题，为您补充说明：',
+      grounded_low_1: '该回答有资料依据，但置信度较低，请结合引用信息确认细节。',
+      grounded_low_2: '如果您需要报价或采购沟通，请告诉我产品、市场和时间要求。',
+      unknown_1: '您可以询问 Kowa 的成立时间、地址、联系方式或业务范围。',
+      unknown_2: '也可以咨询再生塑料、树脂贸易、设备或国际物流支持。',
+      qualification_done: '目前的联系信息已足够在下一阶段准备转交办公室团队。',
+      qualification_need: '为了准确转交给 Kowa 办公室团队，请提供以下信息：',
+      established: `Kowa 成立于 ${value}。`,
+      address: `Kowa 的地址是 ${value}。`,
+      phone: `Kowa 的联系电话是 ${value}。`,
+    },
+  } as const;
+
+  return dictionaries[language][key];
+}
+
+function heuristics(sourceContent: string, query: string, language: 'en' | 'ja' | 'zh'): string | null {
+  const c = sourceContent;
+  const kind = questionKind(query);
+
+  if (kind === 'established') {
     const match = c.match(/Established\s*:\s*([^\.\n]+)/i);
-    if (match) return `Kowa was established in ${match[1].trim()}.`;
+    if (match) return localizeText(language, 'established', match[1].trim());
   }
 
-  if (q.includes('address') || q.includes('where')) {
+  if (kind === 'address') {
     const match = c.match(/Reoma Bldg\.[^\.\n]+/i);
-    if (match) return `Kowa address is ${match[0].trim()}.`;
+    if (match) return localizeText(language, 'address', match[0].trim());
+  }
+
+  if (kind === 'phone') {
+    const match = c.match(/TEL\s*:?\s*([^\n]+)/i);
+    if (match) return localizeText(language, 'phone', match[1].trim());
   }
 
   return null;
@@ -72,13 +201,53 @@ function buildHandoffDraft(answer: string, message: string, missingFields: Array
   };
 }
 
-function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof VisitorProfile>): string {
+function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof VisitorProfile>, language: 'en' | 'ja' | 'zh'): string {
   if (!missingFields.length) {
-    return `${baseAnswer} I have enough contact detail to prepare an office handoff in the next sprint.`;
+    return `${baseAnswer} ${localizeText(language, 'qualification_done')}`;
   }
 
-  const fields = missingFields.join(', ');
-  return `${baseAnswer} To route this properly to the Kowa office team, please share your ${fields}.`;
+  const fields = missingFields.map((field) => FIELD_LABELS[language][field]).join(', ');
+  return `${baseAnswer} ${localizeText(language, 'qualification_need')} ${fields}.`;
+}
+
+function normalizeRetrievalQuery(message: string, language: 'en' | 'ja' | 'zh') {
+  if (language === 'en') return message;
+
+  let normalized = message;
+  for (const entry of RETRIEVAL_KEYWORD_MAP) {
+    if (entry.pattern.test(message)) normalized += entry.replacement;
+  }
+  return normalized;
+}
+
+function isFollowUpQuestion(message: string) {
+  const trimmed = message.trim();
+  return FOLLOW_UP_PATTERNS.some((pattern) => pattern.test(trimmed));
+}
+
+function buildContextualQuery(message: string, language: 'en' | 'ja' | 'zh', conversationId: string) {
+  const normalized = normalizeRetrievalQuery(message, language);
+  const history = listAssistantMessages(conversationId);
+  const recentUserContext = history
+    .filter((item) => item.role === 'user')
+    .slice(-2)
+    .map((item) => item.content)
+    .join(' ');
+
+  if (!recentUserContext || !isFollowUpQuestion(message)) {
+    return { retrievalQuery: normalized, followUp: false };
+  }
+
+  return {
+    retrievalQuery: `${recentUserContext} ${normalized}`.trim(),
+    followUp: true,
+  };
+}
+
+function buildRecoveryGuidance(language: 'en' | 'ja' | 'zh', grounded: boolean) {
+  return grounded
+    ? [localizeText(language, 'grounded_low_1'), localizeText(language, 'grounded_low_2')]
+    : [localizeText(language, 'unknown_1'), localizeText(language, 'unknown_2')];
 }
 
 export function createAssistantSessionRecord(input: AssistantSessionRequest): AssistantSessionResponse {
@@ -117,38 +286,35 @@ export async function runAssistantTurn(input: AssistantTurnRequest): Promise<Ass
   const visitorProfile = mergeVisitorProfile(session.visitorProfile, input.visitorProfile);
   const missingFields = intentNeedsQualification(intent) ? listMissingVisitorFields(visitorProfile) : [];
   const stage = resolveAssistantStage(intent, missingFields);
-  const source = await retrieveTopSource(message);
+  const { retrievalQuery, followUp } = buildContextualQuery(message, language, session.conversationId);
+  const source = await retrieveTopSource(retrievalQuery);
 
   let grounded = false;
   let citations: Citation[] = [];
   let confidence: AssistantTurnResponse['confidence'] = 'none';
-  let answer = "I don't know based on the available Kowa sources.";
-  let recoveryGuidance: string[] | undefined = [
-    'Try asking about Kowa company profile details such as establishment, address, contact information, or business scope.',
-    'Ask about recycled plastics, resin trading, machinery, or international logistics support.',
-  ];
+  let answer = localizeText(language, 'unknown');
+  let recoveryGuidance: string[] | undefined = buildRecoveryGuidance(language, false);
 
   if (source) {
     grounded = true;
     citations = buildCitation(source);
-    const heuristicAnswer = heuristics(source.content, message);
+    const heuristicAnswer = heuristics(source.content, message, language);
     confidence = heuristicAnswer ? 'high' : 'low';
     answer =
       heuristicAnswer ??
-      `Based on available Kowa sources, the most relevant information is: ${source.content.slice(0, 180)}...`;
-    recoveryGuidance = heuristicAnswer
-      ? undefined
-      : [
-          'The answer is grounded but low confidence. Confirm details using the citation reference.',
-          'If you need a quote or sourcing discussion, tell me the product, market, and timeline.',
-        ];
+      `${localizeText(language, 'answer_prefix')} ${source.content.slice(0, 180)}...`;
+    recoveryGuidance = heuristicAnswer ? undefined : buildRecoveryGuidance(language, true);
+  }
+
+  if (followUp) {
+    answer = `${localizeText(language, 'follow_up_prefix')} ${answer}`;
   }
 
   if (intentNeedsQualification(intent)) {
-    answer = buildQualificationAnswer(answer, missingFields);
+    answer = buildQualificationAnswer(answer, missingFields, language);
   }
 
-  await recordRetrievalEvent({ query: message, sourceId: source?.id ?? null, grounded });
+  await recordRetrievalEvent({ query: retrievalQuery, sourceId: source?.id ?? null, grounded });
 
   const updatedSession = updateAssistantSession(session.sessionId, {
     language,

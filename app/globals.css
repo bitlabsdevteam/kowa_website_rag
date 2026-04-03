@@ -727,6 +727,11 @@ a:focus-visible {
   gap: 8px;
 }
 
+.chat-mini-entry {
+  display: grid;
+  gap: 6px;
+}
+
 .chat-mini-bubble {
   border-radius: 12px;
   padding: 10px 12px;
@@ -745,6 +750,59 @@ a:focus-visible {
   border: 1px solid var(--line);
   color: var(--text);
   margin-right: 8%;
+}
+
+.chat-mini-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-right: 8%;
+}
+
+.chat-mini-confidence,
+.chat-mini-citation {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.chat-mini-confidence {
+  background: rgba(32, 26, 21, 0.08);
+  color: var(--text);
+}
+
+.chat-mini-confidence.high {
+  background: rgba(67, 120, 74, 0.14);
+  color: #325b39;
+}
+
+.chat-mini-confidence.low {
+  background: rgba(138, 90, 43, 0.14);
+  color: #8a5a2b;
+}
+
+.chat-mini-confidence.none {
+  background: rgba(138, 90, 43, 0.1);
+  color: #6d655c;
+}
+
+.chat-mini-citation {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid var(--line);
+  color: #5a5a5a;
+}
+
+.chat-mini-guidance {
+  margin: 0 8% 0 0;
+  padding-left: 18px;
+  color: #625a50;
+  font-size: 0.8rem;
+  line-height: 1.45;
 }
 
 .chat-mini-input-row {

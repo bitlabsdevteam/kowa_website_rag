@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 
 import { ChatWidget } from '@/components/chat-widget';
+import type { Locale } from '@/lib/site-copy';
 
 type ChatPopupProps = {
   triggerLabel?: string;
+  locale: Locale;
   popupAriaLabel: string;
   closeAriaLabel: string;
   chatLabels: {
@@ -17,7 +19,7 @@ type ChatPopupProps = {
   };
 };
 
-export function ChatPopup({ triggerLabel = 'Talk to Aya', popupAriaLabel, closeAriaLabel, chatLabels }: ChatPopupProps) {
+export function ChatPopup({ triggerLabel = 'Talk to Aya', locale, popupAriaLabel, closeAriaLabel, chatLabels }: ChatPopupProps) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export function ChatPopup({ triggerLabel = 'Talk to Aya', popupAriaLabel, closeA
           <button type="button" className="chat-popup-close" aria-label={closeAriaLabel} onClick={() => setOpen(false)}>
             ×
           </button>
-          <ChatWidget labels={chatLabels} />
+          <ChatWidget labels={chatLabels} locale={locale} />
         </section>
       ) : null}
     </div>

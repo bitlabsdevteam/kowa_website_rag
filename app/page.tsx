@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { ChatPopup } from '@/components/chat-popup';
 import { SiteFooterBar } from '@/components/site-footer-bar';
@@ -10,6 +10,10 @@ import { SITE_COPY, type Locale } from '@/lib/site-copy';
 export default function HomePage() {
   const [locale, setLocale] = useState<Locale>('en');
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return (
     <main className="page shell">
@@ -65,6 +69,7 @@ export default function HomePage() {
             <div className="hero-actions">
               <ChatPopup
                 triggerLabel={copy.hero.cta}
+                locale={locale}
                 popupAriaLabel={copy.chat.popupAriaLabel}
                 closeAriaLabel={copy.chat.closeAriaLabel}
                 chatLabels={copy.chat}
