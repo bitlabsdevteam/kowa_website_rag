@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
-import type { AssistantSessionResponse, AssistantTurnResponse, VisitorProfile } from '@/lib/assistant/types';
+import type {
+  AssistantSessionResponse,
+  AssistantTurnResponse,
+  HandoffDraft,
+  HandoffPreviewResponse,
+  VisitorProfile,
+} from '@/lib/assistant/types';
 import type { Locale } from '@/lib/site-copy';
 
 type Msg = {
@@ -19,6 +25,18 @@ type ChatWidgetLabels = {
   messagePlaceholder: string;
   typeMessageAriaLabel: string;
   connectionIssue: string;
+  contactFieldsTitle: string;
+  contactFieldsBody: string;
+  saveContact: string;
+  prepareHandoff: string;
+  confirmHandoff: string;
+  handoffReady: string;
+  handoffSubmitted: string;
+  nameLabel: string;
+  companyLabel: string;
+  emailLabel: string;
+  phoneLabel: string;
+  countryLabel: string;
 };
 
 type ChatWidgetProps = {
@@ -68,6 +86,9 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
   const [messages, setMessages] = useState<Msg[]>([]);
   const [loading, setLoading] = useState(false);
   const [session, setSession] = useState<AssistantSessionResponse | null>(null);
+  const [visitorProfile, setVisitorProfile] = useState<VisitorProfile>({});
+  const [requestedFields, setRequestedFields] = useState<AssistantTurnResponse['requestedFields']>([]);
+  const [draft, setDraft] = useState<HandoffDraft | null>(null);
 
   useEffect(() => {
     try {
@@ -117,6 +138,87 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
     };
   };
 
+  const updateProfileField = (field: keyof VisitorProfile, value: string) => {
+    setVisitorProfile((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
+
+  const prepareHandoff = async () => {
+    if (!session) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/assistant/handoff/preview', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: session.sessionId,
+          conversationId: session.conversationId,
+          visitorProfile,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Unable to prepare handoff');
+      }
+
+      const payload = (await res.json()) as HandoffPreviewResponse;
+      setDraft(payload.draft);
+      setRequestedFields(payload.requestedFields);
+      setMessages((current) => [...current, { role: 'assistant', text: payload.message }]);
+    } catch {
+      setMessages((current) => [...current, { role: 'assistant', text: labels.connectionIssue }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const saveContactDetails = () => {
+    setMessages((current) => [
+      ...current,
+      {
+        role: 'assistant',
+        text:
+          locale === 'ja'
+            ? '連絡先情報をこのセッションに保存しました。準備ができたら要約を作成してください。'
+            : locale === 'zh'
+              ? '联系信息已保存到当前会话，准备好后可以生成办公室摘要。'
+              : 'Your contact details are saved for this session. Prepare the office summary when you are ready.',
+      },
+    ]);
+  };
+
+  const confirmHandoff = async () => {
+    if (!session) return;
+
+    setLoading(true);
+    try {
+      const res = await fetch('/api/assistant/handoff/confirm', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId: session.sessionId,
+          conversationId: session.conversationId,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Unable to confirm handoff');
+      }
+
+      const payload = (await res.json()) as { message: string };
+      setDraft(null);
+      setRequestedFields([]);
+      setMessages((current) => [...current, { role: 'assistant', text: payload.message }]);
+    } catch {
+      setMessages((current) => [...current, { role: 'assistant', text: labels.connectionIssue }]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const submit = async () => {
     const text = input.trim();
     if (!text || loading) return;
@@ -135,7 +237,10 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
           conversationId: currentSession.conversationId,
           message: text,
           locale,
-          visitorProfile: inferVisitorProfile(text),
+          visitorProfile: {
+            ...visitorProfile,
+            ...inferVisitorProfile(text),
+          },
         }),
       });
 
@@ -144,6 +249,11 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
       }
 
       const payload = (await res.json()) as AssistantTurnResponse;
+      setDraft(payload.handoffDraft ?? null);
+      setRequestedFields(payload.requestedFields);
+      if (payload.requestedFields.length === 0) {
+        setVisitorProfile((current) => ({ ...current }));
+      }
       const supplemental = payload.requestedFields.length
         ? `\n${requiredFieldsLead(payload.language)}${formatRequiredFields(payload.language, payload.requestedFields)}.`
         : '';
@@ -216,6 +326,78 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
           </svg>
         </button>
       </div>
+
+      {(requestedFields.length > 0 || draft) ? (
+        <section className="chat-contact-card" data-testid="chat-contact-card">
+          <h4>{draft ? labels.handoffReady : labels.contactFieldsTitle}</h4>
+          <p>{draft ? draft.summaryEn : labels.contactFieldsBody}</p>
+
+          {!draft ? (
+            <div className="chat-contact-grid">
+              <input
+                className="field"
+                placeholder={labels.nameLabel}
+                value={visitorProfile.name ?? ''}
+                onChange={(event) => updateProfileField('name', event.target.value)}
+              />
+              <input
+                className="field"
+                placeholder={labels.companyLabel}
+                value={visitorProfile.company ?? ''}
+                onChange={(event) => updateProfileField('company', event.target.value)}
+              />
+              <input
+                className="field"
+                placeholder={labels.emailLabel}
+                value={visitorProfile.email ?? ''}
+                onChange={(event) => updateProfileField('email', event.target.value)}
+              />
+              <input
+                className="field"
+                placeholder={labels.phoneLabel}
+                value={visitorProfile.phone ?? ''}
+                onChange={(event) => updateProfileField('phone', event.target.value)}
+              />
+              <input
+                className="field"
+                placeholder={labels.countryLabel}
+                value={visitorProfile.country ?? ''}
+                onChange={(event) => updateProfileField('country', event.target.value)}
+              />
+              <div className="chat-contact-actions">
+                <button type="button" className="button-secondary" onClick={saveContactDetails}>
+                  {labels.saveContact}
+                </button>
+                <button
+                  type="button"
+                  className="field-button"
+                  onClick={() => void prepareHandoff()}
+                  disabled={loading}
+                  data-testid="chat-prepare-handoff"
+                >
+                  {labels.prepareHandoff}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="chat-draft-card" data-testid="chat-handoff-draft">
+              <p>{draft.summaryEn}</p>
+              <p>{draft.summaryOriginal}</p>
+              <div className="chat-contact-actions">
+                <button
+                  type="button"
+                  className="field-button"
+                  onClick={() => void confirmHandoff()}
+                  disabled={loading}
+                  data-testid="chat-confirm-handoff"
+                >
+                  {labels.confirmHandoff}
+                </button>
+              </div>
+            </div>
+          )}
+        </section>
+      ) : null}
     </div>
   );
 }

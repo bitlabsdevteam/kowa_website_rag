@@ -58,6 +58,48 @@ export type HandoffDraft = {
   missingFields: Array<keyof VisitorProfile>;
 };
 
+export type HandoffPreviewRequest = {
+  sessionId: string;
+  conversationId?: string;
+  visitorProfile?: VisitorProfile;
+};
+
+export type HandoffPreviewResponse = {
+  sessionId: string;
+  conversationId: string;
+  draft: HandoffDraft;
+  requestedFields: Array<keyof VisitorProfile>;
+  message: string;
+};
+
+export type AdminQueueStatus = 'new' | 'confirmed' | 'triaged' | 'assigned' | 'resolved' | 'dismissed';
+
+export type AdminQueueItem = {
+  id: string;
+  sessionId: string;
+  conversationId: string;
+  status: AdminQueueStatus;
+  intentType: AssistantIntent;
+  visitorProfile: VisitorProfile;
+  summaryEn: string;
+  summaryOriginal: string;
+  requestedAction: string;
+  transcriptPreview: Array<{ role: 'user' | 'assistant'; content: string }>;
+  createdAt: string;
+  confirmedAt: string;
+};
+
+export type HandoffConfirmRequest = {
+  sessionId: string;
+  conversationId?: string;
+};
+
+export type HandoffConfirmResponse = {
+  success: true;
+  queueItem: AdminQueueItem;
+  message: string;
+};
+
 export type AssistantTurnResponse = {
   sessionId: string;
   conversationId: string;
@@ -90,6 +132,7 @@ export type AssistantSessionRecord = AssistantSessionResponse & {
   anonymousId: string | null;
   visitorProfile: VisitorProfile;
   lastIntent: AssistantIntent | null;
+  pendingHandoffDraft: HandoffDraft | null;
 };
 
 export type AssistantTurnEvent = {

@@ -5,6 +5,7 @@ import {
   appendAssistantMessage,
   createAssistantSession,
   getAssistantSession,
+  insertAdminQueueItem,
   listAssistantMessages,
   recordAssistantTurnEvent,
   updateAssistantSession,
@@ -19,6 +20,9 @@ import {
 import type {
   AssistantSessionRequest,
   AssistantSessionResponse,
+  AdminQueueItem,
+  HandoffConfirmResponse,
+  HandoffPreviewResponse,
   AssistantTurnRequest,
   AssistantTurnResponse,
   HandoffDraft,
@@ -201,6 +205,16 @@ function buildHandoffDraft(answer: string, message: string, missingFields: Array
   };
 }
 
+function summarizeForOffice(message: string, profile: VisitorProfile, intent: HandoffDraft['intentType']) {
+  const parts = [`Intent: ${intent}.`, `Visitor request: ${message}`];
+  if (profile.company) parts.push(`Company: ${profile.company}.`);
+  if (profile.country) parts.push(`Country: ${profile.country}.`);
+  if (profile.email) parts.push(`Email: ${profile.email}.`);
+  if (profile.phone) parts.push(`Phone: ${profile.phone}.`);
+  if (profile.name) parts.push(`Name: ${profile.name}.`);
+  return parts.join(' ');
+}
+
 function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof VisitorProfile>, language: 'en' | 'ja' | 'zh'): string {
   if (!missingFields.length) {
     return `${baseAnswer} ${localizeText(language, 'qualification_done')}`;
@@ -248,6 +262,18 @@ function buildRecoveryGuidance(language: 'en' | 'ja' | 'zh', grounded: boolean) 
   return grounded
     ? [localizeText(language, 'grounded_low_1'), localizeText(language, 'grounded_low_2')]
     : [localizeText(language, 'unknown_1'), localizeText(language, 'unknown_2')];
+}
+
+function lastUserQuestion(conversationId: string) {
+  return listAssistantMessages(conversationId)
+    .filter((item) => item.role === 'user')
+    .slice(-1)[0]?.content ?? null;
+}
+
+function conversationPreview(conversationId: string) {
+  return listAssistantMessages(conversationId)
+    .slice(-6)
+    .map((item) => ({ role: item.role === 'system' ? 'assistant' : item.role, content: item.content }));
 }
 
 export function createAssistantSessionRecord(input: AssistantSessionRequest): AssistantSessionResponse {
@@ -365,6 +391,134 @@ export async function runAssistantTurn(input: AssistantTurnRequest): Promise<Ass
     requestedFields: missingFields,
     suggestedNextAction: missingFields.length ? 'collect_contact_details' : intentNeedsQualification(intent) ? 'prepare_handoff' : 'answer',
     recoveryGuidance,
-    handoffDraft: intentNeedsQualification(intent) ? buildHandoffDraft(answer, message, missingFields, intent) : undefined,
+    handoffDraft:
+      intentNeedsQualification(intent) && missingFields.length === 0 ? buildHandoffDraft(answer, message, missingFields, intent) : undefined,
+  };
+}
+
+export function previewHandoff(input: {
+  sessionId: string;
+  conversationId?: string;
+  visitorProfile?: VisitorProfile;
+}): HandoffPreviewResponse {
+  const session = getAssistantSession(input.sessionId);
+  if (!session) {
+    throw new Error('assistant session not found');
+  }
+
+  const visitorProfile = mergeVisitorProfile(session.visitorProfile, input.visitorProfile);
+  const missingFields = listMissingVisitorFields(visitorProfile);
+  if (missingFields.length > 0) {
+    throw new Error(`missing required visitor fields: ${missingFields.join(', ')}`);
+  }
+
+  const message = lastUserQuestion(session.conversationId);
+  if (!message) {
+    throw new Error('no user message available for handoff summary');
+  }
+
+  const intent = session.lastIntent ?? classifyIntent(message);
+  if (!intentNeedsQualification(intent)) {
+    throw new Error('handoff preview is only available for qualified commercial or support requests');
+  }
+
+  const draft: HandoffDraft = {
+    summaryEn: summarizeForOffice(message, visitorProfile, intent),
+    summaryOriginal: message,
+    intentType: intent,
+    requestedAction: 'Review the request and follow up from the office queue.',
+    missingFields: [],
+  };
+
+  updateAssistantSession(session.sessionId, {
+    visitorProfile,
+    pendingHandoffDraft: draft,
+    stage: 'qualifying',
+    lastIntent: intent,
+  });
+
+  appendAssistantMessage(session.conversationId, {
+    id: crypto.randomUUID(),
+    role: 'assistant',
+    language: session.language,
+    content:
+      session.language === 'ja'
+        ? '社内確認用の要約を準備しました。内容を確認して送信してください。'
+        : session.language === 'zh'
+          ? '我已整理好提交给办公室的摘要，请确认后发送。'
+          : 'I prepared the summary for office review. Confirm it when you are ready to submit.',
+    citations: [],
+    createdAt: new Date().toISOString(),
+  });
+
+  return {
+    sessionId: session.sessionId,
+    conversationId: session.conversationId,
+    draft,
+    requestedFields: [],
+    message:
+      session.language === 'ja'
+        ? '社内共有用の要約を確認できます。'
+        : session.language === 'zh'
+          ? '您现在可以确认并提交办公室摘要。'
+          : 'Your office handoff summary is ready for confirmation.',
+  };
+}
+
+export function confirmHandoff(input: { sessionId: string; conversationId?: string }): HandoffConfirmResponse {
+  const session = getAssistantSession(input.sessionId);
+  if (!session) {
+    throw new Error('assistant session not found');
+  }
+
+  if (!session.pendingHandoffDraft) {
+    throw new Error('no pending handoff draft to confirm');
+  }
+
+  const confirmedAt = new Date().toISOString();
+  const queueItem: AdminQueueItem = {
+    id: crypto.randomUUID(),
+    sessionId: session.sessionId,
+    conversationId: session.conversationId,
+    status: 'confirmed',
+    intentType: session.pendingHandoffDraft.intentType,
+    visitorProfile: session.visitorProfile,
+    summaryEn: session.pendingHandoffDraft.summaryEn,
+    summaryOriginal: session.pendingHandoffDraft.summaryOriginal,
+    requestedAction: session.pendingHandoffDraft.requestedAction,
+    transcriptPreview: conversationPreview(session.conversationId),
+    createdAt: confirmedAt,
+    confirmedAt,
+  };
+
+  insertAdminQueueItem(queueItem);
+  updateAssistantSession(session.sessionId, {
+    pendingHandoffDraft: null,
+    stage: 'answering',
+  });
+
+  appendAssistantMessage(session.conversationId, {
+    id: crypto.randomUUID(),
+    role: 'assistant',
+    language: session.language,
+    content:
+      session.language === 'ja'
+        ? '要約をオフィスキューへ送信しました。担当者からの連絡をお待ちください。'
+        : session.language === 'zh'
+          ? '摘要已提交到办公室队列，请等待团队联系您。'
+          : 'The summary has been submitted to the office queue. Please wait for a follow-up from the team.',
+    citations: [],
+    createdAt: confirmedAt,
+  });
+
+  return {
+    success: true,
+    queueItem,
+    message:
+      session.language === 'ja'
+        ? 'オフィスキューへの送信が完了しました。'
+        : session.language === 'zh'
+          ? '已成功提交到办公室队列。'
+          : 'The office handoff has been submitted successfully.',
   };
 }

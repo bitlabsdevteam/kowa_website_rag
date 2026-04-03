@@ -1,4 +1,5 @@
 import type {
+  AdminQueueItem,
   AssistantMessageRecord,
   AssistantSessionRecord,
   AssistantSessionRequest,
@@ -14,6 +15,7 @@ type AssistantGlobalState = {
   sessions: Map<string, AssistantSessionRecord>;
   messages: Map<string, AssistantMessageRecord[]>;
   events: AssistantTurnEvent[];
+  queue: AdminQueueItem[];
 };
 
 const GLOBAL_KEY = '__KOWA_ASSISTANT_STORE__';
@@ -25,6 +27,7 @@ function getState(): AssistantGlobalState {
       sessions: new Map<string, AssistantSessionRecord>(),
       messages: new Map<string, AssistantMessageRecord[]>(),
       events: [],
+      queue: [],
     };
   }
   return container[GLOBAL_KEY] as AssistantGlobalState;
@@ -57,6 +60,7 @@ export function createAssistantSession(
     anonymousId: input.anonymousId ?? null,
     visitorProfile: {},
     lastIntent: null,
+    pendingHandoffDraft: null,
   };
 
   const state = getState();
@@ -84,6 +88,7 @@ export function updateAssistantSession(
     stage?: AssistantStage;
     lastIntent?: AssistantIntent;
     visitorProfile?: VisitorProfile;
+    pendingHandoffDraft?: AssistantSessionRecord['pendingHandoffDraft'];
   },
 ): AssistantSessionRecord | null {
   const current = getAssistantSession(sessionId);
@@ -95,6 +100,7 @@ export function updateAssistantSession(
     stage: input.stage ?? current.stage,
     lastIntent: input.lastIntent ?? current.lastIntent,
     visitorProfile: input.visitorProfile ?? current.visitorProfile,
+    pendingHandoffDraft: input.pendingHandoffDraft !== undefined ? input.pendingHandoffDraft : current.pendingHandoffDraft,
     updatedAt: now(),
   };
 
@@ -115,4 +121,12 @@ export function listAssistantMessages(conversationId: string): AssistantMessageR
 
 export function recordAssistantTurnEvent(event: AssistantTurnEvent) {
   getState().events.unshift(event);
+}
+
+export function insertAdminQueueItem(item: AdminQueueItem) {
+  getState().queue.unshift(item);
+}
+
+export function listAdminQueueItems(): AdminQueueItem[] {
+  return [...getState().queue];
 }

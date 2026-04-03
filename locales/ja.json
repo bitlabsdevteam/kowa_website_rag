@@ -143,7 +143,19 @@
     "promoBody": "ご質問がございましたら、こちらへどうぞ。メッセージを送ってください。できるだけ早くご連絡いたします。",
     "messagePlaceholder": "メッセージを書く",
     "typeMessageAriaLabel": "メッセージを入力",
-    "connectionIssue": "接続に問題があります。しばらくしてから再度お試しください。"
+    "connectionIssue": "接続に問題があります。しばらくしてから再度お試しください。",
+    "contactFieldsTitle": "社内連携用の連絡先情報",
+    "contactFieldsBody": "見積、調達、サポート、提携のご相談では、要約作成の前に連絡先情報をご入力ください。",
+    "saveContact": "情報を保存",
+    "prepareHandoff": "社内共有用の要約を準備",
+    "confirmHandoff": "確認して送信",
+    "handoffReady": "社内共有用の要約が準備できました",
+    "handoffSubmitted": "オフィスキューへ送信しました",
+    "nameLabel": "お名前",
+    "companyLabel": "会社名",
+    "emailLabel": "メールアドレス",
+    "phoneLabel": "電話番号",
+    "countryLabel": "国名"
   },
   "loginPage": {
     "eyebrow": "Supabase 認証",

@@ -63,6 +63,18 @@ export type SiteCopy = {
     messagePlaceholder: string;
     typeMessageAriaLabel: string;
     connectionIssue: string;
+    contactFieldsTitle: string;
+    contactFieldsBody: string;
+    saveContact: string;
+    prepareHandoff: string;
+    confirmHandoff: string;
+    handoffReady: string;
+    handoffSubmitted: string;
+    nameLabel: string;
+    companyLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    countryLabel: string;
   };
   business: BusinessSection;
   companyProfile: CompanyProfileSection;

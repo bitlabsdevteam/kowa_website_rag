@@ -805,6 +805,47 @@ a:focus-visible {
   line-height: 1.45;
 }
 
+.chat-contact-card {
+  display: grid;
+  gap: 10px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.78);
+  padding: 14px;
+}
+
+.chat-contact-card h4,
+.chat-contact-card p {
+  margin: 0;
+}
+
+.chat-contact-card h4 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+}
+
+.chat-contact-card p {
+  color: #5a544c;
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.chat-contact-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.chat-contact-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chat-draft-card {
+  display: grid;
+  gap: 10px;
+}
+
 .chat-mini-input-row {
   display: flex;
   align-items: center;
