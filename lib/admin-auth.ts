@@ -1,14 +1,16 @@
 export const ADMIN_AUTH_KEY = 'kowa-admin-auth';
 export const ADMIN_SOURCES_KEY = 'kowa-admin-sources';
+export const ADMIN_AUTH_HEADER = 'x-kowa-admin-auth';
+export const ADMIN_AUTH_VALUE = 'authenticated';
 
 export function getLocalAdminAuth(): boolean {
   if (typeof window === 'undefined') return false;
-  return window.localStorage.getItem(ADMIN_AUTH_KEY) === 'authenticated';
+  return window.localStorage.getItem(ADMIN_AUTH_KEY) === ADMIN_AUTH_VALUE;
 }
 
 export function setLocalAdminAuth(): void {
   if (typeof window === 'undefined') return;
-  window.localStorage.setItem(ADMIN_AUTH_KEY, 'authenticated');
+  window.localStorage.setItem(ADMIN_AUTH_KEY, ADMIN_AUTH_VALUE);
 }
 
 export function clearLocalAdminAuth(): void {
@@ -32,4 +34,12 @@ export function readLocalAdminSources<T>(): T[] {
 export function writeLocalAdminSources<T>(sources: T[]): void {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(ADMIN_SOURCES_KEY, JSON.stringify(sources));
+}
+
+export function getAdminRequestHeaders(): HeadersInit {
+  return { [ADMIN_AUTH_HEADER]: ADMIN_AUTH_VALUE };
+}
+
+export function isAuthorizedAdminRequest(request: Request): boolean {
+  return request.headers.get(ADMIN_AUTH_HEADER) === ADMIN_AUTH_VALUE;
 }

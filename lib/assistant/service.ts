@@ -4,10 +4,13 @@ import { recordRetrievalEvent } from '@/lib/source-runtime';
 import {
   appendAssistantMessage,
   createAssistantSession,
+  getAdminQueueItem,
   getAssistantSession,
   insertAdminQueueItem,
   listAssistantMessages,
+  listAdminQueueItems,
   recordAssistantTurnEvent,
+  updateAdminQueueItem,
   updateAssistantSession,
 } from '@/lib/assistant/store';
 import {
@@ -20,6 +23,8 @@ import {
 import type {
   AssistantSessionRequest,
   AssistantSessionResponse,
+  AdminQueueNoteRequest,
+  AdminQueueStatusRequest,
   AdminQueueItem,
   HandoffConfirmResponse,
   HandoffPreviewResponse,
@@ -487,8 +492,11 @@ export function confirmHandoff(input: { sessionId: string; conversationId?: stri
     summaryOriginal: session.pendingHandoffDraft.summaryOriginal,
     requestedAction: session.pendingHandoffDraft.requestedAction,
     transcriptPreview: conversationPreview(session.conversationId),
+    assignedTo: null,
+    notes: [],
     createdAt: confirmedAt,
     confirmedAt,
+    updatedAt: confirmedAt,
   };
 
   insertAdminQueueItem(queueItem);
@@ -521,4 +529,58 @@ export function confirmHandoff(input: { sessionId: string; conversationId?: stri
           ? '已成功提交到办公室队列。'
           : 'The office handoff has been submitted successfully.',
   };
+}
+
+export function listOfficeQueue(): AdminQueueItem[] {
+  return listAdminQueueItems();
+}
+
+export function updateOfficeQueueStatus(id: string, input: AdminQueueStatusRequest): AdminQueueItem {
+  const next = updateAdminQueueItem(id, (current) => ({
+    ...current,
+    status: input.status,
+    assignedTo: input.assignedTo !== undefined ? input.assignedTo : current.assignedTo,
+    updatedAt: new Date().toISOString(),
+  }));
+
+  if (!next) {
+    throw new Error('queue item not found');
+  }
+
+  return next;
+}
+
+export function addOfficeQueueNote(id: string, input: AdminQueueNoteRequest): AdminQueueItem {
+  const body = input.body.trim();
+  if (!body) {
+    throw new Error('note body is required');
+  }
+
+  const next = updateAdminQueueItem(id, (current) => ({
+    ...current,
+    notes: [
+      {
+        id: crypto.randomUUID(),
+        body,
+        author: input.author?.trim() || 'office-admin',
+        createdAt: new Date().toISOString(),
+      },
+      ...current.notes,
+    ],
+    updatedAt: new Date().toISOString(),
+  }));
+
+  if (!next) {
+    throw new Error('queue item not found');
+  }
+
+  return next;
+}
+
+export function getOfficeQueueItem(id: string): AdminQueueItem {
+  const item = getAdminQueueItem(id);
+  if (!item) {
+    throw new Error('queue item not found');
+  }
+  return item;
 }

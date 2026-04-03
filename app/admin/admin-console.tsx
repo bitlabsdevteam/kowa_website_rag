@@ -3,7 +3,14 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 
-import { clearLocalAdminAuth, getLocalAdminAuth, readLocalAdminSources, writeLocalAdminSources } from '@/lib/admin-auth';
+import type { AdminQueueItem, AdminQueueStatus } from '@/lib/assistant/types';
+import {
+  clearLocalAdminAuth,
+  getAdminRequestHeaders,
+  getLocalAdminAuth,
+  readLocalAdminSources,
+  writeLocalAdminSources,
+} from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
@@ -23,15 +30,48 @@ export function AdminConsole() {
   const copy = SITE_COPY.en.adminPage;
   const [gate, setGate] = useState<GateState>('loading');
   const [sources, setSources] = useState<SourceRecord[]>([]);
+  const [queueItems, setQueueItems] = useState<AdminQueueItem[]>([]);
+  const [selectedQueueId, setSelectedQueueId] = useState<string | null>(null);
+  const [queueLoading, setQueueLoading] = useState(false);
+  const [assignee, setAssignee] = useState('');
+  const [noteBody, setNoteBody] = useState('');
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
   const [content, setContent] = useState('');
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  const selectedQueueItem = useMemo(
+    () => queueItems.find((item) => item.id === selectedQueueId) ?? null,
+    [queueItems, selectedQueueId],
+  );
+
+  const loadQueue = async () => {
+    setQueueLoading(true);
+    try {
+      const res = await fetch('/api/admin/handoffs', {
+        headers: getAdminRequestHeaders(),
+      });
+
+      if (!res.ok) {
+        throw new Error('Unable to load assistant inbox');
+      }
+
+      const payload = (await res.json()) as { items: AdminQueueItem[] };
+      setQueueItems(payload.items);
+      setSelectedQueueId((current) => current ?? payload.items[0]?.id ?? null);
+    } catch {
+      setQueueItems([]);
+      setSelectedQueueId(null);
+    } finally {
+      setQueueLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (getLocalAdminAuth()) {
       setGate('allowed');
       setSources(readLocalAdminSources<SourceRecord>());
+      void loadQueue();
       return;
     }
 
@@ -41,6 +81,7 @@ export function AdminConsole() {
         if (data.session) {
           setGate('allowed');
           setSources(readLocalAdminSources<SourceRecord>());
+          void loadQueue();
           return;
         }
         setGate('denied');
@@ -49,6 +90,11 @@ export function AdminConsole() {
       setGate('denied');
     }
   }, []);
+
+  useEffect(() => {
+    setAssignee(selectedQueueItem?.assignedTo ?? '');
+    setNoteBody('');
+  }, [selectedQueueItem]);
 
   const persist = (next: SourceRecord[]) => {
     setSources(next);
@@ -98,7 +144,7 @@ export function AdminConsole() {
   };
 
   const publishToggle = (id: string, publish: boolean) => {
-      const confirmed = window.confirm(publish ? copy.confirmPublish : copy.confirmUnpublish);
+    const confirmed = window.confirm(publish ? copy.confirmPublish : copy.confirmUnpublish);
     if (!confirmed) return;
 
     const next = sources.map((source) => (source.id === id ? { ...source, published: publish } : source));
@@ -111,9 +157,47 @@ export function AdminConsole() {
 
     const now = new Date().toISOString();
     const next = sources.map((source) =>
-      source.id === id ? { ...source, lastIngestedAt: now, lastIngestionResult: 'Success' as const } : source
+      source.id === id ? { ...source, lastIngestedAt: now, lastIngestionResult: 'Success' as const } : source,
     );
     persist(next);
+  };
+
+  const updateQueueItem = async (id: string, payload: { status: AdminQueueStatus; assignedTo?: string | null }) => {
+    const confirmed = window.confirm(copy.confirmStatusChange);
+    if (!confirmed) return;
+
+    const res = await fetch(`/api/admin/handoffs/${id}/status`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminRequestHeaders(),
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) return;
+
+    const body = (await res.json()) as { item: AdminQueueItem };
+    setQueueItems((current) => current.map((item) => (item.id === body.item.id ? body.item : item)));
+  };
+
+  const addQueueNote = async () => {
+    if (!selectedQueueItem || !noteBody.trim()) return;
+
+    const res = await fetch(`/api/admin/handoffs/${selectedQueueItem.id}/note`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...getAdminRequestHeaders(),
+      },
+      body: JSON.stringify({ body: noteBody, author: 'office-admin' }),
+    });
+
+    if (!res.ok) return;
+
+    const body = (await res.json()) as { item: AdminQueueItem };
+    setQueueItems((current) => current.map((item) => (item.id === body.item.id ? body.item : item)));
+    setNoteBody('');
   };
 
   const logout = async () => {
@@ -128,11 +212,8 @@ export function AdminConsole() {
   };
 
   const heading = useMemo(
-    () =>
-      editingId
-        ? copy.headingEdit
-        : copy.headingCreate,
-    [copy.headingCreate, copy.headingEdit, editingId]
+    () => (editingId ? copy.headingEdit : copy.headingCreate),
+    [copy.headingCreate, copy.headingEdit, editingId],
   );
 
   if (gate === 'loading') {
@@ -173,6 +254,9 @@ export function AdminConsole() {
         <h1 className="page-title">{copy.heroTitle}</h1>
         <p className="lead">{heading}</p>
         <div className="hero-actions">
+          <button type="button" className="button-secondary" onClick={() => void loadQueue()}>
+            Refresh inbox
+          </button>
           <button type="button" className="button-secondary" onClick={() => void logout()}>
             {copy.logout}
           </button>
@@ -275,6 +359,140 @@ export function AdminConsole() {
             </div>
           ) : (
             <p className="footer-note">{copy.noSources}</p>
+          )}
+        </article>
+
+        <article className="card">
+          <span className="badge">{copy.inboxBadge}</span>
+          <p className="footer-note">{copy.inboxTitle}</p>
+          {queueLoading ? (
+            <p className="footer-note">Loading inbox...</p>
+          ) : queueItems.length ? (
+            <div className="admin-source-list">
+              {queueItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={`admin-queue-item${selectedQueueId === item.id ? ' selected' : ''}`}
+                  onClick={() => setSelectedQueueId(item.id)}
+                  data-testid={`handoff-row-${item.id}`}
+                >
+                  <div className="admin-source-head">
+                    <strong>{item.summaryEn}</strong>
+                    <span className="admin-health">{item.status}</span>
+                  </div>
+                  <p>
+                    {copy.inboxIntentPrefix}: {item.intentType}
+                  </p>
+                  <p>
+                    {copy.inboxAssigneePrefix}: {item.assignedTo ?? 'Unassigned'}
+                  </p>
+                  <p>
+                    {copy.inboxUpdatedPrefix}: {item.updatedAt}
+                  </p>
+                </button>
+              ))}
+            </div>
+          ) : (
+            <p className="footer-note">{copy.inboxEmpty}</p>
+          )}
+        </article>
+
+        <article className="card">
+          <span className="badge">{copy.detailBadge}</span>
+          {selectedQueueItem ? (
+            <div className="admin-queue-detail">
+              <div className="admin-detail-block">
+                <strong>{copy.detailSummary}</strong>
+                <p>{selectedQueueItem.summaryEn}</p>
+              </div>
+              <div className="admin-detail-block">
+                <strong>{copy.detailOriginal}</strong>
+                <p>{selectedQueueItem.summaryOriginal}</p>
+              </div>
+              <div className="admin-detail-block">
+                <strong>{copy.detailRequestedAction}</strong>
+                <p>{selectedQueueItem.requestedAction}</p>
+              </div>
+              <div className="admin-detail-block">
+                <strong>{copy.detailVisitor}</strong>
+                <p>{selectedQueueItem.visitorProfile.name ?? '-'}</p>
+                <p>{selectedQueueItem.visitorProfile.company ?? '-'}</p>
+                <p>{selectedQueueItem.visitorProfile.email ?? '-'}</p>
+                <p>{selectedQueueItem.visitorProfile.phone ?? '-'}</p>
+                <p>{selectedQueueItem.visitorProfile.country ?? '-'}</p>
+              </div>
+              <div className="admin-detail-block">
+                <strong>{copy.detailTranscript}</strong>
+                <div className="stack-list">
+                  {selectedQueueItem.transcriptPreview.map((entry, index) => (
+                    <p key={`${entry.role}-${index}`}>
+                      <strong>{entry.role}:</strong> {entry.content}
+                    </p>
+                  ))}
+                </div>
+              </div>
+              <div className="form-grid">
+                <input
+                  className="field"
+                  value={assignee}
+                  onChange={(event) => setAssignee(event.target.value)}
+                  placeholder={copy.assigneePlaceholder}
+                />
+                <div className="admin-actions-row">
+                  <button
+                    type="button"
+                    className="button-secondary"
+                    onClick={() => void updateQueueItem(selectedQueueItem.id, { status: selectedQueueItem.status, assignedTo: assignee.trim() || null })}
+                  >
+                    {copy.assignAction}
+                  </button>
+                  <button type="button" className="button-secondary" onClick={() => void updateQueueItem(selectedQueueItem.id, { status: 'triaged' })}>
+                    {copy.statusTriaged}
+                  </button>
+                  <button
+                    type="button"
+                    className="button-secondary"
+                    onClick={() => void updateQueueItem(selectedQueueItem.id, { status: 'assigned', assignedTo: assignee.trim() || null })}
+                  >
+                    {copy.statusAssigned}
+                  </button>
+                  <button type="button" className="button-secondary" onClick={() => void updateQueueItem(selectedQueueItem.id, { status: 'resolved' })}>
+                    {copy.statusResolved}
+                  </button>
+                  <button type="button" className="button-secondary" onClick={() => void updateQueueItem(selectedQueueItem.id, { status: 'dismissed' })}>
+                    {copy.statusDismissed}
+                  </button>
+                </div>
+              </div>
+              <div className="admin-detail-block">
+                <strong>{copy.detailNotes}</strong>
+                {selectedQueueItem.notes.length ? (
+                  <div className="stack-list">
+                    {selectedQueueItem.notes.map((note) => (
+                      <article key={note.id} className="admin-note-item">
+                        <strong>{note.author}</strong>
+                        <p>{note.body}</p>
+                        <span>{note.createdAt}</span>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="footer-note">No office notes yet.</p>
+                )}
+                <textarea
+                  className="text-area"
+                  value={noteBody}
+                  onChange={(event) => setNoteBody(event.target.value)}
+                  placeholder={copy.notePlaceholder}
+                />
+                <button type="button" className="field-button" onClick={() => void addQueueNote()}>
+                  {copy.addNote}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <p className="footer-note">{copy.detailEmpty}</p>
           )}
         </article>
       </section>

@@ -978,7 +978,25 @@ a:focus-visible {
   padding: 16px;
 }
 
+.admin-queue-item {
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.66);
+  padding: 16px;
+  cursor: pointer;
+}
+
+.admin-queue-item.selected {
+  border-color: rgba(138, 90, 43, 0.42);
+  box-shadow: var(--interactive-focus-ring);
+}
+
 .admin-source-item p {
+  margin: 8px 0 0;
+}
+
+.admin-queue-item p {
   margin: 8px 0 0;
 }
 
@@ -1002,6 +1020,41 @@ a:focus-visible {
 .footer-note {
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.admin-queue-detail {
+  display: grid;
+  gap: 14px;
+}
+
+.admin-detail-block {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-detail-block > p,
+.admin-detail-block > strong {
+  margin: 0;
+}
+
+.admin-note-item {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.66);
+  padding: 12px;
+}
+
+.admin-note-item p,
+.admin-note-item strong,
+.admin-note-item span {
+  margin: 0;
+  display: block;
+}
+
+.admin-note-item span {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 6px;
 }
 
 .legacy-title {

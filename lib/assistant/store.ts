@@ -130,3 +130,16 @@ export function insertAdminQueueItem(item: AdminQueueItem) {
 export function listAdminQueueItems(): AdminQueueItem[] {
   return [...getState().queue];
 }
+
+export function getAdminQueueItem(id: string): AdminQueueItem | null {
+  return getState().queue.find((item) => item.id === id) ?? null;
+}
+
+export function updateAdminQueueItem(id: string, updater: (current: AdminQueueItem) => AdminQueueItem): AdminQueueItem | null {
+  const state = getState();
+  const index = state.queue.findIndex((item) => item.id === id);
+  if (index === -1) return null;
+  const next = updater(state.queue[index]);
+  state.queue[index] = next;
+  return next;
+}

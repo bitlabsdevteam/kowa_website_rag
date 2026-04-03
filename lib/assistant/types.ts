@@ -74,6 +74,13 @@ export type HandoffPreviewResponse = {
 
 export type AdminQueueStatus = 'new' | 'confirmed' | 'triaged' | 'assigned' | 'resolved' | 'dismissed';
 
+export type AdminQueueNote = {
+  id: string;
+  body: string;
+  author: string;
+  createdAt: string;
+};
+
 export type AdminQueueItem = {
   id: string;
   sessionId: string;
@@ -85,8 +92,11 @@ export type AdminQueueItem = {
   summaryOriginal: string;
   requestedAction: string;
   transcriptPreview: Array<{ role: 'user' | 'assistant'; content: string }>;
+  assignedTo: string | null;
+  notes: AdminQueueNote[];
   createdAt: string;
   confirmedAt: string;
+  updatedAt: string;
 };
 
 export type HandoffConfirmRequest = {
@@ -98,6 +108,16 @@ export type HandoffConfirmResponse = {
   success: true;
   queueItem: AdminQueueItem;
   message: string;
+};
+
+export type AdminQueueStatusRequest = {
+  status: AdminQueueStatus;
+  assignedTo?: string | null;
+};
+
+export type AdminQueueNoteRequest = {
+  body: string;
+  author?: string;
 };
 
 export type AssistantTurnResponse = {
