@@ -6,6 +6,7 @@ import type {
   AssistantSessionRecord,
   AssistantSessionRequest,
   AssistantSessionResponse,
+  TelegramChannelBinding,
   AssistantTurnEvent,
   AssistantIntent,
   AssistantLanguage,
@@ -20,6 +21,7 @@ type AssistantGlobalState = {
   queue: AdminQueueItem[];
   metrics: AssistantMetricsSummary;
   rateLimits: Map<string, string[]>;
+  telegramBindings: Map<string, TelegramChannelBinding>;
 };
 
 const GLOBAL_KEY = '__KOWA_ASSISTANT_STORE__';
@@ -43,6 +45,7 @@ function getState(): AssistantGlobalState {
         invalidPayloads: 0,
       },
       rateLimits: new Map<string, string[]>(),
+      telegramBindings: new Map<string, TelegramChannelBinding>(),
     };
   }
   return container[GLOBAL_KEY] as AssistantGlobalState;
@@ -208,4 +211,23 @@ export function checkAndConsumeRateLimit(key: string, limit: number, windowMs: n
   valid.push(new Date(now).toISOString());
   state.rateLimits.set(key, valid);
   return true;
+}
+
+function telegramBindingKey(telegramUserId: number, telegramChatId: number) {
+  return `${telegramUserId}:${telegramChatId}`;
+}
+
+export function getTelegramChannelBinding(telegramUserId: number, telegramChatId: number): TelegramChannelBinding | null {
+  return getState().telegramBindings.get(telegramBindingKey(telegramUserId, telegramChatId)) ?? null;
+}
+
+export function upsertTelegramChannelBinding(
+  input: Omit<TelegramChannelBinding, 'updatedAt'> & { updatedAt?: string },
+): TelegramChannelBinding {
+  const binding: TelegramChannelBinding = {
+    ...input,
+    updatedAt: input.updatedAt ?? now(),
+  };
+  getState().telegramBindings.set(telegramBindingKey(binding.telegramUserId, binding.telegramChatId), binding);
+  return binding;
 }

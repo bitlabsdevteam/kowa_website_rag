@@ -187,3 +187,56 @@ export type AssistantTurnEvent = {
   provider: 'fallback';
   createdAt: string;
 };
+
+export type TelegramChannelBinding = {
+  channel: 'telegram';
+  telegramUserId: number;
+  telegramChatId: number;
+  sessionId: string;
+  conversationId: string;
+  language: AssistantLanguage;
+  username?: string | null;
+  firstName?: string | null;
+  lastName?: string | null;
+  updatedAt: string;
+};
+
+export type TelegramWebhookUpdate = {
+  update_id: number;
+  message?: {
+    message_id: number;
+    date: number;
+    text?: string;
+    chat: {
+      id: number;
+      type: 'private' | 'group' | 'supergroup' | 'channel';
+    };
+    from?: {
+      id: number;
+      is_bot: boolean;
+      first_name?: string;
+      last_name?: string;
+      username?: string;
+      language_code?: string;
+    };
+  };
+  callback_query?: {
+    id: string;
+  };
+};
+
+export type TelegramOutboundMessage = {
+  method: 'sendMessage';
+  chatId: number;
+  text: string;
+};
+
+export type TelegramWebhookResponse = {
+  ok: true;
+  ignored?: boolean;
+  route?: '/api/telegram/webhook';
+  sessionId?: string;
+  conversationId?: string;
+  reply?: TelegramOutboundMessage;
+  delivery: 'disabled' | 'sent' | 'skipped';
+};
