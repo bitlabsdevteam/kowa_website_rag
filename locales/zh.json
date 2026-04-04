@@ -122,6 +122,60 @@
     }
   },
   "footer": {
+    "navAria": "页脚导航",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "业务概览",
+            "href": "/business"
+          },
+          {
+            "label": "产品",
+            "href": "/products"
+          },
+          {
+            "label": "联系销售",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "公司简介",
+            "href": "/company_profile"
+          },
+          {
+            "label": "新闻",
+            "href": "/news"
+          },
+          {
+            "label": "联系地址",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "职业概览",
+            "href": "/company_profile"
+          },
+          {
+            "label": "招聘咨询",
+            "href": "/inquiry"
+          },
+          {
+            "label": "东京办公室",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "使用条款",
     "social": {

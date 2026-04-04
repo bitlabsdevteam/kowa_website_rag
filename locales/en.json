@@ -122,6 +122,60 @@
     }
   },
   "footer": {
+    "navAria": "Footer navigation",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "Business Overview",
+            "href": "/business"
+          },
+          {
+            "label": "Products",
+            "href": "/products"
+          },
+          {
+            "label": "Contact Sales",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "Company Profile",
+            "href": "/company_profile"
+          },
+          {
+            "label": "News",
+            "href": "/news"
+          },
+          {
+            "label": "Access",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "Career Overview",
+            "href": "/company_profile"
+          },
+          {
+            "label": "Open Inquiry",
+            "href": "/inquiry"
+          },
+          {
+            "label": "Tokyo Access",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "Terms",
     "social": {

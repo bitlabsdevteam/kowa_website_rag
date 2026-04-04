@@ -122,6 +122,60 @@
     }
   },
   "footer": {
+    "navAria": "フッターナビゲーション",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "事業概要",
+            "href": "/business"
+          },
+          {
+            "label": "製品",
+            "href": "/products"
+          },
+          {
+            "label": "営業窓口",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "会社案内",
+            "href": "/company_profile"
+          },
+          {
+            "label": "ニュース",
+            "href": "/news"
+          },
+          {
+            "label": "アクセス",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "キャリア概要",
+            "href": "/company_profile"
+          },
+          {
+            "label": "採用問い合わせ",
+            "href": "/inquiry"
+          },
+          {
+            "label": "東京オフィス",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "利用規約",
     "social": {
