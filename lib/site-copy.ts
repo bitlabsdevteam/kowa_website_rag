@@ -26,6 +26,7 @@ type BusinessSection = {
   intro: string;
   pillars: Array<{ title: string; detail: string }>;
   flowTitle: string;
+  flowNodeLabels: string[];
   flowSteps: string[];
 };
 

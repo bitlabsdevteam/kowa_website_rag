@@ -12,7 +12,7 @@ test('v7 task4 renders reusable logo mark + wordmark and stays responsive', asyn
   await expect(brand).toBeVisible();
   await expect(logoSvg).toBeVisible();
   await expect(logoWordmark).toHaveText('Kowa Trade & Commerce');
-  await expect(logoSubline).toHaveText('Tokyo, Japan');
+  await expect(logoSubline).toHaveCount(0);
 
   await page.screenshot({ path: 'tests/screenshots/task4-step1-v7-logo-desktop.png', fullPage: true });
 
@@ -21,13 +21,11 @@ test('v7 task4 renders reusable logo mark + wordmark and stays responsive', asyn
 
   await expect(brand).toBeVisible();
   await expect(logoSvg).toBeVisible();
+  await expect(logoSubline).toHaveCount(0);
 
   const brandBox = await brand.boundingBox();
   expect(brandBox).not.toBeNull();
   expect((brandBox?.x ?? 0) + (brandBox?.width ?? 0)).toBeLessThanOrEqual(390);
-
-  const sublineDisplay = await logoSubline.evaluate((node) => getComputedStyle(node).display);
-  expect(sublineDisplay).toBe('none');
 
   await page.screenshot({ path: 'tests/screenshots/task4-step2-v7-logo-mobile.png', fullPage: true });
 });

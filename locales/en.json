@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "Resource circulation flow",
+    "flowNodeLabels": [
+      "Collection",
+      "Sorting",
+      "Regeneration",
+      "Distribution"
+    ],
     "flowSteps": [
       "Purchase and collect production-loss and waste plastics.",
       "Sort and assess by resin type, shape, additives, and deposits.",
@@ -188,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "Tokyo, Japan"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya assistant popup",

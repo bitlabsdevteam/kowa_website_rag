@@ -6,6 +6,8 @@ npm install
 npm run dev
 ```
 
+`npm run dev` (or `pnpm run dev`) now runs Next.js in webpack mode with polling-based file watching, so browser refresh/hot reload continues to work when files change without restarting the dev server.
+
 ## Docker
 1. Copy `.env.example` to `.env` and set required runtime values.
 2. Build and run:

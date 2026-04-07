@@ -1,0 +1,16 @@
+<svg width="1280" height="360" viewBox="0 0 1280 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kowaGoldPrimary" x1="42" y1="18" x2="314" y2="332" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCC08B"/>
+      <stop offset="1" stop-color="#A9813D"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="360" rx="34" fill="#FAF7F1"/>
+  <circle cx="178" cy="180" r="134" fill="#FCFAF5"/>
+  <circle cx="178" cy="180" r="124" stroke="url(#kowaGoldPrimary)" stroke-width="8"/>
+  <path d="M132 106H156V164L211 106H247L179 176L250 255H214L156 188V255H132V106Z" fill="#1D2A3C"/>
+  <circle cx="229" cy="124" r="8" fill="url(#kowaGoldPrimary)"/>
+  <text x="350" y="162" fill="#1D2A3C" font-size="90" font-weight="600" letter-spacing="8" font-family="&quot;Avenir Next&quot;, &quot;Segoe UI&quot;, sans-serif">KOWA</text>
+  <text x="352" y="226" fill="#5B6677" font-size="36" letter-spacing="5" font-family="&quot;Avenir Next&quot;, &quot;Segoe UI&quot;, sans-serif">TRADE &amp; COMMERCE</text>
+  <line x1="352" y1="248" x2="913" y2="248" stroke="#DCC08B" stroke-width="3"/>
+</svg>

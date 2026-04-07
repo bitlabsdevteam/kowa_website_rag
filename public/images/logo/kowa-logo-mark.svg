@@ -1,0 +1,12 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="kowaGold" x1="116" y1="96" x2="392" y2="416" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#DCC08B"/>
+      <stop offset="1" stop-color="#A9813D"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="224" fill="#FAF7F1"/>
+  <circle cx="256" cy="256" r="210" stroke="url(#kowaGold)" stroke-width="12"/>
+  <path d="M180 130H220V227L312 130H371L260 249L378 382H318L220 270V382H180V130Z" fill="#1D2A3C"/>
+  <circle cx="343" cy="160" r="15" fill="url(#kowaGold)"/>
+</svg>

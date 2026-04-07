@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "資源循環フロー",
+    "flowNodeLabels": [
+      "仕入・回収",
+      "選別",
+      "再資源化",
+      "国内外流通"
+    ],
     "flowSteps": [
       "仕入・回収",
       "素材特性に応じた選別",
@@ -188,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "東京、日本"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya アシスタント ポップアップ",

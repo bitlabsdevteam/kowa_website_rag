@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import type {
   AssistantSessionResponse,
@@ -89,6 +89,7 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
   const [visitorProfile, setVisitorProfile] = useState<VisitorProfile>({});
   const [requestedFields, setRequestedFields] = useState<AssistantTurnResponse['requestedFields']>([]);
   const [draft, setDraft] = useState<HandoffDraft | null>(null);
+  const threadRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     try {
@@ -99,6 +100,11 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
       // ignore invalid cached session state
     }
   }, []);
+
+  useEffect(() => {
+    if (!threadRef.current) return;
+    threadRef.current.scrollTop = threadRef.current.scrollHeight;
+  }, [messages, loading, draft, requestedFields]);
 
   const ensureSession = async () => {
     if (session) return session;
@@ -276,39 +282,125 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
 
   return (
     <div className="chat-shell compact">
-      <div className="chat-promo" data-testid="chat-popup-style">
-        <h3>{labels.promoTitle}</h3>
-        <p>{labels.promoBody}</p>
-      </div>
-
-      {messages.length > 0 ? (
-        <div className="chat-mini-thread" aria-live="polite">
-          {messages.slice(-2).map((message, index) => (
-            <div key={`${message.role}-${index}`} className="chat-mini-entry">
-              <div className={`chat-mini-bubble ${message.role}`}>{message.text}</div>
-              {message.role === 'assistant' && message.confidence ? (
-                <div className="chat-mini-meta">
-                  <span className={`chat-mini-confidence ${message.confidence}`} data-testid="chat-confidence">
-                    {message.confidence}
-                  </span>
-                  {message.citations?.map((citation) => (
-                    <span key={citation.id} className="chat-mini-citation" data-testid="chat-citation">
-                      {citation.title}
-                    </span>
-                  ))}
-                </div>
-              ) : null}
-              {message.role === 'assistant' && message.recoveryGuidance?.length ? (
-                <ul className="chat-mini-guidance" data-testid="chat-recovery-guidance">
-                  {message.recoveryGuidance.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          ))}
+      <div className="chat-mini-thread-wrap" ref={threadRef}>
+        <div className="chat-promo" data-testid="chat-popup-style">
+          <h3>{labels.promoTitle}</h3>
+          <p>{labels.promoBody}</p>
         </div>
-      ) : null}
+
+        {messages.length > 0 ? (
+          <div className="chat-mini-thread" aria-live="polite">
+            {messages.map((message, index) => (
+              <div key={`${message.role}-${index}`} className="chat-mini-entry">
+                <div className={`chat-mini-bubble ${message.role}`}>{message.text}</div>
+                {message.role === 'assistant' && message.confidence ? (
+                  <div className="chat-mini-meta">
+                    <span className={`chat-mini-confidence ${message.confidence}`} data-testid="chat-confidence">
+                      {message.confidence}
+                    </span>
+                    {message.citations?.map((citation) => (
+                      <span key={citation.id} className="chat-mini-citation" data-testid="chat-citation">
+                        {citation.title}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
+                {message.role === 'assistant' && message.recoveryGuidance?.length ? (
+                  <ul className="chat-mini-guidance" data-testid="chat-recovery-guidance">
+                    {message.recoveryGuidance.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                ) : null}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="chat-empty-state">{labels.messagePlaceholder}</p>
+        )}
+
+        {loading ? (
+          <div className="chat-mini-entry">
+            <div className="chat-mini-bubble assistant chat-mini-loading" aria-live="polite">
+              <span />
+              <span />
+              <span />
+            </div>
+          </div>
+        ) : null}
+
+        {(requestedFields.length > 0 || draft) ? (
+          <section className="chat-contact-card" data-testid="chat-contact-card">
+            <h4>{draft ? labels.handoffReady : labels.contactFieldsTitle}</h4>
+            <p>{draft ? draft.summaryEn : labels.contactFieldsBody}</p>
+
+            {!draft ? (
+              <div className="chat-contact-grid">
+                <input
+                  className="field"
+                  placeholder={labels.nameLabel}
+                  value={visitorProfile.name ?? ''}
+                  onChange={(event) => updateProfileField('name', event.target.value)}
+                />
+                <input
+                  className="field"
+                  placeholder={labels.companyLabel}
+                  value={visitorProfile.company ?? ''}
+                  onChange={(event) => updateProfileField('company', event.target.value)}
+                />
+                <input
+                  className="field"
+                  placeholder={labels.emailLabel}
+                  value={visitorProfile.email ?? ''}
+                  onChange={(event) => updateProfileField('email', event.target.value)}
+                />
+                <input
+                  className="field"
+                  placeholder={labels.phoneLabel}
+                  value={visitorProfile.phone ?? ''}
+                  onChange={(event) => updateProfileField('phone', event.target.value)}
+                />
+                <input
+                  className="field"
+                  placeholder={labels.countryLabel}
+                  value={visitorProfile.country ?? ''}
+                  onChange={(event) => updateProfileField('country', event.target.value)}
+                />
+                <div className="chat-contact-actions">
+                  <button type="button" className="button-secondary" onClick={saveContactDetails}>
+                    {labels.saveContact}
+                  </button>
+                  <button
+                    type="button"
+                    className="field-button"
+                    onClick={() => void prepareHandoff()}
+                    disabled={loading}
+                    data-testid="chat-prepare-handoff"
+                  >
+                    {labels.prepareHandoff}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="chat-draft-card" data-testid="chat-handoff-draft">
+                <p>{draft.summaryEn}</p>
+                <p>{draft.summaryOriginal}</p>
+                <div className="chat-contact-actions">
+                  <button
+                    type="button"
+                    className="field-button"
+                    onClick={() => void confirmHandoff()}
+                    disabled={loading}
+                    data-testid="chat-confirm-handoff"
+                  >
+                    {labels.confirmHandoff}
+                  </button>
+                </div>
+              </div>
+            )}
+          </section>
+        ) : null}
+      </div>
 
       <div className="chat-mini-input-row">
         <input
@@ -326,78 +418,6 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
           </svg>
         </button>
       </div>
-
-      {(requestedFields.length > 0 || draft) ? (
-        <section className="chat-contact-card" data-testid="chat-contact-card">
-          <h4>{draft ? labels.handoffReady : labels.contactFieldsTitle}</h4>
-          <p>{draft ? draft.summaryEn : labels.contactFieldsBody}</p>
-
-          {!draft ? (
-            <div className="chat-contact-grid">
-              <input
-                className="field"
-                placeholder={labels.nameLabel}
-                value={visitorProfile.name ?? ''}
-                onChange={(event) => updateProfileField('name', event.target.value)}
-              />
-              <input
-                className="field"
-                placeholder={labels.companyLabel}
-                value={visitorProfile.company ?? ''}
-                onChange={(event) => updateProfileField('company', event.target.value)}
-              />
-              <input
-                className="field"
-                placeholder={labels.emailLabel}
-                value={visitorProfile.email ?? ''}
-                onChange={(event) => updateProfileField('email', event.target.value)}
-              />
-              <input
-                className="field"
-                placeholder={labels.phoneLabel}
-                value={visitorProfile.phone ?? ''}
-                onChange={(event) => updateProfileField('phone', event.target.value)}
-              />
-              <input
-                className="field"
-                placeholder={labels.countryLabel}
-                value={visitorProfile.country ?? ''}
-                onChange={(event) => updateProfileField('country', event.target.value)}
-              />
-              <div className="chat-contact-actions">
-                <button type="button" className="button-secondary" onClick={saveContactDetails}>
-                  {labels.saveContact}
-                </button>
-                <button
-                  type="button"
-                  className="field-button"
-                  onClick={() => void prepareHandoff()}
-                  disabled={loading}
-                  data-testid="chat-prepare-handoff"
-                >
-                  {labels.prepareHandoff}
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="chat-draft-card" data-testid="chat-handoff-draft">
-              <p>{draft.summaryEn}</p>
-              <p>{draft.summaryOriginal}</p>
-              <div className="chat-contact-actions">
-                <button
-                  type="button"
-                  className="field-button"
-                  onClick={() => void confirmHandoff()}
-                  disabled={loading}
-                  data-testid="chat-confirm-handoff"
-                >
-                  {labels.confirmHandoff}
-                </button>
-              </div>
-            </div>
-          )}
-        </section>
-      ) : null}
     </div>
   );
 }

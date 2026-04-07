@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "资源循环流程",
+    "flowNodeLabels": [
+      "采购回收",
+      "分选评估",
+      "再生加工",
+      "国内外流通"
+    ],
     "flowSteps": [
       "采购与回收",
       "按材料特性分选",
@@ -188,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "东京，日本"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya 助手弹窗",

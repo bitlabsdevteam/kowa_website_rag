@@ -16,7 +16,7 @@ export default function NewsPage() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <section className="card stack-list page-surface" data-testid="news-page-content">
+      <section className="card stack-list page-surface corporate-hero corporate-content-surface" data-testid="news-page-content">
         <span className="eyebrow">{copy.menu.news}</span>
         <h1 className="page-title">{copy.news.title}</h1>
         {copy.news.entries.map((entry) => (
