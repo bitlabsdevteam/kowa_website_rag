@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "资源循环流程",
+    "flowNodeLabels": [
+      "采购回收",
+      "分选评估",
+      "再生加工",
+      "国内外流通"
+    ],
     "flowSteps": [
       "采购与回收",
       "按材料特性分选",
@@ -122,6 +128,60 @@
     }
   },
   "footer": {
+    "navAria": "页脚导航",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "业务概览",
+            "href": "/business"
+          },
+          {
+            "label": "产品",
+            "href": "/products"
+          },
+          {
+            "label": "联系销售",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "公司简介",
+            "href": "/company_profile"
+          },
+          {
+            "label": "新闻",
+            "href": "/news"
+          },
+          {
+            "label": "联系地址",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "职业概览",
+            "href": "/company_profile"
+          },
+          {
+            "label": "招聘咨询",
+            "href": "/inquiry"
+          },
+          {
+            "label": "东京办公室",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "使用条款",
     "social": {
@@ -134,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "东京，日本"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya 助手弹窗",
@@ -143,7 +203,19 @@
     "promoBody": "如果您有任何问题，请发送消息给我们。我们会尽快回复您。",
     "messagePlaceholder": "输入消息",
     "typeMessageAriaLabel": "输入消息",
-    "connectionIssue": "连接异常，请稍后再试。"
+    "connectionIssue": "连接异常，请稍后再试。",
+    "contactFieldsTitle": "转交办公室所需的联系信息",
+    "contactFieldsBody": "如涉及报价、采购、支持或合作，请先填写联系信息，再准备办公室摘要。",
+    "saveContact": "保存信息",
+    "prepareHandoff": "准备办公室摘要",
+    "confirmHandoff": "确认并提交",
+    "handoffReady": "办公室摘要已准备好",
+    "handoffSubmitted": "已提交到办公室队列",
+    "nameLabel": "姓名",
+    "companyLabel": "公司名称",
+    "emailLabel": "邮箱",
+    "phoneLabel": "电话",
+    "countryLabel": "国家"
   },
   "loginPage": {
     "eyebrow": "Supabase 身份认证",
@@ -186,7 +258,36 @@
     "confirmPublish": "确认发布该来源？",
     "confirmUnpublish": "确认取消发布该来源？",
     "confirmReindex": "确认对该来源触发重建索引？",
-    "noSources": "暂无来源。请先创建来源，再进行发布和重建索引。"
+    "noSources": "暂无来源。请先创建来源，再进行发布和重建索引。",
+    "inboxBadge": "助手收件箱",
+    "inboxTitle": "已确认的访客摘要会集中进入这个办公室队列。",
+    "inboxEmpty": "当前还没有转交记录。先在网站助手中确认摘要后，这里才会出现项目。",
+    "detailBadge": "转交详情",
+    "detailEmpty": "选择一个转交项目后，可查看访客资料、摘要、会话预览和内部备注。",
+    "detailSummary": "英文摘要",
+    "detailOriginal": "原始请求",
+    "detailRequestedAction": "请求动作",
+    "detailVisitor": "访客资料",
+    "detailTranscript": "会话预览",
+    "detailNotes": "内部备注",
+    "assigneePlaceholder": "填写负责人",
+    "assignAction": "保存负责人",
+    "notePlaceholder": "添加内部备注",
+    "addNote": "添加备注",
+    "statusTriaged": "标记为已分拣",
+    "statusAssigned": "标记为已指派",
+    "statusResolved": "标记为已解决",
+    "statusDismissed": "驳回",
+    "confirmStatusChange": "确认更新此转交状态？",
+    "inboxSessionPrefix": "会话",
+    "inboxIntentPrefix": "意图",
+    "inboxAssigneePrefix": "负责人",
+    "inboxUpdatedPrefix": "更新于",
+    "metricsBadge": "助手指标",
+    "metricsSessions": "会话数",
+    "metricsTurns": "轮次数",
+    "metricsConfirmed": "已确认转交",
+    "metricsRateLimited": "限流次数"
   },
   "migratedPages": {
     "businessBadge": "Business Items（已迁移）",

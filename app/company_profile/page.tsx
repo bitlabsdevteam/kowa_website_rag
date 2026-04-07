@@ -16,7 +16,7 @@ export default function CompanyProfilePage() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <section className="card page-surface company-profile-surface" data-testid="company-profile-page-content">
+      <section className="card page-surface company-profile-surface corporate-hero corporate-content-surface" data-testid="company-profile-page-content">
         <span className="eyebrow">{copy.menu.companyProfile}</span>
         <h1 className="page-title">{copy.companyProfile.title}</h1>
         <p className="body-copy">{copy.companyProfile.summary}</p>

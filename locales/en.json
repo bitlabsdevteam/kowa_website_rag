@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "Resource circulation flow",
+    "flowNodeLabels": [
+      "Collection",
+      "Sorting",
+      "Regeneration",
+      "Distribution"
+    ],
     "flowSteps": [
       "Purchase and collect production-loss and waste plastics.",
       "Sort and assess by resin type, shape, additives, and deposits.",
@@ -122,6 +128,60 @@
     }
   },
   "footer": {
+    "navAria": "Footer navigation",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "Business Overview",
+            "href": "/business"
+          },
+          {
+            "label": "Products",
+            "href": "/products"
+          },
+          {
+            "label": "Contact Sales",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "Company Profile",
+            "href": "/company_profile"
+          },
+          {
+            "label": "News",
+            "href": "/news"
+          },
+          {
+            "label": "Access",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "Career Overview",
+            "href": "/company_profile"
+          },
+          {
+            "label": "Open Inquiry",
+            "href": "/inquiry"
+          },
+          {
+            "label": "Tokyo Access",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "Terms",
     "social": {
@@ -134,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "Tokyo, Japan"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya assistant popup",
@@ -143,7 +203,19 @@
     "promoBody": "If you have any questions, please send us a message. We will get back to you as soon as possible.",
     "messagePlaceholder": "Write a message",
     "typeMessageAriaLabel": "Type message",
-    "connectionIssue": "Connection issue. Please try again in a moment."
+    "connectionIssue": "Connection issue. Please try again in a moment.",
+    "contactFieldsTitle": "Contact details for office routing",
+    "contactFieldsBody": "For quote, sourcing, support, or partnership requests, add your details before preparing the office summary.",
+    "saveContact": "Save details",
+    "prepareHandoff": "Prepare office summary",
+    "confirmHandoff": "Confirm and submit",
+    "handoffReady": "Office summary ready",
+    "handoffSubmitted": "Submitted to office queue",
+    "nameLabel": "Name",
+    "companyLabel": "Company",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "countryLabel": "Country"
   },
   "loginPage": {
     "eyebrow": "Supabase authentication",
@@ -186,7 +258,36 @@
     "confirmPublish": "Publish this source?",
     "confirmUnpublish": "Unpublish this source?",
     "confirmReindex": "Trigger reindex for this source?",
-    "noSources": "No sources yet. Create one to begin publish and reindex workflows."
+    "noSources": "No sources yet. Create one to begin publish and reindex workflows.",
+    "inboxBadge": "Assistant inbox",
+    "inboxTitle": "Confirmed visitor handoffs now appear in one triage queue.",
+    "inboxEmpty": "No handoffs yet. Confirm a visitor summary in the website assistant to populate the inbox.",
+    "detailBadge": "Handoff detail",
+    "detailEmpty": "Select a handoff to review visitor details, transcript context, and office notes.",
+    "detailSummary": "English summary",
+    "detailOriginal": "Original request",
+    "detailRequestedAction": "Requested action",
+    "detailVisitor": "Visitor profile",
+    "detailTranscript": "Transcript preview",
+    "detailNotes": "Office notes",
+    "assigneePlaceholder": "Assign owner",
+    "assignAction": "Save assignee",
+    "notePlaceholder": "Add an internal office note",
+    "addNote": "Add note",
+    "statusTriaged": "Mark triaged",
+    "statusAssigned": "Mark assigned",
+    "statusResolved": "Mark resolved",
+    "statusDismissed": "Dismiss",
+    "confirmStatusChange": "Update this handoff status?",
+    "inboxSessionPrefix": "Session",
+    "inboxIntentPrefix": "Intent",
+    "inboxAssigneePrefix": "Assignee",
+    "inboxUpdatedPrefix": "Updated",
+    "metricsBadge": "Assistant metrics",
+    "metricsSessions": "Sessions",
+    "metricsTurns": "Turns",
+    "metricsConfirmed": "Confirmed handoffs",
+    "metricsRateLimited": "Rate-limited"
   },
   "migratedPages": {
     "businessBadge": "Business Items (Migrated)",

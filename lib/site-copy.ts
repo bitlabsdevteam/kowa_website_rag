@@ -26,6 +26,7 @@ type BusinessSection = {
   intro: string;
   pillars: Array<{ title: string; detail: string }>;
   flowTitle: string;
+  flowNodeLabels: string[];
   flowSteps: string[];
 };
 
@@ -63,6 +64,18 @@ export type SiteCopy = {
     messagePlaceholder: string;
     typeMessageAriaLabel: string;
     connectionIssue: string;
+    contactFieldsTitle: string;
+    contactFieldsBody: string;
+    saveContact: string;
+    prepareHandoff: string;
+    confirmHandoff: string;
+    handoffReady: string;
+    handoffSubmitted: string;
+    nameLabel: string;
+    companyLabel: string;
+    emailLabel: string;
+    phoneLabel: string;
+    countryLabel: string;
   };
   business: BusinessSection;
   companyProfile: CompanyProfileSection;
@@ -84,6 +97,14 @@ export type SiteCopy = {
     };
   };
   footer: {
+    navAria: string;
+    menuGroups: Array<{
+      title: string;
+      links: Array<{
+        label: string;
+        href: string;
+      }>;
+    }>;
     copyright: string;
     termsLabel: string;
     social: {
@@ -135,6 +156,35 @@ export type SiteCopy = {
     confirmUnpublish: string;
     confirmReindex: string;
     noSources: string;
+    inboxBadge: string;
+    inboxTitle: string;
+    inboxEmpty: string;
+    detailBadge: string;
+    detailEmpty: string;
+    detailSummary: string;
+    detailOriginal: string;
+    detailRequestedAction: string;
+    detailVisitor: string;
+    detailTranscript: string;
+    detailNotes: string;
+    assigneePlaceholder: string;
+    assignAction: string;
+    notePlaceholder: string;
+    addNote: string;
+    statusTriaged: string;
+    statusAssigned: string;
+    statusResolved: string;
+    statusDismissed: string;
+    confirmStatusChange: string;
+    inboxSessionPrefix: string;
+    inboxIntentPrefix: string;
+    inboxAssigneePrefix: string;
+    inboxUpdatedPrefix: string;
+    metricsBadge: string;
+    metricsSessions: string;
+    metricsTurns: string;
+    metricsConfirmed: string;
+    metricsRateLimited: string;
   };
   migratedPages: {
     businessBadge: string;

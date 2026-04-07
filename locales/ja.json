@@ -47,6 +47,12 @@
       }
     ],
     "flowTitle": "資源循環フロー",
+    "flowNodeLabels": [
+      "仕入・回収",
+      "選別",
+      "再資源化",
+      "国内外流通"
+    ],
     "flowSteps": [
       "仕入・回収",
       "素材特性に応じた選別",
@@ -122,6 +128,60 @@
     }
   },
   "footer": {
+    "navAria": "フッターナビゲーション",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "事業概要",
+            "href": "/business"
+          },
+          {
+            "label": "製品",
+            "href": "/products"
+          },
+          {
+            "label": "営業窓口",
+            "href": "/inquiry"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "会社案内",
+            "href": "/company_profile"
+          },
+          {
+            "label": "ニュース",
+            "href": "/news"
+          },
+          {
+            "label": "アクセス",
+            "href": "/access"
+          }
+        ]
+      },
+      {
+        "title": "Career",
+        "links": [
+          {
+            "label": "キャリア概要",
+            "href": "/company_profile"
+          },
+          {
+            "label": "採用問い合わせ",
+            "href": "/inquiry"
+          },
+          {
+            "label": "東京オフィス",
+            "href": "/access"
+          }
+        ]
+      }
+    ],
     "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
     "termsLabel": "利用規約",
     "social": {
@@ -134,7 +194,7 @@
   "brand": {
     "ariaLabel": "Kowa Trade and Commerce",
     "name": "Kowa Trade & Commerce",
-    "location": "東京、日本"
+    "location": ""
   },
   "chat": {
     "popupAriaLabel": "Aya アシスタント ポップアップ",
@@ -143,7 +203,19 @@
     "promoBody": "ご質問がございましたら、こちらへどうぞ。メッセージを送ってください。できるだけ早くご連絡いたします。",
     "messagePlaceholder": "メッセージを書く",
     "typeMessageAriaLabel": "メッセージを入力",
-    "connectionIssue": "接続に問題があります。しばらくしてから再度お試しください。"
+    "connectionIssue": "接続に問題があります。しばらくしてから再度お試しください。",
+    "contactFieldsTitle": "社内連携用の連絡先情報",
+    "contactFieldsBody": "見積、調達、サポート、提携のご相談では、要約作成の前に連絡先情報をご入力ください。",
+    "saveContact": "情報を保存",
+    "prepareHandoff": "社内共有用の要約を準備",
+    "confirmHandoff": "確認して送信",
+    "handoffReady": "社内共有用の要約が準備できました",
+    "handoffSubmitted": "オフィスキューへ送信しました",
+    "nameLabel": "お名前",
+    "companyLabel": "会社名",
+    "emailLabel": "メールアドレス",
+    "phoneLabel": "電話番号",
+    "countryLabel": "国名"
   },
   "loginPage": {
     "eyebrow": "Supabase 認証",
@@ -186,7 +258,36 @@
     "confirmPublish": "このソースを公開しますか？",
     "confirmUnpublish": "このソースを非公開にしますか？",
     "confirmReindex": "このソースの再インデックスを実行しますか？",
-    "noSources": "ソースがまだありません。公開や再インデックスを始めるには作成してください。"
+    "noSources": "ソースがまだありません。公開や再インデックスを始めるには作成してください。",
+    "inboxBadge": "アシスタント受信箱",
+    "inboxTitle": "確定した問い合わせ要約をこのキューでトリアージできます。",
+    "inboxEmpty": "まだ引き継ぎはありません。サイト側のアシスタントで要約を確定するとここに表示されます。",
+    "detailBadge": "引き継ぎ詳細",
+    "detailEmpty": "引き継ぎを選択すると、連絡先、会話要約、社内メモを確認できます。",
+    "detailSummary": "英語要約",
+    "detailOriginal": "元の依頼",
+    "detailRequestedAction": "依頼アクション",
+    "detailVisitor": "訪問者情報",
+    "detailTranscript": "会話プレビュー",
+    "detailNotes": "社内メモ",
+    "assigneePlaceholder": "担当者を入力",
+    "assignAction": "担当者を保存",
+    "notePlaceholder": "社内メモを追加",
+    "addNote": "メモを追加",
+    "statusTriaged": "トリアージ済みにする",
+    "statusAssigned": "担当割当にする",
+    "statusResolved": "解決済みにする",
+    "statusDismissed": "却下する",
+    "confirmStatusChange": "この引き継ぎステータスを更新しますか？",
+    "inboxSessionPrefix": "セッション",
+    "inboxIntentPrefix": "意図",
+    "inboxAssigneePrefix": "担当",
+    "inboxUpdatedPrefix": "更新",
+    "metricsBadge": "アシスタント指標",
+    "metricsSessions": "セッション数",
+    "metricsTurns": "ターン数",
+    "metricsConfirmed": "確定引き継ぎ数",
+    "metricsRateLimited": "制限発生数"
   },
   "migratedPages": {
     "businessBadge": "Business Items（移行済み）",
