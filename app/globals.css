@@ -2948,6 +2948,88 @@ body {
   color: #f7fbff;
 }
 
+.news-grid {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.news-card,
+.news-article-surface {
+  display: grid;
+  gap: 18px;
+}
+
+.news-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.news-meta-pill {
+  margin: 0;
+}
+
+.news-meta {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.news-card-title {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+}
+
+.news-card-excerpt {
+  font-size: 1.08rem;
+  color: var(--text);
+}
+
+.news-blocks {
+  display: grid;
+  gap: 16px;
+}
+
+.news-block-heading {
+  margin: 12px 0 0;
+  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.news-block-heading.minor {
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+}
+
+.news-block-list {
+  margin: 0;
+}
+
+.news-block-quote {
+  margin: 0;
+  padding: 18px 20px;
+  border-left: 3px solid var(--accent);
+  background: rgba(255, 250, 243, 0.78);
+  border-radius: 18px;
+}
+
+.news-block-quote p,
+.news-block-quote cite {
+  margin: 0;
+}
+
+.news-block-quote cite {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-style: normal;
+}
+
 .corporate-hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
