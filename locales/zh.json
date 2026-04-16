@@ -3,6 +3,7 @@
     "about": "关于",
     "news": "新闻",
     "products": "产品",
+    "machines": "设备",
     "companyProfile": "公司简介",
     "login": "用户登录",
     "onlineShop": "在线购物",
@@ -140,6 +141,10 @@
           {
             "label": "产品",
             "href": "/products"
+          },
+          {
+            "label": "设备",
+            "href": "/machines"
           },
           {
             "label": "联系销售",

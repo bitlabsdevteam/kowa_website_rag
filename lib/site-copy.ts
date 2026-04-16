@@ -8,6 +8,7 @@ export type MenuLabels = {
   about: string;
   news: string;
   products: string;
+  machines: string;
   companyProfile: string;
   login: string;
   onlineShop: string;

@@ -23,10 +23,6 @@ type ProductCarouselProps = {
   };
 };
 
-function normalizeIndex(index: number, length: number) {
-  return (index + length) % length;
-}
-
 export function ProductCarousel({ items, entries, locale, labels }: ProductCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const startX = useRef<number | null>(null);
@@ -71,24 +67,26 @@ export function ProductCarousel({ items, entries, locale, labels }: ProductCarou
   const activeItem = items[activeIndex] ?? items[0];
   const activeCategory = activeItem.category;
 
-  const chapters = entries.map((entry, index) => {
-    const chapterCopy = showcaseCopy.chapters[index] ?? showcaseCopy.chapters[showcaseCopy.chapters.length - 1];
-    const chapterIndexes = items.reduce<number[]>((result, item, itemIndex) => {
-      if (chapterCopy.categories.includes(item.category)) {
-        result.push(itemIndex);
-      }
-      return result;
-    }, []);
-    const firstIndex = chapterIndexes[0] ?? 0;
+  const chapters = entries
+    .map((entry, index) => {
+      const chapterCopy = showcaseCopy.chapters[index] ?? showcaseCopy.chapters[showcaseCopy.chapters.length - 1];
+      const chapterIndexes = items.reduce<number[]>((result, item, itemIndex) => {
+        if (chapterCopy.categories.includes(item.category)) {
+          result.push(itemIndex);
+        }
+        return result;
+      }, []);
+      const firstIndex = chapterIndexes[0] ?? 0;
 
-    return {
-      entry,
-      chapterCopy,
-      firstIndex,
-      count: chapterIndexes.length,
-      isActive: chapterCopy.categories.includes(activeCategory),
-    };
-  });
+      return {
+        entry,
+        chapterCopy,
+        firstIndex,
+        count: chapterIndexes.length,
+        isActive: chapterCopy.categories.includes(activeCategory),
+      };
+    })
+    .filter((chapter) => chapter.count > 0);
 
   return (
     <section className="products-carousel" data-testid="products-carousel" aria-label={labels.ariaLabel}>
@@ -145,8 +143,6 @@ export function ProductCarousel({ items, entries, locale, labels }: ProductCarou
         >
           {items.map((item, index) => {
             const story = showcaseCopy.categories[item.category];
-            const previousItem = items[normalizeIndex(index - 1, items.length)];
-            const nextItem = items[normalizeIndex(index + 1, items.length)];
 
             return (
               <article
@@ -159,27 +155,6 @@ export function ProductCarousel({ items, entries, locale, labels }: ProductCarou
               >
                 <div className="products-carousel-stage" data-accent={story.accent}>
                   <div className="products-carousel-visual-panel">
-                    <div className="products-carousel-supporting">
-                      <figure className="products-carousel-support-card" data-direction="prev">
-                        <Image
-                          src={previousItem.src}
-                          alt={previousItem.title}
-                          width={720}
-                          height={540}
-                          sizes="(max-width: 980px) 34vw, 14vw"
-                        />
-                      </figure>
-                      <figure className="products-carousel-support-card" data-direction="next">
-                        <Image
-                          src={nextItem.src}
-                          alt={nextItem.title}
-                          width={720}
-                          height={540}
-                          sizes="(max-width: 980px) 34vw, 14vw"
-                        />
-                      </figure>
-                    </div>
-
                     <figure className="products-carousel-hero-figure">
                       <div className="products-carousel-image-shell">
                         <Image

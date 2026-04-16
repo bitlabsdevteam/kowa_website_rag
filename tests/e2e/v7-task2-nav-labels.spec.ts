@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('v7 task2 nav shows ABOUT/NEWS/PRODUCTS and hides legacy labels', async ({ page }) => {
+test('v7 task2 nav shows ABOUT/NEWS/PRODUCTS/MACHINES and hides legacy labels', async ({ page }) => {
   await page.goto('/');
 
   const nav = page.getByRole('navigation', { name: 'Main navigation' });
@@ -8,8 +8,10 @@ test('v7 task2 nav shows ABOUT/NEWS/PRODUCTS and hides legacy labels', async ({ 
   await expect(nav.getByTestId('top-menu-link-about')).toHaveText('ABOUT');
   await expect(nav.getByTestId('top-menu-link-news')).toHaveText('NEWS');
   await expect(nav.getByTestId('top-menu-link-products')).toHaveText('PRODUCTS');
+  await expect(nav.getByTestId('top-menu-link-machines')).toHaveText('MACHINES');
   await expect(nav.getByTestId('top-menu-link-news')).toHaveAttribute('href', '/news');
   await expect(nav.getByTestId('top-menu-link-products')).toHaveAttribute('href', '/products');
+  await expect(nav.getByTestId('top-menu-link-machines')).toHaveAttribute('href', '/machines');
 
   await expect(nav.getByText('Overview', { exact: true })).toHaveCount(0);
   await expect(nav.getByText('Business', { exact: true })).toHaveCount(0);

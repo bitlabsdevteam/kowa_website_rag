@@ -8,6 +8,7 @@ type TopMenuLabels = {
   about: string;
   news: string;
   products: string;
+  machines: string;
   companyProfile: string;
   login: string;
   onlineShop: string;
@@ -64,6 +65,9 @@ export function TopMenu({ labels, brand, localeLabel, locale, onLocaleChange }: 
         </Link>
         <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products">
           {labels.products}
+        </Link>
+        <Link href="/machines" className="top-menu-link" data-testid="top-menu-link-machines">
+          {labels.machines}
         </Link>
         <Link href="/company_profile" className="top-menu-link" data-testid="top-menu-link-company-profile">
           {labels.companyProfile}

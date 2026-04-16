@@ -3,6 +3,7 @@
     "about": "ABOUT",
     "news": "NEWS",
     "products": "PRODUCTS",
+    "machines": "MACHINES",
     "companyProfile": "COMPANY PROFILE",
     "login": "User Login",
     "onlineShop": "Online Shopping",
@@ -140,6 +141,10 @@
           {
             "label": "Products",
             "href": "/products"
+          },
+          {
+            "label": "Machines",
+            "href": "/machines"
           },
           {
             "label": "Contact Sales",

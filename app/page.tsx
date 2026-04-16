@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -8,6 +9,8 @@ import { ResourceCirculationFlow } from '@/components/resource-circulation-flow'
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { SiteFooterMenu } from '@/components/site-footer-menu';
 import { TopMenu } from '@/components/top-menu';
+import crushingProcessEng from '@/images/Crushing_process_Eng.png';
+import crushingProcessJa from '@/images/Crashing_processJap.png';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 
 const HOME_UI: Record<
@@ -29,6 +32,12 @@ const HOME_UI: Record<
     assistantBody: string;
     productsCta: string;
     profileCta: string;
+    processLabel: string;
+    processTitle: string;
+    processBody: string;
+    processSteps: [string, string, string];
+    processCaption: string;
+    processImageAlt: string;
   }
 > = {
   en: {
@@ -48,6 +57,16 @@ const HOME_UI: Record<
     assistantBody: 'Keep the chatbot secondary to the corporate story. Visitors first understand the business, then open Aya for sourcing, product, and office-routing questions.',
     productsCta: 'Explore products',
     profileCta: 'Read company profile',
+    processLabel: 'Plastic size-reduction flow',
+    processTitle: "A clearer view of Kowa's plastic size-reduction and reprocessing flow.",
+    processBody: 'This section presents the operating sequence behind recycled plastics: intake and sorting, controlled crushing and grinding, and preparation for blending or pelletizing.',
+    processSteps: [
+      'Material intake and resin-based sorting.',
+      'Crushing and grinding for controlled size reduction.',
+      'Preparation for blending, pelletizing, and onward supply.',
+    ],
+    processCaption: 'English-language process reference for international customers and partners.',
+    processImageAlt: 'English process diagram showing plastic size reduction, crushing, and grinding.',
   },
   ja: {
     heroFlag: 'Tokyo, Japan | グローバルトレードと資源循環',
@@ -66,6 +85,16 @@ const HOME_UI: Record<
     assistantBody: 'チャットを主役にせず、先に企業情報を理解してもらい、その後にAyaで製品・調達・社内連携の相談へ進めます。',
     productsCta: '製品を見る',
     profileCta: '会社案内へ',
+    processLabel: 'プラスチック減容・粉砕フロー',
+    processTitle: 'Kowaの再生プラスチック前処理を、業務フローとして明快に表示。',
+    processBody: 'このセクションでは、再生プラスチックの実務工程を整理して示します。受け入れと選別、減容・粉砕、そしてブレンドやペレット化へつなぐ前処理フローです。',
+    processSteps: [
+      '廃プラスチックの受け入れと樹脂別の選別。',
+      '減容・粉砕による再利用可能なフレーク化。',
+      'ブレンド、ペレット化、次工程への供給準備。',
+    ],
+    processCaption: '日本語来訪者向けに工程図を日本語版で表示します。',
+    processImageAlt: 'プラスチックの減容・粉砕フローを示す日本語の工程図。',
   },
   zh: {
     heroFlag: 'Tokyo, Japan | 全球贸易与资源循环',
@@ -84,6 +113,16 @@ const HOME_UI: Record<
     assistantBody: '让聊天保持非阻塞角色。访客先理解公司业务，再通过 Aya 进入产品、采购和办公室转交流程。',
     productsCta: '查看产品',
     profileCta: '阅读公司简介',
+    processLabel: '塑料减容与粉碎流程',
+    processTitle: '以更专业的方式展示 Kowa 的塑料减容与再处理流程。',
+    processBody: '这里直接展示再生塑料的作业顺序：来料与分拣、受控粉碎与研磨，以及进入混配或造粒前的准备阶段。',
+    processSteps: [
+      '废塑料接收与树脂分类。',
+      '粉碎与研磨，实现受控减容。',
+      '为混配、造粒和后续供货做好准备。',
+    ],
+    processCaption: '中文访客当前显示英文版流程图。',
+    processImageAlt: '展示塑料减容、粉碎与研磨流程的英文流程图。',
   },
 };
 
@@ -92,7 +131,7 @@ export default function HomePage() {
   const [activeFlowIndex, setActiveFlowIndex] = useState(0);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
-  const companyBlocks = copy.companyProfile.blocks.slice(0, 2);
+  const processImage = locale === 'ja' ? crushingProcessJa : crushingProcessEng;
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -200,48 +239,40 @@ export default function HomePage() {
             </div>
           </section>
 
-          <section className="corporate-intelligence-grid" aria-label={ui.profileLabel}>
-            <div className="corporate-profile-stack">
-              <div className="corporate-section-head corporate-section-head-tight">
+          <section className="corporate-intelligence-grid" aria-label={ui.processLabel}>
+            <article className="process-feature-card">
+              <div className="corporate-section-head corporate-section-head-tight process-feature-head">
                 <div>
-                  <p className="section-label">{ui.profileLabel}</p>
-                  <h2 className="section-title corporate-subtitle">{ui.platformTitle}</h2>
+                  <p className="section-label">{ui.processLabel}</p>
+                  <h2 className="section-title corporate-subtitle">{ui.processTitle}</h2>
                 </div>
-                <Link href="/company_profile" className="text-link">
-                  {ui.profileCta}
-                </Link>
+                <p className="body-copy process-feature-body">{ui.processBody}</p>
               </div>
 
-              <div className="corporate-profile-grid">
-                {companyBlocks.map((block) => (
-                  <article key={block.heading} className="corporate-profile-card">
-                    <p className="corporate-card-label">{block.heading}</p>
-                    <ul className="corporate-point-list">
-                      {block.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
+              <div className="process-stage-grid">
+                {ui.processSteps.map((step, index) => (
+                  <article key={step} className="process-stage-card">
+                    <span className="process-stage-index">{String(index + 1).padStart(2, '0')}</span>
+                    <p>{step}</p>
                   </article>
                 ))}
               </div>
-            </div>
+
+              <figure className="process-diagram-card">
+                <div className="process-diagram-frame">
+                  <Image
+                    className="process-diagram-image"
+                    src={processImage}
+                    alt={ui.processImageAlt}
+                    priority={locale === 'en'}
+                    sizes="(max-width: 980px) 100vw, 62vw"
+                  />
+                </div>
+                <figcaption>{ui.processCaption}</figcaption>
+              </figure>
+            </article>
 
             <div className="corporate-side-stack">
-              <article className="corporate-side-card">
-                <p className="corporate-card-label">{ui.productLabel}</p>
-                <div className="corporate-trade-grid">
-                  {copy.products.entries.map((product) => (
-                    <div key={product.name} className="corporate-trade-item">
-                      <strong>{product.name}</strong>
-                      <p>{product.detail}</p>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/products" className="text-link">
-                  {ui.productsCta}
-                </Link>
-              </article>
-
               <article className="corporate-side-card">
                 <p className="corporate-card-label">{ui.assistantLabel}</p>
                 <p className="body-copy">{ui.assistantBody}</p>

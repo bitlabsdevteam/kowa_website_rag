@@ -1188,6 +1188,701 @@ a:focus-visible {
   margin: 0;
 }
 
+.products-merch-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(320px, 0.96fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+.products-merch-lead,
+.products-lead-card,
+.products-feature-card,
+.products-guidance-card,
+.products-machine-cta,
+.machines-hero-copy,
+.machines-hero-note,
+.machines-stage-card,
+.machines-card,
+.machines-meta-card,
+.machines-return-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(197, 210, 226, 0.14);
+  background: linear-gradient(180deg, rgba(12, 19, 31, 0.78), rgba(18, 27, 41, 0.72));
+  box-shadow: 0 24px 54px rgba(5, 10, 18, 0.22);
+  backdrop-filter: blur(18px);
+}
+
+.products-merch-lead,
+.products-lead-card,
+.products-guidance-card,
+.products-machine-cta,
+.machines-hero-copy,
+.machines-hero-note,
+.machines-card,
+.machines-return-panel {
+  border-radius: 28px;
+}
+
+.products-feature-card,
+.machines-stage-card,
+.machines-meta-card {
+  border-radius: 22px;
+}
+
+.products-merch-lead,
+.products-lead-card,
+.products-guidance-card,
+.products-machine-cta,
+.machines-hero-copy,
+.machines-hero-note,
+.machines-return-panel {
+  padding: 26px;
+}
+
+.products-merch-lead {
+  display: grid;
+  gap: 22px;
+  align-content: space-between;
+  background:
+    radial-gradient(circle at top right, rgba(70, 122, 185, 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(12, 20, 32, 0.82), rgba(18, 28, 42, 0.76));
+}
+
+.products-merch-copy {
+  display: grid;
+  gap: 14px;
+}
+
+.section-label {
+  margin: 0 0 10px;
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.products-merch-title,
+.products-carousel-shell-title,
+.machines-card-head h2,
+.machines-return-panel h2 {
+  max-width: 12ch;
+}
+
+.products-merch-lead-copy {
+  color: #f2f7fb;
+  max-width: 36ch;
+}
+
+.products-merch-proof {
+  display: grid;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid rgba(197, 210, 226, 0.12);
+}
+
+.products-merch-proof > span,
+.machines-hero-note > span,
+.machines-card-head > span,
+.machines-meta-card > span {
+  color: rgba(168, 187, 208, 0.84);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.products-merch-proof-list,
+.products-chip-list,
+.products-feature-points,
+.products-guidance-list,
+.machines-point-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.products-merch-proof-list li,
+.products-feature-points li,
+.products-guidance-list li,
+.machines-point-list li {
+  position: relative;
+  padding-left: 18px;
+  color: rgba(219, 228, 238, 0.76);
+  line-height: 1.6;
+}
+
+.products-merch-proof-list li::before,
+.products-feature-points li::before,
+.products-guidance-list li::before,
+.machines-point-list li::before {
+  content: '';
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(103, 181, 219, 0.9);
+  box-shadow: 0 0 0 6px rgba(103, 181, 219, 0.12);
+}
+
+.products-lead-card,
+.products-feature-card {
+  display: grid;
+  gap: 0;
+}
+
+.products-lead-image-shell,
+.products-feature-image-shell,
+.machines-card-image-shell {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  background: rgba(6, 12, 20, 0.46);
+}
+
+.products-lead-image-shell {
+  min-height: 380px;
+  border-radius: 22px;
+}
+
+.products-feature-image-shell {
+  min-height: 240px;
+  border-radius: 18px 18px 0 0;
+}
+
+.products-lead-image,
+.products-feature-image,
+.machines-card-image {
+  object-fit: cover;
+  transform: scale(1.04);
+  transition: transform 480ms ease;
+}
+
+.products-lead-card:hover .products-lead-image,
+.products-feature-card:hover .products-feature-image,
+.machines-card:hover .machines-card-image {
+  transform: scale(1.08);
+}
+
+.products-lead-card-copy,
+.products-feature-copy {
+  display: grid;
+  gap: 12px;
+}
+
+.products-lead-card-copy {
+  padding-top: 18px;
+}
+
+.products-lead-card-copy h3,
+.products-feature-copy h3,
+.machines-card-head h2,
+.machines-return-panel h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.products-lead-card-copy p,
+.products-feature-copy p,
+.machines-card-head p,
+.machines-return-panel p,
+.machines-hero-note p {
+  margin: 0;
+  color: rgba(219, 228, 238, 0.76);
+  line-height: 1.68;
+}
+
+.products-chip-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.products-chip-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(197, 210, 226, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(236, 242, 247, 0.88);
+  font-size: 0.84rem;
+}
+
+.products-feature-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.products-feature-card {
+  padding: 12px;
+  gap: 16px;
+}
+
+.products-feature-copy {
+  padding: 0 8px 6px;
+}
+
+.products-guidance-strip {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr) minmax(280px, 0.72fr);
+}
+
+.products-guidance-card {
+  display: grid;
+  gap: 12px;
+}
+
+.products-guidance-card h2,
+.products-machine-cta h3,
+.machines-hero-copy h2 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  letter-spacing: -0.04em;
+  line-height: 1.02;
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.products-guidance-card p,
+.products-machine-cta p,
+.machines-hero-copy p,
+.machines-hero-note p {
+  margin: 0;
+}
+
+.products-guidance-list-card {
+  background:
+    radial-gradient(circle at top left, rgba(40, 121, 146, 0.18), transparent 30%),
+    linear-gradient(180deg, rgba(12, 20, 32, 0.8), rgba(18, 28, 42, 0.76));
+}
+
+.products-machine-cta {
+  display: grid;
+  gap: 14px;
+  align-content: space-between;
+  background:
+    radial-gradient(circle at bottom right, rgba(74, 110, 166, 0.2), transparent 34%),
+    linear-gradient(180deg, rgba(12, 20, 32, 0.82), rgba(18, 28, 42, 0.78));
+}
+
+.products-machine-cta > span {
+  color: rgba(168, 187, 208, 0.84);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.products-merch-lead .body-copy,
+.products-guidance-card p,
+.products-machine-cta p,
+.products-feature-copy p,
+.products-lead-card-copy p {
+  color: rgba(219, 228, 238, 0.76);
+}
+
+.products-guidance-card h2,
+.products-machine-cta h3,
+.products-lead-card-copy h3,
+.products-feature-copy h3 {
+  color: #f7fbff;
+}
+
+.products-machine-cta .button-secondary {
+  border-color: rgba(197, 210, 226, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2f7fb;
+}
+
+.products-machine-cta .button-secondary:hover {
+  border-color: rgba(103, 181, 219, 0.3);
+  background: rgba(103, 181, 219, 0.14);
+}
+
+.products-carousel-shell {
+  display: grid;
+  gap: 18px;
+}
+
+.products-carousel-shell-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.products-carousel-shell-copy {
+  max-width: 54ch;
+}
+
+.machines-page-surface {
+  gap: 26px;
+}
+
+.machines-intro-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+}
+
+.machines-intro-copy,
+.machines-source-note,
+.machines-selector-panel,
+.machines-spotlight-copy,
+.machines-return-panel {
+  border: 1px solid rgba(197, 210, 226, 0.14);
+  border-radius: 26px;
+  background: linear-gradient(180deg, rgba(12, 19, 31, 0.78), rgba(18, 27, 41, 0.72));
+  box-shadow: 0 24px 54px rgba(5, 10, 18, 0.22);
+  backdrop-filter: blur(18px);
+}
+
+.machines-intro-copy {
+  display: grid;
+  align-content: center;
+  min-height: 196px;
+  padding: 30px 32px;
+  background:
+    radial-gradient(circle at top left, rgba(40, 121, 146, 0.22), transparent 34%),
+    linear-gradient(180deg, rgba(11, 20, 34, 0.82), rgba(18, 30, 46, 0.76));
+}
+
+.machines-source-note {
+  display: grid;
+  gap: 12px;
+  padding: 24px 26px;
+  background:
+    radial-gradient(circle at top right, rgba(74, 110, 166, 0.18), transparent 28%),
+    linear-gradient(180deg, rgba(14, 22, 35, 0.78), rgba(20, 30, 46, 0.72));
+}
+
+.machines-selector-panel {
+  display: grid;
+  gap: 14px;
+  padding: 18px;
+}
+
+.machines-selector-list {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.machines-selector-button {
+  display: grid;
+  gap: 8px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(197, 210, 226, 0.12);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  text-align: left;
+  color: #f2f7fb;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.machines-selector-button:hover,
+.machines-selector-button:focus-visible {
+  transform: translateY(-2px);
+  border-color: rgba(130, 197, 220, 0.34);
+  background: linear-gradient(180deg, rgba(42, 104, 130, 0.22), rgba(255, 255, 255, 0.06));
+  box-shadow: 0 18px 34px rgba(5, 12, 22, 0.24);
+}
+
+.machines-selector-button.is-active {
+  border-color: rgba(128, 196, 220, 0.4);
+  background:
+    radial-gradient(circle at top left, rgba(56, 150, 178, 0.26), transparent 40%),
+    linear-gradient(180deg, rgba(17, 39, 54, 0.86), rgba(18, 28, 42, 0.82));
+  box-shadow: 0 22px 40px rgba(4, 10, 20, 0.28);
+}
+
+.machines-selector-button small,
+.machines-spotlight-head > span,
+.machines-context-card > span,
+.machines-source-note > span,
+.machines-blueprint-copy small {
+  font-size: 0.74rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(168, 187, 208, 0.84);
+}
+
+.machines-selector-button strong {
+  font-size: 1.02rem;
+  line-height: 1.25;
+}
+
+.machines-selector-button span {
+  color: rgba(219, 228, 238, 0.72);
+  line-height: 1.55;
+  font-size: 0.93rem;
+}
+
+.machines-spotlight {
+  display: grid;
+  gap: 22px;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.84fr);
+  align-items: stretch;
+}
+
+.machines-visual-shell {
+  position: relative;
+  min-height: 560px;
+  overflow: hidden;
+  border-radius: 32px;
+  border: 1px solid rgba(197, 210, 226, 0.12);
+  background:
+    linear-gradient(145deg, rgba(8, 16, 27, 0.96), rgba(18, 29, 43, 0.92));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 30px 72px rgba(4, 10, 18, 0.32);
+}
+
+.machines-visual-shell--crusher {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(49, 104, 182, 0.28), transparent 34%),
+    linear-gradient(145deg, rgba(8, 17, 28, 0.98), rgba(18, 28, 42, 0.94));
+}
+
+.machines-visual-shell--mixer {
+  background:
+    radial-gradient(circle at 22% 22%, rgba(44, 129, 117, 0.22), transparent 34%),
+    linear-gradient(145deg, rgba(8, 18, 28, 0.98), rgba(17, 30, 40, 0.94));
+}
+
+.machines-visual-shell--secondary {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(111, 134, 168, 0.24), transparent 34%),
+    linear-gradient(145deg, rgba(9, 17, 28, 0.98), rgba(20, 31, 45, 0.94));
+}
+
+.machines-visual-shell--vacuum {
+  background:
+    radial-gradient(circle at 18% 16%, rgba(41, 92, 90, 0.24), transparent 34%),
+    linear-gradient(145deg, rgba(7, 17, 27, 0.98), rgba(17, 29, 39, 0.94));
+}
+
+.machines-visual-aura {
+  position: absolute;
+  inset: auto auto 8% 12%;
+  width: 52%;
+  height: 26%;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(48, 117, 200, 0.22), transparent 72%);
+  filter: blur(24px);
+  pointer-events: none;
+}
+
+.machines-visual-backdrop,
+.machines-visual-cutout-shell {
+  position: absolute;
+  inset: 0;
+}
+
+.machines-visual-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(7, 14, 24, 0.28), rgba(6, 12, 20, 0.62)),
+    linear-gradient(90deg, rgba(7, 14, 24, 0.5), transparent 34%, rgba(7, 14, 24, 0.44));
+}
+
+.machines-visual-backdrop-image {
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.5;
+  filter: saturate(0.92) contrast(0.92) blur(3px);
+  transform: scale(1.06);
+}
+
+.machines-visual-cutout-shell {
+  inset: 6% 4% 3%;
+}
+
+.machines-visual-cutout {
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 26px 46px rgba(3, 8, 18, 0.46));
+}
+
+.machines-blueprint {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: space-between;
+  padding: 34px;
+}
+
+.machines-blueprint-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(156, 176, 201, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(156, 176, 201, 0.12) 1px, transparent 1px);
+  background-size: 54px 54px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.82), transparent 92%);
+}
+
+.machines-blueprint-index {
+  position: relative;
+  font-size: clamp(6rem, 16vw, 9.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+  color: rgba(170, 191, 214, 0.12);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.machines-blueprint-copy {
+  position: relative;
+  display: grid;
+  gap: 10px;
+  max-width: 22rem;
+}
+
+.machines-blueprint-copy strong {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  color: rgba(244, 248, 252, 0.94);
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.machines-blueprint-chip-column {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 10px;
+}
+
+.machines-blueprint-chip-column span,
+.machines-chip-list li {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(197, 210, 226, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(236, 242, 247, 0.88);
+}
+
+.machines-spotlight-copy {
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  padding: 30px 30px 28px;
+}
+
+.machines-spotlight-head {
+  display: grid;
+  gap: 12px;
+}
+
+.machines-spotlight-head h2,
+.machines-return-panel h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+  color: #f7fbff;
+  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+}
+
+.machines-spotlight-head p,
+.machines-source-note p,
+.machines-return-panel p {
+  margin: 0;
+  color: rgba(219, 228, 238, 0.76);
+  line-height: 1.7;
+}
+
+.machines-context-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.machines-context-card {
+  display: grid;
+  gap: 8px;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(197, 210, 226, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+}
+
+.machines-context-card strong {
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: #f2f7fb;
+}
+
+.machines-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.machines-return-panel {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 24px 26px;
+  background:
+    radial-gradient(circle at top right, rgba(70, 122, 185, 0.2), transparent 30%),
+    linear-gradient(180deg, rgba(12, 20, 32, 0.8), rgba(18, 28, 42, 0.76));
+}
+
+.machines-intro-copy .lead,
+.machines-source-note,
+.machines-spotlight-copy,
+.machines-return-panel,
+.machines-selector-panel .section-label,
+.machines-return-panel .section-label {
+  color: rgba(219, 228, 238, 0.78);
+}
+
+.machines-intro-copy .lead {
+  color: rgba(232, 239, 246, 0.84);
+}
+
+.machines-source-note .section-label,
+.machines-selector-panel .section-label,
+.machines-return-panel .section-label {
+  color: #d8b884;
+}
+
+.machines-return-panel .button-secondary {
+  border-color: rgba(197, 210, 226, 0.18);
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2f7fb;
+}
+
+.machines-return-panel .button-secondary:hover {
+  border-color: rgba(216, 184, 132, 0.28);
+  background: rgba(216, 184, 132, 0.14);
+}
+
 .product-cards {
   display: grid;
   gap: 12px;
@@ -1297,8 +1992,8 @@ a:focus-visible {
   border: 1px solid rgba(226, 232, 240, 0.12);
   border-radius: 24px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04)),
-    radial-gradient(circle at top right, rgba(212, 176, 117, 0.18), transparent 50%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03)),
+    radial-gradient(circle at top right, rgba(74, 110, 166, 0.2), transparent 50%);
   color: #f7fbff;
   text-align: left;
   overflow: hidden;
@@ -1316,7 +2011,7 @@ a:focus-visible {
   inset: auto -10% -32% 46%;
   height: 180px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(212, 176, 117, 0.26), transparent 68%);
+  background: radial-gradient(circle, rgba(74, 110, 166, 0.3), transparent 68%);
   opacity: 0.72;
   pointer-events: none;
 }
@@ -1324,7 +2019,7 @@ a:focus-visible {
 .products-carousel-chapter:hover,
 .products-carousel-chapter[data-active='true'] {
   transform: translateY(-3px);
-  border-color: rgba(212, 176, 117, 0.28);
+  border-color: rgba(103, 181, 219, 0.28);
   box-shadow: 0 18px 50px rgba(3, 7, 18, 0.18);
 }
 
@@ -1376,7 +2071,7 @@ a:focus-visible {
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #f3d39f;
+  color: #9ec8e8;
 }
 
 .products-carousel-chapter-cta {
@@ -1421,8 +2116,8 @@ a:focus-visible {
 
 .products-carousel-button:hover {
   transform: translateY(-1px);
-  border-color: rgba(212, 176, 117, 0.28);
-  background: rgba(212, 176, 117, 0.14);
+  border-color: rgba(103, 181, 219, 0.28);
+  background: rgba(103, 181, 219, 0.14);
 }
 
 .products-carousel-viewport {
@@ -1456,8 +2151,8 @@ a:focus-visible {
 }
 
 .products-carousel-stage {
-  --products-accent-primary: rgba(212, 176, 117, 0.36);
-  --products-accent-secondary: rgba(245, 158, 11, 0.18);
+  --products-accent-primary: rgba(74, 110, 166, 0.32);
+  --products-accent-secondary: rgba(56, 189, 248, 0.14);
   display: grid;
   gap: 28px;
   grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
@@ -1501,8 +2196,8 @@ a:focus-visible {
 }
 
 .products-carousel-stage[data-accent='amber'] {
-  --products-accent-primary: rgba(212, 176, 117, 0.34);
-  --products-accent-secondary: rgba(245, 158, 11, 0.18);
+  --products-accent-primary: rgba(90, 136, 196, 0.3);
+  --products-accent-secondary: rgba(56, 189, 248, 0.14);
 }
 
 .products-carousel-stage[data-accent='sea'] {
@@ -1528,39 +2223,6 @@ a:focus-visible {
 
 .products-carousel-visual-panel {
   min-height: 100%;
-}
-
-.products-carousel-supporting {
-  position: absolute;
-  top: 22px;
-  right: 0;
-  width: min(184px, 34%);
-  display: grid;
-  gap: 14px;
-  z-index: 2;
-}
-
-.products-carousel-support-card {
-  position: relative;
-  margin: 0;
-  aspect-ratio: 4 / 3;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(226, 232, 240, 0.12);
-  background: rgba(8, 15, 27, 0.48);
-  box-shadow: 0 18px 40px rgba(3, 7, 18, 0.26);
-  animation: productsFloat 11s ease-in-out infinite;
-}
-
-.products-carousel-support-card[data-direction='next'] {
-  margin-left: auto;
-  animation-delay: -5.5s;
-}
-
-.products-carousel-support-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .products-carousel-hero-figure {
@@ -1655,7 +2317,7 @@ a:focus-visible {
   font-size: 0.78rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #f3d39f;
+  color: #9ec8e8;
 }
 
 .products-carousel-story-panel h3 {
@@ -1726,8 +2388,8 @@ a:focus-visible {
   width: 8px;
   height: 8px;
   border-radius: 999px;
-  background: #f3d39f;
-  box-shadow: 0 0 0 6px rgba(243, 211, 159, 0.12);
+  background: #67b5db;
+  box-shadow: 0 0 0 6px rgba(103, 181, 219, 0.12);
 }
 
 .products-carousel-pages {
@@ -1770,15 +2432,15 @@ a:focus-visible {
 
 .products-carousel-page[aria-current='true'] {
   transform: translateY(-1px);
-  border-color: rgba(212, 176, 117, 0.28);
+  border-color: rgba(103, 181, 219, 0.28);
   background:
-    linear-gradient(180deg, rgba(212, 176, 117, 0.18), rgba(255, 255, 255, 0.08)),
+    linear-gradient(180deg, rgba(103, 181, 219, 0.18), rgba(255, 255, 255, 0.08)),
     rgba(255, 255, 255, 0.08);
 }
 
 .products-carousel-page:hover {
   transform: translateY(-1px);
-  border-color: rgba(212, 176, 117, 0.22);
+  border-color: rgba(103, 181, 219, 0.22);
 }
 
 @keyframes productsGlow {
@@ -1789,17 +2451,6 @@ a:focus-visible {
 
   50% {
     transform: translate3d(-12px, 14px, 0) scale(1.08);
-  }
-}
-
-@keyframes productsFloat {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(-2deg);
-  }
-
-  50% {
-    transform: translate3d(0, -10px, 0) rotate(2deg);
   }
 }
 
@@ -2590,18 +3241,30 @@ a:focus-visible {
   .kpi-row,
   .meta-grid,
   .fact-row,
+  .products-chip-list,
   .products-carousel-chapters,
   .products-carousel-story-meta,
   .product-cards,
   .product-media-grid,
-  .business-pillar-grid {
+  .business-pillar-grid,
+  .products-feature-grid,
+  .products-guidance-strip,
+  .machines-selector-list {
     grid-template-columns: 1fr;
   }
 
   .products-page-head,
-  .products-carousel-intro {
+  .products-carousel-intro,
+  .products-carousel-shell-head,
+  .machines-return-panel {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .products-merch-hero,
+  .machines-intro-grid,
+  .machines-spotlight {
+    grid-template-columns: 1fr;
   }
 
   .products-carousel-stage {
@@ -2618,12 +3281,13 @@ a:focus-visible {
     order: 2;
   }
 
-  .products-carousel-supporting {
-    width: min(180px, 40%);
-  }
-
   .products-carousel-image-shell {
     min-height: 340px;
+  }
+
+  .products-lead-image-shell,
+  .machines-visual-shell {
+    min-height: 320px;
   }
 
   .shell-header {
@@ -2936,7 +3600,6 @@ body {
 
 .corporate-content-surface .products-carousel-viewport,
 .corporate-content-surface .products-carousel-image-shell,
-.corporate-content-surface .products-carousel-support-card,
 .corporate-content-surface .products-carousel-meta-card {
   border-color: rgba(226, 232, 240, 0.12);
   background: rgba(255, 255, 255, 0.06);
@@ -3359,6 +4022,98 @@ body {
   gap: 18px;
 }
 
+.process-feature-card {
+  border: 1px solid rgba(226, 232, 240, 0.08);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(212, 176, 117, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.04));
+  padding: 22px;
+  display: grid;
+  gap: 18px;
+}
+
+.process-feature-card .section-title {
+  max-width: 15ch;
+  font-size: clamp(1.55rem, 2.5vw, 2.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.04em;
+}
+
+.process-feature-head {
+  align-items: start;
+}
+
+.process-feature-body {
+  max-width: 40ch;
+  font-size: 0.98rem;
+  line-height: 1.68;
+}
+
+.process-stage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.process-stage-card {
+  min-height: 124px;
+  border: 1px solid rgba(226, 232, 240, 0.08);
+  border-radius: 18px;
+  background: rgba(5, 12, 24, 0.28);
+  padding: 16px;
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.process-stage-card p {
+  margin: 0;
+  color: rgba(224, 231, 241, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.58;
+}
+
+.process-stage-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: rgba(212, 176, 117, 0.14);
+  color: #f3d39f;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.process-diagram-card {
+  margin: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.process-diagram-frame {
+  overflow: hidden;
+  border: 1px solid rgba(226, 232, 240, 0.08);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.process-diagram-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.process-diagram-card figcaption {
+  color: rgba(183, 197, 218, 0.72);
+  font-size: 0.86rem;
+  line-height: 1.55;
+}
+
 .corporate-profile-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3456,6 +4211,13 @@ body {
     grid-template-columns: 1fr;
   }
 
+  .products-guidance-strip,
+  .machines-intro-grid,
+  .machines-spotlight,
+  .machines-selector-list {
+    grid-template-columns: 1fr;
+  }
+
   .corporate-hero-summary {
     max-width: 100%;
     margin-left: 0;
@@ -3463,8 +4225,13 @@ body {
   }
 
   .command-lane-grid,
-  .corporate-profile-grid {
+  .corporate-profile-grid,
+  .process-stage-grid {
     grid-template-columns: 1fr;
+  }
+
+  .machines-visual-shell {
+    min-height: 460px;
   }
 }
 
@@ -3502,16 +4269,41 @@ body {
     padding: 10px;
   }
 
+  .products-merch-lead,
+  .products-lead-card,
+  .products-guidance-card,
+  .products-machine-cta,
+  .machines-intro-copy,
+  .machines-source-note,
+  .machines-selector-panel,
+  .machines-spotlight-copy,
+  .machines-return-panel {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .products-feature-card,
+  .machines-selector-button,
+  .machines-context-card,
+  .machines-visual-shell {
+    border-radius: 18px;
+  }
+
+  .products-feature-card,
+  .machines-selector-panel {
+    padding: 10px;
+  }
+
+  .products-lead-image-shell,
+  .products-feature-image-shell,
+  .machines-visual-shell {
+    min-height: 240px;
+  }
+
   .products-carousel-stage {
     gap: 18px;
     padding: 18px;
     border-radius: 24px;
-  }
-
-  .products-carousel-supporting {
-    top: 14px;
-    width: 120px;
-    gap: 10px;
   }
 
   .products-carousel-image-shell {
@@ -3530,5 +4322,25 @@ body {
 
   .products-carousel-page small {
     font-size: 0.72rem;
+  }
+
+  .machines-spotlight-copy {
+    padding: 22px 20px;
+  }
+
+  .machines-selector-button {
+    padding: 16px;
+  }
+
+  .machines-blueprint {
+    padding: 22px;
+  }
+
+  .machines-blueprint-copy strong {
+    font-size: clamp(1.6rem, 10vw, 2.3rem);
+  }
+
+  .machines-visual-cutout-shell {
+    inset: 9% 3% 8%;
   }
 }

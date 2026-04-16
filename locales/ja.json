@@ -3,6 +3,7 @@
     "about": "会社情報",
     "news": "ニュース",
     "products": "製品",
+    "machines": "設備",
     "companyProfile": "会社案内",
     "login": "ログイン",
     "onlineShop": "オンラインショップ",
@@ -140,6 +141,10 @@
           {
             "label": "製品",
             "href": "/products"
+          },
+          {
+            "label": "設備",
+            "href": "/machines"
           },
           {
             "label": "営業窓口",
