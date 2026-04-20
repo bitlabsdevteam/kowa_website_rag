@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
-
 :root {
-  --font-body: 'Instrument Sans', 'Manrope', 'Segoe UI', sans-serif;
-  --font-display: 'Instrument Sans', 'Manrope', 'Segoe UI', sans-serif;
+  --font-body: var(--font-inter), 'Segoe UI', sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, var(--font-inter), sans-serif;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -1746,7 +1744,7 @@ a:focus-visible {
   line-height: 0.9;
   letter-spacing: -0.06em;
   color: rgba(170, 191, 214, 0.12);
-  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-display);
 }
 
 .machines-blueprint-copy {
@@ -1761,7 +1759,7 @@ a:focus-visible {
   line-height: 0.96;
   letter-spacing: -0.04em;
   color: rgba(244, 248, 252, 0.94);
-  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-display);
 }
 
 .machines-blueprint-chip-column {
@@ -1802,7 +1800,7 @@ a:focus-visible {
   line-height: 0.94;
   letter-spacing: -0.06em;
   color: #f7fbff;
-  font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  font-family: var(--font-display);
 }
 
 .machines-spotlight-head p,
@@ -2736,7 +2734,8 @@ a:focus-visible {
   z-index: 1;
   display: grid;
   gap: 8px;
-  width: 152px;
+  width: 176px;
+  min-height: 84px;
   padding: 14px 15px;
   border: 1px solid rgba(32, 26, 21, 0.1);
   border-radius: 18px;
@@ -2838,9 +2837,10 @@ a:focus-visible {
 }
 
 .resource-flow-node-label {
-  font-size: 0.96rem;
-  line-height: 1.32;
+  font-size: 0.92rem;
+  line-height: 1.28;
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 .resource-flow-core {
@@ -3182,45 +3182,238 @@ a:focus-visible {
 
 .company-profile-surface {
   display: grid;
+  gap: 28px;
+}
+
+.company-profile-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.company-profile-hero-copy {
+  display: grid;
   gap: 16px;
 }
 
-.company-profile-grid {
+.company-profile-title {
+  max-width: 10ch;
+}
+
+.company-profile-summary {
+  max-width: 58ch;
+  font-size: 1.08rem;
+}
+
+.company-profile-intro-panel,
+.company-profile-facts-panel,
+.company-profile-statement-card,
+.company-profile-focus-card,
+.company-profile-timeline-card {
+  border: 1px solid rgba(226, 232, 240, 0.12);
+  border-radius: 24px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.04));
+  backdrop-filter: blur(14px);
+}
+
+.company-profile-intro-panel {
+  padding: clamp(18px, 3vw, 28px);
+  display: grid;
+  gap: 12px;
+  max-width: 44rem;
+}
+
+.company-profile-intro-title,
+.company-profile-facts-title,
+.company-profile-focus-card h3,
+.company-profile-timeline-card h3 {
+  margin: 0;
+  color: #f7fbff;
+}
+
+.company-profile-intro-title {
+  font-size: clamp(1.45rem, 2.6vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+}
+
+.company-profile-facts-panel {
+  padding: clamp(18px, 3vw, 26px);
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 20px;
+}
+
+.company-profile-facts-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #f3d39f;
+}
+
+.company-profile-facts-list {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.company-profile-fact-row {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.1);
+}
+
+.company-profile-fact-row:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.company-profile-fact-row dt {
+  color: rgba(163, 181, 206, 0.82);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.company-profile-fact-row dd {
+  margin: 0;
+  color: #f7fbff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.company-profile-section-head {
+  display: grid;
+  gap: 10px;
+}
+
+.company-profile-section-title {
+  margin: 0;
+}
+
+.company-profile-statement-section,
+.company-profile-focus-section,
+.company-profile-timeline-section {
+  display: grid;
+  gap: 18px;
+}
+
+.company-profile-statement-grid,
+.company-profile-focus-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.company-profile-statement-card,
+.company-profile-focus-card {
+  padding: clamp(18px, 3vw, 24px);
   display: grid;
   gap: 12px;
 }
 
-.company-profile-card {
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  background: rgba(255, 252, 246, 0.84);
-  padding: 16px;
-  display: grid;
-  gap: 8px;
+.company-profile-statement-language {
+  margin: 0;
+  color: #f3d39f;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-.company-profile-card h2 {
+.company-profile-statement-card p:last-child,
+.company-profile-focus-card p,
+.company-profile-timeline-card p,
+.company-profile-timeline-intro {
   margin: 0;
+}
+
+.company-profile-focus-card h3 {
+  font-size: 1.2rem;
+  line-height: 1.15;
+}
+
+.company-profile-focus-card p {
+  color: rgba(224, 231, 241, 0.82);
+  line-height: 1.65;
+}
+
+.company-profile-timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 16px;
+}
+
+.company-profile-timeline-item {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.company-profile-timeline-year {
+  position: relative;
+  padding-top: 4px;
+  color: #f3d39f;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.company-profile-timeline-year::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  bottom: -34px;
+  left: 8px;
+  width: 1px;
+  background: linear-gradient(180deg, rgba(243, 211, 159, 0.65), rgba(243, 211, 159, 0));
+}
+
+.company-profile-timeline-item:last-child .company-profile-timeline-year::after {
+  display: none;
+}
+
+.company-profile-timeline-card {
+  padding: 18px 20px;
+  position: relative;
+}
+
+.company-profile-timeline-card::before {
+  content: '';
+  position: absolute;
+  left: -14px;
+  top: 20px;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #f3d39f;
+  box-shadow: 0 0 0 6px rgba(243, 211, 159, 0.12);
+}
+
+.company-profile-timeline-card h3 {
   font-size: 1.1rem;
+  margin-bottom: 8px;
 }
 
-.company-profile-card ul {
-  margin: 0;
-  padding-left: 18px;
-  display: grid;
-  gap: 7px;
-}
-
-.company-profile-card li {
-  color: var(--muted);
-  line-height: 1.55;
+.company-profile-timeline-card p {
+  color: rgba(224, 231, 241, 0.82);
+  line-height: 1.6;
 }
 
 @media (max-width: 980px) {
   .hero-grid,
   .section-split,
   .content-grid,
-  .dashboard-grid {
+  .dashboard-grid,
+  .company-profile-hero {
     grid-template-columns: 1fr;
   }
 
@@ -3230,6 +3423,10 @@ a:focus-visible {
 
   .hero-title {
     max-width: 9ch;
+  }
+
+  .company-profile-facts-panel {
+    position: static;
   }
 
   .business-architecture {
@@ -3373,7 +3570,7 @@ a:focus-visible {
   }
 
   .resource-flow-node {
-    width: 136px;
+    width: 148px;
     padding: 12px 13px;
   }
 
@@ -3422,8 +3619,8 @@ a:focus-visible {
 }
 
 :root {
-  --font-body: 'Instrument Sans', 'Manrope', 'Segoe UI', sans-serif;
-  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-body: var(--font-inter), 'Segoe UI', sans-serif;
+  --font-display: 'Helvetica Neue', Helvetica, Arial, var(--font-inter), sans-serif;
   --interactive-focus-ring: 0 0 0 4px rgba(188, 148, 84, 0.18);
 }
 
@@ -4342,5 +4539,19 @@ body {
 
   .machines-visual-cutout-shell {
     inset: 9% 3% 8%;
+  }
+
+  .company-profile-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .company-profile-timeline-year::after,
+  .company-profile-timeline-card::before {
+    display: none;
+  }
+
+  .company-profile-timeline-card {
+    padding: 16px 18px;
   }
 }

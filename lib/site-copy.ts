@@ -25,18 +25,43 @@ export type MenuLabels = {
 type BusinessSection = {
   title: string;
   intro: string;
-  pillars: Array<{ title: string; detail: string }>;
   flowTitle: string;
-  flowNodeLabels: string[];
-  flowSteps: string[];
+  flowPhases: Array<{
+    nodeLabel: string;
+    title: string;
+    step: string;
+    detail: string;
+  }>;
 };
 
 type CompanyProfileSection = {
   title: string;
   summary: string;
-  blocks: Array<{
-    heading: string;
-    points: string[];
+  introLabel: string;
+  introTitle: string;
+  introBody: string;
+  statementLabel: string;
+  statements: Array<{
+    language: string;
+    text: string;
+  }>;
+  focusLabel: string;
+  focusCards: Array<{
+    title: string;
+    detail: string;
+  }>;
+  factLabel: string;
+  facts: Array<{
+    label: string;
+    value: string;
+  }>;
+  timelineLabel: string;
+  timelineTitle: string;
+  timelineIntro: string;
+  timeline: Array<{
+    year: string;
+    title: string;
+    detail: string;
   }>;
 };
 

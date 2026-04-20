@@ -29,68 +29,128 @@
   "business": {
     "title": "WHAT IS KOWA'S BUSINESS?",
     "intro": "Kowa runs a resource-circulation trading model centered on plastics recycling, industrial support, and cross-border supply operations.",
-    "pillars": [
-      {
-        "title": "Resin and Recycling Trade",
-        "detail": "Sale and purchasing of synthetic resin raw materials and recycled plastics with stable sourcing routes."
-      },
-      {
-        "title": "Processing and Regeneration",
-        "detail": "Sorting, crushing, blending, pelletization, and regeneration of production-loss and waste plastic."
-      },
-      {
-        "title": "Engineering and Machinery",
-        "detail": "Battery-pack development support plus import/export of processing, crushing, and machine-tool equipment."
-      },
-      {
-        "title": "Global Distribution",
-        "detail": "Domestic and overseas distribution, including export/customs workflows and selected Japanese product channels."
-      }
-    ],
     "flowTitle": "Resource circulation flow",
-    "flowNodeLabels": [
-      "Collection",
-      "Sorting",
-      "Regeneration",
-      "Distribution"
-    ],
-    "flowSteps": [
-      "Purchase and collect production-loss and waste plastics.",
-      "Sort and assess by resin type, shape, additives, and deposits.",
-      "Process through crushing, blending, and pelletization.",
-      "Route to domestic sales and export with customs handling."
+    "flowPhases": [
+      {
+        "nodeLabel": "Purchase & Collection",
+        "title": "Purchase & Collection",
+        "step": "Purchase and collect production-loss materials and waste plastic.",
+        "detail": "The source flow starts with intake from resin production loss, waste plastic, mixed plastic, and processing-loss material before the line moves into sorting."
+      },
+      {
+        "nodeLabel": "Sorting & Dismantling",
+        "title": "Sorting & Dismantling",
+        "step": "Sort and dismantle by resin, ingredient blend, and material condition.",
+        "detail": "Kowa separates incoming material before processing so different resin streams and blended inputs can move into the correct crushing and regeneration path."
+      },
+      {
+        "nodeLabel": "Crushing & Regeneration",
+        "title": "Crushing & Regeneration",
+        "step": "Crush, compress, blend, and regenerate into reusable raw material.",
+        "detail": "The documented process centers on crushing machines, compression equipment, and ribbon-mixer handling that convert plastic inputs back into reusable raw material."
+      },
+      {
+        "nodeLabel": "Export / Domestic Sales",
+        "title": "Export / Domestic Sales",
+        "step": "Route regenerated material to export, overseas supply, and domestic sales.",
+        "detail": "The final stage is outbound circulation: export lanes, overseas supply, and domestic sales after material has been processed into usable feedstock."
+      }
     ]
   },
   "companyProfile": {
     "title": "Company Profile",
-    "summary": "Kowa connects trading, recycling, and operational execution so materials can circulate as usable resources across domestic and overseas markets.",
-    "blocks": [
+    "summary": "Kowa presents recycling, trade, and factory execution as one operating profile spanning Tokyo headquarters, Gunma processing capability, and overseas circulation.",
+    "introLabel": "Corporate profile",
+    "introTitle": "From domestic collection to global circulation.",
+    "introBody": "The legacy profile frames Kowa as a plastics-centered trading and processing company: collect domestically, regenerate where needed, and return usable resources to industrial supply chains.",
+    "statementLabel": "Source narrative",
+    "statements": [
       {
-        "heading": "Core Business Domains",
-        "points": [
-          "Synthetic resin raw materials and recycled plastics trading.",
-          "Recycled plastics processing: sorting, crushing, blending, pelletization, and transshipment.",
-          "Battery-pack development, design, and manufacturing support.",
-          "Import/export of food-processing machines, crushers, and machine tools.",
-          "Cross-border distribution of selected Japanese products."
-        ]
+        "language": "Japanese",
+        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
       },
       {
-        "heading": "Operational Model",
-        "points": [
-          "Kowa provides a whole-service path from material purchase and classification to processing, logistics, customs, and export.",
-          "Distribution warehouse partnerships support stable procurement and regular supply.",
-          "The model focuses on effective reuse of limited resources and practical circularity."
-        ]
+        "language": "English",
+        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+      }
+    ],
+    "focusLabel": "Operating priorities",
+    "focusCards": [
+      {
+        "title": "Collection and export lanes",
+        "detail": "Domestic collection and preprocessing are tied directly to overseas circulation, especially across Southeast Asian markets."
       },
       {
-        "heading": "Company Facts",
-        "points": [
-          "Established: 1994",
-          "Address: Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073, Japan",
-          "Main line: +81-3-3455-1699",
-          "Related companies: G.P. Polymer Co.,Ltd.; Green-Eco-Technology Co.,Ltd."
-        ]
+        "title": "Domestic regeneration capability",
+        "detail": "Kowa complements export activity with in-country crushing and regeneration through G.P. Polymer and the Gunma processing line."
+      },
+      {
+        "title": "Resource-minded execution",
+        "detail": "The profile emphasizes careful use of limited resources, customer-first handling, and a practical circular-economy mindset."
+      }
+    ],
+    "factLabel": "At a glance",
+    "facts": [
+      {
+        "label": "Foundation",
+        "value": "1993 founding, followed by reorganization in 1994"
+      },
+      {
+        "label": "Current capital",
+        "value": "50 million yen after the 2015 increase"
+      },
+      {
+        "label": "Head office",
+        "value": "Reoma Bldg. 5F, 2-10-6 Mita, Minato-ku, Tokyo"
+      },
+      {
+        "label": "Main line",
+        "value": "+81-3-3455-1699"
+      }
+    ],
+    "timelineLabel": "Company history",
+    "timelineTitle": "Operational build-out over time.",
+    "timelineIntro": "The chronology shows Kowa evolving from a trading company into a warehouse, factory, and large-scale plastics processing operator.",
+    "timeline": [
+      {
+        "year": "1993",
+        "title": "Foundation",
+        "detail": "Kowa Tsusho was founded as a limited company."
+      },
+      {
+        "year": "1994",
+        "title": "Corporate reorganization",
+        "detail": "Capital increased to 10 million yen and the company reorganized as a joint-stock company."
+      },
+      {
+        "year": "2003",
+        "title": "North-Kanto logistics base",
+        "detail": "A self-operated Gunma distribution warehouse started operations as the North-Kanto base."
+      },
+      {
+        "year": "2005",
+        "title": "Tokai warehouse start",
+        "detail": "Fuji distribution warehouse began operating as the Tokai regional base."
+      },
+      {
+        "year": "2015",
+        "title": "Capital expansion",
+        "detail": "Capital increased to 50 million yen."
+      },
+      {
+        "year": "2016",
+        "title": "Gunma processing factory",
+        "detail": "The Gunma processing factory was completed and the first large crushing and grinding line was introduced."
+      },
+      {
+        "year": "2017",
+        "title": "Mixer installation",
+        "detail": "A large industrial mixer was added to the processing setup."
+      },
+      {
+        "year": "2019",
+        "title": "Second crushing line",
+        "detail": "A second large crushing and grinding machine was introduced."
       }
     ]
   },

@@ -29,68 +29,128 @@
   "business": {
     "title": "KOWA 的业务是什么？",
     "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
-    "pillars": [
-      {
-        "title": "树脂与再生材料贸易",
-        "detail": "经营合成树脂原料与再生塑料的采购与销售，保持稳定供货路线。"
-      },
-      {
-        "title": "加工与再资源化",
-        "detail": "提供分选、粉碎、混配、造粒等处理能力，将损耗料和废塑料再利用。"
-      },
-      {
-        "title": "电池与机械支持",
-        "detail": "支持电池包开发，并提供食品加工设备、粉碎机和机床的进出口销售。"
-      },
-      {
-        "title": "全球分销执行",
-        "detail": "覆盖国内外流通与报关流程，并开展日本优质商品的海外分销。"
-      }
-    ],
     "flowTitle": "资源循环流程",
-    "flowNodeLabels": [
-      "采购回收",
-      "分选评估",
-      "再生加工",
-      "国内外流通"
-    ],
-    "flowSteps": [
-      "采购与回收",
-      "按材料特性分选",
-      "粉碎/混配/造粒",
-      "国内销售与出口（含报关）"
+    "flowPhases": [
+      {
+        "nodeLabel": "采购与回收",
+        "title": "采购与回收",
+        "step": "采购并回收生产损耗料和废塑料。",
+        "detail": "资料中的流程起点包括树脂、生产损耗料、废塑料、混合塑料以及加工损耗料的接收与汇集。"
+      },
+      {
+        "nodeLabel": "分选与拆解",
+        "title": "分选与拆解",
+        "step": "按树脂特性、混配状态和材料状况进行分选与拆解。",
+        "detail": "来料会先被区分到合适的处理路径，再进入粉碎和再生工序，以保证不同材料流向正确。"
+      },
+      {
+        "nodeLabel": "粉碎与再生",
+        "title": "粉碎与再生",
+        "step": "通过粉碎、压缩与混合，恢复为可再利用原料。",
+        "detail": "该阶段对应资料中的粉碎机、压缩设备和 ribbon mixer 等处理设备，把塑料重新变成可用原料。"
+      },
+      {
+        "nodeLabel": "出口 / 国内销售",
+        "title": "出口 / 国内销售",
+        "step": "把再生后的原料接入出口、海外供给和日本国内销售。",
+        "detail": "最终阶段是出货与流通，把处理完成的原料送往出口通道、海外市场以及日本国内销售。"
+      }
     ]
   },
   "companyProfile": {
     "title": "公司简介",
-    "summary": "Kowa 连接贸易能力与再生加工能力，在国内外市场推动资源循环和稳定供应。",
-    "blocks": [
+    "summary": "Kowa 将回收、贸易和工厂执行整合为同一份企业画像，覆盖东京总部、群马加工能力以及面向海外的资源流通。",
+    "introLabel": "企业画像",
+    "introTitle": "从日本国内回收到全球循环。",
+    "introBody": "旧版公司资料把 Kowa 定义为一家以塑料为核心的贸易与加工企业：在日本国内收集，在需要时进行再生处理，再把可用资源重新送回产业链。",
+    "statementLabel": "资料原文",
+    "statements": [
       {
-        "heading": "核心业务",
-        "points": [
-          "合成树脂原料与再生塑料贸易。",
-          "再生塑料处理：分选、粉碎、混配、造粒与转运。",
-          "电池包开发、设计与制造支持。",
-          "食品加工设备、粉碎设备与机床的进出口销售。",
-          "日本消费品的跨境分销。"
-        ]
+        "language": "Japanese",
+        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
       },
       {
-        "heading": "运营模式",
-        "points": [
-          "提供从采购、分选、加工到报关和出口的一体化服务。",
-          "依托仓储与供应网络，保障稳定采购和供货。",
-          "强调有限资源的有效再利用与可持续循环。"
-        ]
+        "language": "English",
+        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+      }
+    ],
+    "focusLabel": "运营重点",
+    "focusCards": [
+      {
+        "title": "回收与出口通道",
+        "detail": "在日本国内完成回收和预处理后，再接入面向东南亚等地区的循环流通路线。"
       },
       {
-        "heading": "公司信息",
-        "points": [
-          "成立: 1994 年",
-          "地址: 日本东京都港区三田 2-10-6 Reoma 大楼 5F",
-          "电话: +81-3-3455-1699",
-          "关联公司: G.P. Polymer Co.,Ltd.; Green-Eco-Technology Co.,Ltd."
-        ]
+        "title": "日本国内再生能力",
+        "detail": "除出口外，还通过 G.P. Polymer 和群马加工线推进粉碎与再生处理。"
+      },
+      {
+        "title": "重视资源价值的执行",
+        "detail": "资料强调珍惜有限资源、以客户视角运营，并把循环价值落实到实际业务中。"
+      }
+    ],
+    "factLabel": "概览",
+    "facts": [
+      {
+        "label": "创立与改组",
+        "value": "1993 年创立，1994 年增资并改组为股份公司"
+      },
+      {
+        "label": "现有资本金",
+        "value": "2015 年增资后为 5,000 万日元"
+      },
+      {
+        "label": "总部",
+        "value": "日本东京都港区三田 2-10-6 Reoma 大楼 5F"
+      },
+      {
+        "label": "联系电话",
+        "value": "+81-3-3455-1699"
+      }
+    ],
+    "timelineLabel": "沿革",
+    "timelineTitle": "从贸易公司扩展到仓储与加工运营。",
+    "timelineIntro": "这条时间线展示了 Kowa 如何逐步从商流业务扩展到仓库、自有工厂和大型塑料粉碎设备运营。",
+    "timeline": [
+      {
+        "year": "1993",
+        "title": "公司创立",
+        "detail": "以有限公司的形式设立广和通商。"
+      },
+      {
+        "year": "1994",
+        "title": "改组为股份公司",
+        "detail": "资本金增至 1,000 万日元，并改组为股份公司。"
+      },
+      {
+        "year": "2003",
+        "title": "群马仓储基地启动",
+        "detail": "群马自营流通仓库开始运作，成为北关东据点。"
+      },
+      {
+        "year": "2005",
+        "title": "富士仓库启动",
+        "detail": "富士流通仓库开始运作，成为东海地区据点。"
+      },
+      {
+        "year": "2015",
+        "title": "资本金扩大",
+        "detail": "资本金增至 5,000 万日元。"
+      },
+      {
+        "year": "2016",
+        "title": "群马加工工厂建成",
+        "detail": "群马加工工厂竣工，并导入第一套大型破碎/粉碎设备。"
+      },
+      {
+        "year": "2017",
+        "title": "大型混合机导入",
+        "detail": "为扩充加工能力，新增大型工业混合机。"
+      },
+      {
+        "year": "2019",
+        "title": "第二套粉碎线导入",
+        "detail": "新增第二套大型破碎/粉碎设备。"
       }
     ]
   },

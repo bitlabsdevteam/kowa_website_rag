@@ -138,23 +138,23 @@ export default function HomePage() {
   }, [locale]);
 
   useEffect(() => {
-    if (activeFlowIndex >= copy.business.flowSteps.length) {
+    if (activeFlowIndex >= copy.business.flowPhases.length) {
       setActiveFlowIndex(0);
     }
-  }, [activeFlowIndex, copy.business.flowSteps.length]);
+  }, [activeFlowIndex, copy.business.flowPhases.length]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches || copy.business.flowSteps.length <= 1) {
+    if (mediaQuery.matches || copy.business.flowPhases.length <= 1) {
       return undefined;
     }
 
     const intervalId = window.setInterval(() => {
-      setActiveFlowIndex((current) => (current + 1) % copy.business.flowSteps.length);
+      setActiveFlowIndex((current) => (current + 1) % copy.business.flowPhases.length);
     }, 4200);
 
     return () => window.clearInterval(intervalId);
-  }, [copy.business.flowSteps.length]);
+  }, [copy.business.flowPhases.length]);
 
   return (
     <main className="page shell home-page">
@@ -208,8 +208,8 @@ export default function HomePage() {
               <div className="business-architecture-rail">
                 <p className="business-flow-title">{copy.business.flowTitle}</p>
                 <ol className="business-step-list">
-                  {copy.business.flowSteps.map((step, index) => (
-                    <li key={step} className={`business-step-item ${activeFlowIndex === index ? 'is-active' : ''}`}>
+                  {copy.business.flowPhases.map((phase, index) => (
+                    <li key={`${phase.title}-${phase.step}`} className={`business-step-item ${activeFlowIndex === index ? 'is-active' : ''}`}>
                       <button
                         type="button"
                         className="business-step-button"
@@ -217,7 +217,7 @@ export default function HomePage() {
                         aria-pressed={activeFlowIndex === index}
                       >
                         <span className="business-step-index">{String(index + 1).padStart(2, '0')}</span>
-                        <span>{step}</span>
+                        <span>{phase.step}</span>
                       </button>
                     </li>
                   ))}
@@ -229,9 +229,7 @@ export default function HomePage() {
                   brand={copy.brand.name}
                   title={copy.business.flowTitle}
                   intro={copy.business.intro}
-                  nodeLabels={copy.business.flowNodeLabels}
-                  steps={copy.business.flowSteps}
-                  pillars={copy.business.pillars}
+                  phases={copy.business.flowPhases}
                   activeIndex={activeFlowIndex}
                   onSelect={setActiveFlowIndex}
                 />
