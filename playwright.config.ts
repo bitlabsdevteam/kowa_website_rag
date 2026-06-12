@@ -9,6 +9,11 @@ export default defineConfig({
   use: {
     baseURL: BASE_URL,
     trace: 'on-first-retry',
+    launchOptions: {
+      // Headless Chromium's default ANGLE-on-Vulkan SwiftShader fails to create
+      // WebGL contexts on macOS; the GL-backed SwiftShader path works.
+      args: ['--use-angle=swiftshader'],
+    },
   },
   projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
   webServer: {

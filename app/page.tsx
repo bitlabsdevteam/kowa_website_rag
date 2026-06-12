@@ -1,5 +1,6 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -8,6 +9,8 @@ import { SiteFooterBar } from '@/components/site-footer-bar';
 import { SiteFooterMenu } from '@/components/site-footer-menu';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
+
+const Hero3DScene = dynamic(() => import('@/components/hero-3d/hero-3d-scene'), { ssr: false });
 
 const HOME_UI: Record<
   Locale,
@@ -102,6 +105,8 @@ export default function HomePage() {
           </div>
 
           <div className="reference-hero-media">
+            <Hero3DScene />
+
             <div className="reference-stat-grid">
               <article className="reference-stat-card" data-testid="hero-stat-card">
                 <span>{ui.snapshotLabels[0]}</span>

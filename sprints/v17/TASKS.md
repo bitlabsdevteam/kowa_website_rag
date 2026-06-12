@@ -22,9 +22,10 @@
   - Files: components/hero-3d/use-scroll-progress.ts, tests/unit/v17-task4-scroll-progress.test.mjs
   - Completed: 2026-06-12 — Added pure computeScrollProgress (clamped -top/height, degenerate-input safe) plus useScrollProgress hook with rAF throttling, passive scroll/resize listeners, cleanup, and reduced-motion guard. 3 unit tests pass (TDD: failed before implementation). Build, lint, semgrep, npm audit clean.
 
-- [ ] Task 5: Build the R3F 3D background scene (P0)
+- [x] Task 5: Build the R3F 3D background scene (P0)
   - Acceptance: `Hero3DScene` renders a full-bleed `<Canvas>` (dynamic import, ssr:false) with a particle field / floating geometry, fog, and lighting in Kowa's palette; runs without console errors in dev
   - Files: components/hero-3d/hero-3d-scene.tsx
+  - Completed: 2026-06-12 — Hero3DScene with seeded 900-point particle field, three floating meshes (icosahedron/torus/octahedron), fog and ambient/directional/point lights in brand greens; mounted in the hero media column via next/dynamic ssr:false. E2E spec asserts canvas mounts aria-hidden with zero console errors. Playwright config gained --use-angle=swiftshader to fix headless WebGL context creation. Build, lint, semgrep, npm audit clean.
 
 - [ ] Task 6: Add static fallback for reduced-motion / no-WebGL (P0)
   - Acceptance: `HeroFallback` renders a static cinematic gradient backdrop; landing page swaps to it when WebGL is unavailable or `prefers-reduced-motion: reduce` is set
