@@ -60,12 +60,19 @@ export default function HomePage() {
   const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
   const heroRef = useRef<HTMLElement | null>(null);
   const heroProgress = useScrollProgress(heroRef);
+  // Mutable mirror of heroProgress so the 3D camera rig can read the latest
+  // value inside useFrame without re-rendering the canvas per scroll frame.
+  const heroProgressRef = useRef(0);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
+
+  useEffect(() => {
+    heroProgressRef.current = heroProgress;
+  }, [heroProgress]);
 
   useEffect(() => {
     if (supportsHero3DScene()) {
@@ -106,7 +113,7 @@ export default function HomePage() {
         style={{ '--hero-parallax': heroProgress } as CSSProperties}
       >
         <div className="hero-parallax-background" data-testid="hero-parallax-background" aria-hidden="true">
-          {heroVisual === '3d' ? <Hero3DScene /> : <HeroFallback />}
+          {heroVisual === '3d' ? <Hero3DScene progressRef={heroProgressRef} /> : <HeroFallback />}
         </div>
         <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
         <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">

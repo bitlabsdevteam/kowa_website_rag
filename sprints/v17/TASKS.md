@@ -37,9 +37,10 @@
   - Files: app/page.tsx, app/globals.css
   - Completed: 2026-06-12 — Hero restructured into three layers: hero-parallax-background (3D scene/fallback, full-bleed, drifts +130px), hero-parallax-mid (gradient atmosphere veil, +60px), hero-parallax-foreground (copy + stat cards, -48px), driven by useScrollProgress via a --hero-parallax CSS variable. Hero is min-height 100svh with a dark cinematic treatment (ivory copy, glassy stat cards). 3 e2e tests (layer structure/full-viewport, distinct scroll rates, ja locale switch) pass with screenshots; v17 task 2/3/5/6 specs, build, lint, 10 unit tests, semgrep, npm audit all clean.
 
-- [ ] Task 8: Wire scroll progress into the 3D camera rig (P1)
+- [x] Task 8: Wire scroll progress into the 3D camera rig (P1)
   - Acceptance: Camera/group position in `Hero3DScene` eases with scroll progress so the scene visibly shifts depth while scrolling through the hero; no jank from re-renders (progress passed via ref/useFrame, not state-per-frame)
   - Files: components/hero-3d/hero-3d-scene.tsx, app/page.tsx
+  - Completed: 2026-06-12 — Added camera-rig-math.ts (pure computeCameraTarget: dolly z 9→5.5, tilt y 0→-1.6, clamped) and a CameraRig component that eases toward it via MathUtils.damp in useFrame, reading a mutable progressRef mirrored from useScrollProgress in a useEffect (lint rejects render-time ref writes). Eased value exposed as data-hero-progress on the canvas for e2e observability. 3 unit + 1 e2e tests pass (TDD: failed first); 9 regression e2e green; build, lint, semgrep, npm audit clean.
 
 - [ ] Task 9: Update affected tests and run full validation (P1)
   - Acceptance: Any existing e2e/unit tests referencing the hero CTA or video are updated; `npm run build`, `npm run lint`, `node --test tests/unit/v17-*.test.mjs`, and the landing-page Playwright specs pass

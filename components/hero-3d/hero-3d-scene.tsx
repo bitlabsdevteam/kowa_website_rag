@@ -2,7 +2,12 @@
 
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
+import { MathUtils } from 'three';
 import type { Group, Points } from 'three';
+
+import { computeCameraTarget } from './camera-rig-math';
+
+type ProgressRef = { readonly current: number };
 
 const PALETTE = {
   fog: '#13291d',
@@ -99,7 +104,27 @@ function FloatingGeometry() {
   );
 }
 
-export default function Hero3DScene() {
+function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
+  const easedRef = useRef(0);
+
+  useFrame((state, delta) => {
+    const progress = progressRef?.current ?? 0;
+    const eased = MathUtils.damp(easedRef.current, progress, 3, delta);
+    easedRef.current = eased;
+
+    const target = computeCameraTarget(eased);
+    state.camera.position.y = target.y;
+    state.camera.position.z = target.z;
+    state.camera.lookAt(0, 0, -4);
+
+    // Surface the eased value on the canvas so e2e tests can observe the rig.
+    state.gl.domElement.setAttribute('data-hero-progress', eased.toFixed(3));
+  });
+
+  return null;
+}
+
+export default function Hero3DScene({ progressRef }: { progressRef?: ProgressRef }) {
   return (
     <div className="hero-3d-scene" data-testid="hero-3d-scene" aria-hidden="true">
       <Canvas
@@ -112,6 +137,7 @@ export default function Hero3DScene() {
         <ambientLight intensity={0.5} color={PALETTE.ivory} />
         <directionalLight position={[6, 8, 4]} intensity={1.2} color={PALETTE.ivory} />
         <pointLight position={[-8, -4, -2]} intensity={14} color={PALETTE.accent} />
+        <CameraRig progressRef={progressRef} />
         <ParticleField />
         <FloatingGeometry />
       </Canvas>
