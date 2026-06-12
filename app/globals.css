@@ -6301,3 +6301,112 @@ body {
   box-shadow: none !important;
   backdrop-filter: none;
 }
+
+/* ============================================================
+   v18 Task 4 — Landing-route dark glass theme (.reference-site)
+   Sections below the hero float on translucent glass over the
+   fixed 3D backdrop. The !important flags counter the global
+   light-theme cleanup block that forces white card surfaces.
+   ============================================================ */
+
+.reference-site .reference-section-card {
+  border: 1px solid rgba(243, 239, 231, 0.16) !important;
+  background: rgba(13, 28, 20, 0.55) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.reference-site .business-architecture-rail,
+.reference-site .business-architecture-visual,
+.reference-site .resource-flow-stage {
+  border-color: rgba(243, 239, 231, 0.14) !important;
+  background: rgba(19, 41, 29, 0.45) !important;
+  box-shadow: none !important;
+}
+
+.reference-site .resource-flow-node,
+.reference-site .resource-flow-core,
+.reference-site .resource-flow-detail,
+.reference-site .business-step-button {
+  border-color: rgba(243, 239, 231, 0.18) !important;
+  background: rgba(19, 41, 29, 0.72) !important;
+  box-shadow: none !important;
+}
+
+.reference-site .section-title,
+.reference-site .reference-section-title,
+.reference-site .business-flow-title,
+.reference-site .resource-flow-detail h3,
+.reference-site .resource-flow-core strong {
+  color: #f3efe7 !important;
+}
+
+.reference-site .section-label {
+  color: rgba(216, 231, 220, 0.85) !important;
+}
+
+.reference-site .body-copy,
+.reference-site .reference-section-copy,
+.reference-site .resource-flow-core p,
+.reference-site .resource-flow-detail p,
+.reference-site .resource-flow-detail-step,
+.reference-site .business-step-button,
+.reference-site .resource-flow-node {
+  color: rgba(243, 239, 231, 0.8) !important;
+}
+
+.reference-site .resource-flow-node-index,
+.reference-site .resource-flow-core-kicker,
+.reference-site .resource-flow-detail-kicker {
+  background: rgba(243, 239, 231, 0.1) !important;
+  border-color: rgba(243, 239, 231, 0.22) !important;
+  color: #d8e7dc !important;
+}
+
+.reference-site .resource-flow-track-base {
+  fill: rgba(243, 239, 231, 0.04) !important;
+  stroke: rgba(243, 239, 231, 0.12) !important;
+}
+
+.reference-site .resource-flow-track,
+.reference-site .resource-flow-spoke {
+  stroke: rgba(243, 239, 231, 0.24) !important;
+}
+
+.reference-site .site-footer {
+  border-color: transparent !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.reference-site .footer-menu-panel {
+  border: 1px solid rgba(243, 239, 231, 0.16) !important;
+  background: rgba(13, 28, 20, 0.55) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.reference-site .footer-menu-title {
+  color: #d8e7dc !important;
+}
+
+.reference-site .footer-menu-link {
+  color: rgba(243, 239, 231, 0.78) !important;
+}
+
+.reference-site .footer-menu-link:hover {
+  color: #f3efe7 !important;
+}
+
+.reference-site .site-footer-bar {
+  color: rgba(243, 239, 231, 0.66) !important;
+  border-top-color: rgba(243, 239, 231, 0.18) !important;
+  background: transparent !important;
+}
+
+.reference-site .site-footer-bar a,
+.reference-site .site-footer-social a {
+  color: #d8e7dc !important;
+}

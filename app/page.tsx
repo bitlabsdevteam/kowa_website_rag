@@ -200,7 +200,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      <footer className="site-footer">
+      <footer className="site-footer" data-testid="landing-footer">
         <SiteFooterMenu navAria={copy.footer.navAria} menuGroups={copy.footer.menuGroups} />
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
