@@ -687,6 +687,14 @@ body {
   height: 100%;
 }
 
+.hero-3d-fallback {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 25%, rgba(45, 107, 73, 0.55), transparent 65%),
+    radial-gradient(ellipse 70% 55% at 80% 75%, rgba(31, 82, 53, 0.6), transparent 70%),
+    radial-gradient(ellipse 45% 35% at 70% 20%, rgba(243, 239, 231, 0.12), transparent 75%),
+    #13291d;
+}
+
 .reference-stat-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

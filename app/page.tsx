@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
+import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { ResourceCirculationFlow } from '@/components/resource-circulation-flow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { SiteFooterMenu } from '@/components/site-footer-menu';
@@ -55,12 +56,19 @@ const HOME_UI: Record<
 export default function HomePage() {
   const [locale, setLocale] = useState<Locale>('en');
   const [activeFlowIndex, setActiveFlowIndex] = useState(0);
+  const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
+
+  useEffect(() => {
+    if (supportsHero3DScene()) {
+      setHeroVisual('3d');
+    }
+  }, []);
 
   useEffect(() => {
     if (activeFlowIndex >= copy.business.flowPhases.length) {
@@ -105,7 +113,7 @@ export default function HomePage() {
           </div>
 
           <div className="reference-hero-media">
-            <Hero3DScene />
+            {heroVisual === '3d' ? <Hero3DScene /> : <HeroFallback />}
 
             <div className="reference-stat-grid">
               <article className="reference-stat-card" data-testid="hero-stat-card">

@@ -27,9 +27,10 @@
   - Files: components/hero-3d/hero-3d-scene.tsx
   - Completed: 2026-06-12 — Hero3DScene with seeded 900-point particle field, three floating meshes (icosahedron/torus/octahedron), fog and ambient/directional/point lights in brand greens; mounted in the hero media column via next/dynamic ssr:false. E2E spec asserts canvas mounts aria-hidden with zero console errors. Playwright config gained --use-angle=swiftshader to fix headless WebGL context creation. Build, lint, semgrep, npm audit clean.
 
-- [ ] Task 6: Add static fallback for reduced-motion / no-WebGL (P0)
+- [x] Task 6: Add static fallback for reduced-motion / no-WebGL (P0)
   - Acceptance: `HeroFallback` renders a static cinematic gradient backdrop; landing page swaps to it when WebGL is unavailable or `prefers-reduced-motion: reduce` is set
   - Files: components/hero-3d/hero-fallback.tsx, app/page.tsx
+  - Completed: 2026-06-12 — Added HeroFallback (layered radial-gradient backdrop in brand greens) and supportsHero3DScene() gate (reduced-motion + WebGL probe). Page defaults to fallback and upgrades to the 3D scene only when supported. 3 e2e tests (reduced-motion, stubbed no-WebGL, capable-browser keeps scene) pass with screenshots; v17 task2/3/5 specs still green. Build, lint, semgrep, npm audit clean.
 
 - [ ] Task 7: Compose the cinematic hero with parallax layers (P0)
   - Acceptance: Hero is full-viewport with the 3D scene behind layered foreground copy (existing `SITE_COPY` hero text); scrolling moves background, mid, and foreground layers at distinct rates; locale switching still works
