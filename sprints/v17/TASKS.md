@@ -7,9 +7,10 @@
   - Files: package.json, package-lock.json
   - Completed: 2026-06-12 — Installed three@0.184, @react-three/fiber@9.6, @react-three/drei@10.7, @types/three. Also resolved npm audit findings: bumped next to 16.2.9 (high-severity advisories) and added a postcss ^8.5.10 override for next's pinned vulnerable postcss. Build, lint, unit tests (3), semgrep, and npm audit all clean.
 
-- [ ] Task 2: Remove the "Talk to Aya" button from the landing page (P0)
+- [x] Task 2: Remove the "Talk to Aya" button from the landing page (P0)
   - Acceptance: `ChatPopup` is no longer rendered or imported in `app/page.tsx`; the secondary "View company profile" link remains; `components/chat-popup.tsx` itself is unchanged; build passes
   - Files: app/page.tsx
+  - Completed: 2026-06-12 — Removed ChatPopup import and render from the hero; secondary CTA preserved. Added e2e spec v17-task2-remove-aya-cta.spec.ts (TDD: failed before, passes after, with screenshots). Build, lint, semgrep, npm audit clean. Note: legacy spec v5-task3-landing-redesign.spec.ts still clicks landing-primary-cta and will be updated in Task 9.
 
 - [ ] Task 3: Remove the YouTube video from the landing page (P0)
   - Acceptance: No `iframe`/`reference-video-frame` markup remains in `app/page.tsx`; hero stat cards are preserved or relocated; build passes
