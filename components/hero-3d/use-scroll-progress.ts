@@ -14,11 +14,36 @@ export function computeScrollProgress(top: number, height: number): number {
 }
 
 /**
- * Tracks scroll progress (0..1) for the element in `targetRef`, throttled to
- * one measurement per animation frame. Stays at 0 when the visitor prefers
+ * Normalizes whole-document scroll: 0 at the top of the page, 1 once the
+ * viewport bottom reaches the end of the document. Pages with no scrollable
+ * range (shorter than the viewport) stay at 0.
+ */
+export function computeDocumentScrollProgress(
+  scrollY: number,
+  scrollHeight: number,
+  viewportHeight: number,
+): number {
+  if (
+    !Number.isFinite(scrollY) ||
+    !Number.isFinite(scrollHeight) ||
+    !Number.isFinite(viewportHeight)
+  ) {
+    return 0;
+  }
+  const range = scrollHeight - viewportHeight;
+  if (range <= 0) {
+    return 0;
+  }
+  return Math.min(1, Math.max(0, scrollY / range));
+}
+
+/**
+ * Tracks scroll progress (0..1), throttled to one measurement per animation
+ * frame. With a `targetRef` it measures that element's scroll-through; without
+ * one it measures whole-document scroll. Stays at 0 when the visitor prefers
  * reduced motion, so parallax consumers render their static state.
  */
-export function useScrollProgress(targetRef: RefObject<HTMLElement | null>): number {
+export function useScrollProgress(targetRef?: RefObject<HTMLElement | null>): number {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -32,10 +57,20 @@ export function useScrollProgress(targetRef: RefObject<HTMLElement | null>): num
 
     const measure = () => {
       frame = 0;
-      const element = targetRef.current;
-      if (!element) return;
-      const rect = element.getBoundingClientRect();
-      setProgress(computeScrollProgress(rect.top, rect.height));
+      if (targetRef) {
+        const element = targetRef.current;
+        if (!element) return;
+        const rect = element.getBoundingClientRect();
+        setProgress(computeScrollProgress(rect.top, rect.height));
+        return;
+      }
+      setProgress(
+        computeDocumentScrollProgress(
+          window.scrollY,
+          document.documentElement.scrollHeight,
+          window.innerHeight,
+        ),
+      );
     };
 
     const requestMeasure = () => {
