@@ -12,9 +12,10 @@
   - Files: app/page.tsx
   - Completed: 2026-06-12 — Removed ChatPopup import and render from the hero; secondary CTA preserved. Added e2e spec v17-task2-remove-aya-cta.spec.ts (TDD: failed before, passes after, with screenshots). Build, lint, semgrep, npm audit clean. Note: legacy spec v5-task3-landing-redesign.spec.ts still clicks landing-primary-cta and will be updated in Task 9.
 
-- [ ] Task 3: Remove the YouTube video from the landing page (P0)
+- [x] Task 3: Remove the YouTube video from the landing page (P0)
   - Acceptance: No `iframe`/`reference-video-frame` markup remains in `app/page.tsx`; hero stat cards are preserved or relocated; build passes
   - Files: app/page.tsx
+  - Completed: 2026-06-12 — Removed the reference-video-frame block and YouTube iframe; stat cards kept in the hero media column with data-testid="hero-stat-card". Added e2e spec v17-task3-remove-youtube.spec.ts (TDD: failed before, passes after, with screenshots). Build, lint, semgrep, npm audit clean.
 
 - [ ] Task 4: Create `useScrollProgress` hook (P0)
   - Acceptance: Hook returns normalized 0–1 scroll progress for a target element, throttled via `requestAnimationFrame`, and returns 0 when `prefers-reduced-motion` is set; covered by a small unit test

@@ -102,27 +102,16 @@ export default function HomePage() {
           </div>
 
           <div className="reference-hero-media">
-            <div className="reference-video-frame" aria-label={copy.hero.videoTitle}>
-              <iframe
-                src="https://www.youtube-nocookie.com/embed/ScMzIvxBSi4"
-                title={copy.hero.videoTitle}
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
-
             <div className="reference-stat-grid">
-              <article className="reference-stat-card">
+              <article className="reference-stat-card" data-testid="hero-stat-card">
                 <span>{ui.snapshotLabels[0]}</span>
                 <strong>{copy.brand.location}</strong>
               </article>
-              <article className="reference-stat-card">
+              <article className="reference-stat-card" data-testid="hero-stat-card">
                 <span>{ui.snapshotLabels[1]}</span>
                 <strong>{copy.business.flowTitle}</strong>
               </article>
-              <article className="reference-stat-card">
+              <article className="reference-stat-card" data-testid="hero-stat-card">
                 <span>{ui.snapshotLabels[2]}</span>
                 <strong>{copy.menu.companyProfile}</strong>
               </article>
