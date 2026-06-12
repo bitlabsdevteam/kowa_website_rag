@@ -17,9 +17,10 @@
   - Files: app/page.tsx
   - Completed: 2026-06-12 — Removed the reference-video-frame block and YouTube iframe; stat cards kept in the hero media column with data-testid="hero-stat-card". Added e2e spec v17-task3-remove-youtube.spec.ts (TDD: failed before, passes after, with screenshots). Build, lint, semgrep, npm audit clean.
 
-- [ ] Task 4: Create `useScrollProgress` hook (P0)
+- [x] Task 4: Create `useScrollProgress` hook (P0)
   - Acceptance: Hook returns normalized 0–1 scroll progress for a target element, throttled via `requestAnimationFrame`, and returns 0 when `prefers-reduced-motion` is set; covered by a small unit test
   - Files: components/hero-3d/use-scroll-progress.ts, tests/unit/v17-task4-scroll-progress.test.mjs
+  - Completed: 2026-06-12 — Added pure computeScrollProgress (clamped -top/height, degenerate-input safe) plus useScrollProgress hook with rAF throttling, passive scroll/resize listeners, cleanup, and reduced-motion guard. 3 unit tests pass (TDD: failed before implementation). Build, lint, semgrep, npm audit clean.
 
 - [ ] Task 5: Build the R3F 3D background scene (P0)
   - Acceptance: `Hero3DScene` renders a full-bleed `<Canvas>` (dynamic import, ssr:false) with a particle field / floating geometry, fog, and lighting in Kowa's palette; runs without console errors in dev
