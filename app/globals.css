@@ -724,9 +724,15 @@ body {
   min-height: 100svh;
   padding: clamp(48px, 8vh, 96px) clamp(24px, 5vw, 64px);
   overflow: hidden;
-  border-color: rgba(243, 239, 231, 0.16);
-  /* The fixed page backdrop provides the scene; keep the hero translucent. */
-  background: rgba(19, 41, 29, 0.35);
+  /* Boxless: full-bleed out of the width-constrained page shell so the copy
+     floats directly over the fixed page backdrop. The !important flags counter
+     the light-theme cleanup block that forces white card surfaces. */
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 .hero-parallax-background {

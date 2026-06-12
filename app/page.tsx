@@ -105,7 +105,10 @@ export default function HomePage() {
   return (
     <main className="page shell reference-site">
       <div className="page-backdrop" data-testid="page-backdrop" aria-hidden="true">
-        {heroVisual === '3d' ? <Hero3DScene progressRef={pageProgressRef} /> : <HeroFallback />}
+        {/* The fallback stays mounted as a poster underlay so the backdrop
+            never flashes empty while the 3D chunk loads. */}
+        <HeroFallback />
+        {heroVisual === '3d' ? <Hero3DScene progressRef={pageProgressRef} /> : null}
       </div>
       <section className="shell-header">
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
@@ -114,7 +117,7 @@ export default function HomePage() {
       <section
         id="about"
         ref={heroRef}
-        className="hero-panel reference-hero cinematic-hero"
+        className="reference-hero cinematic-hero"
         data-testid="landing-primary-box"
         style={{ '--hero-parallax': heroProgress } as CSSProperties}
       >

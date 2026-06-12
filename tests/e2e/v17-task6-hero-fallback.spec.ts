@@ -41,11 +41,13 @@ test('v17 task6: missing WebGL support swaps the 3D scene for the static fallbac
   await page.screenshot({ path: 'tests/screenshots/task6-02-no-webgl-fallback.png', fullPage: false });
 });
 
-test('v17 task6: capable browsers still get the 3D scene, not the fallback', async ({ page }) => {
+test('v17 task6: capable browsers still get the 3D scene, over the poster underlay', async ({ page }) => {
   await page.goto('/');
 
   await expect(page.locator('[data-testid="hero-3d-scene"]')).toBeVisible();
-  await expect(page.locator('[data-testid="hero-3d-fallback"]')).toHaveCount(0);
+  // Since v18 the fallback stays mounted as a poster underlay beneath the
+  // scene so the backdrop never flashes empty while the 3D chunk loads.
+  await expect(page.locator('[data-testid="hero-3d-fallback"]')).toHaveCount(1);
 
   await page.screenshot({ path: 'tests/screenshots/task6-03-webgl-scene-kept.png', fullPage: false });
 });

@@ -26,9 +26,12 @@ test('v17 task7: hero is full-viewport with background, mid, and foreground laye
   await expect(mid).toHaveAttribute('aria-hidden', 'true');
   await expect(foreground).toBeVisible();
 
-  // The 3D scene (or its fallback) lives inside the background layer.
+  // Since v18 the 3D scene (or its fallback) lives in the fixed page backdrop;
+  // the hero background layer remains as the slow parallax stratum.
   await expect(
-    background.locator('[data-testid="hero-3d-scene"], [data-testid="hero-3d-fallback"]'),
+    page.locator(
+      '[data-testid="page-backdrop"] [data-testid="hero-3d-scene"], [data-testid="page-backdrop"] [data-testid="hero-3d-fallback"]',
+    ),
   ).toHaveCount(1);
 
   // Foreground carries the brand copy and stat cards.
