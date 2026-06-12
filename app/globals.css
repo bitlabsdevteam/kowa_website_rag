@@ -695,6 +695,95 @@ body {
     #13291d;
 }
 
+.reference-hero.cinematic-hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100svh;
+  padding: clamp(48px, 8vh, 96px) clamp(24px, 5vw, 64px);
+  overflow: hidden;
+  border-color: rgba(243, 239, 231, 0.16);
+  background: #13291d;
+}
+
+.hero-parallax-background {
+  position: absolute;
+  /* Oversized vertically so the parallax drift never exposes the seam. */
+  inset: -14% 0;
+  z-index: 0;
+  transform: translate3d(0, calc(var(--hero-parallax, 0) * 130px), 0);
+  will-change: transform;
+}
+
+.hero-parallax-background .hero-3d-scene {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero-parallax-mid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(19, 41, 29, 0.3) 0%, rgba(19, 41, 29, 0) 38%, rgba(19, 41, 29, 0.6) 100%),
+    radial-gradient(ellipse 70% 55% at 24% 32%, rgba(45, 107, 73, 0.32), transparent 70%);
+  transform: translate3d(0, calc(var(--hero-parallax, 0) * 60px), 0);
+  will-change: transform;
+}
+
+.hero-parallax-foreground {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  align-items: center;
+  transform: translate3d(0, calc(var(--hero-parallax, 0) * -48px), 0);
+  will-change: transform;
+}
+
+.cinematic-hero .hero-title,
+.cinematic-hero .reference-hero-title {
+  color: #f3efe7;
+}
+
+.cinematic-hero .reference-hero-lead,
+.cinematic-hero .reference-hero-body {
+  color: rgba(243, 239, 231, 0.78);
+}
+
+.cinematic-hero .executive-kicker {
+  color: rgba(216, 231, 220, 0.85);
+}
+
+.cinematic-hero .corporate-eyebrow {
+  border: 1px solid rgba(243, 239, 231, 0.24);
+  background: rgba(243, 239, 231, 0.1);
+  color: #d8e7dc;
+}
+
+.cinematic-hero .button-secondary {
+  border: 1px solid rgba(243, 239, 231, 0.32) !important;
+  background: rgba(243, 239, 231, 0.08) !important;
+  color: #f3efe7 !important;
+}
+
+.cinematic-hero .reference-stat-card {
+  border-color: rgba(243, 239, 231, 0.18);
+  background: rgba(19, 41, 29, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.cinematic-hero .reference-stat-card span {
+  color: rgba(243, 239, 231, 0.62);
+}
+
+.cinematic-hero .reference-stat-card strong {
+  color: #f3efe7;
+}
+
 .reference-stat-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

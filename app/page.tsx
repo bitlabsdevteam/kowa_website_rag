@@ -2,9 +2,10 @@
 
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
+import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { ResourceCirculationFlow } from '@/components/resource-circulation-flow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { SiteFooterMenu } from '@/components/site-footer-menu';
@@ -57,6 +58,8 @@ export default function HomePage() {
   const [locale, setLocale] = useState<Locale>('en');
   const [activeFlowIndex, setActiveFlowIndex] = useState(0);
   const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
+  const heroRef = useRef<HTMLElement | null>(null);
+  const heroProgress = useScrollProgress(heroRef);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
@@ -95,8 +98,18 @@ export default function HomePage() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <section id="about" className="hero-panel reference-hero" data-testid="landing-primary-box">
-        <div className="reference-hero-grid">
+      <section
+        id="about"
+        ref={heroRef}
+        className="hero-panel reference-hero cinematic-hero"
+        data-testid="landing-primary-box"
+        style={{ '--hero-parallax': heroProgress } as CSSProperties}
+      >
+        <div className="hero-parallax-background" data-testid="hero-parallax-background" aria-hidden="true">
+          {heroVisual === '3d' ? <Hero3DScene /> : <HeroFallback />}
+        </div>
+        <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
+        <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">
           <div className="reference-hero-copy">
             <span className="eyebrow corporate-eyebrow">{ui.heroFlag}</span>
             <p className="executive-kicker">{copy.hero.eyebrow}</p>
@@ -113,8 +126,6 @@ export default function HomePage() {
           </div>
 
           <div className="reference-hero-media">
-            {heroVisual === '3d' ? <Hero3DScene /> : <HeroFallback />}
-
             <div className="reference-stat-grid">
               <article className="reference-stat-card" data-testid="hero-stat-card">
                 <span>{ui.snapshotLabels[0]}</span>

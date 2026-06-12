@@ -32,9 +32,10 @@
   - Files: components/hero-3d/hero-fallback.tsx, app/page.tsx
   - Completed: 2026-06-12 — Added HeroFallback (layered radial-gradient backdrop in brand greens) and supportsHero3DScene() gate (reduced-motion + WebGL probe). Page defaults to fallback and upgrades to the 3D scene only when supported. 3 e2e tests (reduced-motion, stubbed no-WebGL, capable-browser keeps scene) pass with screenshots; v17 task2/3/5 specs still green. Build, lint, semgrep, npm audit clean.
 
-- [ ] Task 7: Compose the cinematic hero with parallax layers (P0)
+- [x] Task 7: Compose the cinematic hero with parallax layers (P0)
   - Acceptance: Hero is full-viewport with the 3D scene behind layered foreground copy (existing `SITE_COPY` hero text); scrolling moves background, mid, and foreground layers at distinct rates; locale switching still works
   - Files: app/page.tsx, app/globals.css
+  - Completed: 2026-06-12 — Hero restructured into three layers: hero-parallax-background (3D scene/fallback, full-bleed, drifts +130px), hero-parallax-mid (gradient atmosphere veil, +60px), hero-parallax-foreground (copy + stat cards, -48px), driven by useScrollProgress via a --hero-parallax CSS variable. Hero is min-height 100svh with a dark cinematic treatment (ivory copy, glassy stat cards). 3 e2e tests (layer structure/full-viewport, distinct scroll rates, ja locale switch) pass with screenshots; v17 task 2/3/5/6 specs, build, lint, 10 unit tests, semgrep, npm audit all clean.
 
 - [ ] Task 8: Wire scroll progress into the 3D camera rig (P1)
   - Acceptance: Camera/group position in `Hero3DScene` eases with scroll progress so the scene visibly shifts depth while scrolling through the hero; no jank from re-renders (progress passed via ref/useFrame, not state-per-frame)
