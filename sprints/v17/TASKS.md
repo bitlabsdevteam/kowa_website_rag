@@ -42,9 +42,10 @@
   - Files: components/hero-3d/hero-3d-scene.tsx, app/page.tsx
   - Completed: 2026-06-12 — Added camera-rig-math.ts (pure computeCameraTarget: dolly z 9→5.5, tilt y 0→-1.6, clamped) and a CameraRig component that eases toward it via MathUtils.damp in useFrame, reading a mutable progressRef mirrored from useScrollProgress in a useEffect (lint rejects render-time ref writes). Eased value exposed as data-hero-progress on the canvas for e2e observability. 3 unit + 1 e2e tests pass (TDD: failed first); 9 regression e2e green; build, lint, semgrep, npm audit clean.
 
-- [ ] Task 9: Update affected tests and run full validation (P1)
+- [x] Task 9: Update affected tests and run full validation (P1)
   - Acceptance: Any existing e2e/unit tests referencing the hero CTA or video are updated; `npm run build`, `npm run lint`, `node --test tests/unit/v17-*.test.mjs`, and the landing-page Playwright specs pass
   - Files: tests/e2e/* (as needed), tests/unit/v17-*.test.mjs
+  - Completed: 2026-06-12 — Updated 6 legacy specs that encoded pre-v17 behavior (v5-task3, v6-task3/4/5, v7-task1, v7-task11): removed Aya CTA clicks, chat-popup/video assertions, and the old 3-link menu contract; they now assert the v17 contract (no landing-primary-cta, no iframes, company-profile routing, 5-link corporate menu). Full validation: build, lint, 13 unit tests, 10 v17 e2e + 7 legacy landing e2e all pass; semgrep, npm audit clean. Noted for Task 10: hero title is tight at 390px width.
 
 - [ ] Task 10: Polish — mobile sizing, GPU cost, and accessibility pass (P2)
   - Acceptance: Hero renders correctly at 375px width; canvas DPR capped (≤2); decorative canvas is `aria-hidden`; no `@next/next/no-img-element` regressions

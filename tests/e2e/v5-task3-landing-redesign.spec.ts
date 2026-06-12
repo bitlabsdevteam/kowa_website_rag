@@ -1,25 +1,21 @@
 import { expect, test } from '@playwright/test';
 
-test('v5 task3 landing redesign delivers editorial narrative and stronger chatbot onboarding', async ({ page }) => {
+// Updated in v17 Task 9: the landing hero is now a cinematic 3D scene with no
+// chat CTA (removed in v17 Task 2) and no assistant section on the page.
+test('v5 task3 landing redesign delivers editorial narrative (v17 cinematic hero)', async ({ page }) => {
   await page.goto('/');
 
   await page.screenshot({ path: 'tests/screenshots/task3-step1-landing-initial.png', fullPage: true });
 
   await expect(page.getByRole('heading', { name: 'Kowa Trade & Commerce' })).toBeVisible();
   await expect(page.locator('[data-testid="landing-narrative"]')).toBeVisible();
-  await expect(page.locator('[data-testid="landing-primary-cta"]')).toBeVisible();
-  await expect(page.locator('[data-testid="landing-secondary-cta"]')).toBeVisible();
 
-  await page.locator('[data-testid="landing-primary-cta"]').click();
-  await expect(page.locator('#assistant')).toBeInViewport();
+  // The Talk to Aya CTA was removed from the landing page in v17.
+  await expect(page.locator('[data-testid="landing-primary-cta"]')).toHaveCount(0);
 
-  await expect(page.locator('[data-testid="chat-prompt-0"]')).toBeVisible();
-  await page.locator('[data-testid="chat-prompt-0"]').click();
-  await expect(page.locator('[data-testid="chat-prompt-0"]')).toBeEnabled();
+  // The hero routes visitors to the company profile instead.
+  await expect(page.locator('.hero-actions a[href="/company_profile"]')).toBeVisible();
 
-  await page.screenshot({ path: 'tests/screenshots/task3-step2-assistant-focus.png', fullPage: true });
-
-  await expect(page.locator('[data-testid="trust-pillar"]')).toHaveCount(3);
-  await expect(page.locator('[data-testid="fact-established"]')).toContainText('1994');
-  await expect(page.locator('[data-testid="fact-address"]')).toContainText('Minato-Ku, Tokyo');
+  await expect(page.locator('[data-testid="business-section"]')).toBeVisible();
+  await expect(page.locator('[data-testid="hero-stat-card"]')).toHaveCount(3);
 });
