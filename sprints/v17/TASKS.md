@@ -1,6 +1,6 @@
 # Sprint v17 — Tasks
 
-## Status: In Progress
+## Status: Complete
 
 - [x] Task 1: Install 3D dependencies and verify build baseline (P0)
   - Acceptance: `npm install three @react-three/fiber @react-three/drei @types/three` succeeds; `npm run build` and `npm run lint` pass with no new errors
@@ -47,6 +47,7 @@
   - Files: tests/e2e/* (as needed), tests/unit/v17-*.test.mjs
   - Completed: 2026-06-12 — Updated 6 legacy specs that encoded pre-v17 behavior (v5-task3, v6-task3/4/5, v7-task1, v7-task11): removed Aya CTA clicks, chat-popup/video assertions, and the old 3-link menu contract; they now assert the v17 contract (no landing-primary-cta, no iframes, company-profile routing, 5-link corporate menu). Full validation: build, lint, 13 unit tests, 10 v17 e2e + 7 legacy landing e2e all pass; semgrep, npm audit clean. Noted for Task 10: hero title is tight at 390px width.
 
-- [ ] Task 10: Polish — mobile sizing, GPU cost, and accessibility pass (P2)
+- [x] Task 10: Polish — mobile sizing, GPU cost, and accessibility pass (P2)
   - Acceptance: Hero renders correctly at 375px width; canvas DPR capped (≤2); decorative canvas is `aria-hidden`; no `@next/next/no-img-element` regressions
   - Files: components/hero-3d/hero-3d-scene.tsx, app/globals.css
+  - Completed: 2026-06-12 — Added v17-task10-mobile-polish.spec.ts locking the acceptance in at 375px/deviceScaleFactor 3: no horizontal overflow, title and stat cards within viewport, canvas backing store capped at 2x CSS pixels on a 3x display, scene + background layer aria-hidden. No source changes needed — dpr={[1,2]} (Task 5), aria-hidden (Tasks 5/7), and existing responsive grids already satisfy the criteria; lint confirms zero img-element findings. Screenshots use scale:'css' (3x capture buffers fail under SwiftShader). Full suite: 12 v17 e2e + 13 unit, build, lint, semgrep, npm audit clean.
