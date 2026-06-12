@@ -695,6 +695,28 @@ body {
     #13291d;
 }
 
+/* Full-viewport cinematic backdrop: the 3D scene (or fallback) is fixed
+   behind the whole landing page; content sections stack above it. */
+.page-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.page-backdrop .hero-3d-scene {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.reference-site > section,
+.reference-site > footer {
+  position: relative;
+  z-index: 1;
+}
+
 .reference-hero.cinematic-hero {
   position: relative;
   display: flex;
@@ -703,7 +725,8 @@ body {
   padding: clamp(48px, 8vh, 96px) clamp(24px, 5vw, 64px);
   overflow: hidden;
   border-color: rgba(243, 239, 231, 0.16);
-  background: #13291d;
+  /* The fixed page backdrop provides the scene; keep the hero translucent. */
+  background: rgba(19, 41, 29, 0.35);
 }
 
 .hero-parallax-background {

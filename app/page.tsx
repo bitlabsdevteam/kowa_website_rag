@@ -60,9 +60,12 @@ export default function HomePage() {
   const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
   const heroRef = useRef<HTMLElement | null>(null);
   const heroProgress = useScrollProgress(heroRef);
-  // Mutable mirror of heroProgress so the 3D camera rig can read the latest
-  // value inside useFrame without re-rendering the canvas per scroll frame.
-  const heroProgressRef = useRef(0);
+  // Whole-document progress drives the page-level backdrop camera; the
+  // hero-scoped progress keeps driving the copy-layer parallax drift.
+  const pageProgress = useScrollProgress();
+  // Mutable mirror so the 3D camera rig can read the latest value inside
+  // useFrame without re-rendering the canvas per scroll frame.
+  const pageProgressRef = useRef(0);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
@@ -71,8 +74,8 @@ export default function HomePage() {
   }, [locale]);
 
   useEffect(() => {
-    heroProgressRef.current = heroProgress;
-  }, [heroProgress]);
+    pageProgressRef.current = pageProgress;
+  }, [pageProgress]);
 
   useEffect(() => {
     if (supportsHero3DScene()) {
@@ -101,6 +104,9 @@ export default function HomePage() {
 
   return (
     <main className="page shell reference-site">
+      <div className="page-backdrop" data-testid="page-backdrop" aria-hidden="true">
+        {heroVisual === '3d' ? <Hero3DScene progressRef={pageProgressRef} /> : <HeroFallback />}
+      </div>
       <section className="shell-header">
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
@@ -112,9 +118,7 @@ export default function HomePage() {
         data-testid="landing-primary-box"
         style={{ '--hero-parallax': heroProgress } as CSSProperties}
       >
-        <div className="hero-parallax-background" data-testid="hero-parallax-background" aria-hidden="true">
-          {heroVisual === '3d' ? <Hero3DScene progressRef={heroProgressRef} /> : <HeroFallback />}
-        </div>
+        <div className="hero-parallax-background" data-testid="hero-parallax-background" aria-hidden="true" />
         <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
         <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">
           <div className="reference-hero-copy">

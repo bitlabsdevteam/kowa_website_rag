@@ -7,9 +7,10 @@
   - Files: components/hero-3d/use-scroll-progress.ts, tests/unit/v18-task1-document-progress.test.mjs
   - Completed: 2026-06-12 — Added pure computeDocumentScrollProgress (scrollY / (scrollHeight − viewportHeight), clamped, degenerate-safe) and made targetRef optional on useScrollProgress: omitted → document mode measuring window.scrollY/document scrollHeight/innerHeight. Element mode, rAF throttle, passive listeners, and reduced-motion guard unchanged. TDD: 3 new unit tests failed first, now 16/16 pass (incl. all v17). Build, lint, semgrep, npm audit clean.
 
-- [ ] Task 2: Promote the 3D scene to a fixed full-viewport page backdrop (P0)
+- [x] Task 2: Promote the 3D scene to a fixed full-viewport page backdrop (P0)
   - Acceptance: `Hero3DScene`/`HeroFallback` render inside a `position: fixed; inset: 0; z-index: 0` `.page-backdrop` div mounted once in `app/page.tsx`; no rounded corners, borders, or panel box around the canvas; canvas covers the viewport at any scroll position; e2e spec asserts backdrop bounding box equals viewport
   - Files: app/page.tsx, app/globals.css, tests/e2e/v18-task2-fullpage-backdrop.spec.ts
+  - Completed: 2026-06-12 — Scene/fallback moved out of the hero's parallax layer into a fixed .page-backdrop (inset 0, z-index 0); camera rig now fed by whole-document progress (Task 1 hook) via pageProgressRef; hero panel made translucent (rgba veil) so the scene shows through; landing sections/footer stack above via z-index 1. TDD: spec failed first (no backdrop), now passes incl. fixed bbox = viewport at top and bottom, no border/radius on scene, hero hosts no scene. Full e2e suite 46/46 green; build, lint, semgrep, npm audit clean. Noted pre-existing (untouched) failures outside this sprint's gate: v9-task10 product-manifest and v9-task7 footer-contract unit tests fail on main without these changes.
 
 - [ ] Task 3: Restyle the hero as a boxless full-viewport copy layer (P0)
   - Acceptance: Hero section is 100svh of copy + CTAs directly over the backdrop (no `hero-panel` card background); `--hero-parallax` foreground/mid drift still works from document progress; locale switching still works
