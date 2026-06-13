@@ -355,6 +355,10 @@ body {
 body {
   color: var(--color-text);
   font-family: var(--font-body);
+  /* The boxless hero breaks out to 100vw, which is wider than the body by the
+     classic scrollbar width and would surface a horizontal scrollbar. Clip the
+     sliver here (the fixed page-backdrop is viewport-positioned and unaffected). */
+  overflow-x: clip;
 }
 
 .shell::before,
@@ -6445,6 +6449,22 @@ body {
 .reveal-fly-right[data-revealed='true'] {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+}
+
+/* Mobile: shorten the fly-in travel so columns never start off-screen on a
+   narrow viewport (and never widen the document during the transition). */
+@media (max-width: 600px) {
+  .reveal-fade-up {
+    transform: translate3d(0, 24px, 0);
+  }
+
+  .reveal-fly-left {
+    transform: translate3d(-32px, 0, 0);
+  }
+
+  .reveal-fly-right {
+    transform: translate3d(32px, 0, 0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
