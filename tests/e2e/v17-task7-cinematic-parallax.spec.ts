@@ -26,13 +26,16 @@ test('v17 task7: hero is full-viewport with background, mid, and foreground laye
   await expect(mid).toHaveAttribute('aria-hidden', 'true');
   await expect(foreground).toBeVisible();
 
-  // Since v18 the 3D scene (or its fallback) lives in the fixed page backdrop;
-  // the hero background layer remains as the slow parallax stratum.
+  // Since v18 the 3D scene lives in the fixed page backdrop (the hero
+  // background layer remains as the slow parallax stratum). A capable browser
+  // also keeps the fallback mounted as a poster underlay (v18 task3), so the
+  // backdrop holds the scene plus, optionally, the underlay.
+  await expect(page.locator('[data-testid="page-backdrop"] [data-testid="hero-3d-scene"]')).toHaveCount(1);
   await expect(
     page.locator(
       '[data-testid="page-backdrop"] [data-testid="hero-3d-scene"], [data-testid="page-backdrop"] [data-testid="hero-3d-fallback"]',
-    ),
-  ).toHaveCount(1);
+    ).first(),
+  ).toBeAttached();
 
   // Foreground carries the brand copy and stat cards.
   await expect(foreground.getByRole('heading', { level: 1 })).toContainText('Kowa Trade & Commerce');

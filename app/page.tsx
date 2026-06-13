@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
+import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { ResourceCirculationFlow } from '@/components/resource-circulation-flow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
@@ -159,16 +160,18 @@ export default function HomePage() {
       </section>
 
       <section className="card reference-section-card corporate-business-section" aria-label={copy.business.title} data-testid="business-section">
-        <div className="reference-section-head">
-          <div>
-            <p className="section-label">{ui.platformLabel}</p>
-            <h2 className="section-title reference-section-title">{ui.platformTitle}</h2>
+        <ScrollReveal variant="fade-up" testId="reveal-business-head">
+          <div className="reference-section-head">
+            <div>
+              <p className="section-label">{ui.platformLabel}</p>
+              <h2 className="section-title reference-section-title">{ui.platformTitle}</h2>
+            </div>
+            <p className="body-copy reference-section-copy">{ui.platformBody}</p>
           </div>
-          <p className="body-copy reference-section-copy">{ui.platformBody}</p>
-        </div>
+        </ScrollReveal>
 
         <div className="reference-business-grid">
-          <div className="business-architecture-rail">
+          <ScrollReveal variant="fly-left" testId="reveal-business-rail" className="business-architecture-rail">
             <p className="business-flow-title">{copy.business.flowTitle}</p>
             <p className="body-copy">{copy.business.intro}</p>
             <ol className="business-step-list">
@@ -186,9 +189,9 @@ export default function HomePage() {
                 </li>
               ))}
             </ol>
-          </div>
+          </ScrollReveal>
 
-          <div className="business-architecture-visual">
+          <ScrollReveal variant="fly-right" testId="reveal-business-visual" className="business-architecture-visual">
             <ResourceCirculationFlow
               brand={copy.brand.name}
               title={copy.business.flowTitle}
@@ -197,7 +200,7 @@ export default function HomePage() {
               activeIndex={activeFlowIndex}
               onSelect={setActiveFlowIndex}
             />
-          </div>
+          </ScrollReveal>
         </div>
       </section>
       <footer className="site-footer" data-testid="landing-footer">
