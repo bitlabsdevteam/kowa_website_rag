@@ -272,34 +272,6 @@ export default function MachinesPage() {
           <article className="machines-intro-copy">
             <p className="lead">{pageCopy.lead}</p>
           </article>
-          <article className="machines-source-note">
-            <span>{pageCopy.noteLabel}</span>
-            <p>{pageCopy.noteBody}</p>
-          </article>
-        </section>
-
-        <section className="machines-selector-panel" aria-label={pageCopy.selectorLabel}>
-          <p className="section-label">{pageCopy.selectorLabel}</p>
-          <div className="machines-selector-list">
-            {MACHINE_IDS.map((machineId, index) => {
-              const detail = pageCopy.cards[machineId];
-              const isActive = machineId === selectedMachineId;
-
-              return (
-                <button
-                  key={machineId}
-                  type="button"
-                  className={`machines-selector-button${isActive ? ' is-active' : ''}`}
-                  onClick={() => setSelectedMachineId(machineId)}
-                  aria-pressed={isActive}
-                >
-                  <small>{String(index + 1).padStart(2, '0')}</small>
-                  <strong>{detail.title}</strong>
-                  <span>{detail.summary}</span>
-                </button>
-              );
-            })}
-          </div>
         </section>
 
         <section className="machines-spotlight">
@@ -371,6 +343,37 @@ export default function MachinesPage() {
               ))}
             </ul>
           </article>
+        </section>
+
+        <section className="machines-support-grid">
+          <article className="machines-source-note">
+            <span>{pageCopy.noteLabel}</span>
+            <p>{pageCopy.noteBody}</p>
+          </article>
+
+          <section className="machines-selector-panel" aria-label={pageCopy.selectorLabel}>
+            <p className="section-label">{pageCopy.selectorLabel}</p>
+            <div className="machines-selector-list">
+              {MACHINE_IDS.map((machineId, index) => {
+                const detail = pageCopy.cards[machineId];
+                const isActive = machineId === selectedMachineId;
+
+                return (
+                  <button
+                    key={machineId}
+                    type="button"
+                    className={`machines-selector-button${isActive ? ' is-active' : ''}`}
+                    onClick={() => setSelectedMachineId(machineId)}
+                    aria-pressed={isActive}
+                  >
+                    <small>{String(index + 1).padStart(2, '0')}</small>
+                    <strong>{detail.title}</strong>
+                    <span>{detail.summary}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
         </section>
 
         <section className="machines-return-panel">

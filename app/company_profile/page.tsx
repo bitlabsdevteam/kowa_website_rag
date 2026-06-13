@@ -38,7 +38,9 @@ export default function CompanyProfilePage() {
               <p className="body-copy">{profile.introBody}</p>
             </article>
           </div>
+        </div>
 
+        <section className="company-profile-facts-band">
           <aside className="company-profile-facts-panel" aria-label={profile.factLabel}>
             <h2 className="company-profile-facts-title">{profile.factLabel}</h2>
             <dl className="company-profile-facts-list">
@@ -50,7 +52,7 @@ export default function CompanyProfilePage() {
               ))}
             </dl>
           </aside>
-        </div>
+        </section>
 
         <section className="company-profile-statement-section" aria-labelledby="company-profile-statement-heading">
           <div className="company-profile-section-head">

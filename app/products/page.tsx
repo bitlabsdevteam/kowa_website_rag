@@ -231,24 +231,6 @@ export default function ProductsPage() {
         </div>
 
         <section className="products-merch-hero" aria-label={pageCopy.featureLabel}>
-          <article className="products-merch-lead">
-            <div className="products-merch-copy">
-              <p className="section-label">{pageCopy.merchandisingLabel}</p>
-              <h2 className="section-title products-merch-title">{pageCopy.merchandisingTitle}</h2>
-              <p className="lead products-merch-lead-copy">{pageCopy.lead}</p>
-              <p className="body-copy">{pageCopy.body}</p>
-            </div>
-
-            <div className="products-merch-proof">
-              <span>{pageCopy.evidenceLabel}</span>
-              <ul className="products-merch-proof-list">
-                {pageCopy.evidenceItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </article>
-
           <article className="products-lead-card">
             <div className="products-lead-image-shell">
               <Image
@@ -267,6 +249,24 @@ export default function ProductsPage() {
               <ul className="products-chip-list">
                 {leadFeature.points.map((point) => (
                   <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </div>
+          </article>
+
+          <article className="products-merch-lead">
+            <div className="products-merch-copy">
+              <p className="section-label">{pageCopy.merchandisingLabel}</p>
+              <h2 className="section-title products-merch-title">{pageCopy.merchandisingTitle}</h2>
+              <p className="lead products-merch-lead-copy">{pageCopy.lead}</p>
+              <p className="body-copy">{pageCopy.body}</p>
+            </div>
+
+            <div className="products-merch-proof">
+              <span>{pageCopy.evidenceLabel}</span>
+              <ul className="products-merch-proof-list">
+                {pageCopy.evidenceItems.map((item) => (
+                  <li key={item}>{item}</li>
                 ))}
               </ul>
             </div>
@@ -292,6 +292,18 @@ export default function ProductsPage() {
           ))}
         </section>
 
+        <section className="products-carousel-shell" aria-label={pageCopy.carouselLabel}>
+          <div className="products-carousel-shell-head">
+            <div>
+              <p className="section-label">{pageCopy.carouselLabel}</p>
+              <h2 className="section-title products-carousel-shell-title">{pageCopy.carouselTitle}</h2>
+            </div>
+            <p className="body-copy products-carousel-shell-copy">{pageCopy.carouselBody}</p>
+          </div>
+
+          <ProductCarousel items={PRODUCT_MEDIA} entries={copy.products.entries} locale={locale} labels={copy.products.carousel} />
+        </section>
+
         <section className="products-guidance-strip" aria-label={pageCopy.merchandisingLabel}>
           <article className="products-guidance-card">
             <p className="section-label">{pageCopy.merchandisingLabel}</p>
@@ -313,18 +325,6 @@ export default function ProductsPage() {
               {pageCopy.machineCta}
             </Link>
           </article>
-        </section>
-
-        <section className="products-carousel-shell" aria-label={pageCopy.carouselLabel}>
-          <div className="products-carousel-shell-head">
-            <div>
-              <p className="section-label">{pageCopy.carouselLabel}</p>
-              <h2 className="section-title products-carousel-shell-title">{pageCopy.carouselTitle}</h2>
-            </div>
-            <p className="body-copy products-carousel-shell-copy">{pageCopy.carouselBody}</p>
-          </div>
-
-          <ProductCarousel items={PRODUCT_MEDIA} entries={copy.products.entries} locale={locale} labels={copy.products.carousel} />
         </section>
       </section>
 
