@@ -30,7 +30,9 @@ test('camera target clamps progress outside the 0-1 range and rejects bad input'
 test('Hero3DScene drives the camera from a progress ref inside useFrame', () => {
   const source = readFileSync(new URL('../../components/hero-3d/hero-3d-scene.tsx', import.meta.url), 'utf8');
   assert.match(source, /progressRef/, 'scene should accept a progressRef prop');
-  assert.match(source, /computeCameraTarget/, 'rig should reuse the pure target mapping');
+  // v18 promotes the rig to the full-page path mapping (computeCameraPath); the
+  // pure-mapping contract still holds, just under the longer-travel function.
+  assert.match(source, /computeCameraPath/, 'rig should reuse the pure path mapping');
   assert.match(source, /MathUtils\.damp/, 'camera should ease via damping, not snap');
   assert.match(source, /data-hero-progress/, 'rig should expose eased progress for e2e checks');
   assert.doesNotMatch(source, /setState|useState\(/, 'no per-frame React state in the scene');

@@ -5,7 +5,7 @@ import { useMemo, useRef } from 'react';
 import { MathUtils } from 'three';
 import type { Group, Points } from 'three';
 
-import { computeCameraTarget } from './camera-rig-math';
+import { computeCameraPath } from './camera-rig-math';
 
 type ProgressRef = { readonly current: number };
 
@@ -112,7 +112,8 @@ function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
     const eased = MathUtils.damp(easedRef.current, progress, 3, delta);
     easedRef.current = eased;
 
-    const target = computeCameraTarget(eased);
+    const target = computeCameraPath(eased);
+    state.camera.position.x = target.x;
     state.camera.position.y = target.y;
     state.camera.position.z = target.z;
     state.camera.lookAt(0, 0, -4);
