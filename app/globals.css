@@ -59,7 +59,7 @@
 
 html:lang(en) {
   --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
 }
 
 html:lang(ja),
@@ -338,7 +338,7 @@ html:lang(zh) {
 
 html:lang(en) {
   --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
 }
 
 html:lang(ja),
@@ -5302,7 +5302,7 @@ a:focus-visible {
 
 html:lang(en) {
   --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
 }
 
 html:lang(ja),
@@ -6455,4 +6455,45 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+/* ============================================================
+   v18 Task 8 — Typography refresh
+   Fraunces (display, optical-sized) + Space Grotesk (UI/body).
+   Headlines get the high-contrast editorial cut; the cinematic
+   hero headline is enlarged with tightened serif tracking.
+   ============================================================ */
+
+.hero-title,
+.section-title,
+.page-title,
+.reference-hero-title,
+.reference-section-title {
+  font-optical-sizing: auto;
+}
+
+/* Latin display headings lean into Fraunces' contrast; the Japanese/Chinese
+   locales keep Noto Sans JP (var(--font-display) resolves per-locale). */
+html:lang(en) .hero-title,
+html:lang(en) .reference-hero-title {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 0.96;
+}
+
+html:lang(en) .reference-hero.cinematic-hero .reference-hero-title {
+  font-size: clamp(3.4rem, 7vw, 6rem);
+}
+
+html:lang(en) .section-title,
+html:lang(en) .reference-section-title {
+  letter-spacing: -0.015em;
+}
+
+/* Space Grotesk reads a touch wider than Manrope; nudge body tracking in. */
+.body-copy,
+.lead,
+.reference-hero-lead,
+.reference-hero-body {
+  letter-spacing: -0.005em;
 }
