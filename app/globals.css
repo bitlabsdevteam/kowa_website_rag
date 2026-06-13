@@ -6410,3 +6410,49 @@ body {
 .reference-site .site-footer-social a {
   color: #d8e7dc !important;
 }
+
+/* ============================================================
+   v18 Task 6 — Scroll-reveal variants
+   Elements start offset + faded and settle to their resting
+   pose once data-revealed flips to true. Paired columns fly in
+   from opposite sides and "combine" at center on reveal.
+   ============================================================ */
+
+.reveal-fade-up,
+.reveal-fly-left,
+.reveal-fly-right {
+  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-fade-up {
+  transform: translate3d(0, 40px, 0);
+}
+
+.reveal-fly-left {
+  transform: translate3d(-72px, 0, 0);
+}
+
+.reveal-fly-right {
+  transform: translate3d(72px, 0, 0);
+}
+
+.reveal-fade-up[data-revealed='true'],
+.reveal-fly-left[data-revealed='true'],
+.reveal-fly-right[data-revealed='true'] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-fade-up,
+  .reveal-fly-left,
+  .reveal-fly-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
