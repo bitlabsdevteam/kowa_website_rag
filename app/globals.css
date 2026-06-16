@@ -22,21 +22,24 @@
   --color-line: rgba(62, 47, 31, 0.13);
   --color-line-strong: rgba(62, 47, 31, 0.2);
   --color-text: #201a15;
-  --color-text-muted: #6f6458;
+  --color-text-muted: #5c5247;
   --color-accent: #2d6b49;
   --color-accent-strong: #1f5235;
 
-  --bg: #f3efe7;
-  --bg-strong: #ebe5d9;
-  --surface: rgba(255, 252, 246, 0.88);
-  --surface-strong: #f8f3ea;
-  --surface-muted: #efe9de;
-  --line: rgba(62, 47, 31, 0.13);
-  --line-strong: rgba(62, 47, 31, 0.2);
-  --text: #201a15;
-  --muted: #6f6458;
-  --accent: #2d6b49;
-  --accent-strong: #1f5235;
+  /* Cinematic landing backdrop + matched dark-glass surfaces.
+     The 3D scene paints rgb(19,41,29) (= --backdrop-base, mirrored in
+     components/hero-3d/hero-3d-scene.tsx PALETTE.backdrop). Every box that
+     floats over it derives from that SAME green hue, only stepping up in
+     lightness per elevation level, so panels read as a lift of the backdrop
+     rather than a clashing patch — backdrop and content boxes stay matched. */
+  --backdrop-base: #13291d;
+  --glass-panel: rgba(24, 49, 36, 0.66); /* section cards, footer, stat cards */
+  --glass-sub: rgba(21, 44, 32, 0.52); /* architecture rails / flow stages */
+  --glass-raised: rgba(30, 58, 43, 0.78); /* nodes, cores, step buttons */
+  --glass-border: rgba(243, 239, 231, 0.16);
+
+  /* Theme: Resource Circulation Editorial. --color-* above are canonical;
+     the short aliases below mirror them — never set literal values here. */
   --shadow-soft: 0 24px 70px rgba(46, 34, 20, 0.08);
   --shadow-card: 0 14px 38px rgba(46, 34, 20, 0.06);
   --radius-xl: 32px;
@@ -804,8 +807,8 @@ body {
 }
 
 .cinematic-hero .reference-stat-card {
-  border-color: rgba(243, 239, 231, 0.18);
-  background: rgba(19, 41, 29, 0.55);
+  border-color: var(--glass-border);
+  background: var(--glass-panel);
   backdrop-filter: blur(10px);
 }
 
@@ -6314,8 +6317,8 @@ body {
    ============================================================ */
 
 .reference-site .reference-section-card {
-  border: 1px solid rgba(243, 239, 231, 0.16) !important;
-  background: rgba(13, 28, 20, 0.55) !important;
+  border: 1px solid var(--glass-border) !important;
+  background: var(--glass-panel) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -6324,8 +6327,8 @@ body {
 .reference-site .business-architecture-rail,
 .reference-site .business-architecture-visual,
 .reference-site .resource-flow-stage {
-  border-color: rgba(243, 239, 231, 0.14) !important;
-  background: rgba(19, 41, 29, 0.45) !important;
+  border-color: var(--glass-border) !important;
+  background: var(--glass-sub) !important;
   box-shadow: none !important;
 }
 
@@ -6333,8 +6336,8 @@ body {
 .reference-site .resource-flow-core,
 .reference-site .resource-flow-detail,
 .reference-site .business-step-button {
-  border-color: rgba(243, 239, 231, 0.18) !important;
-  background: rgba(19, 41, 29, 0.72) !important;
+  border-color: var(--glass-border) !important;
+  background: var(--glass-raised) !important;
   box-shadow: none !important;
 }
 
@@ -6385,8 +6388,8 @@ body {
 }
 
 .reference-site .footer-menu-panel {
-  border: 1px solid rgba(243, 239, 231, 0.16) !important;
-  background: rgba(13, 28, 20, 0.55) !important;
+  border: 1px solid var(--glass-border) !important;
+  background: var(--glass-panel) !important;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -6516,4 +6519,637 @@ html:lang(en) .reference-section-title {
 .reference-hero-lead,
 .reference-hero-body {
   letter-spacing: -0.005em;
+}
+
+/* ============================================================
+   Products page — cinematic carousel band
+   The carousel becomes the page centerpiece: a forest-green
+   dark-glass band (the design system's "cinematic contrast"
+   band), colour-matched to the landing backdrop tokens
+   (--backdrop-base / --glass-*). The full dark stage design
+   already exists above; the GET light-theme overrides flatten
+   it to #fff and tint it blue. This scope restores the dark
+   stage and re-tints every accent to the brand green family.
+   ============================================================ */
+
+.products-carousel-shell--cinematic {
+  /* local brand-green accents replacing the legacy blue glow */
+  --cine-accent: #7fc6a0;
+  --cine-text: rgba(243, 239, 231, 0.92);
+  --cine-text-muted: rgba(243, 239, 231, 0.7);
+  --cine-deep: #0f2117;
+  position: relative;
+  margin-inline: -30px;
+  padding: 34px 30px 36px !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-panel, 32px) !important;
+  background:
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    var(--backdrop-base) !important;
+  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  overflow: hidden;
+}
+
+/* Section head copy sits on the dark band → cream text */
+.products-carousel-shell--cinematic .products-carousel-shell-title,
+.products-carousel-shell--cinematic .products-carousel-shell-title.section-title {
+  color: #f4efe5 !important;
+}
+
+.products-carousel-shell--cinematic .section-label {
+  color: var(--cine-accent) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-shell-copy,
+.products-carousel-shell--cinematic .products-carousel-summary,
+.products-carousel-shell--cinematic .products-carousel-position {
+  color: var(--cine-text-muted) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-overline {
+  color: var(--cine-accent) !important;
+}
+
+/* Chapter lane buttons → dark green glass with a green active state */
+.products-carousel-shell--cinematic .products-carousel-chapter {
+  background: var(--glass-sub) !important;
+  border-color: var(--glass-border) !important;
+  box-shadow: none !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-chapter:hover {
+  background: var(--glass-raised) !important;
+  border-color: rgba(127, 198, 160, 0.4) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-chapter[data-active='true'] {
+  background: var(--glass-raised) !important;
+  border-color: rgba(127, 198, 160, 0.55) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-chapter-copy strong {
+  color: #f4efe5 !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-chapter-copy p,
+.products-carousel-shell--cinematic .products-carousel-chapter-copy span,
+.products-carousel-shell--cinematic .products-carousel-chapter-overline,
+.products-carousel-shell--cinematic .products-carousel-chapter-index,
+.products-carousel-shell--cinematic .products-carousel-chapter-cta {
+  color: var(--cine-text-muted) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-chapter-cta {
+  color: var(--cine-accent) !important;
+}
+
+/* Prev/next controls → glass */
+.products-carousel-shell--cinematic .products-carousel-button {
+  background: var(--glass-sub) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--cine-text) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-button:hover {
+  border-color: rgba(127, 198, 160, 0.45) !important;
+}
+
+/* The stage itself: restore the dark glass, re-tinted green, enlarged */
+.products-carousel-shell--cinematic .products-carousel-stage,
+.products-carousel-shell--cinematic .products-carousel-stage[data-accent='amber'],
+.products-carousel-shell--cinematic .products-carousel-stage[data-accent='sea'],
+.products-carousel-shell--cinematic .products-carousel-stage[data-accent='sky'],
+.products-carousel-shell--cinematic .products-carousel-stage[data-accent='mist'] {
+  min-height: 600px;
+  border-color: var(--glass-border) !important;
+  background:
+    radial-gradient(circle at top left, rgba(127, 198, 160, 0.16), transparent 44%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    var(--glass-panel) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-stage::before {
+  background: radial-gradient(circle, rgba(45, 107, 73, 0.5), transparent 68%) !important;
+}
+
+/* The viewport, image backing, and panels all inherit a solid #fff from the GET
+   overrides; restore the deep dark backing so the green stage reads as one
+   cinematic band instead of a white block with invisible cream text. */
+.products-carousel-shell--cinematic .products-carousel-viewport {
+  border-color: var(--glass-border) !important;
+  background: var(--cine-deep) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-image-shell {
+  border-color: var(--glass-border) !important;
+  background: var(--cine-deep) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-visual-panel,
+.products-carousel-shell--cinematic .products-carousel-story-panel {
+  background: transparent !important;
+}
+
+/* Page pips → dark green glass (were pale #f8fbf8 with invisible text) */
+.products-carousel-shell--cinematic .products-carousel-page {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-sub) !important;
+  color: var(--cine-text) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-page small {
+  color: var(--cine-text-muted) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-page:hover {
+  border-color: rgba(127, 198, 160, 0.4) !important;
+}
+
+/* Meta cards → dark green glass with light text (were pale #f8fbf8) */
+.products-carousel-shell--cinematic .products-carousel-meta-card {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-raised) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-meta-card strong {
+  color: #f4efe5 !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-meta-card span {
+  color: var(--cine-text-muted) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-hero-figure span {
+  color: var(--cine-text-muted) !important;
+}
+
+/* Story panel copy → cream, overline/bullets → brand green */
+.products-carousel-shell--cinematic .products-carousel-story-panel h3 {
+  color: #f4efe5 !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-story-overline {
+  color: var(--cine-accent) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-story-summary,
+.products-carousel-shell--cinematic .products-carousel-point-list li,
+.products-carousel-shell--cinematic .products-carousel-hero-figure strong {
+  color: var(--cine-text) !important;
+}
+
+.products-carousel-shell--cinematic .products-carousel-point-list li::before {
+  background: var(--cine-accent) !important;
+  box-shadow: 0 0 0 6px rgba(127, 198, 160, 0.14) !important;
+}
+
+/* Page pips → green active emphasis */
+.products-carousel-shell--cinematic .products-carousel-page[aria-current='true'] {
+  border-color: rgba(127, 198, 160, 0.5) !important;
+  background:
+    linear-gradient(180deg, rgba(127, 198, 160, 0.22), rgba(255, 255, 255, 0.06)),
+    rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Refined motion: lift the story panel of the active slide in. */
+.products-carousel-shell--cinematic .products-carousel-slide .products-carousel-story-panel {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms ease 120ms, transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1) 120ms;
+}
+
+.products-carousel-shell--cinematic .products-carousel-slide[data-active='true'] .products-carousel-story-panel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slow Ken-Burns drift on the active visual (existing scale stays as the base). */
+.products-carousel-shell--cinematic .products-carousel-slide[data-active='true'] .products-carousel-image {
+  animation: productsKenBurns 14s ease-in-out infinite alternate;
+}
+
+@keyframes productsKenBurns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+
+/* Slim dual CTA row under the carousel */
+.products-cta-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 26px 28px;
+  border: 1px solid var(--color-line);
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8f4 100%);
+  box-shadow: var(--shadow-card);
+}
+
+.products-cta-copy {
+  display: grid;
+  gap: 8px;
+}
+
+.products-cta-copy .section-title {
+  font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+}
+
+.products-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+@media (max-width: 720px) {
+  .products-carousel-shell--cinematic {
+    margin-inline: 0;
+  }
+
+  .products-cta-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .products-cta-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-carousel-shell--cinematic .products-carousel-slide[data-active='true'] .products-carousel-image {
+    animation: none;
+  }
+
+  .products-carousel-shell--cinematic .products-carousel-slide .products-carousel-story-panel {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Machines page — cinematic stage band
+   Mirrors the products cinematic carousel band: one forest-green
+   dark-glass band wraps the machine spotlight + the stage
+   selector. The machines page already ships a rich dark visual
+   design (visual shell / blueprint / cutout / context cards);
+   the GET light overrides flatten it to cream and tint it blue.
+   This scope restores the dark design, re-tinted to brand green,
+   colour-matched to --backdrop-base / --glass-* like products.
+   ============================================================ */
+
+.machines-stage-shell--cinematic {
+  --cine-accent: #7fc6a0;
+  --cine-text: rgba(243, 239, 231, 0.92);
+  --cine-text-muted: rgba(243, 239, 231, 0.7);
+  --cine-deep: #0f2117;
+  position: relative;
+  display: grid;
+  gap: 22px;
+  margin-inline: -30px;
+  padding: 34px 30px 30px !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-panel, 32px) !important;
+  background:
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    var(--backdrop-base) !important;
+  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  overflow: hidden;
+}
+
+/* Band head */
+.machines-stage-shell--cinematic .machines-stage-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  align-items: end;
+  gap: 12px;
+}
+
+.machines-stage-shell--cinematic .machines-stage-title {
+  color: #f4efe5 !important;
+}
+
+.machines-stage-shell--cinematic .section-label {
+  color: var(--cine-accent) !important;
+}
+
+.machines-stage-shell--cinematic .machines-stage-lead {
+  margin: 0;
+  color: var(--cine-text-muted) !important;
+}
+
+/* Visual shell + the four accent variants → green dark glass */
+.machines-stage-shell--cinematic .machines-visual-shell,
+.machines-stage-shell--cinematic .machines-visual-shell--crusher,
+.machines-stage-shell--cinematic .machines-visual-shell--mixer,
+.machines-stage-shell--cinematic .machines-visual-shell--secondary,
+.machines-stage-shell--cinematic .machines-visual-shell--vacuum {
+  border-color: var(--glass-border) !important;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(127, 198, 160, 0.2), transparent 36%),
+    linear-gradient(145deg, rgba(13, 33, 23, 0.96), rgba(9, 24, 16, 0.94)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 30px 72px rgba(4, 12, 8, 0.36) !important;
+}
+
+/* Re-enable the aura, re-tinted green */
+.machines-stage-shell--cinematic .machines-visual-aura {
+  display: block !important;
+  background: radial-gradient(circle, rgba(45, 107, 73, 0.32), transparent 72%) !important;
+}
+
+/* Cutout backdrop → cinematic dark green wash + slow Ken-Burns */
+.machines-stage-shell--cinematic .machines-visual-backdrop::after {
+  background:
+    linear-gradient(180deg, rgba(7, 19, 12, 0.32), rgba(6, 16, 11, 0.66)),
+    linear-gradient(90deg, rgba(7, 19, 12, 0.52), transparent 34%, rgba(7, 19, 12, 0.46)) !important;
+}
+
+.machines-stage-shell--cinematic .machines-visual-backdrop-image {
+  opacity: 0.5 !important;
+  filter: saturate(0.94) contrast(0.94) blur(2px) !important;
+  animation: machinesKenBurns 16s ease-in-out infinite alternate;
+}
+
+/* Blueprint → green grid + cream copy */
+.machines-stage-shell--cinematic .machines-blueprint-grid {
+  background-image:
+    linear-gradient(rgba(127, 198, 160, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(127, 198, 160, 0.14) 1px, transparent 1px) !important;
+}
+
+.machines-stage-shell--cinematic .machines-blueprint-index {
+  color: rgba(127, 198, 160, 0.16) !important;
+}
+
+.machines-stage-shell--cinematic .machines-blueprint-copy strong {
+  color: #f4efe5 !important;
+}
+
+.machines-stage-shell--cinematic .machines-blueprint-copy small {
+  color: var(--cine-text-muted) !important;
+}
+
+/* Spotlight copy → cream headings, green eyebrow */
+.machines-stage-shell--cinematic .machines-spotlight-head > span {
+  color: var(--cine-accent) !important;
+}
+
+.machines-stage-shell--cinematic .machines-spotlight-head h2 {
+  color: #f4efe5 !important;
+}
+
+.machines-stage-shell--cinematic .machines-spotlight-head p {
+  color: var(--cine-text-muted) !important;
+}
+
+/* Context cards → dark green glass */
+.machines-stage-shell--cinematic .machines-context-card {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-raised) !important;
+}
+
+.machines-stage-shell--cinematic .machines-context-card > span {
+  color: var(--cine-text-muted) !important;
+}
+
+.machines-stage-shell--cinematic .machines-context-card strong {
+  color: #f4efe5 !important;
+}
+
+/* Chip + blueprint chips → glass chips */
+.machines-stage-shell--cinematic .machines-chip-list li,
+.machines-stage-shell--cinematic .machines-blueprint-chip-column span {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-sub) !important;
+  color: var(--cine-text) !important;
+}
+
+/* Stage selector → in-band navigation, glass with green active */
+.machines-stage-shell--cinematic .machines-selector-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.machines-stage-shell--cinematic .machines-selector-button {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-sub) !important;
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.machines-stage-shell--cinematic .machines-selector-button strong {
+  color: #f4efe5 !important;
+}
+
+.machines-stage-shell--cinematic .machines-selector-button small,
+.machines-stage-shell--cinematic .machines-selector-button span {
+  color: var(--cine-text-muted) !important;
+}
+
+.machines-stage-shell--cinematic .machines-selector-button:hover {
+  border-color: rgba(127, 198, 160, 0.4) !important;
+}
+
+.machines-stage-shell--cinematic .machines-selector-button.is-active {
+  border-color: rgba(127, 198, 160, 0.55) !important;
+  background: var(--glass-raised) !important;
+}
+
+/* Refined motion: spotlight lifts in on machine switch (keyed remount) */
+.machines-stage-shell--cinematic .machines-spotlight {
+  animation: machinesSpotlightIn 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes machinesSpotlightIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes machinesKenBurns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, -1.5%, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  .machines-stage-shell--cinematic {
+    margin-inline: 0;
+  }
+
+  .machines-stage-shell--cinematic .machines-stage-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .machines-stage-shell--cinematic .machines-selector-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .machines-stage-shell--cinematic .machines-spotlight {
+    animation: none;
+  }
+
+  .machines-stage-shell--cinematic .machines-visual-backdrop-image {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   News + Company Profile — cinematic signature band
+   Same forest-green dark-glass band as products/machines, used
+   here to wrap each page's primary content (News: the article
+   grid; Company Profile: the facts/mission/focus/timeline
+   dossier). Both pages already ship a dark card design that the
+   GET light overrides flatten to cream; this scope restores it,
+   re-tinted to brand green and colour-matched to the same tokens.
+   ============================================================ */
+
+.news-shell--cinematic,
+.company-profile-dossier--cinematic {
+  --cine-accent: #7fc6a0;
+  --cine-text: rgba(243, 239, 231, 0.92);
+  --cine-text-muted: rgba(243, 239, 231, 0.7);
+  position: relative;
+  margin-inline: -30px;
+  padding: 34px 30px 36px !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: var(--radius-panel, 32px) !important;
+  background:
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    var(--backdrop-base) !important;
+  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  overflow: hidden;
+}
+
+.company-profile-dossier--cinematic {
+  display: grid;
+  gap: 28px;
+}
+
+/* --- News article cards → dark green glass --- */
+.news-shell--cinematic .news-card {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-panel) !important;
+  box-shadow: 0 18px 40px rgba(6, 18, 12, 0.28) !important;
+  transition: transform 240ms ease, border-color 240ms ease;
+}
+
+.news-shell--cinematic .news-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(127, 198, 160, 0.4) !important;
+}
+
+.news-shell--cinematic .news-card-title {
+  color: #f4efe5 !important;
+}
+
+.news-shell--cinematic .news-card-excerpt,
+.news-shell--cinematic .news-card .body-copy {
+  color: var(--cine-text) !important;
+}
+
+.news-shell--cinematic .news-meta {
+  color: var(--cine-text-muted) !important;
+}
+
+.news-shell--cinematic .news-meta-pill {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-sub) !important;
+  color: var(--cine-accent) !important;
+}
+
+.news-shell--cinematic .button-secondary {
+  border: 1px solid var(--glass-border) !important;
+  background: var(--glass-raised) !important;
+  color: #f4efe5 !important;
+}
+
+.news-shell--cinematic .button-secondary:hover {
+  border-color: rgba(127, 198, 160, 0.5) !important;
+  background: rgba(127, 198, 160, 0.18) !important;
+}
+
+/* --- Company Profile dossier cards → dark green glass --- */
+.company-profile-dossier--cinematic .company-profile-facts-panel,
+.company-profile-dossier--cinematic .company-profile-statement-card,
+.company-profile-dossier--cinematic .company-profile-focus-card,
+.company-profile-dossier--cinematic .company-profile-timeline-card {
+  border-color: var(--glass-border) !important;
+  background: var(--glass-panel) !important;
+  box-shadow: 0 18px 40px rgba(6, 18, 12, 0.26) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+.company-profile-dossier--cinematic .section-label,
+.company-profile-dossier--cinematic .company-profile-facts-title,
+.company-profile-dossier--cinematic .company-profile-statement-language {
+  color: var(--cine-accent) !important;
+}
+
+.company-profile-dossier--cinematic .company-profile-section-title,
+.company-profile-dossier--cinematic .company-profile-focus-card h3,
+.company-profile-dossier--cinematic .company-profile-timeline-card h3 {
+  color: #f4efe5 !important;
+}
+
+/* Facts panel reads as a full-width dossier header inside the band */
+.company-profile-dossier--cinematic .company-profile-facts-band {
+  justify-items: stretch;
+  margin-top: 0;
+}
+
+.company-profile-dossier--cinematic .company-profile-facts-panel {
+  width: 100%;
+  position: static;
+}
+
+.company-profile-dossier--cinematic .company-profile-facts-list {
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px 28px;
+}
+
+.company-profile-dossier--cinematic .company-profile-fact-row {
+  border-bottom: 0 !important;
+  padding-bottom: 0;
+  background: transparent !important;
+}
+
+.company-profile-dossier--cinematic .company-profile-fact-row dt {
+  color: var(--cine-text-muted) !important;
+}
+
+.company-profile-dossier--cinematic .company-profile-fact-row dd,
+.company-profile-dossier--cinematic .company-profile-statement-card p {
+  color: var(--cine-text) !important;
+}
+
+.company-profile-dossier--cinematic .company-profile-focus-card p,
+.company-profile-dossier--cinematic .company-profile-timeline-card p,
+.company-profile-dossier--cinematic .company-profile-timeline-intro {
+  color: var(--cine-text-muted) !important;
+}
+
+@media (max-width: 720px) {
+  .news-shell--cinematic,
+  .company-profile-dossier--cinematic {
+    margin-inline: 0;
+  }
 }

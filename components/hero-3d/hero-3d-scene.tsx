@@ -3,18 +3,20 @@
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import { MathUtils } from 'three';
-import type { Group, Points } from 'three';
+import type { Points } from 'three';
 
 import { computeCameraPath } from './camera-rig-math';
 
 type ProgressRef = { readonly current: number };
 
+// Backdrop hue is the single source of truth for the cinematic green. The CSS
+// dark-glass surfaces (.reference-site …) and the .hero-3d-fallback poster all
+// derive from this exact rgb(19,41,29) so the canvas and the content boxes that
+// float over it stay perfectly colour-matched — no seam between scene and glass.
 const PALETTE = {
   fog: '#13291d',
   backdrop: '#13291d',
   particles: '#9fc7ae',
-  accent: '#2d6b49',
-  accentStrong: '#1f5235',
   ivory: '#f3efe7',
 } as const;
 
@@ -71,39 +73,6 @@ function ParticleField() {
   );
 }
 
-function FloatingGeometry() {
-  const groupRef = useRef<Group>(null);
-
-  useFrame((state) => {
-    const group = groupRef.current;
-    if (!group) return;
-    const t = state.clock.elapsedTime;
-    group.rotation.y = t * 0.05;
-    group.children.forEach((child, index) => {
-      child.rotation.x = t * 0.1 + index;
-      child.rotation.z = t * 0.06 + index * 2;
-      child.position.y += Math.sin(t * 0.4 + index * 1.7) * 0.0015;
-    });
-  });
-
-  return (
-    <group ref={groupRef}>
-      <mesh position={[-4.5, 1.4, -6]}>
-        <icosahedronGeometry args={[1.4, 0]} />
-        <meshStandardMaterial color={PALETTE.accent} roughness={0.35} metalness={0.3} flatShading />
-      </mesh>
-      <mesh position={[4.8, -1.2, -7]}>
-        <torusGeometry args={[1.5, 0.4, 16, 64]} />
-        <meshStandardMaterial color={PALETTE.accentStrong} roughness={0.4} metalness={0.45} />
-      </mesh>
-      <mesh position={[1.6, 2.6, -10]}>
-        <octahedronGeometry args={[1.1, 0]} />
-        <meshStandardMaterial color={PALETTE.ivory} roughness={0.55} metalness={0.15} flatShading />
-      </mesh>
-    </group>
-  );
-}
-
 function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
   const easedRef = useRef(0);
 
@@ -135,12 +104,8 @@ export default function Hero3DScene({ progressRef }: { progressRef?: ProgressRef
       >
         <color attach="background" args={[PALETTE.backdrop]} />
         <fog attach="fog" args={[PALETTE.fog, 8, 26]} />
-        <ambientLight intensity={0.5} color={PALETTE.ivory} />
-        <directionalLight position={[6, 8, 4]} intensity={1.2} color={PALETTE.ivory} />
-        <pointLight position={[-8, -4, -2]} intensity={14} color={PALETTE.accent} />
         <CameraRig progressRef={progressRef} />
         <ParticleField />
-        <FloatingGeometry />
       </Canvas>
     </div>
   );

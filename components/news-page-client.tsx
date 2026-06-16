@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
+import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { formatNewsDate, getNewsVisibleDate, resolveNewsLocalization } from '@/lib/news/format';
@@ -33,33 +34,37 @@ export function NewsPageClient({ initialArticles }: NewsPageClientProps) {
         </p>
       </section>
 
-      <section className="news-grid" aria-label={copy.news.title}>
-        {initialArticles.map((article) => {
-          const localization = resolveNewsLocalization(article, locale);
-          const publishedLabel = formatNewsDate(getNewsVisibleDate(article), locale);
+      <ScrollReveal variant="fade-up">
+        <section className="news-shell news-shell--cinematic" aria-label={copy.news.title}>
+          <div className="news-grid">
+            {initialArticles.map((article) => {
+              const localization = resolveNewsLocalization(article, locale);
+              const publishedLabel = formatNewsDate(getNewsVisibleDate(article), locale);
 
-          return (
-            <article key={article.id} className="card news-card">
-              <div className="news-card-header">
-                <span className="eyebrow news-meta-pill">{copy.menu.news}</span>
-                {publishedLabel ? <p className="news-meta">{publishedLabel}</p> : null}
-              </div>
-              <div className="stack-list">
-                <h2 className="section-title news-card-title">{localization.title}</h2>
-                <p className="body-copy news-card-excerpt">{localization.excerpt}</p>
-                {localization.bodyBlocks[0]?.type === 'paragraph' ? (
-                  <p className="body-copy">{localization.bodyBlocks[0].text}</p>
-                ) : null}
-              </div>
-              <div className="hero-actions">
-                <Link href={`/news/${article.slug}`} className="button-secondary">
-                  Read article
-                </Link>
-              </div>
-            </article>
-          );
-        })}
-      </section>
+              return (
+                <article key={article.id} className="card news-card">
+                  <div className="news-card-header">
+                    <span className="eyebrow news-meta-pill">{copy.menu.news}</span>
+                    {publishedLabel ? <p className="news-meta">{publishedLabel}</p> : null}
+                  </div>
+                  <div className="stack-list">
+                    <h2 className="section-title news-card-title">{localization.title}</h2>
+                    <p className="body-copy news-card-excerpt">{localization.excerpt}</p>
+                    {localization.bodyBlocks[0]?.type === 'paragraph' ? (
+                      <p className="body-copy">{localization.bodyBlocks[0].text}</p>
+                    ) : null}
+                  </div>
+                  <div className="hero-actions">
+                    <Link href={`/news/${article.slug}`} className="button-secondary">
+                      Read article
+                    </Link>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </section>
+      </ScrollReveal>
 
       <footer className="site-footer">
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />

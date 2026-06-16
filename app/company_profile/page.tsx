@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
@@ -40,6 +41,8 @@ export default function CompanyProfilePage() {
           </div>
         </div>
 
+        <ScrollReveal variant="fade-up">
+          <section className="company-profile-dossier company-profile-dossier--cinematic">
         <section className="company-profile-facts-band">
           <aside className="company-profile-facts-panel" aria-label={profile.factLabel}>
             <h2 className="company-profile-facts-title">{profile.factLabel}</h2>
@@ -113,6 +116,8 @@ export default function CompanyProfilePage() {
             ))}
           </ol>
         </section>
+          </section>
+        </ScrollReveal>
       </section>
 
       <footer className="site-footer">

@@ -29,28 +29,28 @@ type ProductShowcaseCopy = {
 
 export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
   en: {
-    introEyebrow: 'Product atlas',
+    introEyebrow: 'Product lanes',
     introBody:
-      'A more cinematic view of Kowa’s sourcing, regeneration, and support lanes. Open a chapter, then move through the media stream with the main controls.',
-    chapterMediaCountLabel: 'media',
-    chapterButtonLabel: 'Open chapter',
+      'Kowa’s product offer along one circular supply — resin procurement, recycling and pellet regeneration, and battery-pack support. Open a lane, then move through it with the main controls.',
+    chapterMediaCountLabel: 'visuals',
+    chapterButtonLabel: 'Open lane',
     categoryMetaLabel: 'Category',
     visualMetaLabel: 'Visual',
     capabilitiesLabel: 'Capabilities',
     chapters: [
       {
-        eyebrow: 'Chapter 01',
-        caption: 'Resin procurement and distribution surfaces',
+        eyebrow: 'Lane 01',
+        caption: 'Synthetic resin procurement and distribution',
         categories: ['resin-materials', 'commerce-distribution'],
       },
       {
-        eyebrow: 'Chapter 02',
-        caption: 'Recycling, pelletization, and plant operations',
+        eyebrow: 'Lane 02',
+        caption: 'Recycling, pellet regeneration, and plant operations',
         categories: ['recycling-process', 'pellets-output', 'factory-operations'],
       },
       {
-        eyebrow: 'Chapter 03',
-        caption: 'Equipment-oriented support and line readiness',
+        eyebrow: 'Lane 03',
+        caption: 'Battery-pack support and processing-line readiness',
         categories: ['machinery-equipment', 'factory-operations'],
       },
     ],
@@ -100,28 +100,28 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
     },
   },
   ja: {
-    introEyebrow: 'プロダクトアトラス',
+    introEyebrow: '製品レーン',
     introBody:
-      'Kowaの調達、再生、支援レーンをより立体的に見せる構成です。章を開き、その後メイン操作でビジュアルを巡回できます。',
+      'ひとつの循環型サプライに沿ったKowaの提供価値——樹脂調達、再生とペレット化、バッテリーパック支援。レーンを開き、メイン操作で巡回できます。',
     chapterMediaCountLabel: '点',
-    chapterButtonLabel: '章を開く',
+    chapterButtonLabel: 'レーンを開く',
     categoryMetaLabel: 'カテゴリ',
     visualMetaLabel: 'ビジュアル',
     capabilitiesLabel: '主要ポイント',
     chapters: [
       {
-        eyebrow: 'Chapter 01',
-        caption: '樹脂調達と流通のビジュアル',
+        eyebrow: 'Lane 01',
+        caption: '合成樹脂の調達と流通',
         categories: ['resin-materials', 'commerce-distribution'],
       },
       {
-        eyebrow: 'Chapter 02',
-        caption: '再生、ペレット化、工場オペレーション',
+        eyebrow: 'Lane 02',
+        caption: '再生・ペレット化と工場オペレーション',
         categories: ['recycling-process', 'pellets-output', 'factory-operations'],
       },
       {
-        eyebrow: 'Chapter 03',
-        caption: '設備支援とライン整備のレーン',
+        eyebrow: 'Lane 03',
+        caption: 'バッテリーパック支援と処理ライン整備',
         categories: ['machinery-equipment', 'factory-operations'],
       },
     ],
@@ -171,27 +171,27 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
     },
   },
   zh: {
-    introEyebrow: '产品图谱',
-    introBody: '用更具展示感的方式呈现 Kowa 的采购、再生与支持业务线。先切换章节，再用主控件浏览整组视觉内容。',
-    chapterMediaCountLabel: '项素材',
-    chapterButtonLabel: '打开章节',
+    introEyebrow: '产品通道',
+    introBody: 'Kowa 在同一条循环供应链上的产品能力——树脂采购、再生与造粒、电池组支持。先打开一个通道，再用主控件浏览。',
+    chapterMediaCountLabel: '项视觉',
+    chapterButtonLabel: '打开通道',
     categoryMetaLabel: '类别',
     visualMetaLabel: '视觉',
     capabilitiesLabel: '关键能力',
     chapters: [
       {
-        eyebrow: 'Chapter 01',
-        caption: '树脂采购与分销视觉',
+        eyebrow: 'Lane 01',
+        caption: '合成树脂采购与分销',
         categories: ['resin-materials', 'commerce-distribution'],
       },
       {
-        eyebrow: 'Chapter 02',
+        eyebrow: 'Lane 02',
         caption: '再生、造粒与工厂运营',
         categories: ['recycling-process', 'pellets-output', 'factory-operations'],
       },
       {
-        eyebrow: 'Chapter 03',
-        caption: '设备支持与产线准备',
+        eyebrow: 'Lane 03',
+        caption: '电池组支持与产线准备',
         categories: ['machinery-equipment', 'factory-operations'],
       },
     ],

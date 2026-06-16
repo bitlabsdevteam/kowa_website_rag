@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 
+import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
@@ -33,6 +34,7 @@ type MachineDetail = {
 type MachinesPageCopy = {
   intro: string;
   lead: string;
+  stageTitle: string;
   selectorLabel: string;
   noteLabel: string;
   noteBody: string;
@@ -74,6 +76,7 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
     intro: 'Warehouse and factory machinery used in Kowa’s Gunma operation.',
     lead:
       'A quieter view of the line: select one stage and read only the essential context for that equipment.',
+    stageTitle: 'The Gunma line, stage by stage.',
     selectorLabel: 'Machine stages',
     noteLabel: 'Source note',
     noteBody:
@@ -131,6 +134,7 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
   ja: {
     intro: '群馬拠点の倉庫・工場で使われる機械設備を整理したページです。',
     lead: 'ラインを静かに読むための構成です。工程をひとつ選ぶと、その設備に必要な要点だけを表示します。',
+    stageTitle: '群馬ラインを、工程ごとに。',
     selectorLabel: '機械ステージ',
     noteLabel: '出典メモ',
     noteBody:
@@ -188,6 +192,7 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
   zh: {
     intro: '整理 Kowa 群马仓库与工厂所使用设备的独立页面。',
     lead: '现在改成更安静的阅读方式。选择一个环节，只看这台设备最关键的说明。',
+    stageTitle: '群马产线，逐环节呈现。',
     selectorLabel: '设备环节',
     noteLabel: '来源说明',
     noteBody:
@@ -268,82 +273,111 @@ export default function MachinesPage() {
           <p className="body-copy products-page-intro">{pageCopy.intro}</p>
         </div>
 
-        <section className="machines-intro-grid">
-          <article className="machines-intro-copy">
-            <p className="lead">{pageCopy.lead}</p>
-          </article>
-        </section>
-
-        <section className="machines-spotlight">
-          <article className={`machines-visual-shell ${activeVisual.accentClass}`}>
-            <div className="machines-visual-aura" />
-            {activeVisual.kind === 'cutout' && activeVisual.backdropSrc && activeVisual.cutoutSrc ? (
-              <>
-                <div className="machines-visual-backdrop">
-                  <Image
-                    src={activeVisual.backdropSrc}
-                    alt={activeMachine.title}
-                    fill
-                    sizes="(max-width: 980px) 100vw, 50vw"
-                    className="machines-visual-backdrop-image"
-                  />
-                </div>
-                <div className="machines-visual-cutout-shell">
-                  <Image
-                    src={activeVisual.cutoutSrc}
-                    alt={activeMachine.title}
-                    fill
-                    sizes="(max-width: 980px) 100vw, 50vw"
-                    className="machines-visual-cutout"
-                  />
-                </div>
-              </>
-            ) : (
-              <div className="machines-blueprint">
-                <div className="machines-blueprint-grid" />
-                <span className="machines-blueprint-index">{String(activeIndex).padStart(2, '0')}</span>
-                <div className="machines-blueprint-copy">
-                  <small>{activeMachine.stageLabel}</small>
-                  <strong>{activeMachine.title}</strong>
-                </div>
-                <div className="machines-blueprint-chip-column">
-                  {activeMachine.chips.map((chip) => (
-                    <span key={chip}>{chip}</span>
-                  ))}
-                </div>
+        <ScrollReveal variant="fade-up">
+          <section className="machines-stage-shell machines-stage-shell--cinematic" aria-label={pageCopy.selectorLabel}>
+            <div className="machines-stage-head">
+              <div>
+                <p className="section-label">{pageCopy.selectorLabel}</p>
+                <h2 className="section-title machines-stage-title">{pageCopy.stageTitle}</h2>
               </div>
-            )}
-          </article>
-
-          <article className="machines-spotlight-copy">
-            <div className="machines-spotlight-head">
-              <span>{activeMachine.legacyLabel}</span>
-              <h2>{activeMachine.title}</h2>
-              <p>{activeMachine.summary}</p>
+              <p className="body-copy machines-stage-lead">{pageCopy.lead}</p>
             </div>
 
-            <div className="machines-context-grid">
-              <article className="machines-context-card">
-                <span>{pageCopy.roleLabel}</span>
-                <strong>{activeMachine.role}</strong>
+            <section className="machines-spotlight" key={selectedMachineId}>
+              <article className={`machines-visual-shell ${activeVisual.accentClass}`}>
+                <div className="machines-visual-aura" />
+                {activeVisual.kind === 'cutout' && activeVisual.backdropSrc && activeVisual.cutoutSrc ? (
+                  <>
+                    <div className="machines-visual-backdrop">
+                      <Image
+                        src={activeVisual.backdropSrc}
+                        alt={activeMachine.title}
+                        fill
+                        sizes="(max-width: 980px) 100vw, 50vw"
+                        className="machines-visual-backdrop-image"
+                      />
+                    </div>
+                    <div className="machines-visual-cutout-shell">
+                      <Image
+                        src={activeVisual.cutoutSrc}
+                        alt={activeMachine.title}
+                        fill
+                        sizes="(max-width: 980px) 100vw, 50vw"
+                        className="machines-visual-cutout"
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <div className="machines-blueprint">
+                    <div className="machines-blueprint-grid" />
+                    <span className="machines-blueprint-index">{String(activeIndex).padStart(2, '0')}</span>
+                    <div className="machines-blueprint-copy">
+                      <small>{activeMachine.stageLabel}</small>
+                      <strong>{activeMachine.title}</strong>
+                    </div>
+                    <div className="machines-blueprint-chip-column">
+                      {activeMachine.chips.map((chip) => (
+                        <span key={chip}>{chip}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </article>
-              <article className="machines-context-card">
-                <span>{pageCopy.outputLabel}</span>
-                <strong>{activeMachine.output}</strong>
-              </article>
-              <article className="machines-context-card">
-                <span>{pageCopy.reasonLabel}</span>
-                <strong>{activeMachine.reason}</strong>
-              </article>
-            </div>
 
-            <ul className="machines-chip-list">
-              {activeMachine.chips.map((chip) => (
-                <li key={chip}>{chip}</li>
-              ))}
-            </ul>
-          </article>
-        </section>
+              <article className="machines-spotlight-copy">
+                <div className="machines-spotlight-head">
+                  <span>{activeMachine.legacyLabel}</span>
+                  <h2>{activeMachine.title}</h2>
+                  <p>{activeMachine.summary}</p>
+                </div>
+
+                <div className="machines-context-grid">
+                  <article className="machines-context-card">
+                    <span>{pageCopy.roleLabel}</span>
+                    <strong>{activeMachine.role}</strong>
+                  </article>
+                  <article className="machines-context-card">
+                    <span>{pageCopy.outputLabel}</span>
+                    <strong>{activeMachine.output}</strong>
+                  </article>
+                  <article className="machines-context-card">
+                    <span>{pageCopy.reasonLabel}</span>
+                    <strong>{activeMachine.reason}</strong>
+                  </article>
+                </div>
+
+                <ul className="machines-chip-list">
+                  {activeMachine.chips.map((chip) => (
+                    <li key={chip}>{chip}</li>
+                  ))}
+                </ul>
+              </article>
+            </section>
+
+            <section className="machines-selector-panel" aria-label={pageCopy.selectorLabel}>
+              <div className="machines-selector-list">
+                {MACHINE_IDS.map((machineId, index) => {
+                  const detail = pageCopy.cards[machineId];
+                  const isActive = machineId === selectedMachineId;
+
+                  return (
+                    <button
+                      key={machineId}
+                      type="button"
+                      className={`machines-selector-button${isActive ? ' is-active' : ''}`}
+                      onClick={() => setSelectedMachineId(machineId)}
+                      aria-pressed={isActive}
+                    >
+                      <small>{String(index + 1).padStart(2, '0')}</small>
+                      <strong>{detail.title}</strong>
+                      <span>{detail.summary}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          </section>
+        </ScrollReveal>
 
         <section className="machines-support-grid">
           <article className="machines-source-note">
@@ -351,40 +385,16 @@ export default function MachinesPage() {
             <p>{pageCopy.noteBody}</p>
           </article>
 
-          <section className="machines-selector-panel" aria-label={pageCopy.selectorLabel}>
-            <p className="section-label">{pageCopy.selectorLabel}</p>
-            <div className="machines-selector-list">
-              {MACHINE_IDS.map((machineId, index) => {
-                const detail = pageCopy.cards[machineId];
-                const isActive = machineId === selectedMachineId;
-
-                return (
-                  <button
-                    key={machineId}
-                    type="button"
-                    className={`machines-selector-button${isActive ? ' is-active' : ''}`}
-                    onClick={() => setSelectedMachineId(machineId)}
-                    aria-pressed={isActive}
-                  >
-                    <small>{String(index + 1).padStart(2, '0')}</small>
-                    <strong>{detail.title}</strong>
-                    <span>{detail.summary}</span>
-                  </button>
-                );
-              })}
+          <section className="machines-return-panel">
+            <div>
+              <p className="section-label">{pageCopy.returnLabel}</p>
+              <h2>{pageCopy.returnTitle}</h2>
+              <p>{pageCopy.returnBody}</p>
             </div>
+            <Link href="/products" className="button-secondary">
+              {pageCopy.returnCta}
+            </Link>
           </section>
-        </section>
-
-        <section className="machines-return-panel">
-          <div>
-            <p className="section-label">{pageCopy.returnLabel}</p>
-            <h2>{pageCopy.returnTitle}</h2>
-            <p>{pageCopy.returnBody}</p>
-          </div>
-          <Link href="/products" className="button-secondary">
-            {pageCopy.returnCta}
-          </Link>
         </section>
       </section>
 
