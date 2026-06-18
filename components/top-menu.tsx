@@ -9,7 +9,9 @@ type TopMenuLabels = {
   news: string;
   products: string;
   machines: string;
+  partners: string;
   companyProfile: string;
+  contactUs: string;
   login: string;
   onlineShop: string;
   navAria: string;
@@ -44,17 +46,27 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
         <Link href="/" className="top-menu-link" data-testid="top-menu-link-about">
           {labels.about}
         </Link>
-        <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news">
+        {/* News temporarily hidden from the top menu (route /news still active). Restore to re-expose. */}
+        {/* <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news">
           {labels.news}
-        </Link>
+        </Link> */}
         <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products">
           {labels.products}
         </Link>
-        <Link href="/machines" className="top-menu-link" data-testid="top-menu-link-machines">
-          {labels.machines}
-        </Link>
+        <a
+          href="https://www.greenecotec.co.jp/index.html"
+          className="top-menu-link"
+          data-testid="top-menu-link-partners"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {labels.partners}
+        </a>
         <Link href="/company_profile" className="top-menu-link" data-testid="top-menu-link-company-profile">
           {labels.companyProfile}
+        </Link>
+        <Link href="/contact_us" className="top-menu-link" data-testid="top-menu-link-contact-us">
+          {labels.contactUs}
         </Link>
       </div>
 

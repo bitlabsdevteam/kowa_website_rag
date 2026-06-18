@@ -10,11 +10,12 @@ test('v6 task3 top menu exposes the corporate link set without a chat entry', as
   await page.screenshot({ path: 'tests/screenshots/task3-step1-v6-menu-red-state.png', fullPage: true });
 
   await expect(page.locator('[data-testid="top-menu-link-about"]')).toBeVisible();
-  await expect(page.locator('[data-testid="top-menu-link-news"]')).toBeVisible();
+  // News temporarily hidden from the top menu.
+  await expect(page.locator('[data-testid="top-menu-link-news"]')).toHaveCount(0);
   await expect(page.locator('[data-testid="top-menu-link-products"]')).toBeVisible();
   await expect(page.locator('[data-testid="top-menu-link-machines"]')).toBeVisible();
   await expect(page.locator('[data-testid="top-menu-link-company-profile"]')).toBeVisible();
-  await expect(page.locator('[data-testid^="top-menu-link-"]')).toHaveCount(5);
+  await expect(page.locator('[data-testid^="top-menu-link-"]')).toHaveCount(4);
 
   await expect(page.locator('[data-testid="top-menu-link-talk-to-aya"]')).toHaveCount(0);
   await expect(page.locator('[data-testid="top-menu-link-admin"]')).toHaveCount(0);

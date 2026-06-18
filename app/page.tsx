@@ -9,7 +9,6 @@ import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { ResourceCirculationFlow } from '@/components/resource-circulation-flow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
-import { SiteFooterMenu } from '@/components/site-footer-menu';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 
@@ -126,8 +125,6 @@ export default function HomePage() {
         <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
         <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">
           <div className="reference-hero-copy">
-            <span className="eyebrow corporate-eyebrow">{ui.heroFlag}</span>
-            <p className="executive-kicker">{copy.hero.eyebrow}</p>
             <h1 className="hero-title reference-hero-title">{copy.hero.title}</h1>
             <p className="lead reference-hero-lead">{copy.hero.lead}</p>
             <p className="body-copy reference-hero-body" data-testid="landing-narrative">
@@ -137,23 +134,6 @@ export default function HomePage() {
               <Link href="/company_profile" className="button-secondary">
                 {ui.secondaryCta}
               </Link>
-            </div>
-          </div>
-
-          <div className="reference-hero-media">
-            <div className="reference-stat-grid">
-              <article className="reference-stat-card" data-testid="hero-stat-card">
-                <span>{ui.snapshotLabels[0]}</span>
-                <strong>{copy.brand.location}</strong>
-              </article>
-              <article className="reference-stat-card" data-testid="hero-stat-card">
-                <span>{ui.snapshotLabels[1]}</span>
-                <strong>{copy.business.flowTitle}</strong>
-              </article>
-              <article className="reference-stat-card" data-testid="hero-stat-card">
-                <span>{ui.snapshotLabels[2]}</span>
-                <strong>{copy.menu.companyProfile}</strong>
-              </article>
             </div>
           </div>
         </div>
@@ -204,7 +184,6 @@ export default function HomePage() {
         </div>
       </section>
       <footer className="site-footer" data-testid="landing-footer">
-        <SiteFooterMenu navAria={copy.footer.navAria} menuGroups={copy.footer.menuGroups} />
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
       </footer>
     </main>

@@ -7,7 +7,8 @@ test('v7 task1 baseline captures homepage render and key targets', async ({ page
 
   await expect(page.getByTestId('landing-primary-box')).toBeVisible();
   await expect(page.getByTestId('top-menu-link-about')).toBeVisible();
-  await expect(page.getByTestId('top-menu-link-news')).toBeVisible();
+  // News temporarily hidden from the top menu.
+  await expect(page.getByTestId('top-menu-link-news')).toHaveCount(0);
   await expect(page.getByTestId('top-menu-link-products')).toBeVisible();
 
   await page.screenshot({ path: 'tests/screenshots/task1-step1-v7-home-baseline.png', fullPage: true });

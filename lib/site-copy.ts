@@ -9,7 +9,9 @@ export type MenuLabels = {
   news: string;
   products: string;
   machines: string;
+  partners: string;
   companyProfile: string;
+  contactUs: string;
   login: string;
   onlineShop: string;
   localeLabel: string;
@@ -65,6 +67,22 @@ type CompanyProfileSection = {
   }>;
 };
 
+type ContactPageSection = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  detailLabel: string;
+  email: string;
+  formTitle: string;
+  companyLabel: string;
+  emailLabel: string;
+  queryLabel: string;
+  submitLabel: string;
+  sendingLabel: string;
+  successMessage: string;
+  errorMessage: string;
+};
+
 export type SiteCopy = {
   menu: MenuLabels;
   brand: {
@@ -105,6 +123,7 @@ export type SiteCopy = {
   };
   business: BusinessSection;
   companyProfile: CompanyProfileSection;
+  contactPage: ContactPageSection;
   news: {
     title: string;
     entries: string[];

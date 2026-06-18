@@ -12,36 +12,37 @@
   --radius-pill: 999px;
   --radius-card: 24px;
   --radius-panel: 32px;
-  --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.14);
-  --color-canvas: #f3efe7;
-  --color-canvas-strong: #ebe5d9;
-  --color-surface: rgba(255, 252, 246, 0.88);
-  --surface-card: rgba(255, 252, 246, 0.88);
-  --color-surface-strong: #f8f3ea;
-  --color-surface-muted: #efe9de;
-  --color-line: rgba(62, 47, 31, 0.13);
-  --color-line-strong: rgba(62, 47, 31, 0.2);
-  --color-text: #201a15;
-  --color-text-muted: #5c5247;
+  --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.16);
+  --color-canvas: #ffffff;
+  --color-canvas-strong: #f4f6f8;
+  --color-surface: rgba(255, 255, 255, 0.96);
+  --surface-card: #ffffff;
+  --color-surface-strong: #ffffff;
+  --color-surface-muted: #f3f5f7;
+  --color-line: rgba(27, 42, 74, 0.12);
+  --color-line-strong: rgba(27, 42, 74, 0.2);
+  --color-text: #15233f;
+  --color-text-muted: #586379;
   --color-accent: #2d6b49;
   --color-accent-strong: #1f5235;
+  --color-silver: #c3cad6;
 
-  /* Cinematic landing backdrop + matched dark-glass surfaces.
-     The 3D scene paints rgb(19,41,29) (= --backdrop-base, mirrored in
-     components/hero-3d/hero-3d-scene.tsx PALETTE.backdrop). Every box that
-     floats over it derives from that SAME green hue, only stepping up in
-     lightness per elevation level, so panels read as a lift of the backdrop
-     rather than a clashing patch — backdrop and content boxes stay matched. */
-  --backdrop-base: #13291d;
-  --glass-panel: rgba(24, 49, 36, 0.66); /* section cards, footer, stat cards */
-  --glass-sub: rgba(21, 44, 32, 0.52); /* architecture rails / flow stages */
-  --glass-raised: rgba(30, 58, 43, 0.78); /* nodes, cores, step buttons */
-  --glass-border: rgba(243, 239, 231, 0.16);
+  /* Cinematic landing backdrop + matched light-glass surfaces.
+     The 3D scene paints pure white (= --backdrop-base, mirrored in
+     components/hero-3d/hero-3d-scene.tsx PALETTE.backdrop) with a drifting
+     green particle field. Every box that floats over it is a frosted white
+     panel, stepping up in opacity per elevation level and separated from the
+     white canvas by a navy hairline + soft shadow — calm, editorial, white. */
+  --backdrop-base: #ffffff;
+  --glass-panel: rgba(255, 255, 255, 0.72); /* section cards, footer, stat cards */
+  --glass-sub: rgba(244, 246, 248, 0.6); /* architecture rails / flow stages */
+  --glass-raised: rgba(255, 255, 255, 0.9); /* nodes, cores, step buttons */
+  --glass-border: rgba(27, 42, 74, 0.12);
 
   /* Theme: Resource Circulation Editorial. --color-* above are canonical;
      the short aliases below mirror them — never set literal values here. */
-  --shadow-soft: 0 24px 70px rgba(46, 34, 20, 0.08);
-  --shadow-card: 0 14px 38px rgba(46, 34, 20, 0.06);
+  --shadow-soft: 0 22px 60px rgba(21, 35, 63, 0.08);
+  --shadow-card: 0 18px 34px rgba(21, 35, 63, 0.06);
   --radius-xl: 32px;
   --radius-lg: 24px;
   --radius-md: 18px;
@@ -314,28 +315,29 @@ html:lang(zh) {
 }
 
 .footer-menu-panel {
-  background: linear-gradient(180deg, #ffffff 0%, #f4f8f4 100%) !important;
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6f8 100%) !important;
 }
 
-/* GET-inspired corporate redesign overrides */
+/* Silver · Navy · Green editorial redesign overrides (authoritative tokens) */
 :root {
   --font-body: var(--font-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
   --font-display: var(--font-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --color-canvas: #f4f6f4;
-  --color-canvas-strong: #e8ede8;
+  --color-canvas: #ffffff;
+  --color-canvas-strong: #f4f6f8;
   --color-surface: rgba(255, 255, 255, 0.96);
-  --surface-card: rgba(255, 255, 255, 0.98);
+  --surface-card: #ffffff;
   --color-surface-strong: #ffffff;
-  --color-surface-muted: #eef3ee;
-  --color-line: rgba(18, 41, 27, 0.12);
-  --color-line-strong: rgba(18, 41, 27, 0.2);
-  --color-text: #173122;
-  --color-text-muted: #5d7364;
+  --color-surface-muted: #f3f5f7;
+  --color-line: rgba(27, 42, 74, 0.12);
+  --color-line-strong: rgba(27, 42, 74, 0.2);
+  --color-text: #15233f;
+  --color-text-muted: #586379;
   --color-accent: #2d6b49;
   --color-accent-strong: #1f5235;
+  --color-silver: #c3cad6;
   --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.16);
-  --shadow-soft: 0 22px 60px rgba(20, 42, 29, 0.08);
-  --shadow-card: 0 18px 34px rgba(20, 42, 29, 0.06);
+  --shadow-soft: 0 22px 60px rgba(21, 35, 63, 0.08);
+  --shadow-card: 0 18px 34px rgba(21, 35, 63, 0.06);
   --content: min(1240px, calc(100vw - 48px));
 }
 
@@ -352,12 +354,14 @@ html:lang(zh) {
 
 html,
 body {
-  background: linear-gradient(180deg, #f7faf7 0%, #eef3ef 100%);
+  background: #ffffff;
 }
 
 body {
   color: var(--color-text);
   font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
   /* The boxless hero breaks out to 100vw, which is wider than the body by the
      classic scrollbar width and would surface a horizontal scrollbar. Clip the
      sliver here (the fixed page-backdrop is viewport-positioned and unaffected). */
@@ -437,16 +441,16 @@ body {
 }
 
 .hero-title {
-  font-size: clamp(3.2rem, 6vw, 5.4rem);
-  max-width: 9ch;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  max-width: 16ch;
 }
 
 .page-title {
-  font-size: clamp(2.6rem, 4.8vw, 4.4rem);
+  font-size: clamp(2.1rem, 3.5vw, 3rem);
 }
 
 .section-title {
-  font-size: clamp(2rem, 3.1vw, 3rem);
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
 }
 
 .lead,
@@ -685,7 +689,7 @@ body {
   min-height: 360px;
   border: 1px solid var(--color-line);
   border-radius: 18px;
-  background: #13291d;
+  background: #ffffff;
 }
 
 .hero-3d-scene canvas {
@@ -696,10 +700,9 @@ body {
 
 .hero-3d-fallback {
   background:
-    radial-gradient(ellipse 80% 60% at 20% 25%, rgba(45, 107, 73, 0.55), transparent 65%),
-    radial-gradient(ellipse 70% 55% at 80% 75%, rgba(31, 82, 53, 0.6), transparent 70%),
-    radial-gradient(ellipse 45% 35% at 70% 20%, rgba(243, 239, 231, 0.12), transparent 75%),
-    #13291d;
+    radial-gradient(ellipse 80% 60% at 20% 25%, rgba(45, 107, 73, 0.08), transparent 65%),
+    radial-gradient(ellipse 70% 55% at 80% 75%, rgba(27, 42, 74, 0.05), transparent 70%),
+    #ffffff;
 }
 
 /* Full-viewport cinematic backdrop: the 3D scene (or fallback) is fixed
@@ -765,8 +768,8 @@ body {
   z-index: 1;
   pointer-events: none;
   background:
-    linear-gradient(180deg, rgba(19, 41, 29, 0.3) 0%, rgba(19, 41, 29, 0) 38%, rgba(19, 41, 29, 0.6) 100%),
-    radial-gradient(ellipse 70% 55% at 24% 32%, rgba(45, 107, 73, 0.32), transparent 70%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 255, 255, 0.6) 100%),
+    radial-gradient(ellipse 70% 55% at 24% 32%, rgba(45, 107, 73, 0.06), transparent 70%);
   transform: translate3d(0, calc(var(--hero-parallax, 0) * 60px), 0);
   will-change: transform;
 }
@@ -782,28 +785,73 @@ body {
 
 .cinematic-hero .hero-title,
 .cinematic-hero .reference-hero-title {
-  color: #f3efe7;
+  color: #15233f;
 }
 
 .cinematic-hero .reference-hero-lead,
 .cinematic-hero .reference-hero-body {
-  color: rgba(243, 239, 231, 0.78);
+  color: rgba(21, 35, 63, 0.9);
+}
+
+/* Centered cinematic hero: title + copy stacked and centred over the white
+   particle field, with the snapshot cards centred beneath. Strong navy so the
+   type reads clearly against the drifting green motes. */
+.cinematic-hero .reference-hero-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.cinematic-hero .reference-hero-copy {
+  justify-items: center;
+  text-align: center;
+  gap: 22px;
+}
+
+.cinematic-hero .reference-hero-title {
+  max-width: 18ch;
+  color: var(--color-text);
+  font-weight: 700;
+}
+
+.cinematic-hero .reference-hero-lead,
+.cinematic-hero .reference-hero-body {
+  margin-inline: auto;
+}
+
+.cinematic-hero .hero-actions {
+  justify-content: center;
+}
+
+.cinematic-hero .reference-hero-media {
+  width: 100%;
+  justify-items: center;
+}
+
+.cinematic-hero .reference-stat-grid {
+  max-width: 720px;
+  margin-inline: auto;
 }
 
 .cinematic-hero .executive-kicker {
-  color: rgba(216, 231, 220, 0.85);
+  color: rgba(45, 107, 73, 0.85);
 }
 
 .cinematic-hero .corporate-eyebrow {
-  border: 1px solid rgba(243, 239, 231, 0.24);
-  background: rgba(243, 239, 231, 0.1);
-  color: #d8e7dc;
+  border: 1px solid rgba(21, 35, 63, 0.24);
+  background: rgba(21, 35, 63, 0.1);
+  color: #2d6b49;
 }
 
 .cinematic-hero .button-secondary {
-  border: 1px solid rgba(243, 239, 231, 0.32) !important;
-  background: rgba(243, 239, 231, 0.08) !important;
-  color: #f3efe7 !important;
+  border: 1px solid rgba(21, 35, 63, 0.32) !important;
+  background: rgba(21, 35, 63, 0.08) !important;
+  color: #15233f !important;
 }
 
 .cinematic-hero .reference-stat-card {
@@ -813,11 +861,11 @@ body {
 }
 
 .cinematic-hero .reference-stat-card span {
-  color: rgba(243, 239, 231, 0.62);
+  color: rgba(21, 35, 63, 0.62);
 }
 
 .cinematic-hero .reference-stat-card strong {
-  color: #f3efe7;
+  color: #15233f;
 }
 
 .reference-stat-grid {
@@ -1297,6 +1345,114 @@ body {
   margin-top: 22px;
 }
 
+/* Contact Us page */
+.contact-page-surface {
+  padding-top: clamp(36px, 6vw, 72px);
+  padding-bottom: clamp(36px, 6vw, 72px);
+}
+
+.contact-page-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: start;
+}
+
+.contact-page-intro {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+.contact-page-title {
+  margin: 0;
+}
+
+.contact-page-lead {
+  max-width: 46ch;
+  color: var(--muted);
+}
+
+.contact-page-detail {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.contact-page-email {
+  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+  font-weight: 600;
+  color: var(--accent-strong);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+}
+
+.contact-page-email:hover,
+.contact-page-email:focus-visible {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.contact-page-form-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  backdrop-filter: blur(14px);
+  padding: clamp(22px, 3.5vw, 36px);
+  box-shadow: 0 20px 60px -38px rgba(32, 26, 21, 0.55);
+}
+
+.contact-form {
+  gap: 16px;
+}
+
+.contact-form-title {
+  margin: 0 0 4px;
+}
+
+.field-label {
+  display: grid;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.contact-form textarea.field {
+  min-height: 132px;
+  resize: vertical;
+  font: inherit;
+}
+
+.contact-form .field-button {
+  justify-self: start;
+  margin-top: 4px;
+}
+
+.contact-form-feedback {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.contact-form-feedback--success {
+  color: var(--accent-strong);
+}
+
+.contact-form-feedback--error {
+  color: #9f4b44;
+}
+
+@media (max-width: 860px) {
+  .contact-page-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .company-profile-hero-copy {
   display: grid;
   gap: 18px;
@@ -1402,7 +1558,7 @@ body {
 
 .footer-menu-panel {
   padding: 28px;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f8f4 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6f8 100%);
 }
 
 .footer-menu-grid {
@@ -1829,25 +1985,25 @@ a:focus-visible {
 .section-title,
 .page-title {
   margin: 0;
-  letter-spacing: -0.05em;
-  line-height: 0.98;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
   font-family: var(--font-display);
   font-weight: 600;
   text-wrap: balance;
 }
 
 .hero-title {
-  font-size: clamp(3rem, 6.2vw, 5rem);
-  max-width: 8.5ch;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  max-width: 16ch;
 }
 
 .page-title {
-  font-size: clamp(2.8rem, 8vw, 4.8rem);
+  font-size: clamp(2.1rem, 3.5vw, 3rem);
 }
 
 .section-title {
-  font-size: clamp(1.85rem, 3.2vw, 2.85rem);
-  letter-spacing: -0.045em;
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+  letter-spacing: -0.02em;
 }
 
 .hero-title-home {
@@ -1881,9 +2037,9 @@ a:focus-visible {
 
 .hero h1 {
   margin: 0;
-  letter-spacing: -0.05em;
-  line-height: 0.98;
-  font-size: clamp(2.2rem, 7vw, 3.9rem);
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  font-size: clamp(2.1rem, 5vw, 3.5rem);
   font-family: var(--font-display);
   font-weight: 600;
   text-wrap: balance;
@@ -3326,7 +3482,7 @@ a:focus-visible {
 
 .machines-blueprint-index {
   position: relative;
-  font-size: clamp(6rem, 16vw, 9.5rem);
+  font-size: clamp(3rem, 8vw, 5.5rem);
   line-height: 0.9;
   letter-spacing: -0.06em;
   color: rgba(170, 191, 214, 0.12);
@@ -3508,8 +3664,8 @@ a:focus-visible {
 
 .machines-visual-backdrop::after {
   background:
-    linear-gradient(180deg, rgba(243, 239, 231, 0.22), rgba(243, 239, 231, 0.58)),
-    linear-gradient(90deg, rgba(243, 239, 231, 0.48), transparent 34%, rgba(243, 239, 231, 0.32)) !important;
+    linear-gradient(180deg, rgba(21, 35, 63, 0.22), rgba(21, 35, 63, 0.58)),
+    linear-gradient(90deg, rgba(21, 35, 63, 0.48), transparent 34%, rgba(21, 35, 63, 0.32)) !important;
 }
 
 .machines-visual-backdrop-image {
@@ -4880,13 +5036,18 @@ a:focus-visible {
   gap: 16px;
 }
 
-.company-profile-title {
-  max-width: 10ch;
+.company-profile-hero-copy .company-profile-title {
+  max-width: 18ch;
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
 }
 
-.company-profile-summary {
-  max-width: 58ch;
-  font-size: 1.08rem;
+.company-profile-hero-copy .company-profile-summary {
+  max-width: 52ch;
+  font-size: clamp(1.02rem, 1.3vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--color-text);
 }
 
 .company-profile-intro-panel,
@@ -4977,6 +5138,8 @@ a:focus-visible {
 
 .company-profile-section-title {
   margin: 0;
+  font-size: clamp(1.2rem, 1.7vw, 1.55rem) !important;
+  letter-spacing: -0.01em;
 }
 
 .company-profile-statement-section,
@@ -5014,6 +5177,7 @@ a:focus-visible {
 .company-profile-timeline-card p,
 .company-profile-timeline-intro {
   margin: 0;
+  font-size: 0.92rem;
 }
 
 .company-profile-focus-card h3 {
@@ -5031,64 +5195,111 @@ a:focus-visible {
   padding: 0;
   list-style: none;
   display: grid;
-  gap: 16px;
+  gap: 0;
 }
 
 .company-profile-timeline-item {
   display: grid;
-  grid-template-columns: 92px minmax(0, 1fr);
-  gap: 18px;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 28px;
   align-items: start;
+  position: relative;
+  padding-bottom: 30px;
+}
+
+/* Continuous connecting spine threading every milestone together */
+.company-profile-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 98px;
+  top: 14px;
+  bottom: -12px;
+  width: 2px;
+  transform: translateX(-1px);
+  background: linear-gradient(180deg, var(--color-accent), rgba(45, 107, 73, 0.4));
+}
+
+/* Spine ends cleanly at the final milestone */
+.company-profile-timeline-item:last-child {
+  padding-bottom: 6px;
+}
+
+.company-profile-timeline-item:last-child::before {
+  bottom: auto;
+  height: 18px;
 }
 
 .company-profile-timeline-year {
   position: relative;
-  padding-top: 4px;
-  color: #2d6b49;
-  font-size: 0.9rem;
+  padding-top: 9px;
+  text-align: right;
+  color: var(--color-accent-strong);
+  font-size: 0.95rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
 }
 
+/* Ring node anchored on the spine, aligned with the card heading */
 .company-profile-timeline-year::after {
   content: '';
   position: absolute;
-  top: 28px;
-  bottom: -34px;
-  left: 8px;
-  width: 1px;
-  background: linear-gradient(180deg, rgba(45, 107, 73, 0.65), rgba(45, 107, 73, 0));
+  left: 98px;
+  top: 16px;
+  width: 16px;
+  height: 16px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--color-canvas);
+  border: 2.5px solid var(--color-accent);
+  box-shadow: 0 0 0 5px rgba(45, 107, 73, 0.1);
+  z-index: 2;
 }
 
-.company-profile-timeline-item:last-child .company-profile-timeline-year::after {
-  display: none;
+/* Down-arrow between consecutive milestones — gives the line its direction */
+.company-profile-timeline-item:not(:first-child) .company-profile-timeline-year::before {
+  content: '';
+  position: absolute;
+  left: 98px;
+  top: -17px;
+  width: 8px;
+  height: 8px;
+  transform: translateX(-50%) rotate(45deg);
+  border-right: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  z-index: 2;
 }
 
 .company-profile-timeline-card {
-  padding: 18px 20px;
+  padding: 18px 22px;
   position: relative;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease;
 }
 
+/* Connector reaching from the spine node into the card */
 .company-profile-timeline-card::before {
   content: '';
   position: absolute;
   left: -14px;
-  top: 20px;
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: #2d6b49;
-  box-shadow: 0 0 0 6px rgba(45, 107, 73, 0.12);
+  top: 16px;
+  width: 14px;
+  height: 2px;
+  transform: translateY(-50%);
+  background: var(--color-accent);
+}
+
+.company-profile-timeline-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 22px 44px rgba(21, 35, 63, 0.12);
 }
 
 .company-profile-timeline-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
+  font-size: 0.98rem;
+  margin-bottom: 6px;
 }
 
 .company-profile-timeline-card p {
-  color: rgba(224, 231, 241, 0.82);
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.55;
 }
 
 @media (max-width: 980px) {
@@ -5226,16 +5437,16 @@ a:focus-visible {
   }
 
   .hero-title {
-    font-size: clamp(2.45rem, 13vw, 3.65rem);
-    max-width: 8ch;
+    font-size: clamp(2.1rem, 9vw, 2.9rem);
+    max-width: 16ch;
   }
 
   .page-title {
-    font-size: clamp(2.4rem, 16vw, 3.6rem);
+    font-size: clamp(1.9rem, 9vw, 2.6rem);
   }
 
   .section-title {
-    font-size: clamp(1.6rem, 8vw, 2.3rem);
+    font-size: clamp(1.5rem, 6vw, 2rem);
   }
 
   .business-architecture-visual,
@@ -5625,9 +5836,9 @@ body {
 }
 
 .hero-title-home {
-  max-width: 7ch;
-  font-size: clamp(4rem, 7vw, 6rem);
-  line-height: 0.92;
+  max-width: 14ch;
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  line-height: 1.04;
 }
 
 .executive-lead {
@@ -6132,7 +6343,7 @@ body {
   }
 
   .hero-title-home {
-    font-size: clamp(3.1rem, 15vw, 4.2rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   .command-panel-shell,
@@ -6237,16 +6448,29 @@ body {
 
   .company-profile-timeline-item {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 6px;
+    padding-bottom: 18px;
   }
 
+  .company-profile-timeline-item::before,
+  .company-profile-timeline-item:last-child::before,
   .company-profile-timeline-year::after,
+  .company-profile-timeline-year::before,
   .company-profile-timeline-card::before {
     display: none;
   }
 
+  .company-profile-timeline-year {
+    text-align: left;
+    padding-top: 0;
+  }
+
   .company-profile-timeline-card {
     padding: 16px 18px;
+  }
+
+  .company-profile-timeline-card:hover {
+    transform: none;
   }
 }
 
@@ -6319,7 +6543,7 @@ body {
 .reference-site .reference-section-card {
   border: 1px solid var(--glass-border) !important;
   background: var(--glass-panel) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
+  box-shadow: var(--shadow-card) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
@@ -6346,11 +6570,11 @@ body {
 .reference-site .business-flow-title,
 .reference-site .resource-flow-detail h3,
 .reference-site .resource-flow-core strong {
-  color: #f3efe7 !important;
+  color: #15233f !important;
 }
 
 .reference-site .section-label {
-  color: rgba(216, 231, 220, 0.85) !important;
+  color: rgba(45, 107, 73, 0.85) !important;
 }
 
 .reference-site .body-copy,
@@ -6360,25 +6584,25 @@ body {
 .reference-site .resource-flow-detail-step,
 .reference-site .business-step-button,
 .reference-site .resource-flow-node {
-  color: rgba(243, 239, 231, 0.8) !important;
+  color: rgba(21, 35, 63, 0.8) !important;
 }
 
 .reference-site .resource-flow-node-index,
 .reference-site .resource-flow-core-kicker,
 .reference-site .resource-flow-detail-kicker {
-  background: rgba(243, 239, 231, 0.1) !important;
-  border-color: rgba(243, 239, 231, 0.22) !important;
-  color: #d8e7dc !important;
+  background: rgba(21, 35, 63, 0.1) !important;
+  border-color: rgba(21, 35, 63, 0.22) !important;
+  color: #2d6b49 !important;
 }
 
 .reference-site .resource-flow-track-base {
-  fill: rgba(243, 239, 231, 0.04) !important;
-  stroke: rgba(243, 239, 231, 0.12) !important;
+  fill: rgba(21, 35, 63, 0.04) !important;
+  stroke: rgba(21, 35, 63, 0.12) !important;
 }
 
 .reference-site .resource-flow-track,
 .reference-site .resource-flow-spoke {
-  stroke: rgba(243, 239, 231, 0.24) !important;
+  stroke: rgba(21, 35, 63, 0.24) !important;
 }
 
 .reference-site .site-footer {
@@ -6390,32 +6614,32 @@ body {
 .reference-site .footer-menu-panel {
   border: 1px solid var(--glass-border) !important;
   background: var(--glass-panel) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35) !important;
+  box-shadow: var(--shadow-card) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
 
 .reference-site .footer-menu-title {
-  color: #d8e7dc !important;
+  color: #2d6b49 !important;
 }
 
 .reference-site .footer-menu-link {
-  color: rgba(243, 239, 231, 0.78) !important;
+  color: rgba(21, 35, 63, 0.78) !important;
 }
 
 .reference-site .footer-menu-link:hover {
-  color: #f3efe7 !important;
+  color: #15233f !important;
 }
 
 .reference-site .site-footer-bar {
-  color: rgba(243, 239, 231, 0.66) !important;
-  border-top-color: rgba(243, 239, 231, 0.18) !important;
+  color: rgba(21, 35, 63, 0.66) !important;
+  border-top-color: rgba(21, 35, 63, 0.18) !important;
   background: transparent !important;
 }
 
 .reference-site .site-footer-bar a,
 .reference-site .site-footer-social a {
-  color: #d8e7dc !important;
+  color: #2d6b49 !important;
 }
 
 /* ============================================================
@@ -6501,11 +6725,11 @@ html:lang(en) .hero-title,
 html:lang(en) .reference-hero-title {
   font-weight: 600;
   letter-spacing: -0.02em;
-  line-height: 0.96;
+  line-height: 1.06;
 }
 
 html:lang(en) .reference-hero.cinematic-hero .reference-hero-title {
-  font-size: clamp(3.4rem, 7vw, 6rem);
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
 }
 
 html:lang(en) .section-title,
@@ -6534,27 +6758,27 @@ html:lang(en) .reference-section-title {
 
 .products-carousel-shell--cinematic {
   /* local brand-green accents replacing the legacy blue glow */
-  --cine-accent: #7fc6a0;
-  --cine-text: rgba(243, 239, 231, 0.92);
-  --cine-text-muted: rgba(243, 239, 231, 0.7);
-  --cine-deep: #0f2117;
+  --cine-accent: #2d6b49;
+  --cine-text: rgba(21, 35, 63, 0.92);
+  --cine-text-muted: rgba(21, 35, 63, 0.7);
+  --cine-deep: #f4f6f8;
   position: relative;
   margin-inline: -30px;
   padding: 34px 30px 36px !important;
   border: 1px solid var(--glass-border) !important;
   border-radius: var(--radius-panel, 32px) !important;
   background:
-    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
-    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.1), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(45, 107, 73, 0.07), transparent 55%),
     var(--backdrop-base) !important;
-  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  box-shadow: 0 40px 120px rgba(21, 35, 63, 0.1) !important;
   overflow: hidden;
 }
 
 /* Section head copy sits on the dark band → cream text */
 .products-carousel-shell--cinematic .products-carousel-shell-title,
 .products-carousel-shell--cinematic .products-carousel-shell-title.section-title {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .products-carousel-shell--cinematic .section-label {
@@ -6589,7 +6813,7 @@ html:lang(en) .reference-section-title {
 }
 
 .products-carousel-shell--cinematic .products-carousel-chapter-copy strong {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .products-carousel-shell--cinematic .products-carousel-chapter-copy p,
@@ -6674,7 +6898,7 @@ html:lang(en) .reference-section-title {
 }
 
 .products-carousel-shell--cinematic .products-carousel-meta-card strong {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .products-carousel-shell--cinematic .products-carousel-meta-card span {
@@ -6687,7 +6911,7 @@ html:lang(en) .reference-section-title {
 
 /* Story panel copy → cream, overline/bullets → brand green */
 .products-carousel-shell--cinematic .products-carousel-story-panel h3 {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .products-carousel-shell--cinematic .products-carousel-story-overline {
@@ -6748,7 +6972,7 @@ html:lang(en) .reference-section-title {
   padding: 26px 28px;
   border: 1px solid var(--color-line);
   border-radius: 20px;
-  background: linear-gradient(180deg, #ffffff 0%, #f4f8f4 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f6f8 100%);
   box-shadow: var(--shadow-card);
 }
 
@@ -6806,10 +7030,10 @@ html:lang(en) .reference-section-title {
    ============================================================ */
 
 .machines-stage-shell--cinematic {
-  --cine-accent: #7fc6a0;
-  --cine-text: rgba(243, 239, 231, 0.92);
-  --cine-text-muted: rgba(243, 239, 231, 0.7);
-  --cine-deep: #0f2117;
+  --cine-accent: #2d6b49;
+  --cine-text: rgba(21, 35, 63, 0.92);
+  --cine-text-muted: rgba(21, 35, 63, 0.7);
+  --cine-deep: #f4f6f8;
   position: relative;
   display: grid;
   gap: 22px;
@@ -6818,10 +7042,10 @@ html:lang(en) .reference-section-title {
   border: 1px solid var(--glass-border) !important;
   border-radius: var(--radius-panel, 32px) !important;
   background:
-    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
-    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.1), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(45, 107, 73, 0.07), transparent 55%),
     var(--backdrop-base) !important;
-  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  box-shadow: 0 40px 120px rgba(21, 35, 63, 0.1) !important;
   overflow: hidden;
 }
 
@@ -6834,7 +7058,7 @@ html:lang(en) .reference-section-title {
 }
 
 .machines-stage-shell--cinematic .machines-stage-title {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .machines-stage-shell--cinematic .section-label {
@@ -6890,7 +7114,7 @@ html:lang(en) .reference-section-title {
 }
 
 .machines-stage-shell--cinematic .machines-blueprint-copy strong {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .machines-stage-shell--cinematic .machines-blueprint-copy small {
@@ -6903,7 +7127,7 @@ html:lang(en) .reference-section-title {
 }
 
 .machines-stage-shell--cinematic .machines-spotlight-head h2 {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .machines-stage-shell--cinematic .machines-spotlight-head p {
@@ -6921,7 +7145,7 @@ html:lang(en) .reference-section-title {
 }
 
 .machines-stage-shell--cinematic .machines-context-card strong {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 /* Chip + blueprint chips → glass chips */
@@ -6945,7 +7169,7 @@ html:lang(en) .reference-section-title {
 }
 
 .machines-stage-shell--cinematic .machines-selector-button strong {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .machines-stage-shell--cinematic .machines-selector-button small,
@@ -7023,19 +7247,19 @@ html:lang(en) .reference-section-title {
 
 .news-shell--cinematic,
 .company-profile-dossier--cinematic {
-  --cine-accent: #7fc6a0;
-  --cine-text: rgba(243, 239, 231, 0.92);
-  --cine-text-muted: rgba(243, 239, 231, 0.7);
+  --cine-accent: #2d6b49;
+  --cine-text: rgba(21, 35, 63, 0.92);
+  --cine-text-muted: rgba(21, 35, 63, 0.7);
   position: relative;
   margin-inline: -30px;
   padding: 34px 30px 36px !important;
   border: 1px solid var(--glass-border) !important;
   border-radius: var(--radius-panel, 32px) !important;
   background:
-    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.34), transparent 60%),
-    radial-gradient(120% 120% at 100% 120%, rgba(20, 50, 34, 0.6), transparent 55%),
+    radial-gradient(120% 90% at 12% -10%, rgba(45, 107, 73, 0.1), transparent 60%),
+    radial-gradient(120% 120% at 100% 120%, rgba(45, 107, 73, 0.07), transparent 55%),
     var(--backdrop-base) !important;
-  box-shadow: 0 40px 120px rgba(6, 18, 12, 0.32) !important;
+  box-shadow: 0 40px 120px rgba(21, 35, 63, 0.1) !important;
   overflow: hidden;
 }
 
@@ -7048,7 +7272,7 @@ html:lang(en) .reference-section-title {
 .news-shell--cinematic .news-card {
   border-color: var(--glass-border) !important;
   background: var(--glass-panel) !important;
-  box-shadow: 0 18px 40px rgba(6, 18, 12, 0.28) !important;
+  box-shadow: 0 18px 40px rgba(21, 35, 63, 0.08) !important;
   transition: transform 240ms ease, border-color 240ms ease;
 }
 
@@ -7058,7 +7282,7 @@ html:lang(en) .reference-section-title {
 }
 
 .news-shell--cinematic .news-card-title {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .news-shell--cinematic .news-card-excerpt,
@@ -7079,7 +7303,7 @@ html:lang(en) .reference-section-title {
 .news-shell--cinematic .button-secondary {
   border: 1px solid var(--glass-border) !important;
   background: var(--glass-raised) !important;
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 .news-shell--cinematic .button-secondary:hover {
@@ -7094,7 +7318,7 @@ html:lang(en) .reference-section-title {
 .company-profile-dossier--cinematic .company-profile-timeline-card {
   border-color: var(--glass-border) !important;
   background: var(--glass-panel) !important;
-  box-shadow: 0 18px 40px rgba(6, 18, 12, 0.26) !important;
+  box-shadow: 0 18px 40px rgba(21, 35, 63, 0.08) !important;
   backdrop-filter: blur(14px) !important;
 }
 
@@ -7107,7 +7331,7 @@ html:lang(en) .reference-section-title {
 .company-profile-dossier--cinematic .company-profile-section-title,
 .company-profile-dossier--cinematic .company-profile-focus-card h3,
 .company-profile-dossier--cinematic .company-profile-timeline-card h3 {
-  color: #f4efe5 !important;
+  color: #15233f !important;
 }
 
 /* Facts panel reads as a full-width dossier header inside the band */
@@ -7151,5 +7375,38 @@ html:lang(en) .reference-section-title {
   .news-shell--cinematic,
   .company-profile-dossier--cinematic {
     margin-inline: 0;
+  }
+}
+
+/* ── Top-menu hover: green underline bar (all pages) ─────────────────────────
+   Each nav link grows a centre-out green underline on hover/focus — no lift,
+   tilt, shadow, or pill. */
+.top-menu-link {
+  position: relative;
+}
+
+.top-menu-link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 5px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-strong));
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.top-menu-link:hover::after,
+.top-menu-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-menu-link::after {
+    transition: none;
   }
 }

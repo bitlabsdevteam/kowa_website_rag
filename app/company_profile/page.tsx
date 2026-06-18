@@ -28,71 +28,14 @@ export default function CompanyProfilePage() {
       >
         <div className="company-profile-hero">
           <div className="company-profile-hero-copy">
-            <span className="eyebrow">{copy.menu.companyProfile}</span>
-            <p className="executive-kicker">{profile.introLabel}</p>
+            <span className="eyebrow">{profile.introLabel}</span>
             <h1 className="page-title company-profile-title">{profile.title}</h1>
             <p className="body-copy company-profile-summary">{profile.summary}</p>
-
-            <article className="company-profile-intro-panel">
-              <p className="section-label">{profile.introLabel}</p>
-              <h2 className="company-profile-intro-title">{profile.introTitle}</h2>
-              <p className="body-copy">{profile.introBody}</p>
-            </article>
           </div>
         </div>
 
         <ScrollReveal variant="fade-up">
           <section className="company-profile-dossier company-profile-dossier--cinematic">
-        <section className="company-profile-facts-band">
-          <aside className="company-profile-facts-panel" aria-label={profile.factLabel}>
-            <h2 className="company-profile-facts-title">{profile.factLabel}</h2>
-            <dl className="company-profile-facts-list">
-              {profile.facts.map((fact) => (
-                <div key={fact.label} className="company-profile-fact-row">
-                  <dt>{fact.label}</dt>
-                  <dd>{fact.value}</dd>
-                </div>
-              ))}
-            </dl>
-          </aside>
-        </section>
-
-        <section className="company-profile-statement-section" aria-labelledby="company-profile-statement-heading">
-          <div className="company-profile-section-head">
-            <p className="section-label">{profile.statementLabel}</p>
-            <h2 id="company-profile-statement-heading" className="section-title company-profile-section-title">
-              {profile.statementLabel}
-            </h2>
-          </div>
-
-          <div className="company-profile-statement-grid">
-            {profile.statements.map((statement) => (
-              <article key={statement.language} className="company-profile-statement-card">
-                <p className="company-profile-statement-language">{statement.language}</p>
-                <p>{statement.text}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="company-profile-focus-section" aria-labelledby="company-profile-focus-heading">
-          <div className="company-profile-section-head">
-            <p className="section-label">{profile.focusLabel}</p>
-            <h2 id="company-profile-focus-heading" className="section-title company-profile-section-title">
-              {profile.focusLabel}
-            </h2>
-          </div>
-
-          <div className="company-profile-focus-grid">
-            {profile.focusCards.map((card) => (
-              <article key={card.title} className="company-profile-focus-card">
-                <h3>{card.title}</h3>
-                <p>{card.detail}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
         <section className="company-profile-timeline-section" aria-labelledby="company-profile-timeline-heading">
           <div className="company-profile-section-head">
             <div>

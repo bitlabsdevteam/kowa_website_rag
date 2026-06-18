@@ -4,7 +4,9 @@
     "news": "新闻",
     "products": "产品",
     "machines": "设备",
+    "partners": "合作伙伴",
     "companyProfile": "公司简介",
+    "contactUs": "联系我们",
     "login": "用户登录",
     "onlineShop": "在线购物",
     "localeLabel": "语言",
@@ -58,9 +60,9 @@
     ]
   },
   "companyProfile": {
-    "title": "公司简介",
-    "summary": "Kowa 将回收、贸易和工厂执行整合为同一份企业画像，覆盖东京总部、群马加工能力以及面向海外的资源流通。",
-    "introLabel": "企业画像",
+    "title": "愿景",
+    "summary": "让有价值的资源永不被浪费。Kowa 致力于让塑料与资源持续循环——通过跨境的回收、再生与贸易，使我们所服务的每一条供应链更清洁、更具循环性，并能为子孙后代持续运转。",
+    "introLabel": "愿景",
     "introTitle": "从日本国内回收到全球循环。",
     "introBody": "旧版公司资料把 Kowa 定义为一家以塑料为核心的贸易与加工企业：在日本国内收集，在需要时进行再生处理，再把可用资源重新送回产业链。",
     "statementLabel": "资料原文",
@@ -153,6 +155,21 @@
         "detail": "新增第二套大型破碎/粉碎设备。"
       }
     ]
+  },
+  "contactPage": {
+    "eyebrow": "联系我们",
+    "title": "让我们开始沟通",
+    "lead": "无论您是采购再生树脂、关注资源循环，还是探讨贸易合作，只需填写以下信息，我们的团队将通过电子邮件与您联系。",
+    "detailLabel": "直接邮件联系我们",
+    "email": "contact@kowatrade.com",
+    "formTitle": "给我们留言",
+    "companyLabel": "公司名称",
+    "emailLabel": "电子邮箱",
+    "queryLabel": "咨询内容",
+    "submitLabel": "发送信息",
+    "sendingLabel": "发送中…",
+    "successMessage": "感谢您的留言，信息已发送。我们的团队将尽快与您联系。",
+    "errorMessage": "抱歉，信息发送失败。请稍后再试。"
   },
   "news": {
     "title": "新闻",

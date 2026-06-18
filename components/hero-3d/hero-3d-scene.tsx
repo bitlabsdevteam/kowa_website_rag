@@ -9,15 +9,16 @@ import { computeCameraPath } from './camera-rig-math';
 
 type ProgressRef = { readonly current: number };
 
-// Backdrop hue is the single source of truth for the cinematic green. The CSS
-// dark-glass surfaces (.reference-site …) and the .hero-3d-fallback poster all
-// derive from this exact rgb(19,41,29) so the canvas and the content boxes that
-// float over it stay perfectly colour-matched — no seam between scene and glass.
+// Backdrop hue is the single source of truth: pure WHITE. The CSS light-glass
+// surfaces (.reference-site …) and the .hero-3d-fallback poster all derive from
+// this same white so the canvas and the frosted-white content boxes that float
+// over it stay seamless. The particle field is forest green — the resource-
+// circulation signal, now rendered as dark drifting motes on the white field.
 const PALETTE = {
-  fog: '#13291d',
-  backdrop: '#13291d',
-  particles: '#9fc7ae',
-  ivory: '#f3efe7',
+  fog: '#ffffff',
+  backdrop: '#ffffff',
+  particles: '#7fb89a',
+  ivory: '#15233f',
 } as const;
 
 const PARTICLE_COUNT = 900;
@@ -63,10 +64,10 @@ function ParticleField() {
       </bufferGeometry>
       <pointsMaterial
         color={PALETTE.particles}
-        size={0.05}
+        size={0.1}
         sizeAttenuation
         transparent
-        opacity={0.75}
+        opacity={0.9}
         depthWrite={false}
       />
     </points>
@@ -103,7 +104,7 @@ export default function Hero3DScene({ progressRef }: { progressRef?: ProgressRef
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={[PALETTE.backdrop]} />
-        <fog attach="fog" args={[PALETTE.fog, 8, 26]} />
+        <fog attach="fog" args={[PALETTE.fog, 14, 38]} />
         <CameraRig progressRef={progressRef} />
         <ParticleField />
       </Canvas>

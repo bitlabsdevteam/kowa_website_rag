@@ -4,7 +4,9 @@
     "news": "NEWS",
     "products": "PRODUCTS",
     "machines": "MACHINES",
+    "partners": "PARTNERS",
     "companyProfile": "COMPANY PROFILE",
+    "contactUs": "CONTACT US",
     "login": "User Login",
     "onlineShop": "Online Shopping",
     "localeLabel": "Lang",
@@ -58,9 +60,9 @@
     ]
   },
   "companyProfile": {
-    "title": "Company Profile",
-    "summary": "Kowa presents recycling, trade, and factory execution as one operating profile spanning Tokyo headquarters, Gunma processing capability, and overseas circulation.",
-    "introLabel": "Corporate profile",
+    "title": "Vision",
+    "summary": "A world where nothing of value is wasted. Kowa exists to keep plastics and resources in continuous circulation — collecting, regenerating, and trading materials across borders so that every supply chain we serve becomes cleaner, more circular, and more resilient for the generations ahead.",
+    "introLabel": "Vision",
     "introTitle": "From domestic collection to global circulation.",
     "introBody": "The legacy profile frames Kowa as a plastics-centered trading and processing company: collect domestically, regenerate where needed, and return usable resources to industrial supply chains.",
     "statementLabel": "Source narrative",
@@ -153,6 +155,21 @@
         "detail": "A second large crushing and grinding machine was introduced."
       }
     ]
+  },
+  "contactPage": {
+    "eyebrow": "Contact us",
+    "title": "Let's start a conversation",
+    "lead": "Whether you're sourcing recycled resin, exploring resource circulation, or exploring a trade partnership — share a few details and our team will respond by email.",
+    "detailLabel": "Email us directly",
+    "email": "contact@kowatrade.com",
+    "formTitle": "Send us a message",
+    "companyLabel": "Company name",
+    "emailLabel": "Email",
+    "queryLabel": "Your query",
+    "submitLabel": "Send message",
+    "sendingLabel": "Sending…",
+    "successMessage": "Thank you — your message has been sent. Our team will be in touch.",
+    "errorMessage": "Sorry, your message could not be sent. Please try again later."
   },
   "news": {
     "title": "NEWS",
