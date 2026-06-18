@@ -1,29 +1,22 @@
 import { expect, test } from '@playwright/test';
 
-test('v6 task3 top menu exposes only Overview, Business, and Talk to Aya across breakpoints', async ({ page }) => {
+// Updated in v17 Task 9: the top menu now carries the corporate link set
+// (About / News / Products / Machines / Company Profile) with no chat entry
+// and no mobile toggle.
+test('v6 task3 top menu exposes the corporate link set without a chat entry', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
 
   await page.screenshot({ path: 'tests/screenshots/task3-step1-v6-menu-red-state.png', fullPage: true });
 
-  await expect(page.locator('[data-testid="top-menu-link-overview"]')).toBeVisible();
-  await expect(page.locator('[data-testid="top-menu-link-business"]')).toBeVisible();
-  await expect(page.locator('[data-testid="top-menu-link-talk-to-aya"]')).toBeVisible();
-  await expect(page.locator('[data-testid^="top-menu-link-"]')).toHaveCount(3);
+  await expect(page.locator('[data-testid="top-menu-link-about"]')).toBeVisible();
+  // News temporarily hidden from the top menu.
+  await expect(page.locator('[data-testid="top-menu-link-news"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="top-menu-link-products"]')).toBeVisible();
+  await expect(page.locator('[data-testid="top-menu-link-machines"]')).toBeVisible();
+  await expect(page.locator('[data-testid="top-menu-link-company-profile"]')).toBeVisible();
+  await expect(page.locator('[data-testid^="top-menu-link-"]')).toHaveCount(4);
 
-  await expect(page.locator('[data-testid="top-menu-link-welcome"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="top-menu-link-inquiry"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="top-menu-link-factory"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="top-menu-link-access"]')).toHaveCount(0);
-  await expect(page.locator('[data-testid="top-menu-link-sources"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="top-menu-link-talk-to-aya"]')).toHaveCount(0);
   await expect(page.locator('[data-testid="top-menu-link-admin"]')).toHaveCount(0);
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
-  await page.locator('[data-testid="mobile-menu-toggle"]').click();
-
-  await expect(page.locator('[data-testid="top-menu-link-overview"]')).toBeVisible();
-  await expect(page.locator('[data-testid="top-menu-link-business"]')).toBeVisible();
-  await expect(page.locator('[data-testid="top-menu-link-talk-to-aya"]')).toBeVisible();
-  await expect(page.locator('[data-testid^="top-menu-link-"]')).toHaveCount(3);
 });

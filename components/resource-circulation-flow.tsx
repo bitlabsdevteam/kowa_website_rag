@@ -2,9 +2,12 @@ type ResourceCirculationFlowProps = {
   brand: string;
   title: string;
   intro: string;
-  nodeLabels: string[];
-  steps: string[];
-  pillars: Array<{ title: string; detail: string }>;
+  phases: Array<{
+    nodeLabel: string;
+    title: string;
+    step: string;
+    detail: string;
+  }>;
   activeIndex: number;
   onSelect: (index: number) => void;
 };
@@ -15,14 +18,11 @@ export function ResourceCirculationFlow({
   brand,
   title,
   intro,
-  nodeLabels,
-  steps,
-  pillars,
+  phases,
   activeIndex,
   onSelect,
 }: ResourceCirculationFlowProps) {
-  const activePillar = pillars[activeIndex] ?? pillars[0];
-  const activeStep = steps[activeIndex] ?? steps[0];
+  const activePhase = phases[activeIndex] ?? phases[0];
 
   return (
     <div className="resource-flow-card">
@@ -58,17 +58,17 @@ export function ResourceCirculationFlow({
           <circle cx="320" cy="210" r="7" className="resource-flow-center-dot" />
         </svg>
 
-        {nodeLabels.map((label, index) => (
+        {phases.map((phase, index) => (
           <button
-            key={`${label}-${index}`}
+            key={`${phase.nodeLabel}-${index}`}
             type="button"
             className={`resource-flow-node resource-flow-node-${NODE_POSITIONS[index]} ${activeIndex === index ? 'is-active' : ''}`}
             onClick={() => onSelect(index)}
             aria-pressed={activeIndex === index}
-            aria-label={`${String(index + 1).padStart(2, '0')}. ${steps[index] ?? label}`}
+            aria-label={`${String(index + 1).padStart(2, '0')}. ${phase.step}`}
           >
             <span className="resource-flow-node-index">{String(index + 1).padStart(2, '0')}</span>
-            <span className="resource-flow-node-label">{label}</span>
+            <span className="resource-flow-node-label">{phase.nodeLabel}</span>
           </button>
         ))}
 
@@ -79,11 +79,11 @@ export function ResourceCirculationFlow({
         </div>
       </div>
 
-      <article className="resource-flow-detail" key={`${activeIndex}-${activePillar?.title ?? 'flow'}`}>
+      <article className="resource-flow-detail" key={`${activeIndex}-${activePhase?.title ?? 'flow'}`}>
         <p className="resource-flow-detail-kicker">{title}</p>
-        <h3>{activePillar?.title}</h3>
-        <p className="resource-flow-detail-step">{activeStep}</p>
-        <p>{activePillar?.detail}</p>
+        <h3>{activePhase?.title}</h3>
+        <p className="resource-flow-detail-step">{activePhase?.step}</p>
+        <p>{activePhase?.detail}</p>
       </article>
     </div>
   );

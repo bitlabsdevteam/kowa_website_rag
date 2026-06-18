@@ -1,33 +1,20 @@
 import { expect, test } from '@playwright/test';
 
-test('v6 task5 Talk to Aya routes users to assistant entry from nav and landing on desktop/mobile', async ({ page }) => {
+// Updated in v17 Task 9: Talk to Aya no longer has entry points on the landing
+// page (CTA removed in v17 Task 2; nav entry removed in an earlier sprint).
+// The landing route now leads to the company profile.
+test('v6 task5 landing routing leads to company profile, with no Aya entry points', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
 
   await page.screenshot({ path: 'tests/screenshots/task5-step1-v6-nav-before-routing.png', fullPage: true });
 
-  await page.click('[data-testid="top-menu-link-talk-to-aya"]');
-  await expect(page).toHaveURL(/\/\#assistant$/);
-  await expect(page.locator('#assistant')).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Start with a grounded prompt' })).toBeVisible();
+  await expect(page.locator('[data-testid="top-menu-link-talk-to-aya"]')).toHaveCount(0);
+  await expect(page.locator('[data-testid="landing-primary-cta"]')).toHaveCount(0);
+  await expect(page.getByText('Talk to Aya')).toHaveCount(0);
 
-  await page.screenshot({ path: 'tests/screenshots/task5-step2-v6-desktop-nav-arrival.png', fullPage: true });
+  await page.click('.hero-actions a[href="/company_profile"]');
+  await expect(page).toHaveURL(/\/company_profile$/);
 
-  await page.goto('/');
-  await page.click('[data-testid="landing-primary-cta"]');
-  await expect(page).toHaveURL(/\/\#assistant$/);
-  await expect(page.locator('[data-testid="chat-send"]')).toBeVisible();
-
-  await page.screenshot({ path: 'tests/screenshots/task5-step3-v6-landing-cta-arrival.png', fullPage: true });
-
-  await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/');
-  await page.click('[data-testid="mobile-menu-toggle"]');
-  await page.click('[data-testid="top-menu-link-talk-to-aya"]');
-
-  await expect(page).toHaveURL(/\/\#assistant$/);
-  await expect(page.locator('#assistant')).toBeVisible();
-  await expect(page.locator('[data-testid="chat-send"]')).toBeVisible();
-
-  await page.screenshot({ path: 'tests/screenshots/task5-step4-v6-mobile-nav-arrival.png', fullPage: true });
+  await page.screenshot({ path: 'tests/screenshots/task5-step2-v6-company-profile-arrival.png', fullPage: true });
 });

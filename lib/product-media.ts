@@ -44,34 +44,6 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     sourceFile: 'images/COP ペレット.jpg',
   },
   {
-    id: 'facility-line-01',
-    title: 'Facility Line 01',
-    category: 'factory-operations',
-    src: '/images/products/dsc-0011.jpg',
-    sourceFile: 'images/DSC_0011.JPG',
-  },
-  {
-    id: 'facility-line-02',
-    title: 'Facility Line 02',
-    category: 'factory-operations',
-    src: '/images/products/dsc-0016-0.jpg',
-    sourceFile: 'images/DSC_0016_0.JPG',
-  },
-  {
-    id: 'facility-line-03',
-    title: 'Facility Line 03',
-    category: 'factory-operations',
-    src: '/images/products/dsc-0019-0.jpg',
-    sourceFile: 'images/DSC_0019_0.JPG',
-  },
-  {
-    id: 'facility-line-04',
-    title: 'Facility Line 04',
-    category: 'factory-operations',
-    src: '/images/products/dsc-0028.jpg',
-    sourceFile: 'images/DSC_0028.JPG',
-  },
-  {
     id: 'product-shot-01',
     title: 'Product Shot 01',
     category: 'commerce-distribution',
@@ -98,12 +70,5 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     category: 'recycling-process',
     src: '/images/products/plastic-scrap.jpg',
     sourceFile: 'images/Plastic Scrap.jpg',
-  },
-  {
-    id: 'mixer-machine',
-    title: 'Mixer Machine',
-    category: 'machinery-equipment',
-    src: '/images/products/mixer-machine.jpg',
-    sourceFile: 'images/ミクサー.JPG',
   },
 ];

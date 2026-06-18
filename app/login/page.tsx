@@ -3,11 +3,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { SiteFooterBar } from '@/components/site-footer-bar';
+import { TopMenu } from '@/components/top-menu';
 import { setLocalAdminAuth } from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
 export default function LoginPage() {
+  const site = SITE_COPY.en;
   const copy = SITE_COPY.en.loginPage;
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -39,6 +42,10 @@ export default function LoginPage() {
 
   return (
     <main className="page shell">
+      <section className="shell-header">
+        <TopMenu labels={site.menu} brand={site.brand} locale="en" localeLabel={site.menu.localeLabel} />
+      </section>
+
       <section className="hero-panel narrow-surface">
         <span className="eyebrow">{copy.eyebrow}</span>
         <h1 className="page-title">{copy.title}</h1>
@@ -70,6 +77,10 @@ export default function LoginPage() {
         </form>
         {error ? <p style={{ color: '#9f4b44' }}>{error}</p> : null}
       </section>
+
+      <footer className="site-footer">
+        <SiteFooterBar copyright={site.footer.copyright} termsLabel={site.footer.termsLabel} social={site.footer.social} />
+      </footer>
     </main>
   );
 }

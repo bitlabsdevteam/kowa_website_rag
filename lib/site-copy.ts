@@ -8,7 +8,10 @@ export type MenuLabels = {
   about: string;
   news: string;
   products: string;
+  machines: string;
+  partners: string;
   companyProfile: string;
+  contactUs: string;
   login: string;
   onlineShop: string;
   localeLabel: string;
@@ -24,19 +27,60 @@ export type MenuLabels = {
 type BusinessSection = {
   title: string;
   intro: string;
-  pillars: Array<{ title: string; detail: string }>;
   flowTitle: string;
-  flowNodeLabels: string[];
-  flowSteps: string[];
+  flowPhases: Array<{
+    nodeLabel: string;
+    title: string;
+    step: string;
+    detail: string;
+  }>;
 };
 
 type CompanyProfileSection = {
   title: string;
   summary: string;
-  blocks: Array<{
-    heading: string;
-    points: string[];
+  introLabel: string;
+  introTitle: string;
+  introBody: string;
+  statementLabel: string;
+  statements: Array<{
+    language: string;
+    text: string;
   }>;
+  focusLabel: string;
+  focusCards: Array<{
+    title: string;
+    detail: string;
+  }>;
+  factLabel: string;
+  facts: Array<{
+    label: string;
+    value: string;
+  }>;
+  timelineLabel: string;
+  timelineTitle: string;
+  timelineIntro: string;
+  timeline: Array<{
+    year: string;
+    title: string;
+    detail: string;
+  }>;
+};
+
+type ContactPageSection = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  detailLabel: string;
+  email: string;
+  formTitle: string;
+  companyLabel: string;
+  emailLabel: string;
+  queryLabel: string;
+  submitLabel: string;
+  sendingLabel: string;
+  successMessage: string;
+  errorMessage: string;
 };
 
 export type SiteCopy = {
@@ -79,6 +123,7 @@ export type SiteCopy = {
   };
   business: BusinessSection;
   companyProfile: CompanyProfileSection;
+  contactPage: ContactPageSection;
   news: {
     title: string;
     entries: string[];
