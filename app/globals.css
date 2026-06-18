@@ -2353,7 +2353,7 @@ a:focus-visible {
 }
 
 .kowa-logo-text strong {
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -2381,7 +2381,7 @@ a:focus-visible {
   border-radius: 999px;
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.82rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: 180ms ease;
@@ -7375,6 +7375,488 @@ html:lang(en) .reference-section-title {
   .news-shell--cinematic,
   .company-profile-dossier--cinematic {
     margin-inline: 0;
+  }
+}
+
+/* ── Top-menu dropdown: Partners ▸ G.E.T ─────────────────────────────────────
+   Partners is no longer a link — it triggers a small sub-menu whose G.E.T
+   entry opens the Green Eco Tec site. Revealed on hover or keyboard focus. */
+.top-menu-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.top-menu-dropdown-trigger {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.top-menu-submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 168px;
+  padding: 8px;
+  border-radius: 14px;
+  background: var(--color-surface-strong);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+  z-index: 60;
+}
+
+.top-menu-dropdown:hover .top-menu-submenu,
+.top-menu-dropdown:focus-within .top-menu-submenu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.top-menu-submenu-link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.top-menu-submenu-link:hover,
+.top-menu-submenu-link:focus-visible {
+  background: rgba(45, 107, 73, 0.1);
+  color: var(--color-accent-strong);
+}
+
+/* ── 3-step plastics process workflow (landing) ──────────────────────────────
+   Buy → Process → Package & sell. A left-to-right rail of frosted cards with a
+   flowing pellet on each connector and a 3D pop on the active stage. */
+.process-workflow {
+  margin-top: 8px;
+}
+
+.process-track {
+  list-style: none;
+  margin: 0;
+  padding: 18px 4px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  perspective: 1500px;
+}
+
+.process-stage {
+  flex: 1 1 0;
+  display: flex;
+}
+
+.process-stage-card {
+  position: relative;
+  width: 100%;
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  padding: 26px 24px 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-line);
+  background: var(--color-surface-strong);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    border-color 0.3s ease;
+}
+
+.process-stage-card:hover {
+  transform: translateZ(22px);
+}
+
+.process-stage.is-active .process-stage-card {
+  transform: translateZ(52px) translateY(-6px);
+  border-color: var(--color-accent);
+  box-shadow: 0 34px 70px rgba(31, 82, 53, 0.2);
+}
+
+.process-stage-icon {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  color: var(--color-accent-strong);
+  background: rgba(45, 107, 73, 0.1);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.process-stage-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.process-stage.is-active .process-stage-icon {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-strong));
+  transform: translateZ(20px) scale(1.05);
+}
+
+.process-stage.is-active .process-stage-icon--spin svg {
+  animation: process-spin 3.6s linear infinite;
+}
+
+/* Animated story motif per stage: whole plastic → crushed → packaged */
+.process-scene {
+  position: relative;
+  width: 100%;
+  height: 72px;
+  border-radius: 14px;
+  background: rgba(45, 107, 73, 0.06);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+}
+
+.process-stage.is-active .process-scene {
+  background: rgba(45, 107, 73, 0.1);
+  border-color: rgba(45, 107, 73, 0.28);
+}
+
+/* Stage 1 — a whole plastic bottle gently bobbing */
+.pscene-bottle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 40px;
+  margin: -20px 0 0 -12px;
+  border-radius: 8px 8px 10px 10px;
+  background: linear-gradient(160deg, rgba(45, 107, 73, 0.85), rgba(31, 82, 53, 0.95));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  animation: pscene-bob 2.8s ease-in-out infinite;
+}
+
+.pscene-bottle::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 3px 3px 0 0;
+  background: rgba(31, 82, 53, 0.95);
+}
+
+@keyframes pscene-bob {
+  0%, 100% { transform: translateY(3px) rotate(-4deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+/* Stage 2 — a block squashes while shards burst out (crushing) */
+.pscene-block {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, rgba(45, 107, 73, 0.85), rgba(31, 82, 53, 0.95));
+  animation: pscene-press 2.4s ease-in-out infinite;
+}
+
+@keyframes pscene-press {
+  0%, 100% { transform: scale(1); }
+  45% { transform: scaleY(0.4) scaleX(1.12); }
+  62% { transform: scaleY(0.5) scaleX(1.08); }
+}
+
+.pscene-shard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -4px 0 0 -4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  opacity: 0;
+}
+
+.pscene-shard:nth-of-type(2) { animation: pscene-burst-1 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(3) { animation: pscene-burst-2 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(4) { animation: pscene-burst-3 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(5) { animation: pscene-burst-4 2.4s ease-out infinite; }
+
+@keyframes pscene-burst-1 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(-22px, -15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-2 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(22px, -15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-3 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(-21px, 15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-4 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(22px, 15px) scale(1); opacity: 0; }
+}
+
+/* Stage 3 — crushed bits drop into a package box */
+.pscene-box {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 38px;
+  height: 24px;
+  margin-left: -19px;
+  border: 2px solid var(--color-accent-strong);
+  border-radius: 4px;
+  background: rgba(45, 107, 73, 0.14);
+}
+
+.pscene-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  right: -2px;
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+  background: var(--color-accent-strong);
+}
+
+.pscene-bit {
+  position: absolute;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  opacity: 0;
+}
+
+.pscene-bit:nth-of-type(1) { left: 41%; animation: pscene-drop 2.1s ease-in infinite; }
+.pscene-bit:nth-of-type(2) { left: 50%; animation: pscene-drop 2.1s ease-in 0.45s infinite; }
+.pscene-bit:nth-of-type(3) { left: 59%; animation: pscene-drop 2.1s ease-in 0.9s infinite; }
+
+@keyframes pscene-drop {
+  0% { transform: translateY(-8px); opacity: 0; }
+  20% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { transform: translateY(26px); opacity: 0; }
+}
+
+.process-stage-index {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-accent-strong);
+}
+
+.process-stage-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.process-stage-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+.process-stage-points {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 14px 0 0;
+  display: grid;
+  gap: 9px;
+  width: 100%;
+  border-top: 1px solid var(--color-line);
+}
+
+.process-stage-points li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+.process-stage-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 5px;
+  border-left: 2px solid var(--color-accent);
+  border-bottom: 2px solid var(--color-accent);
+  transform: rotate(-45deg);
+}
+
+.process-stage.is-active .process-stage-points li {
+  color: var(--color-text);
+}
+
+/* Connector between stages: faint rail, a flowing pellet, and a chevron */
+.process-connector {
+  flex: 0 0 64px;
+  align-self: center;
+  position: relative;
+  height: 24px;
+}
+
+.process-connector-line {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  right: 14px;
+  height: 2px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  background: rgba(45, 107, 73, 0.22);
+}
+
+.process-connector.is-done .process-connector-line {
+  background: var(--color-accent);
+}
+
+.process-connector-pellet {
+  position: absolute;
+  top: 50%;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(45, 107, 73, 0.14);
+  transform: translateY(-50%);
+  animation: process-flow 2.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.process-connector-arrow {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 8px;
+  height: 8px;
+  transform: translateY(-50%) rotate(45deg);
+  border-top: 2px solid var(--color-accent);
+  border-right: 2px solid var(--color-accent);
+}
+
+@keyframes process-flow {
+  0% { left: 6px; opacity: 0; }
+  18% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { left: calc(100% - 22px); opacity: 0; }
+}
+
+@keyframes process-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 860px) {
+  .process-track {
+    flex-direction: column;
+    perspective: none;
+    gap: 0;
+  }
+
+  .process-stage.is-active .process-stage-card {
+    transform: none;
+    border-color: var(--color-accent);
+  }
+
+  .process-stage-card:hover {
+    transform: none;
+  }
+
+  .process-connector {
+    flex: none;
+    width: 100%;
+    height: 34px;
+  }
+
+  .process-connector-line {
+    top: 4px;
+    bottom: 12px;
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: auto;
+    transform: translateX(-50%);
+  }
+
+  .process-connector-arrow {
+    top: auto;
+    bottom: 6px;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%) rotate(135deg);
+  }
+
+  .process-connector-pellet {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .process-stage-card,
+  .process-stage-icon {
+    transition: border-color 0.3s ease;
+  }
+  .process-stage.is-active .process-stage-card {
+    transform: none;
+  }
+  .process-stage.is-active .process-stage-icon {
+    transform: none;
+  }
+  .process-stage.is-active .process-stage-icon--spin svg {
+    animation: none;
+  }
+  .process-connector-pellet {
+    animation: none;
+    left: calc(50% - 4px);
+  }
+  .pscene-bottle,
+  .pscene-block,
+  .pscene-shard,
+  .pscene-bit {
+    animation: none;
+  }
+  .pscene-shard {
+    opacity: 0;
+  }
+  .pscene-bit {
+    opacity: 1;
   }
 }
 
