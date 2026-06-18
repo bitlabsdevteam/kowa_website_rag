@@ -51,6 +51,36 @@ function SellIcon() {
 
 const ICONS = [BuyIcon, ProcessIcon, SellIcon];
 
+/** Animated motif per stage: a whole plastic → crushed shards → packaged box. */
+function StageScene({ index }: { index: number }) {
+  if (index === 0) {
+    return (
+      <span className="process-scene process-scene--buy" aria-hidden="true">
+        <span className="pscene-bottle" />
+      </span>
+    );
+  }
+  if (index === 1) {
+    return (
+      <span className="process-scene process-scene--crush" aria-hidden="true">
+        <span className="pscene-block" />
+        <span className="pscene-shard" />
+        <span className="pscene-shard" />
+        <span className="pscene-shard" />
+        <span className="pscene-shard" />
+      </span>
+    );
+  }
+  return (
+    <span className="process-scene process-scene--pack" aria-hidden="true">
+      <span className="pscene-bit" />
+      <span className="pscene-bit" />
+      <span className="pscene-bit" />
+      <span className="pscene-box" />
+    </span>
+  );
+}
+
 export function ProcessWorkflow({ steps, activeIndex, onSelect }: ProcessWorkflowProps) {
   return (
     <div className="process-workflow" data-testid="process-workflow">
@@ -68,6 +98,7 @@ export function ProcessWorkflow({ steps, activeIndex, onSelect }: ProcessWorkflo
                   aria-pressed={index === activeIndex}
                   data-testid={`process-step-${index}`}
                 >
+                  <StageScene index={index} />
                   <span className={`process-stage-icon ${index === 1 ? 'process-stage-icon--spin' : ''}`} aria-hidden="true">
                     <Icon />
                   </span>

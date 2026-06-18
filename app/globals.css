@@ -7520,6 +7520,156 @@ html:lang(en) .reference-section-title {
   animation: process-spin 3.6s linear infinite;
 }
 
+/* Animated story motif per stage: whole plastic → crushed → packaged */
+.process-scene {
+  position: relative;
+  width: 100%;
+  height: 72px;
+  border-radius: 14px;
+  background: rgba(45, 107, 73, 0.06);
+  border: 1px solid var(--color-line);
+  overflow: hidden;
+}
+
+.process-stage.is-active .process-scene {
+  background: rgba(45, 107, 73, 0.1);
+  border-color: rgba(45, 107, 73, 0.28);
+}
+
+/* Stage 1 — a whole plastic bottle gently bobbing */
+.pscene-bottle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 24px;
+  height: 40px;
+  margin: -20px 0 0 -12px;
+  border-radius: 8px 8px 10px 10px;
+  background: linear-gradient(160deg, rgba(45, 107, 73, 0.85), rgba(31, 82, 53, 0.95));
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+  animation: pscene-bob 2.8s ease-in-out infinite;
+}
+
+.pscene-bottle::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 3px 3px 0 0;
+  background: rgba(31, 82, 53, 0.95);
+}
+
+@keyframes pscene-bob {
+  0%, 100% { transform: translateY(3px) rotate(-4deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+}
+
+/* Stage 2 — a block squashes while shards burst out (crushing) */
+.pscene-block {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, rgba(45, 107, 73, 0.85), rgba(31, 82, 53, 0.95));
+  animation: pscene-press 2.4s ease-in-out infinite;
+}
+
+@keyframes pscene-press {
+  0%, 100% { transform: scale(1); }
+  45% { transform: scaleY(0.4) scaleX(1.12); }
+  62% { transform: scaleY(0.5) scaleX(1.08); }
+}
+
+.pscene-shard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  margin: -4px 0 0 -4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  opacity: 0;
+}
+
+.pscene-shard:nth-of-type(2) { animation: pscene-burst-1 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(3) { animation: pscene-burst-2 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(4) { animation: pscene-burst-3 2.4s ease-out infinite; }
+.pscene-shard:nth-of-type(5) { animation: pscene-burst-4 2.4s ease-out infinite; }
+
+@keyframes pscene-burst-1 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(-22px, -15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-2 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(22px, -15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-3 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(-21px, 15px) scale(1); opacity: 0; }
+}
+@keyframes pscene-burst-4 {
+  0%, 42% { transform: translate(0, 0) scale(0.4); opacity: 0; }
+  56% { opacity: 1; }
+  100% { transform: translate(22px, 15px) scale(1); opacity: 0; }
+}
+
+/* Stage 3 — crushed bits drop into a package box */
+.pscene-box {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  width: 38px;
+  height: 24px;
+  margin-left: -19px;
+  border: 2px solid var(--color-accent-strong);
+  border-radius: 4px;
+  background: rgba(45, 107, 73, 0.14);
+}
+
+.pscene-box::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -2px;
+  right: -2px;
+  height: 5px;
+  border-radius: 3px 3px 0 0;
+  background: var(--color-accent-strong);
+}
+
+.pscene-bit {
+  position: absolute;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 2px;
+  background: var(--color-accent);
+  opacity: 0;
+}
+
+.pscene-bit:nth-of-type(1) { left: 41%; animation: pscene-drop 2.1s ease-in infinite; }
+.pscene-bit:nth-of-type(2) { left: 50%; animation: pscene-drop 2.1s ease-in 0.45s infinite; }
+.pscene-bit:nth-of-type(3) { left: 59%; animation: pscene-drop 2.1s ease-in 0.9s infinite; }
+
+@keyframes pscene-drop {
+  0% { transform: translateY(-8px); opacity: 0; }
+  20% { opacity: 1; }
+  78% { opacity: 1; }
+  100% { transform: translateY(26px); opacity: 0; }
+}
+
 .process-stage-index {
   font-size: 0.78rem;
   font-weight: 700;
@@ -7695,6 +7845,18 @@ html:lang(en) .reference-section-title {
   .process-connector-pellet {
     animation: none;
     left: calc(50% - 4px);
+  }
+  .pscene-bottle,
+  .pscene-block,
+  .pscene-shard,
+  .pscene-bit {
+    animation: none;
+  }
+  .pscene-shard {
+    opacity: 0;
+  }
+  .pscene-bit {
+    opacity: 1;
   }
 }
 
