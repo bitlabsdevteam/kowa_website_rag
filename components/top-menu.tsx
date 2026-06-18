@@ -53,15 +53,28 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
         <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products">
           {labels.products}
         </Link>
-        <a
-          href="https://www.greenecotec.co.jp/index.html"
-          className="top-menu-link"
-          data-testid="top-menu-link-partners"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {labels.partners}
-        </a>
+        <div className="top-menu-dropdown">
+          <button
+            type="button"
+            className="top-menu-link top-menu-dropdown-trigger"
+            data-testid="top-menu-link-partners"
+            aria-haspopup="true"
+          >
+            {labels.partners}
+          </button>
+          <div className="top-menu-submenu" role="menu" aria-label={labels.partners}>
+            <a
+              href="https://www.greenecotec.co.jp/index.html"
+              className="top-menu-submenu-link"
+              data-testid="top-menu-link-get"
+              role="menuitem"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              G.E.T
+            </a>
+          </div>
+        </div>
         <Link href="/company_profile" className="top-menu-link" data-testid="top-menu-link-company-profile">
           {labels.companyProfile}
         </Link>

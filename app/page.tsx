@@ -7,7 +7,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
-import { ResourceCirculationFlow } from '@/components/resource-circulation-flow';
+import { ProcessWorkflow } from '@/components/process-workflow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
@@ -23,6 +23,11 @@ const HOME_UI: Record<
     platformLabel: string;
     platformTitle: string;
     platformBody: string;
+    processSteps: [
+      { title: string; desc: string; points: string[] },
+      { title: string; desc: string; points: string[] },
+      { title: string; desc: string; points: string[] },
+    ];
   }
 > = {
   en: {
@@ -33,6 +38,35 @@ const HOME_UI: Record<
     platformTitle: 'WHAT IS KOWA’S BUSINESS?',
     platformBody:
       'Kowa combines procurement, processing coordination, recycling flows, and multilingual trade execution in one business platform.',
+    processSteps: [
+      {
+        title: 'Buy plastics',
+        desc: 'We source plastics destined for waste and bring them back into productive use.',
+        points: [
+          'Production-loss material & waste plastic from manufacturers',
+          'Mixed and post-industrial plastics, plus resin procurement',
+          'Collected domestically across Japan',
+        ],
+      },
+      {
+        title: 'Process the plastics',
+        desc: 'Material is sorted and regenerated into clean, reusable raw stock.',
+        points: [
+          'Sort & dismantle by resin type and blend',
+          'Crush, compress, and mix into raw material',
+          'Regenerated on the G.P. Polymer / Gunma line',
+        ],
+      },
+      {
+        title: 'Package & sell',
+        desc: 'Regenerated stock is repackaged and routed back into supply chains.',
+        points: [
+          'Repackaged into reusable raw material',
+          'Exported overseas, with a focus on Southeast Asia',
+          'Supplied to domestic industrial supply chains',
+        ],
+      },
+    ],
   },
   ja: {
     heroFlag: 'Tokyo, Japan | グローバルトレードと資源循環',
@@ -42,6 +76,35 @@ const HOME_UI: Record<
     platformTitle: 'WHAT IS KOWA’S BUSINESS?',
     platformBody:
       'Kowaは、調達、加工連携、資源循環、そして多言語での商流実行を一体として扱う事業プラットフォームです。',
+    processSteps: [
+      {
+        title: 'プラスチックを仕入れる',
+        desc: '廃棄されるプラスチックを仕入れ、再び資源として活かします。',
+        points: [
+          'メーカーからの生産ロス材・廃プラスチック',
+          '混合・産業系プラスチック、樹脂の調達',
+          '日本国内での回収',
+        ],
+      },
+      {
+        title: 'プラスチックを加工する',
+        desc: '選別・再生を経て、清潔で再利用可能な原料に戻します。',
+        points: [
+          '樹脂特性・配合ごとの選別と解体',
+          '粉砕・圧縮・混合により原料化',
+          'G.P.ポリマー／群馬ラインで再生',
+        ],
+      },
+      {
+        title: '梱包して販売する',
+        desc: '再生した原料を梱包し、サプライチェーンへ戻します。',
+        points: [
+          '再利用可能な原料へ再梱包',
+          '東南アジアを中心に海外へ輸出',
+          '国内の産業向けサプライへ供給',
+        ],
+      },
+    ],
   },
   zh: {
     heroFlag: 'Tokyo, Japan | 全球贸易与资源循环',
@@ -51,6 +114,35 @@ const HOME_UI: Record<
     platformTitle: 'WHAT IS KOWA’S BUSINESS?',
     platformBody:
       'Kowa 把采购、加工协同、资源循环与多语言贸易执行整合成一个统一的业务平台。',
+    processSteps: [
+      {
+        title: '采购塑料',
+        desc: '采购即将被废弃的塑料，让其重新成为资源。',
+        points: [
+          '来自制造商的生产损耗料与废塑料',
+          '混合及工业来源塑料，以及树脂采购',
+          '在日本国内回收',
+        ],
+      },
+      {
+        title: '加工塑料',
+        desc: '经过分选与再生，转化为洁净、可再利用的原料。',
+        points: [
+          '按树脂类型与配合进行分选、拆解',
+          '粉碎、压缩、混合制成原料',
+          '在 G.P. Polymer／群马产线再生',
+        ],
+      },
+      {
+        title: '打包与销售',
+        desc: '将再生原料重新打包，送回供应链。',
+        points: [
+          '重新打包为可用原料',
+          '以东南亚为主出口海外',
+          '面向国内产业供应链供给',
+        ],
+      },
+    ],
   },
 };
 
@@ -83,24 +175,26 @@ export default function HomePage() {
     }
   }, []);
 
+  const processStepCount = ui.processSteps.length;
+
   useEffect(() => {
-    if (activeFlowIndex >= copy.business.flowPhases.length) {
+    if (activeFlowIndex >= processStepCount) {
       setActiveFlowIndex(0);
     }
-  }, [activeFlowIndex, copy.business.flowPhases.length]);
+  }, [activeFlowIndex, processStepCount]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches || copy.business.flowPhases.length <= 1) {
+    if (mediaQuery.matches || processStepCount <= 1) {
       return undefined;
     }
 
     const intervalId = window.setInterval(() => {
-      setActiveFlowIndex((current) => (current + 1) % copy.business.flowPhases.length);
+      setActiveFlowIndex((current) => (current + 1) % processStepCount);
     }, 4200);
 
     return () => window.clearInterval(intervalId);
-  }, [copy.business.flowPhases.length]);
+  }, [processStepCount]);
 
   return (
     <main className="page shell reference-site">
@@ -150,38 +244,9 @@ export default function HomePage() {
           </div>
         </ScrollReveal>
 
-        <div className="reference-business-grid">
-          <ScrollReveal variant="fly-left" testId="reveal-business-rail" className="business-architecture-rail">
-            <p className="business-flow-title">{copy.business.flowTitle}</p>
-            <p className="body-copy">{copy.business.intro}</p>
-            <ol className="business-step-list">
-              {copy.business.flowPhases.map((phase, index) => (
-                <li key={`${phase.title}-${phase.step}`} className={`business-step-item ${activeFlowIndex === index ? 'is-active' : ''}`}>
-                  <button
-                    type="button"
-                    className="business-step-button"
-                    onClick={() => setActiveFlowIndex(index)}
-                    aria-pressed={activeFlowIndex === index}
-                  >
-                    <span className="business-step-index">{String(index + 1).padStart(2, '0')}</span>
-                    <span>{phase.step}</span>
-                  </button>
-                </li>
-              ))}
-            </ol>
-          </ScrollReveal>
-
-          <ScrollReveal variant="fly-right" testId="reveal-business-visual" className="business-architecture-visual">
-            <ResourceCirculationFlow
-              brand={copy.brand.name}
-              title={copy.business.flowTitle}
-              intro={copy.business.intro}
-              phases={copy.business.flowPhases}
-              activeIndex={activeFlowIndex}
-              onSelect={setActiveFlowIndex}
-            />
-          </ScrollReveal>
-        </div>
+        <ScrollReveal variant="fade-up" testId="reveal-business-visual">
+          <ProcessWorkflow steps={ui.processSteps} activeIndex={activeFlowIndex} onSelect={setActiveFlowIndex} />
+        </ScrollReveal>
       </section>
       <footer className="site-footer" data-testid="landing-footer">
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
