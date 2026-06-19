@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Fraunces, Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
@@ -32,6 +32,14 @@ const notoSansJp = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: 'Kowa Trade & Commerce',
   description: 'Kowa Trade and Commerce corporate website with multilingual company information and an Aya assistant.',
+};
+
+// Explicit mobile viewport: scale to device width, allow user zoom (accessibility),
+// and tint the browser chrome to match the cream canvas.
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#f3efe7',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -12,6 +12,7 @@
     "localeLabel": "Lang",
     "navAria": "Main navigation",
     "homeAria": "Kowa Trade and Commerce home",
+    "menuToggleLabel": "Menu",
     "localeOptions": {
       "en": "EN",
       "ja": "JP",

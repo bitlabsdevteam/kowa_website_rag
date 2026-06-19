@@ -17,6 +17,7 @@ export type MenuLabels = {
   localeLabel: string;
   navAria: string;
   homeAria: string;
+  menuToggleLabel: string;
   localeOptions: {
     en: string;
     ja: string;
