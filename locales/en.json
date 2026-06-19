@@ -169,7 +169,24 @@
     "submitLabel": "Send message",
     "sendingLabel": "Sending…",
     "successMessage": "Thank you — your message has been sent. Our team will be in touch.",
-    "errorMessage": "Sorry, your message could not be sent. Please try again later."
+    "errorMessage": "Sorry, your message could not be sent. Please try again later.",
+    "locationEyebrow": "Visit us",
+    "locationTitle": "Our Tokyo office",
+    "locationLead": "Find us in the heart of Minato — a short walk from Tamachi and Mita stations.",
+    "addressLabel": "Head office",
+    "address": "Reoma Bldg. 5F, 2-10-6, Mita, Minato-Ku, Tokyo 108-0073, Japan",
+    "directionsLabel": "Get directions",
+    "mapTitle": "Map showing the location of Kowa Trade and Commerce, Mita, Minato-Ku, Tokyo",
+    "stationsLabel": "Nearest stations",
+    "stationsClosestBadge": "Closest",
+    "stationsApproxNote": "Walking times are approximate.",
+    "stationsResetLabel": "View office",
+    "stationsRouteHint": "Walking route to the office shown on the map.",
+    "stations": [
+      { "name": "Mita Station", "lines": "Toei Asakusa / Mita lines", "walk": "~8 min walk", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
+      { "name": "Tamachi Station", "lines": "JR Yamanote line", "walk": "~12 min walk", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
+      { "name": "Akabanebashi Station", "lines": "Toei Oedo line", "walk": "~8 min walk", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+    ]
   },
   "news": {
     "title": "NEWS",
@@ -202,7 +219,10 @@
       "prevButton": "Prev",
       "nextButton": "Next",
       "pagesAriaLabel": "Carousel pages",
-      "goToSlideLabel": "Go to slide"
+      "goToSlideLabel": "Go to slide",
+      "enlargeLabel": "Click to enlarge",
+      "closeLabel": "Close",
+      "thumbnailsAriaLabel": "Product thumbnails"
     }
   },
   "footer": {

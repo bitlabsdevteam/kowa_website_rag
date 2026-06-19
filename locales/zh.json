@@ -169,7 +169,24 @@
     "submitLabel": "发送信息",
     "sendingLabel": "发送中…",
     "successMessage": "感谢您的留言，信息已发送。我们的团队将尽快与您联系。",
-    "errorMessage": "抱歉，信息发送失败。请稍后再试。"
+    "errorMessage": "抱歉，信息发送失败。请稍后再试。",
+    "locationEyebrow": "到访我们",
+    "locationTitle": "东京办公室",
+    "locationLead": "位于港区中心地带，距田町站与三田站均为步行可达。",
+    "addressLabel": "总公司",
+    "address": "〒108-0073 东京都港区三田2-10-6 Reoma大厦5楼",
+    "directionsLabel": "查看路线",
+    "mapTitle": "显示广和通商位置的地图（东京都港区三田）",
+    "stationsLabel": "最近车站",
+    "stationsClosestBadge": "最近",
+    "stationsApproxNote": "步行时间为大致估算。",
+    "stationsResetLabel": "返回办公室地图",
+    "stationsRouteHint": "地图上已显示前往办公室的步行路线。",
+    "stations": [
+      { "name": "三田站", "lines": "都营浅草线・三田线", "walk": "步行约8分钟", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
+      { "name": "田町站", "lines": "JR山手线", "walk": "步行约12分钟", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
+      { "name": "赤羽桥站", "lines": "都营大江户线", "walk": "步行约8分钟", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+    ]
   },
   "news": {
     "title": "新闻",
@@ -202,7 +219,10 @@
       "prevButton": "上一项",
       "nextButton": "下一项",
       "pagesAriaLabel": "轮播分页",
-      "goToSlideLabel": "跳转到第"
+      "goToSlideLabel": "跳转到第",
+      "enlargeLabel": "点击放大",
+      "closeLabel": "关闭",
+      "thumbnailsAriaLabel": "产品缩略图"
     }
   },
   "footer": {

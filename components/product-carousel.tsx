@@ -1,8 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { startTransition, useEffect, useRef, useState } from 'react';
-import type React from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import type { ProductMediaItem } from '@/lib/product-media';
 import { PRODUCT_SHOWCASE_COPY } from '@/lib/product-showcase-copy';
@@ -10,226 +9,182 @@ import type { Locale } from '@/lib/site-copy';
 
 type ProductCarouselProps = {
   items: ProductMediaItem[];
-  entries: Array<{ name: string; detail: string }>;
   locale: Locale;
   labels: {
     ariaLabel: string;
     prevAriaLabel: string;
     nextAriaLabel: string;
-    prevButton: string;
-    nextButton: string;
     pagesAriaLabel: string;
     goToSlideLabel: string;
+    enlargeLabel: string;
+    closeLabel: string;
+    thumbnailsAriaLabel: string;
   };
 };
 
-export function ProductCarousel({ items, entries, locale, labels }: ProductCarouselProps) {
+const AUTO_ROTATE_MS = 5000;
+
+export function ProductCarousel({ items, locale, labels }: ProductCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const startX = useRef<number | null>(null);
-  const showcaseCopy = PRODUCT_SHOWCASE_COPY[locale];
+  const [paused, setPaused] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const categories = PRODUCT_SHOWCASE_COPY[locale].categories;
 
+  const count = items.length;
+  const goTo = useCallback((index: number) => setActiveIndex(((index % count) + count) % count), [count]);
+  const goNext = useCallback(() => goTo(activeIndex + 1), [activeIndex, goTo]);
+  const goPrev = useCallback(() => goTo(activeIndex - 1), [activeIndex, goTo]);
+
+  // Auto-rotate every 5s; pause on hover, while the lightbox is open, or under
+  // reduced-motion preferences.
   useEffect(() => {
-    if (activeIndex >= items.length) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, items.length]);
+    if (count <= 1 || paused || lightboxOpen) return undefined;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return undefined;
 
-  const setIndex = (index: number) => {
-    startTransition(() => {
-      setActiveIndex(index);
-    });
-  };
+    const id = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % count);
+    }, AUTO_ROTATE_MS);
+    return () => window.clearInterval(id);
+  }, [count, paused, lightboxOpen]);
 
-  const goNext = () => {
-    setIndex((activeIndex + 1) % items.length);
-  };
+  // Close the lightbox on Escape and focus the close button when it opens.
+  useEffect(() => {
+    if (!lightboxOpen) return undefined;
+    closeButtonRef.current?.focus();
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLightboxOpen(false);
+      if (event.key === 'ArrowRight') goNext();
+      if (event.key === 'ArrowLeft') goPrev();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightboxOpen, goNext, goPrev]);
 
-  const goPrev = () => {
-    setIndex((activeIndex - 1 + items.length) % items.length);
-  };
-
-  const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
-    startX.current = event.touches[0]?.clientX ?? null;
-  };
-
-  const onTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
-    if (startX.current == null) return;
-    const endX = event.changedTouches[0]?.clientX ?? startX.current;
-    const delta = endX - startX.current;
-    startX.current = null;
-
-    if (delta <= -40) goNext();
-    if (delta >= 40) goPrev();
-  };
-
-  if (items.length === 0) return null;
+  if (count === 0) return null;
 
   const activeItem = items[activeIndex] ?? items[0];
-  const activeCategory = activeItem.category;
-
-  const chapters = entries
-    .map((entry, index) => {
-      const chapterCopy = showcaseCopy.chapters[index] ?? showcaseCopy.chapters[showcaseCopy.chapters.length - 1];
-      const chapterIndexes = items.reduce<number[]>((result, item, itemIndex) => {
-        if (chapterCopy.categories.includes(item.category)) {
-          result.push(itemIndex);
-        }
-        return result;
-      }, []);
-      const firstIndex = chapterIndexes[0] ?? 0;
-
-      return {
-        entry,
-        chapterCopy,
-        firstIndex,
-        count: chapterIndexes.length,
-        isActive: chapterCopy.categories.includes(activeCategory),
-      };
-    })
-    .filter((chapter) => chapter.count > 0);
+  const activeCategory = categories[activeItem.category];
 
   return (
-    <section className="products-carousel" data-testid="products-carousel" aria-label={labels.ariaLabel}>
-      <div className="products-carousel-overview">
-        <div className="products-carousel-intro">
-          <div>
-            <p className="products-carousel-overline">{showcaseCopy.introEyebrow}</p>
-            <p className="products-carousel-summary body-copy">{showcaseCopy.introBody}</p>
-          </div>
-          <p className="products-carousel-position" data-testid="products-carousel-position" aria-live="polite">
-            {activeIndex + 1} / {items.length}
-          </p>
-        </div>
-
-        <div className="products-carousel-chapters">
-          {chapters.map(({ entry, chapterCopy, firstIndex, count, isActive }, index) => (
-            <button
-              key={`${entry.name}-${index}`}
-              type="button"
-              className="products-carousel-chapter"
-              data-active={isActive ? 'true' : 'false'}
-              onClick={() => setIndex(firstIndex)}
-              aria-pressed={isActive}
-            >
-              <span className="products-carousel-chapter-index">{String(index + 1).padStart(2, '0')}</span>
-              <div className="products-carousel-chapter-copy">
-                <p className="products-carousel-chapter-overline">{chapterCopy.eyebrow}</p>
-                <strong>{entry.name}</strong>
-                <p>{entry.detail}</p>
-                <span>
-                  {count} {showcaseCopy.chapterMediaCountLabel} · {chapterCopy.caption}
-                </span>
-              </div>
-              <span className="products-carousel-chapter-cta">{showcaseCopy.chapterButtonLabel}</span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div className="products-carousel-head">
-        <button type="button" className="products-carousel-button" data-testid="products-carousel-prev" onClick={goPrev} aria-label={labels.prevAriaLabel}>
-          {labels.prevButton}
-        </button>
-        <button type="button" className="products-carousel-button" data-testid="products-carousel-next" onClick={goNext} aria-label={labels.nextAriaLabel}>
-          {labels.nextButton}
-        </button>
-      </div>
-
-      <div className="products-carousel-viewport" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-        <div
-          className="products-carousel-track"
-          data-testid="products-carousel-track"
-          style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+    <section
+      className="pgallery"
+      data-testid="products-carousel"
+      aria-label={labels.ariaLabel}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="pgallery-stage">
+        <button
+          type="button"
+          className="pgallery-nav pgallery-prev"
+          onClick={goPrev}
+          aria-label={labels.prevAriaLabel}
+          data-testid="products-carousel-prev"
         >
-          {items.map((item, index) => {
-            const story = showcaseCopy.categories[item.category];
+          <span aria-hidden="true">‹</span>
+        </button>
 
-            return (
-              <article
-                key={item.id}
-                className="products-carousel-slide"
-                data-testid="products-carousel-slide"
-                data-index={index}
-                data-active={activeIndex === index ? 'true' : 'false'}
-                aria-hidden={activeIndex === index ? 'false' : 'true'}
-              >
-                <div className="products-carousel-stage" data-accent={story.accent}>
-                  <div className="products-carousel-visual-panel">
-                    <figure className="products-carousel-hero-figure">
-                      <div className="products-carousel-image-shell">
-                        <Image
-                          className="products-carousel-image"
-                          src={item.src}
-                          alt={item.title}
-                          width={1600}
-                          height={1200}
-                          priority={index === 0}
-                          sizes="(max-width: 980px) 100vw, 52vw"
-                        />
-                      </div>
-                      <figcaption>
-                        <strong>{item.title}</strong>
-                        <span>{story.label}</span>
-                      </figcaption>
-                    </figure>
-                  </div>
+        <button
+          type="button"
+          className="pgallery-main"
+          onClick={() => setLightboxOpen(true)}
+          aria-label={labels.enlargeLabel}
+          data-testid="products-carousel-enlarge"
+        >
+          <Image
+            key={activeItem.id}
+            className="pgallery-main-img"
+            src={activeItem.src}
+            alt={activeItem.title}
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 880px"
+          />
+          <span className="pgallery-zoom-hint" aria-hidden="true">
+            {labels.enlargeLabel}
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4.3-4.3M11 8v6M8 11h6" />
+            </svg>
+          </span>
+        </button>
 
-                  <div className="products-carousel-story-panel">
-                    <div className="products-carousel-story-copy">
-                      <p className="products-carousel-story-overline">{story.eyebrow}</p>
-                      <h3>{item.title}</h3>
-                      <p className="products-carousel-story-summary">{story.summary}</p>
-                    </div>
-
-                    <div className="products-carousel-story-meta">
-                      <article className="products-carousel-meta-card">
-                        <span>{showcaseCopy.categoryMetaLabel}</span>
-                        <strong>{story.label}</strong>
-                      </article>
-                      <article className="products-carousel-meta-card">
-                        <span>{showcaseCopy.visualMetaLabel}</span>
-                        <strong>{String(index + 1).padStart(2, '0')}</strong>
-                      </article>
-                      <article className="products-carousel-meta-card">
-                        <span>{showcaseCopy.capabilitiesLabel}</span>
-                        <strong>{story.points.length}</strong>
-                      </article>
-                    </div>
-
-                    <ul className="products-carousel-point-list">
-                      {story.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <button
+          type="button"
+          className="pgallery-nav pgallery-next"
+          onClick={goNext}
+          aria-label={labels.nextAriaLabel}
+          data-testid="products-carousel-next"
+        >
+          <span aria-hidden="true">›</span>
+        </button>
       </div>
 
-      <div className="products-carousel-pages" aria-label={labels.pagesAriaLabel}>
-        {items.map((item, itemIndex) => {
-          const story = showcaseCopy.categories[item.category];
+      <div className="pgallery-caption">
+        <p className="pgallery-cat">{activeCategory.label}</p>
+        <h3 className="pgallery-title" data-testid="products-carousel-position">
+          {activeItem.title}
+        </h3>
+        <p className="pgallery-desc">{activeCategory.summary}</p>
+      </div>
 
-          return (
+      <div className="pgallery-dots" role="tablist" aria-label={labels.pagesAriaLabel}>
+        {items.map((item, index) => (
+          <button
+            key={item.id}
+            type="button"
+            className="pgallery-dot"
+            data-testid="products-carousel-page"
+            aria-label={`${labels.goToSlideLabel} ${index + 1}`}
+            aria-current={activeIndex === index ? 'true' : 'false'}
+            onClick={() => goTo(index)}
+          />
+        ))}
+      </div>
+
+      <ul className="pgallery-thumbs" aria-label={labels.thumbnailsAriaLabel}>
+        {items.map((item, index) => (
+          <li key={item.id}>
             <button
-              key={item.id}
               type="button"
-              className="products-carousel-page"
-              data-testid="products-carousel-page"
-              aria-label={`${labels.goToSlideLabel} ${itemIndex + 1}`}
-              aria-current={activeIndex === itemIndex ? 'true' : 'false'}
-              data-accent={story.accent}
-              onClick={() => setIndex(itemIndex)}
+              className={`pgallery-thumb ${activeIndex === index ? 'is-active' : ''}`}
+              onClick={() => goTo(index)}
+              aria-label={`${labels.goToSlideLabel} ${index + 1}: ${item.title}`}
+              aria-current={activeIndex === index ? 'true' : 'false'}
             >
-              <span>{String(itemIndex + 1).padStart(2, '0')}</span>
-              <small>{story.label}</small>
+              <Image src={item.src} alt={item.title} width={120} height={84} sizes="120px" />
             </button>
-          );
-        })}
-      </div>
+          </li>
+        ))}
+      </ul>
+
+      {lightboxOpen ? (
+        <div
+          className="pgallery-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={activeItem.title}
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            type="button"
+            ref={closeButtonRef}
+            className="pgallery-lightbox-close"
+            onClick={() => setLightboxOpen(false)}
+            aria-label={labels.closeLabel}
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+          {/* eslint-disable-next-line @next/next/no-img-element -- full-resolution view at natural size */}
+          <img
+            className="pgallery-lightbox-img"
+            src={activeItem.src}
+            alt={activeItem.title}
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      ) : null}
     </section>
   );
 }
