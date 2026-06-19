@@ -1,12 +1,42 @@
 'use client';
 
-import { Fragment } from 'react';
+import { Fragment, type ReactNode } from 'react';
+
+import { useScrollReveal } from '@/components/hero-3d/use-scroll-reveal';
 
 type ProcessStep = {
   title: string;
   desc: string;
   points: string[];
 };
+
+/** Wraps a list item in a once-only scroll reveal (fly-left / fade-up / fly-right). */
+function RevealItem({
+  variant,
+  delay,
+  className,
+  children,
+  ariaHidden,
+}: {
+  variant: 'fly-left' | 'fly-right' | 'fade-up';
+  delay: number;
+  className: string;
+  children: ReactNode;
+  ariaHidden?: boolean;
+}) {
+  const { ref, revealed } = useScrollReveal<HTMLLIElement>();
+  return (
+    <li
+      ref={ref}
+      className={`${className} reveal-${variant}`}
+      data-revealed={revealed}
+      style={{ transitionDelay: `${delay}ms` }}
+      aria-hidden={ariaHidden}
+    >
+      {children}
+    </li>
+  );
+}
 
 type ProcessWorkflowProps = {
   steps: ProcessStep[];
@@ -88,9 +118,10 @@ export function ProcessWorkflow({ steps, activeIndex, onSelect }: ProcessWorkflo
         {steps.map((step, index) => {
           const Icon = ICONS[index % ICONS.length];
           const state = index === activeIndex ? 'is-active' : index < activeIndex ? 'is-done' : '';
+          const stageVariant = index === 0 ? 'fly-left' : index === steps.length - 1 ? 'fly-right' : 'fade-up';
           return (
             <Fragment key={step.title}>
-              <li className={`process-stage ${state}`}>
+              <RevealItem variant={stageVariant} delay={index * 120} className={`process-stage ${state}`}>
                 <button
                   type="button"
                   className="process-stage-card"
@@ -111,13 +142,18 @@ export function ProcessWorkflow({ steps, activeIndex, onSelect }: ProcessWorkflo
                     ))}
                   </ul>
                 </button>
-              </li>
+              </RevealItem>
               {index < steps.length - 1 ? (
-                <li className={`process-connector ${index < activeIndex ? 'is-done' : ''}`} aria-hidden="true">
+                <RevealItem
+                  variant="fade-up"
+                  delay={index * 120 + 180}
+                  className={`process-connector ${index < activeIndex ? 'is-done' : ''}`}
+                  ariaHidden
+                >
                   <span className="process-connector-line" />
                   <span className="process-connector-pellet" />
                   <span className="process-connector-arrow" />
-                </li>
+                </RevealItem>
               ) : null}
             </Fragment>
           );

@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 
 import { ContactForm } from '@/components/contact-form';
+import { LocationMap } from '@/components/location-map';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
@@ -41,6 +42,10 @@ export default function ContactUsPage() {
             <ContactForm copy={contact} />
           </aside>
         </div>
+      </section>
+
+      <section className="card page-surface contact-map-surface" data-testid="contact-map-section">
+        <LocationMap copy={contact} />
       </section>
 
       <footer className="site-footer">

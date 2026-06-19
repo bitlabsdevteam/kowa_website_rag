@@ -1,7 +1,6 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
@@ -21,8 +20,6 @@ const HOME_UI: Record<
     secondaryCta: string;
     snapshotLabels: [string, string, string];
     platformLabel: string;
-    platformTitle: string;
-    platformBody: string;
     processSteps: [
       { title: string; desc: string; points: string[] },
       { title: string; desc: string; points: string[] },
@@ -32,12 +29,9 @@ const HOME_UI: Record<
 > = {
   en: {
     heroFlag: 'Tokyo, Japan | Global trading and resource circulation',
-    secondaryCta: 'View company profile',
+    secondaryCta: 'More Info',
     snapshotLabels: ['Head office', 'Operating model', 'Corporate route'],
-    platformLabel: 'Business platform',
-    platformTitle: 'WHAT IS KOWA’S BUSINESS?',
-    platformBody:
-      'Kowa combines procurement, processing coordination, recycling flows, and multilingual trade execution in one business platform.',
+    platformLabel: 'How We Work',
     processSteps: [
       {
         title: 'Buy plastics',
@@ -70,12 +64,9 @@ const HOME_UI: Record<
   },
   ja: {
     heroFlag: 'Tokyo, Japan | グローバルトレードと資源循環',
-    secondaryCta: '会社案内を見る',
+    secondaryCta: '詳細を見る',
     snapshotLabels: ['本社拠点', '運営モデル', '企業導線'],
-    platformLabel: 'Business platform',
-    platformTitle: 'WHAT IS KOWA’S BUSINESS?',
-    platformBody:
-      'Kowaは、調達、加工連携、資源循環、そして多言語での商流実行を一体として扱う事業プラットフォームです。',
+    platformLabel: '私たちの進め方',
     processSteps: [
       {
         title: 'プラスチックを仕入れる',
@@ -108,12 +99,9 @@ const HOME_UI: Record<
   },
   zh: {
     heroFlag: 'Tokyo, Japan | 全球贸易与资源循环',
-    secondaryCta: '查看公司简介',
+    secondaryCta: '了解更多',
     snapshotLabels: ['总部', '运营模型', '企业入口'],
-    platformLabel: 'Business platform',
-    platformTitle: 'WHAT IS KOWA’S BUSINESS?',
-    platformBody:
-      'Kowa 把采购、加工协同、资源循环与多语言贸易执行整合成一个统一的业务平台。',
+    platformLabel: '我们的运作方式',
     processSteps: [
       {
         title: '采购塑料',
@@ -225,28 +213,20 @@ export default function HomePage() {
               {copy.hero.body}
             </p>
             <div className="hero-actions">
-              <Link href="/company_profile" className="button-secondary">
+              <a href="#business" className="button-secondary">
                 {ui.secondaryCta}
-              </Link>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="card reference-section-card corporate-business-section" aria-label={copy.business.title} data-testid="business-section">
+      <section id="business" className="card reference-section-card corporate-business-section" aria-label={copy.business.title} data-testid="business-section">
         <ScrollReveal variant="fade-up" testId="reveal-business-head">
-          <div className="reference-section-head">
-            <div>
-              <p className="section-label">{ui.platformLabel}</p>
-              <h2 className="section-title reference-section-title">{ui.platformTitle}</h2>
-            </div>
-            <p className="body-copy reference-section-copy">{ui.platformBody}</p>
-          </div>
+          <h2 className="section-label how-we-work-label">{ui.platformLabel}</h2>
         </ScrollReveal>
 
-        <ScrollReveal variant="fade-up" testId="reveal-business-visual">
-          <ProcessWorkflow steps={ui.processSteps} activeIndex={activeFlowIndex} onSelect={setActiveFlowIndex} />
-        </ScrollReveal>
+        <ProcessWorkflow steps={ui.processSteps} activeIndex={activeFlowIndex} onSelect={setActiveFlowIndex} />
       </section>
       <footer className="site-footer" data-testid="landing-footer">
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />

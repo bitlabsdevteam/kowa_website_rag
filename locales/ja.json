@@ -169,7 +169,24 @@
     "submitLabel": "送信する",
     "sendingLabel": "送信中…",
     "successMessage": "ありがとうございます。メッセージを送信しました。担当者よりご連絡いたします。",
-    "errorMessage": "申し訳ございません。送信できませんでした。時間をおいて再度お試しください。"
+    "errorMessage": "申し訳ございません。送信できませんでした。時間をおいて再度お試しください。",
+    "locationEyebrow": "アクセス",
+    "locationTitle": "東京オフィス",
+    "locationLead": "港区の中心に位置し、田町駅・三田駅から徒歩圏内です。",
+    "addressLabel": "本社",
+    "address": "〒108-0073 東京都港区三田2-10-6 レオマビル5F",
+    "directionsLabel": "ルートを表示",
+    "mapTitle": "広和通商（東京都港区三田）の所在地を示す地図",
+    "stationsLabel": "最寄り駅",
+    "stationsClosestBadge": "最寄り",
+    "stationsApproxNote": "徒歩時間は目安です。",
+    "stationsResetLabel": "本社の地図に戻る",
+    "stationsRouteHint": "本社までの徒歩ルートを地図に表示しています。",
+    "stations": [
+      { "name": "三田駅", "lines": "都営浅草線・三田線", "walk": "徒歩約8分", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
+      { "name": "田町駅", "lines": "JR山手線", "walk": "徒歩約12分", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
+      { "name": "赤羽橋駅", "lines": "都営大江戸線", "walk": "徒歩約8分", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+    ]
   },
   "news": {
     "title": "ニュース",
@@ -202,7 +219,10 @@
       "prevButton": "前へ",
       "nextButton": "次へ",
       "pagesAriaLabel": "カルーセルページ",
-      "goToSlideLabel": "スライドへ移動"
+      "goToSlideLabel": "スライドへ移動",
+      "enlargeLabel": "クリックで拡大",
+      "closeLabel": "閉じる",
+      "thumbnailsAriaLabel": "製品サムネイル"
     }
   },
   "footer": {

@@ -81,6 +81,25 @@ type ContactPageSection = {
   sendingLabel: string;
   successMessage: string;
   errorMessage: string;
+  locationEyebrow: string;
+  locationTitle: string;
+  locationLead: string;
+  addressLabel: string;
+  address: string;
+  directionsLabel: string;
+  mapTitle: string;
+  stationsLabel: string;
+  stationsClosestBadge: string;
+  stationsApproxNote: string;
+  stationsResetLabel: string;
+  stationsRouteHint: string;
+  stations: Array<{
+    name: string;
+    lines: string;
+    walk: string;
+    closest: boolean;
+    mapQuery: string;
+  }>;
 };
 
 export type SiteCopy = {
@@ -139,6 +158,9 @@ export type SiteCopy = {
       nextButton: string;
       pagesAriaLabel: string;
       goToSlideLabel: string;
+      enlargeLabel: string;
+      closeLabel: string;
+      thumbnailsAriaLabel: string;
     };
   };
   footer: {
