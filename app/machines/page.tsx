@@ -8,6 +8,7 @@ import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 const MACHINE_IDS = ['crushing-machine', 'horizontal-crushing-machine', 'ribbon-mixer', 'vacuum-pump'] as const;
 
@@ -250,7 +251,7 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
 };
 
 export default function MachinesPage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const [selectedMachineId, setSelectedMachineId] = useState<MachineId>('crushing-machine');
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
   const pageCopy = MACHINES_PAGE_COPY[locale];

@@ -1,21 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { ContactForm } from '@/components/contact-form';
 import { LocationMap } from '@/components/location-map';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
-import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { SITE_COPY } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 export default function ContactUsPage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
   const contact = copy.contactPage;
-
-  useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
 
   return (
     <main className="page shell">
@@ -32,9 +27,30 @@ export default function ContactUsPage() {
 
             <div className="contact-page-detail">
               <p className="section-label">{contact.detailLabel}</p>
-              <a className="contact-page-email" href={`mailto:${contact.email}`}>
-                {contact.email}
-              </a>
+              <dl className="contact-page-info">
+                <div className="contact-page-info-row">
+                  <dt>{contact.phoneLabel}</dt>
+                  <dd>
+                    <a href={`tel:${contact.phone.replace(/[^+\d]/g, '')}`}>{contact.phone}</a>
+                  </dd>
+                </div>
+                <div className="contact-page-info-row">
+                  <dt>{contact.faxLabel}</dt>
+                  <dd>{contact.fax}</dd>
+                </div>
+                <div className="contact-page-info-row">
+                  <dt>{contact.emailRowLabel}</dt>
+                  <dd>
+                    <a href={`mailto:${contact.email}`}>
+                      {contact.email}
+                    </a>
+                  </dd>
+                </div>
+                <div className="contact-page-info-row">
+                  <dt>{contact.hoursLabel}</dt>
+                  <dd>{contact.hours}</dd>
+                </div>
+              </dl>
             </div>
           </div>
 

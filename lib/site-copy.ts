@@ -72,7 +72,14 @@ type ContactPageSection = {
   title: string;
   lead: string;
   detailLabel: string;
+  phoneLabel: string;
+  phone: string;
+  faxLabel: string;
+  fax: string;
+  emailRowLabel: string;
   email: string;
+  hoursLabel: string;
+  hours: string;
   formTitle: string;
   companyLabel: string;
   emailLabel: string;
@@ -161,6 +168,8 @@ export type SiteCopy = {
       enlargeLabel: string;
       closeLabel: string;
       thumbnailsAriaLabel: string;
+      allFilterLabel: string;
+      filterNavAriaLabel: string;
     };
   };
   footer: {

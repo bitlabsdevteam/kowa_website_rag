@@ -1,12 +1,13 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
-import { ProductCarousel } from '@/components/product-carousel';
+import { ProductShowcase } from '@/components/product-showcase';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { PRODUCT_MEDIA } from '@/lib/product-media';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 const PRODUCT_INTRO: Record<Locale, string> = {
   en: 'Recovered scrap, regenerated pellets, and supply-ready resin — the materials Kowa moves through its circular supply.',
@@ -15,7 +16,7 @@ const PRODUCT_INTRO: Record<Locale, string> = {
 };
 
 export default function ProductsPage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
 
   return (
@@ -31,7 +32,7 @@ export default function ProductsPage() {
           <p className="body-copy">{PRODUCT_INTRO[locale]}</p>
         </div>
 
-        <ProductCarousel items={PRODUCT_MEDIA} locale={locale} labels={copy.products.carousel} />
+        <ProductShowcase items={PRODUCT_MEDIA} locale={locale} labels={copy.products.carousel} />
       </section>
 
       <footer className="site-footer">

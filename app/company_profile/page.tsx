@@ -1,20 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
-import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { SITE_COPY } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 export default function CompanyProfilePage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
   const profile = copy.companyProfile;
-
-  useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
 
   return (
     <main className="page shell">

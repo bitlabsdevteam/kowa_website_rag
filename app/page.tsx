@@ -10,6 +10,7 @@ import { ProcessWorkflow } from '@/components/process-workflow';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 const Hero3DScene = dynamic(() => import('@/components/hero-3d/hero-3d-scene'), { ssr: false });
 
@@ -135,7 +136,7 @@ const HOME_UI: Record<
 };
 
 export default function HomePage() {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const [activeFlowIndex, setActiveFlowIndex] = useState(0);
   const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
   const heroRef = useRef<HTMLElement | null>(null);

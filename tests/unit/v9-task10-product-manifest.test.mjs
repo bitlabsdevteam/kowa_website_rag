@@ -36,7 +36,7 @@ test('v9 task10 manifest exists with typed entries and static files mapped', () 
   const productsPage = readFileSync('app/products/page.tsx', 'utf8');
   assert.equal(productsPage.includes("import { PRODUCT_MEDIA } from '@/lib/product-media';"), true, 'products page should import PRODUCT_MEDIA');
   assert.equal(
-    productsPage.includes('ProductCarousel items={PRODUCT_MEDIA}') || productsPage.includes('data-testid="products-media-grid"'),
+    productsPage.includes('ProductShowcase items={PRODUCT_MEDIA}') || productsPage.includes('ProductCarousel items={PRODUCT_MEDIA}') || productsPage.includes('data-testid="products-media-grid"'),
     true,
     'products page should render manifest-backed media surface',
   );

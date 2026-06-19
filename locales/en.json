@@ -20,9 +20,9 @@
   },
   "hero": {
     "eyebrow": "ABOUT",
-    "title": "Kowa Trade & Commerce",
-    "lead": "A premium Tokyo trading partner for resin, recycled materials, battery-pack support, and industrial machinery flow.",
-    "body": "Built with editorial clarity and operational precision, this experience keeps product, sourcing, and contact context in one place while the Aya assistant supports grounded Q&A.",
+    "title": "Keeping resources in circulation, for the next generation.",
+    "lead": "From domestic collection to global export, Kowa keeps plastics in continuous motion — cleaner supply chains, less waste, and real resource recovery.",
+    "body": "A Tokyo trading partner since 1994: we buy waste and loss plastics across Japan, regenerate them through our G.P. Polymer line, and trade recycled material, resin, battery-pack support, and industrial machinery worldwide.",
     "cta": "Talk to Aya",
     "videoTitle": "Kowa Video Clip",
     "visualAria": "Kowa business visual",
@@ -160,8 +160,15 @@
     "eyebrow": "Contact us",
     "title": "Let's start a conversation",
     "lead": "Whether you're sourcing recycled resin, exploring resource circulation, or exploring a trade partnership — share a few details and our team will respond by email.",
-    "detailLabel": "Email us directly",
-    "email": "contact@kowatrade.com",
+    "detailLabel": "Contact details",
+    "phoneLabel": "Tel",
+    "phone": "+81-3-3455-1699",
+    "faxLabel": "Fax",
+    "fax": "+81-3-3455-1691",
+    "emailRowLabel": "Email",
+    "email": "kowa@kowatrade.com",
+    "hoursLabel": "Business hours",
+    "hours": "9:00 am – 5:30 pm (JST)",
     "formTitle": "Send us a message",
     "companyLabel": "Company name",
     "emailLabel": "Email",
@@ -222,7 +229,9 @@
       "goToSlideLabel": "Go to slide",
       "enlargeLabel": "Click to enlarge",
       "closeLabel": "Close",
-      "thumbnailsAriaLabel": "Product thumbnails"
+      "thumbnailsAriaLabel": "Product thumbnails",
+      "allFilterLabel": "All",
+      "filterNavAriaLabel": "Filter products by category"
     }
   },
   "footer": {

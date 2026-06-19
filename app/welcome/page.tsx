@@ -1,5 +1,5 @@
 import { SiteFooterBar } from '@/components/site-footer-bar';
-import { TopMenu } from '@/components/top-menu';
+import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { findLegacyExcerpt } from '@/lib/legacy-content';
 import { SITE_COPY } from '@/lib/site-copy';
 
@@ -9,7 +9,7 @@ export default function WelcomePage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={site.menu} brand={site.brand} locale="en" localeLabel={site.menu.localeLabel} />
+        <LocalizedTopMenu />
       </section>
 
       <section className="hero-panel">
