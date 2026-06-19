@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Fraunces, Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
+import { LocaleProvider } from '@/components/locale-provider';
+
 // Space Grotesk: clean geometric grotesque for UI and body copy.
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -39,7 +41,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       data-scroll-behavior="smooth"
       className={`${spaceGrotesk.variable} ${fraunces.variable} ${notoSansJp.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <LocaleProvider>{children}</LocaleProvider>
+      </body>
     </html>
   );
 }

@@ -20,9 +20,9 @@
   },
   "hero": {
     "eyebrow": "会社情報",
-    "title": "Kowa Trade & Commerce",
-    "lead": "樹脂原料、再生プラスチック、バッテリーパック支援、産業機械流通に対応する東京発のトレードパートナー。",
-    "body": "エディトリアルな読みやすさと実務精度を両立し、製品・調達・問い合わせ情報を一画面に集約。Ayaアシスタントが根拠付きQ&Aをサポートします。",
+    "title": "資源を、次の世代へ循環させる。",
+    "lead": "国内での回収から海外への輸出まで、広和はプラスチックを止めることなく循環させます。よりクリーンなサプライチェーン、より少ない廃棄、確かな資源の再生を。",
+    "body": "1994年創業の東京の商社として、日本各地で廃プラスチック・ロス材を仕入れ、G.P.ポリマーの再生ラインで再資源化。再生材・樹脂の取引、バッテリーパック支援、産業機械の輸出入をグローバルに展開しています。",
     "cta": "Ayaに相談",
     "videoTitle": "Kowa ビデオクリップ",
     "visualAria": "Kowa 事業ビジュアル",
@@ -160,8 +160,15 @@
     "eyebrow": "お問い合わせ",
     "title": "まずはお気軽にご相談ください",
     "lead": "再生樹脂の調達、資源循環、貿易パートナーシップなど、必要事項をご記入いただければ担当者よりメールにてご連絡いたします。",
-    "detailLabel": "メールで直接お問い合わせ",
-    "email": "contact@kowatrade.com",
+    "detailLabel": "お問い合わせ先",
+    "phoneLabel": "TEL",
+    "phone": "+81-3-3455-1699",
+    "faxLabel": "FAX",
+    "fax": "+81-3-3455-1691",
+    "emailRowLabel": "E-Mail",
+    "email": "kowa@kowatrade.com",
+    "hoursLabel": "営業時間",
+    "hours": "9:00〜17:30",
     "formTitle": "メッセージを送る",
     "companyLabel": "会社名",
     "emailLabel": "メールアドレス",
@@ -222,7 +229,9 @@
       "goToSlideLabel": "スライドへ移動",
       "enlargeLabel": "クリックで拡大",
       "closeLabel": "閉じる",
-      "thumbnailsAriaLabel": "製品サムネイル"
+      "thumbnailsAriaLabel": "製品サムネイル",
+      "allFilterLabel": "すべて",
+      "filterNavAriaLabel": "カテゴリで製品を絞り込む"
     }
   },
   "footer": {

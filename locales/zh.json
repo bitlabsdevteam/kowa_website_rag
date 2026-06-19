@@ -20,9 +20,9 @@
   },
   "hero": {
     "eyebrow": "关于",
-    "title": "Kowa Trade & Commerce",
-    "lead": "来自东京的高端贸易伙伴，专注树脂原料、再生塑料、电池包开发支持与工业机械流通。",
-    "body": "以编辑级清晰度与业务执行力打造统一入口，集中展示产品、采购与联系信息，并由Aya助手提供可追溯问答。",
+    "title": "让资源循环，传承给下一代。",
+    "lead": "从国内回收到海外出口，广和让塑料持续循环——更洁净的供应链、更少的废弃、实实在在的资源再生。",
+    "body": "作为1994年成立的东京贸易伙伴，我们在日本各地采购废塑料与损耗料，通过 G.P. Polymer 再生产线再资源化，并在全球开展再生材料与树脂贸易、电池组支持及工业机械进出口。",
     "cta": "联系 Aya",
     "videoTitle": "Kowa 视频短片",
     "visualAria": "Kowa 业务可视图",
@@ -160,8 +160,15 @@
     "eyebrow": "联系我们",
     "title": "让我们开始沟通",
     "lead": "无论您是采购再生树脂、关注资源循环，还是探讨贸易合作，只需填写以下信息，我们的团队将通过电子邮件与您联系。",
-    "detailLabel": "直接邮件联系我们",
-    "email": "contact@kowatrade.com",
+    "detailLabel": "联系方式",
+    "phoneLabel": "电话",
+    "phone": "+81-3-3455-1699",
+    "faxLabel": "传真",
+    "fax": "+81-3-3455-1691",
+    "emailRowLabel": "邮箱",
+    "email": "kowa@kowatrade.com",
+    "hoursLabel": "营业时间",
+    "hours": "9:00–17:30",
     "formTitle": "给我们留言",
     "companyLabel": "公司名称",
     "emailLabel": "电子邮箱",
@@ -222,7 +229,9 @@
       "goToSlideLabel": "跳转到第",
       "enlargeLabel": "点击放大",
       "closeLabel": "关闭",
-      "thumbnailsAriaLabel": "产品缩略图"
+      "thumbnailsAriaLabel": "产品缩略图",
+      "allFilterLabel": "全部",
+      "filterNavAriaLabel": "按类别筛选产品"
     }
   },
   "footer": {

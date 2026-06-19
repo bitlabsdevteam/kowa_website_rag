@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { SiteFooterBar } from '@/components/site-footer-bar';
-import { TopMenu } from '@/components/top-menu';
+import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { setLocalAdminAuth } from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
@@ -43,7 +43,7 @@ export default function LoginPage() {
   return (
     <main className="page shell">
       <section className="shell-header">
-        <TopMenu labels={site.menu} brand={site.brand} locale="en" localeLabel={site.menu.localeLabel} />
+        <LocalizedTopMenu />
       </section>
 
       <section className="hero-panel narrow-surface">

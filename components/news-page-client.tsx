@@ -1,21 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { formatNewsDate, getNewsVisibleDate, resolveNewsLocalization } from '@/lib/news/format';
 import type { NewsArticle } from '@/lib/news/types';
-import { SITE_COPY, type Locale } from '@/lib/site-copy';
+import { SITE_COPY } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 
 type NewsPageClientProps = {
   initialArticles: NewsArticle[];
 };
 
 export function NewsPageClient({ initialArticles }: NewsPageClientProps) {
-  const [locale, setLocale] = useState<Locale>('en');
+  const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
 
   return (

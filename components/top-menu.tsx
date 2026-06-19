@@ -33,13 +33,14 @@ type TopMenuProps = {
   localeLabel?: string;
   locale?: 'en' | 'ja' | 'zh';
   onLocaleChange?: (locale: 'en' | 'ja' | 'zh') => void;
+  showBrandText?: boolean;
 };
 
-export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en', onLocaleChange }: TopMenuProps) {
+export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en', onLocaleChange, showBrandText = false }: TopMenuProps) {
   return (
     <nav className="top-menu" aria-label={labels.navAria}>
       <Link href="/" className="top-menu-brand" aria-label={labels.homeAria}>
-        <KowaLogo ariaLabel={brand.ariaLabel} name={brand.name} location={brand.location} />
+        <KowaLogo ariaLabel={brand.ariaLabel} name={brand.name} location={brand.location} showText={showBrandText} />
       </Link>
 
       <div className="top-menu-links">
