@@ -9457,3 +9457,348 @@ html:lang(en) .reference-section-title {
   .dc-modal-panel { animation: none; }
   .display-card { transition: filter 0.3s ease, border-color 0.3s ease; }
 }
+
+/* ---------------------------------------------------------------------------
+   BeamsBackground (components/ui/beams-background.tsx)
+   Fills the fixed .page-backdrop with an animated green/teal beam canvas over a
+   deep-green base — shared across all routes via the root layout. Boxless copy
+   over the backdrop (the landing hero + footer) is flipped to light.
+--------------------------------------------------------------------------- */
+.beams-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0a1733;
+}
+
+.beams-canvas {
+  position: absolute;
+  inset: 0;
+  filter: blur(15px);
+}
+
+.beams-veil {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 23, 51, 0.05);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
+  pointer-events: none;
+}
+
+/* Page content sits above the fixed backdrop on every route. */
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+/* The hero parallax overlay was a translucent white wash for the old light
+   backdrop; over the dark beams it reads as a muddy second layer, so clear it. */
+.cinematic-hero .hero-parallax-mid {
+  background: none;
+}
+
+/* Light hero copy for contrast over the dark beams (landing only). */
+.cinematic-hero .hero-title,
+.cinematic-hero .reference-hero-title {
+  color: #f4f1ea !important;
+}
+
+.cinematic-hero .reference-hero-lead,
+.cinematic-hero .reference-hero-body {
+  color: rgba(244, 241, 234, 0.82) !important;
+}
+
+.cinematic-hero .hero-title-typed,
+.cinematic-hero .hero-title-cursor {
+  color: #b9c6db !important;
+}
+
+/* CTA tuned for the dark backdrop: light outline/label, light fill on hover. */
+.cinematic-hero .origin-btn {
+  border-color: rgba(244, 241, 234, 0.5);
+  color: #f4f1ea;
+}
+
+.cinematic-hero .origin-btn .origin-btn-fill {
+  background: #f4f1ea;
+}
+
+.cinematic-hero .origin-btn.is-filled {
+  color: #0c1f16;
+}
+
+.cinematic-hero .origin-btn:focus-visible {
+  box-shadow: 0 0 0 2px #0a1733, 0 0 0 4px rgba(244, 241, 234, 0.7);
+}
+
+/* The landing footer is boxless over the dark beams — lift its text to light. */
+.reference-site .site-footer p,
+.reference-site .site-footer-bar,
+.reference-site .footer-facts strong {
+  color: rgba(244, 241, 234, 0.72) !important;
+}
+
+.reference-site .site-footer-bar {
+  border-top-color: rgba(244, 241, 234, 0.16);
+}
+
+.reference-site .site-footer-social a {
+  color: rgba(244, 241, 234, 0.78);
+}
+
+.reference-site .site-footer-social a:hover {
+  color: #ffffff;
+}
+
+/* ---------------------------------------------------------------------------
+   FeatureGrid (components/ui/modern-feature-grid.tsx)
+   "How We Work" as a boxless grid of glass feature cards floating over the
+   dark-blue beams backdrop.
+--------------------------------------------------------------------------- */
+.corporate-business-section.is-boxless {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.feature-grid {
+  width: 100%;
+  padding: clamp(32px, 6vw, 64px) 0;
+}
+
+.feature-grid-inner {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 24px);
+}
+
+.feature-grid-head {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feature-grid-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f4f1ea;
+}
+
+.feature-grid-desc {
+  margin: 16px auto 0;
+  max-width: 42rem;
+  color: rgba(244, 241, 234, 0.78);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.feature-grid-cards {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 720px) {
+  .feature-grid-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .feature-grid-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(244, 241, 234, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 18px 40px -28px rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: rgba(185, 198, 219, 0.4);
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.feature-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(244, 241, 234, 0.18);
+  background: rgba(185, 198, 219, 0.16);
+  color: #dbe3f0;
+}
+
+.feature-card-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature-card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: #f4f1ea;
+}
+
+.feature-card-desc {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: rgba(244, 241, 234, 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card {
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Boxless content pages — drop the white panels so content floats over the
+   dark-blue beams backdrop (the landing is already boxless via .reference-site).
+   Interactive surfaces (top menu, form inputs, the chat widget) keep their own
+   backgrounds so they stay usable.
+--------------------------------------------------------------------------- */
+.page:not(.reference-site) .page-surface,
+.page:not(.reference-site) .narrow-surface,
+.page:not(.reference-site) > section.card,
+.page:not(.reference-site) .card,
+.page:not(.reference-site) .site-footer {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Relight content text for the dark backdrop. */
+.page:not(.reference-site) :is(.page-surface, .narrow-surface, .card),
+.page:not(.reference-site) .site-footer {
+  color: rgba(244, 241, 234, 0.82) !important;
+}
+
+.page:not(.reference-site)
+  :is(.page-surface, .narrow-surface, .card)
+  :is(h1, h2, h3, h4, .page-title, .section-label, .company-profile-title, strong, dt, th) {
+  color: #f4f1ea !important;
+}
+
+.page:not(.reference-site)
+  :is(.page-surface, .narrow-surface, .card)
+  :is(p, li, dd, td, .body-copy, .lead, .cp-fact-term, .legacy-url, .site-footer p) {
+  color: rgba(244, 241, 234, 0.74) !important;
+}
+
+/* Accent values (e.g. capital figures) → light silver-blue instead of forest. */
+.page:not(.reference-site)
+  :is(.page-surface, .narrow-surface, .card)
+  :is(.cp-fact-value, a) {
+  color: #b9c6db !important;
+}
+
+/* Eyebrow pill on the dark backdrop. */
+.page:not(.reference-site) .corporate-content-surface .eyebrow,
+.page:not(.reference-site) .eyebrow {
+  border-color: rgba(244, 241, 234, 0.28) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: rgba(244, 241, 234, 0.86) !important;
+}
+
+/* Hairline dividers (facts table, footer bar) → faint light. */
+.page:not(.reference-site) .cp-fact + .cp-fact,
+.page:not(.reference-site) .cp-fact {
+  border-color: rgba(244, 241, 234, 0.16) !important;
+}
+
+.page:not(.reference-site) .site-footer-bar {
+  color: rgba(244, 241, 234, 0.72) !important;
+  border-top-color: rgba(244, 241, 234, 0.16) !important;
+}
+
+.page:not(.reference-site) .site-footer-social a {
+  color: rgba(244, 241, 234, 0.78) !important;
+}
+
+/* Nested content sub-panels on inner pages also go boxless. Form inputs (.field)
+   keep their own light surface so they remain visible/usable. */
+.page:not(.reference-site) :is(
+  .contact-page-form-card,
+  .machines-context-card,
+  .machines-return-panel,
+  .machines-visual-shell,
+  .machines-source-note,
+  .machines-selector-panel,
+  .machines-selector-button,
+  .products-lead-card,
+  .products-feature-card,
+  .products-machine-cta,
+  .corporate-side-card,
+  .corporate-profile-card
+) {
+  background: transparent !important;
+  border-color: rgba(244, 241, 234, 0.14) !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Form labels need to read on the dark backdrop now that the panel is gone. */
+.page:not(.reference-site) :is(.field-label, .section-label, dt) {
+  color: #f4f1ea !important;
+}
+
+/* Location map: nearest-stations + address panels go boxless on the dark page. */
+.page:not(.reference-site) :is(.location-stations, .location-map-card) {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Keep the station rows as faint glass so they stay legible/separable. */
+.page:not(.reference-site) .location-station {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(244, 241, 234, 0.14) !important;
+  box-shadow: none !important;
+}
+
+.page:not(.reference-site) .location-station.is-closest {
+  background: rgba(143, 214, 172, 0.1) !important;
+  border-color: rgba(143, 214, 172, 0.4) !important;
+}
+
+.page:not(.reference-site) .location-station-name {
+  color: #f4f1ea !important;
+}
+
+.page:not(.reference-site) :is(.location-station-lines, .location-station-walk, .location-stations-note, .location-map-address) {
+  color: rgba(244, 241, 234, 0.66) !important;
+}

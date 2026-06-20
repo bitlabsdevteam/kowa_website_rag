@@ -1,21 +1,17 @@
 'use client';
 
 import { Recycle, ShoppingCart, Truck } from 'lucide-react';
-import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
-import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
-import DisplayCards, { type DisplayCardItem } from '@/components/ui/display-cards';
+import { FeatureGrid, type Feature } from '@/components/ui/modern-feature-grid';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
 import { OriginButton } from '@/components/ui/origin-button';
 import { Typewriter } from '@/components/ui/typewriter';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
-
-const Hero3DScene = dynamic(() => import('@/components/hero-3d/hero-3d-scene'), { ssr: false });
 
 const HOME_UI: Record<
   Locale,
@@ -140,34 +136,18 @@ const HOME_UI: Record<
 
 export default function HomePage() {
   const [locale, setLocale] = useLocale();
-  const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
   // When reduced motion is preferred we render the full headline statically
   // instead of the looping typewriter.
   const [reducedMotion, setReducedMotion] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
+  // Hero-scoped scroll progress drives the copy-layer parallax drift.
   const heroProgress = useScrollProgress(heroRef);
-  // Whole-document progress drives the page-level backdrop camera; the
-  // hero-scoped progress keeps driving the copy-layer parallax drift.
-  const pageProgress = useScrollProgress();
-  // Mutable mirror so the 3D camera rig can read the latest value inside
-  // useFrame without re-rendering the canvas per scroll frame.
-  const pageProgressRef = useRef(0);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
-
-  useEffect(() => {
-    pageProgressRef.current = pageProgress;
-  }, [pageProgress]);
-
-  useEffect(() => {
-    if (supportsHero3DScene()) {
-      setHeroVisual('3d');
-    }
-  }, []);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -177,30 +157,17 @@ export default function HomePage() {
     return () => mediaQuery.removeEventListener('change', update);
   }, []);
 
-  // Map the localized process steps into stacked display cards. The accent
-  // hue + lucide icon distinguish each stage; click reveals the detail points.
-  const STEP_META = [
-    { icon: <ShoppingCart className="dc-icon-svg" aria-hidden="true" />, accent: '#2d6b49' },
-    { icon: <Recycle className="dc-icon-svg" aria-hidden="true" />, accent: '#0e7490' },
-    { icon: <Truck className="dc-icon-svg" aria-hidden="true" />, accent: '#b4832a' },
-  ];
-  const processCards: DisplayCardItem[] = ui.processSteps.map((step, index) => ({
-    icon: STEP_META[index % STEP_META.length].icon,
-    accentColor: STEP_META[index % STEP_META.length].accent,
+  // Map the localized process steps into feature-grid cards (one lucide icon
+  // per stage).
+  const STEP_ICONS = [ShoppingCart, Recycle, Truck];
+  const features: Feature[] = ui.processSteps.map((step, index) => ({
+    Icon: STEP_ICONS[index % STEP_ICONS.length],
     title: step.title,
     description: step.desc,
-    date: `${ui.platformLabel} · ${String(index + 1).padStart(2, '0')}`,
-    points: step.points,
   }));
 
   return (
     <main className="page shell reference-site">
-      <div className="page-backdrop" data-testid="page-backdrop" aria-hidden="true">
-        {/* The fallback stays mounted as a poster underlay so the backdrop
-            never flashes empty while the 3D chunk loads. */}
-        <HeroFallback />
-        {heroVisual === '3d' ? <Hero3DScene progressRef={pageProgressRef} /> : null}
-      </div>
       <section className="shell-header">
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
@@ -257,16 +224,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="business" className="card reference-section-card corporate-business-section" aria-label={copy.business.title} data-testid="business-section">
+      <section id="business" className="corporate-business-section is-boxless" aria-label={copy.business.title} data-testid="business-section">
         <ScrollReveal variant="fade-up" testId="reveal-business-head">
-          <h2 className="section-label how-we-work-label">{ui.platformLabel}</h2>
+          <FeatureGrid sectionTitle={ui.platformLabel} sectionDescription={copy.business.intro} features={features} />
         </ScrollReveal>
-
-        <DisplayCards
-          cards={processCards}
-          detailsLabel={ui.secondaryCta}
-          closeLabel={copy.products.carousel.closeLabel}
-        />
       </section>
       <footer className="site-footer" data-testid="landing-footer">
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />

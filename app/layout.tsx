@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Fraunces, Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
 import './globals.css';
 
+import { BeamsBackground } from '@/components/ui/beams-background';
 import { LocaleProvider } from '@/components/locale-provider';
 
 // Space Grotesk: clean geometric grotesque for UI and body copy.
@@ -50,6 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${spaceGrotesk.variable} ${fraunces.variable} ${notoSansJp.variable}`}
     >
       <body>
+        <div className="page-backdrop" data-testid="page-backdrop" aria-hidden="true">
+          <BeamsBackground intensity="strong" />
+        </div>
         <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
