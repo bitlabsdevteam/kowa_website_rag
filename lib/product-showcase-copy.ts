@@ -31,7 +31,7 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
   en: {
     introEyebrow: 'Product lanes',
     introBody:
-      'Kowa’s product offer along one circular supply — resin procurement, recycling and pellet regeneration, and battery-pack support. Open a lane, then move through it with the main controls.',
+      'Kowa’s product offer along one circular supply: resin procurement, recycling and pellet regeneration, and battery-pack support. Open a lane, then move through it with the main controls.',
     chapterMediaCountLabel: 'visuals',
     chapterButtonLabel: 'Open lane',
     categoryMetaLabel: 'Category',
@@ -102,7 +102,7 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
   ja: {
     introEyebrow: '製品レーン',
     introBody:
-      'ひとつの循環型サプライに沿ったKowaの提供価値——樹脂調達、再生とペレット化、バッテリーパック支援。レーンを開き、メイン操作で巡回できます。',
+      'ひとつの循環型サプライに沿ったKowaの提供価値：樹脂調達、再生とペレット化、バッテリーパック支援。レーンを開き、メイン操作で巡回できます。',
     chapterMediaCountLabel: '点',
     chapterButtonLabel: 'レーンを開く',
     categoryMetaLabel: 'カテゴリ',
@@ -172,7 +172,7 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
   },
   zh: {
     introEyebrow: '产品通道',
-    introBody: 'Kowa 在同一条循环供应链上的产品能力——树脂采购、再生与造粒、电池组支持。先打开一个通道，再用主控件浏览。',
+    introBody: 'Kowa 在同一条循环供应链上的产品能力：树脂采购、再生与造粒、电池组支持。先打开一个通道，再用主控件浏览。',
     chapterMediaCountLabel: '项视觉',
     chapterButtonLabel: '打开通道',
     categoryMetaLabel: '类别',

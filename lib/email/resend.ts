@@ -6,7 +6,7 @@ export type ContactEmailPayload = {
   query: string;
 };
 
-const DEFAULT_CONTACT_TO_EMAIL = 'contact@kowatrade.com';
+const DEFAULT_CONTACT_TO_EMAIL = 'kowa@kowatrade.com';
 
 function escapeHtml(value: string): string {
   return value
@@ -48,7 +48,7 @@ export async function sendContactEmail({ companyName, email, query }: ContactEma
     from: fromEmail,
     to: toEmail,
     replyTo: email,
-    subject: `New contact form inquiry — ${companyName}`,
+    subject: `New contact form inquiry: ${companyName}`,
     text,
     html,
   });

@@ -6,10 +6,15 @@ import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
+/** Core corporate facts, shown bilingually (JA / EN) regardless of UI locale. */
+const COMPANY_FACTS = [
+  { jaTerm: '資本金', jaValue: '5000万円', enTerm: 'Capital', enValue: '50 Million Yen' },
+  { jaTerm: '設立', jaValue: '1994年', enTerm: 'Established', enValue: '1994' },
+];
+
 export default function CompanyProfilePage() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
-  const profile = copy.companyProfile;
 
   return (
     <main className="page shell">
@@ -21,40 +26,26 @@ export default function CompanyProfilePage() {
         className="card page-surface company-profile-surface corporate-hero corporate-content-surface"
         data-testid="company-profile-page-content"
       >
-        <div className="company-profile-hero">
-          <div className="company-profile-hero-copy">
-            <span className="eyebrow">{profile.introLabel}</span>
-            <h1 className="page-title company-profile-title">{profile.title}</h1>
-            <p className="body-copy company-profile-summary">{profile.summary}</p>
-          </div>
+        <div className="company-profile-hero company-profile-hero--centered">
+          <span className="eyebrow">{copy.menu.companyProfile}</span>
+          <h1 className="page-title company-profile-title">{copy.brand.name}</h1>
         </div>
 
         <ScrollReveal variant="fade-up">
-          <section className="company-profile-dossier company-profile-dossier--cinematic">
-        <section className="company-profile-timeline-section" aria-labelledby="company-profile-timeline-heading">
-          <div className="company-profile-section-head">
-            <div>
-              <p className="section-label">{profile.timelineLabel}</p>
-              <h2 id="company-profile-timeline-heading" className="section-title company-profile-section-title">
-                {profile.timelineTitle}
-              </h2>
-            </div>
-            <p className="body-copy company-profile-timeline-intro">{profile.timelineIntro}</p>
-          </div>
-
-          <ol className="company-profile-timeline">
-            {profile.timeline.map((item) => (
-              <li key={`${item.year}-${item.title}`} className="company-profile-timeline-item">
-                <div className="company-profile-timeline-year">{item.year}</div>
-                <article className="company-profile-timeline-card">
-                  <h3>{item.title}</h3>
-                  <p>{item.detail}</p>
-                </article>
-              </li>
+          <div className="company-profile-facts">
+            {COMPANY_FACTS.map((fact) => (
+              <div key={fact.enTerm} className="cp-fact">
+                <p className="cp-fact-lang cp-fact-lang--ja" lang="ja">
+                  <span className="cp-fact-term">{fact.jaTerm}</span>
+                  <span className="cp-fact-value">{fact.jaValue}</span>
+                </p>
+                <p className="cp-fact-lang cp-fact-lang--en" lang="en">
+                  <span className="cp-fact-term">{fact.enTerm}</span>
+                  <span className="cp-fact-value">{fact.enValue}</span>
+                </p>
+              </div>
             ))}
-          </ol>
-        </section>
-          </section>
+          </div>
         </ScrollReveal>
       </section>
 

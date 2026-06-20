@@ -1,14 +1,17 @@
 'use client';
 
+import { Recycle, ShoppingCart, Truck } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
 
 import { HeroFallback, supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
-import { ProcessWorkflow } from '@/components/process-workflow';
+import DisplayCards, { type DisplayCardItem } from '@/components/ui/display-cards';
 import { SiteFooterBar } from '@/components/site-footer-bar';
 import { TopMenu } from '@/components/top-menu';
+import { OriginButton } from '@/components/ui/origin-button';
+import { Typewriter } from '@/components/ui/typewriter';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
@@ -137,8 +140,10 @@ const HOME_UI: Record<
 
 export default function HomePage() {
   const [locale, setLocale] = useLocale();
-  const [activeFlowIndex, setActiveFlowIndex] = useState(0);
   const [heroVisual, setHeroVisual] = useState<'fallback' | '3d'>('fallback');
+  // When reduced motion is preferred we render the full headline statically
+  // instead of the looping typewriter.
+  const [reducedMotion, setReducedMotion] = useState(false);
   const heroRef = useRef<HTMLElement | null>(null);
   const heroProgress = useScrollProgress(heroRef);
   // Whole-document progress drives the page-level backdrop camera; the
@@ -164,26 +169,29 @@ export default function HomePage() {
     }
   }, []);
 
-  const processStepCount = ui.processSteps.length;
-
-  useEffect(() => {
-    if (activeFlowIndex >= processStepCount) {
-      setActiveFlowIndex(0);
-    }
-  }, [activeFlowIndex, processStepCount]);
-
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    if (mediaQuery.matches || processStepCount <= 1) {
-      return undefined;
-    }
+    const update = () => setReducedMotion(mediaQuery.matches);
+    update();
+    mediaQuery.addEventListener('change', update);
+    return () => mediaQuery.removeEventListener('change', update);
+  }, []);
 
-    const intervalId = window.setInterval(() => {
-      setActiveFlowIndex((current) => (current + 1) % processStepCount);
-    }, 4200);
-
-    return () => window.clearInterval(intervalId);
-  }, [processStepCount]);
+  // Map the localized process steps into stacked display cards. The accent
+  // hue + lucide icon distinguish each stage; click reveals the detail points.
+  const STEP_META = [
+    { icon: <ShoppingCart className="dc-icon-svg" aria-hidden="true" />, accent: '#2d6b49' },
+    { icon: <Recycle className="dc-icon-svg" aria-hidden="true" />, accent: '#0e7490' },
+    { icon: <Truck className="dc-icon-svg" aria-hidden="true" />, accent: '#b4832a' },
+  ];
+  const processCards: DisplayCardItem[] = ui.processSteps.map((step, index) => ({
+    icon: STEP_META[index % STEP_META.length].icon,
+    accentColor: STEP_META[index % STEP_META.length].accent,
+    title: step.title,
+    description: step.desc,
+    date: `${ui.platformLabel} · ${String(index + 1).padStart(2, '0')}`,
+    points: step.points,
+  }));
 
   return (
     <main className="page shell reference-site">
@@ -208,15 +216,42 @@ export default function HomePage() {
         <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
         <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">
           <div className="reference-hero-copy">
-            <h1 className="hero-title reference-hero-title">{copy.hero.title}</h1>
+            <h1 className="hero-title reference-hero-title">
+              {reducedMotion ? (
+                copy.hero.title
+              ) : (
+                <>
+                  {copy.hero.titlePrefix}
+                  <Typewriter
+                    text={copy.hero.titleTyped}
+                    speed={55}
+                    deleteSpeed={32}
+                    waitTime={2200}
+                    initialDelay={600}
+                    className="hero-title-typed"
+                    cursorClassName="hero-title-cursor"
+                  />
+                </>
+              )}
+            </h1>
             <p className="lead reference-hero-lead">{copy.hero.lead}</p>
             <p className="body-copy reference-hero-body" data-testid="landing-narrative">
               {copy.hero.body}
             </p>
             <div className="hero-actions">
-              <a href="#business" className="button-secondary">
+              <OriginButton
+                onClick={() => {
+                  const target = document.getElementById('business');
+                  if (target) {
+                    target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
+                  }
+                  if (typeof history !== 'undefined') {
+                    history.replaceState(null, '', '#business');
+                  }
+                }}
+              >
                 {ui.secondaryCta}
-              </a>
+              </OriginButton>
             </div>
           </div>
         </div>
@@ -227,7 +262,11 @@ export default function HomePage() {
           <h2 className="section-label how-we-work-label">{ui.platformLabel}</h2>
         </ScrollReveal>
 
-        <ProcessWorkflow steps={ui.processSteps} activeIndex={activeFlowIndex} onSelect={setActiveFlowIndex} />
+        <DisplayCards
+          cards={processCards}
+          detailsLabel={ui.secondaryCta}
+          closeLabel={copy.products.carousel.closeLabel}
+        />
       </section>
       <footer className="site-footer" data-testid="landing-footer">
         <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />

@@ -5415,6 +5415,83 @@ a:focus-visible {
   color: var(--color-text);
 }
 
+/* Minimal, centered company-profile header (name + eyebrow only). */
+.company-profile-hero--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  grid-template-columns: none;
+}
+
+.company-profile-hero--centered .company-profile-title {
+  max-width: 22ch;
+  font-size: clamp(2.1rem, 4vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+/* Elegant bilingual key-facts sheet (資本金 / Capital, 設立 / Established). */
+.company-profile-facts {
+  width: 100%;
+  max-width: 760px;
+  margin: clamp(20px, 4vw, 44px) auto 8px;
+  display: grid;
+  border-top: 1px solid var(--color-line);
+}
+
+.cp-fact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 4vw, 48px);
+  align-items: baseline;
+  padding: clamp(22px, 3.2vw, 34px) 6px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cp-fact-lang {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin: 0;
+}
+
+.cp-fact-term {
+  flex: 0 0 auto;
+  min-width: 84px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.cp-fact-lang--ja .cp-fact-term {
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+/* Wider gutter so the English values line up under each other (CAPITAL vs ESTABLISHED). */
+.cp-fact-lang--en .cp-fact-term {
+  min-width: 124px;
+}
+
+.cp-fact-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
+  line-height: 1.1;
+  color: var(--color-accent-strong);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .cp-fact {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
 .company-profile-intro-panel,
 .company-profile-facts-panel,
 .company-profile-statement-card,
@@ -8689,4 +8766,694 @@ html:lang(en) .reference-section-title {
   .pcarousel-dot,
   .pcarousel-thumb,
   .pcarousel-lightbox { transition: none; animation: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Card-fan carousel (components/ui/card-fan-carousel.tsx)
+   A GSAP "hand of cards" gallery. Cards are absolutely positioned and centred;
+   GSAP applies the fan transforms (x/y in rem, rotation, scale). Card heights
+   per breakpoint must match the ideal heights baked into getHeightMultiplier.
+--------------------------------------------------------------------------- */
+.card-fan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 16px 16px 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.card-fan-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 80rem;
+}
+
+.fan-layout {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 42rem;
+}
+
+.fan-card {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  height: 38rem;
+  aspect-ratio: 5 / 7;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-card);
+  border: 1px solid rgba(21, 35, 63, 0.08);
+  box-shadow: var(--shadow-soft);
+  will-change: transform;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.fan-card-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fan-card-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-fan-caption {
+  margin: 18px 0 0;
+  padding: 4px 12px;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  color: var(--color-text);
+  text-align: center;
+  letter-spacing: 0.01em;
+  background: none;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.card-fan-caption::after {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  margin: 6px auto 0;
+  border-radius: 2px;
+  background: var(--color-accent);
+  opacity: 0.55;
+  transition: width 0.25s ease, opacity 0.25s ease;
+}
+
+.card-fan-caption:hover { color: var(--color-accent-strong); }
+.card-fan-caption:hover::after { width: 44px; opacity: 1; }
+
+.card-fan-caption:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.35);
+}
+
+.card-fan-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+.card-fan-arrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid rgba(21, 35, 63, 0.12);
+  background: var(--surface);
+  color: var(--color-accent);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+  outline: none;
+  transition: border-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}
+
+.card-fan-arrow:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+  background: var(--surface-strong);
+}
+
+.card-fan-arrow:active { opacity: 0.7; }
+
+.card-fan-arrow:focus-visible {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.35);
+}
+
+.card-fan-chevron { width: 18px; height: 18px; }
+
+.card-fan-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card-fan-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(21, 35, 63, 0.18);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.card-fan-dot.is-active {
+  background: var(--color-accent);
+  transform: scale(1.3);
+}
+
+@media (max-width: 1023px) {
+  .fan-layout { height: 38rem; }
+  .fan-card { height: 34rem; }
+}
+
+@media (max-width: 767px) {
+  .fan-layout { height: 32rem; }
+  .fan-card { height: 28rem; }
+}
+
+@media (max-width: 639px) {
+  .fan-layout { height: 30rem; }
+  .fan-card { height: 26rem; }
+  .card-fan-arrow { width: 40px; height: 40px; }
+  .card-fan-chevron { width: 16px; height: 16px; }
+}
+
+@media (max-width: 479px) {
+  .fan-layout { height: 26rem; }
+  .fan-card { height: 22rem; }
+}
+
+/* Click-to-open product description modal */
+.card-fan-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 22, 38, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: card-fan-modal-fade 0.2s ease;
+}
+
+@keyframes card-fan-modal-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.card-fan-modal-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  width: min(880px, 100%);
+  max-height: 88vh;
+  overflow: hidden;
+  background: var(--surface-card);
+  border: 1px solid rgba(21, 35, 63, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  animation: card-fan-modal-rise 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes card-fan-modal-rise {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card-fan-modal-media {
+  position: relative;
+  min-height: 280px;
+  background: var(--surface-muted);
+}
+
+.card-fan-modal-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-fan-modal-body {
+  padding: 32px 32px 36px;
+  overflow-y: auto;
+}
+
+.card-fan-modal-eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.card-fan-modal-title {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.card-fan-modal-summary {
+  margin: 0 0 18px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.card-fan-modal-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.card-fan-modal-points li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.card-fan-modal-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+}
+
+.card-fan-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 1;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(21, 35, 63, 0.12);
+  background: var(--surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.card-fan-modal-close:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
+}
+
+.card-fan-modal-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.35);
+}
+
+@media (max-width: 720px) {
+  .card-fan-modal-panel {
+    grid-template-columns: 1fr;
+    max-height: 90vh;
+  }
+  .card-fan-modal-media { min-height: 200px; height: 38vw; max-height: 280px; }
+  .card-fan-modal-body { padding: 24px 22px 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-fan-arrow,
+  .card-fan-dot,
+  .card-fan-caption,
+  .card-fan-caption::after { transition: none; }
+  .card-fan-modal,
+  .card-fan-modal-panel { animation: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   Typewriter (components/ui/typewriter.tsx)
+--------------------------------------------------------------------------- */
+.typewriter {
+  display: inline;
+  white-space: pre-wrap;
+  letter-spacing: -0.01em;
+}
+
+.typewriter-cursor {
+  margin-left: 0.1em;
+}
+
+.typewriter-cursor.is-hidden {
+  display: none;
+}
+
+/* Hero headline: the typed tail picks up the forest-green accent so the
+   rotating phrase reads as the emphasized clause. */
+.hero-title-typed {
+  color: var(--color-accent);
+}
+
+.hero-title-cursor {
+  margin-left: 0.06em;
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+/* ---------------------------------------------------------------------------
+   OriginButton (components/ui/origin-button.tsx)
+   Pill CTA with a brand-green fill that expands from the pointer origin and
+   inverts the label to white.
+--------------------------------------------------------------------------- */
+.origin-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  overflow: hidden;
+  border-radius: 999px;
+  border: 1px solid var(--color-accent);
+  background: transparent;
+  color: var(--color-accent-strong);
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.origin-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg, #f3efe7), 0 0 0 4px var(--color-accent);
+}
+
+.origin-btn:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.origin-btn.is-filled {
+  color: #fff;
+}
+
+.origin-btn-fill {
+  position: absolute;
+  border-radius: 999px;
+  transform-origin: center;
+  transform: scale(0);
+  pointer-events: none;
+  background: var(--color-accent);
+}
+
+.origin-btn-label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .origin-btn,
+  .origin-btn-fill { transition: none; }
+}
+
+/* ---------------------------------------------------------------------------
+   DisplayCards (components/ui/display-cards.tsx)
+   A skewed, grayscale-until-hover stack. Each card is a button that opens a
+   detail modal. Stack offsets are applied per nth-child (3-card stack).
+--------------------------------------------------------------------------- */
+.display-cards {
+  display: grid;
+  grid-template-areas: 'stack';
+  place-items: center;
+  padding: 2.5rem 0 5rem;
+  animation: dc-fade-in 0.7s ease both;
+}
+
+@keyframes dc-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.display-card {
+  grid-area: stack;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 9rem;
+  width: 22rem;
+  margin: 0;
+  padding: 0.85rem 1.1rem;
+  text-align: left;
+  border: 2px solid var(--color-line-strong, rgba(21, 35, 63, 0.18));
+  border-radius: 0.75rem;
+  background: var(--surface-card, #fff);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+  font: inherit;
+  transform: skewY(-8deg) translate(var(--dc-x, 0), var(--dc-y, 0));
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Right-edge fade so stacked cards blend into the section behind them. */
+.display-card::after {
+  content: '';
+  position: absolute;
+  right: -0.25rem;
+  top: -5%;
+  height: 110%;
+  width: 18rem;
+  background: linear-gradient(to left, var(--surface-card, #fff), transparent);
+  pointer-events: none;
+  border-radius: 0.75rem;
+}
+
+.display-card:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.32);
+}
+
+/* Stack geometry: card 1 = back, card 3 = front (full color). */
+.display-card:nth-child(1) { --dc-x: 0; --dc-y: 0; z-index: 1; filter: grayscale(1); }
+.display-card:nth-child(2) { --dc-x: 4rem; --dc-y: 2.5rem; z-index: 2; filter: grayscale(1); }
+.display-card:nth-child(3) { --dc-x: 8rem; --dc-y: 5rem; z-index: 3; filter: none; }
+
+.display-card:nth-child(1):hover { --dc-y: -2.5rem; z-index: 4; filter: none; border-color: var(--color-accent); }
+.display-card:nth-child(2):hover { --dc-y: -0.25rem; z-index: 4; filter: none; border-color: var(--color-accent); }
+.display-card:nth-child(3):hover { --dc-y: 2.5rem; border-color: var(--color-accent); }
+
+.display-card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.display-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: var(--dc-accent, var(--color-accent));
+  color: #fff;
+}
+
+.dc-icon-svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.display-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--dc-accent, var(--color-accent-strong));
+}
+
+.display-card-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--color-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.display-card-date {
+  margin: 0;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+}
+
+/* Detail modal */
+.dc-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 22, 38, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: dc-fade-in 0.2s ease;
+}
+
+.dc-modal-panel {
+  position: relative;
+  width: min(540px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 30px 30px 32px;
+  background: var(--surface-card, #fff);
+  border: 1px solid rgba(21, 35, 63, 0.08);
+  border-top: 4px solid var(--dc-accent, var(--color-accent));
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  animation: card-fan-modal-rise 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dc-modal-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.dc-modal-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--dc-accent, var(--color-accent));
+  color: #fff;
+  flex: 0 0 auto;
+}
+
+.dc-modal-icon .dc-icon-svg {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.dc-modal-eyebrow {
+  margin: 0 0 2px;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.dc-modal-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+.dc-modal-desc {
+  margin: 0 0 18px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.dc-modal-points {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.dc-modal-points li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.dc-modal-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--dc-accent, var(--color-accent));
+}
+
+.dc-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  line-height: 1;
+  border-radius: 999px;
+  border: 1px solid rgba(21, 35, 63, 0.12);
+  background: var(--surface);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.dc-modal-close:hover {
+  background: var(--dc-accent, var(--color-accent));
+  color: #fff;
+  border-color: transparent;
+}
+
+.dc-modal-close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.32);
+}
+
+@media (max-width: 560px) {
+  /* Shrink card + offsets so the stack fits narrow screens. */
+  .display-card { width: 17rem; height: 9.5rem; }
+  .display-card::after { width: 14rem; }
+  .display-card:nth-child(2) { --dc-x: 2.5rem; --dc-y: 2rem; }
+  .display-card:nth-child(3) { --dc-x: 5rem; --dc-y: 4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .display-cards,
+  .dc-modal,
+  .dc-modal-panel { animation: none; }
+  .display-card { transition: filter 0.3s ease, border-color 0.3s ease; }
 }
