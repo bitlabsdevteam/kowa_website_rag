@@ -120,6 +120,10 @@ export type SiteCopy = {
   hero: {
     eyebrow: string;
     title: string;
+    /** Static lead-in shown before the animated typewriter tail. */
+    titlePrefix: string;
+    /** Rotating, grounded tails typed after the prefix. */
+    titleTyped: string[];
     lead: string;
     body: string;
     cta: string;

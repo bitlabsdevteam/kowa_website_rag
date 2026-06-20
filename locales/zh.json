@@ -11,7 +11,7 @@
     "onlineShop": "在线购物",
     "localeLabel": "语言",
     "navAria": "主导航",
-    "homeAria": "Kowa Trade and Commerce 首页",
+    "homeAria": "広和通商株式会社 首页",
     "menuToggleLabel": "菜单",
     "localeOptions": {
       "en": "EN",
@@ -22,7 +22,14 @@
   "hero": {
     "eyebrow": "关于",
     "title": "让资源循环，传承给下一代。",
-    "lead": "从国内回收到海外出口，广和让塑料持续循环——更洁净的供应链、更少的废弃、实实在在的资源再生。",
+    "titlePrefix": "让资源循环，",
+    "titleTyped": [
+      "传承给下一代。",
+      "构建更洁净的供应链。",
+      "减少废弃排放。",
+      "实现资源再生。"
+    ],
+    "lead": "从国内回收到海外出口，広和让塑料持续循环，带来更洁净的供应链、更少的废弃、实实在在的资源再生。",
     "body": "作为1994年成立的东京贸易伙伴，我们在日本各地采购废塑料与损耗料，通过 G.P. Polymer 再生产线再资源化，并在全球开展再生材料与树脂贸易、电池组支持及工业机械进出口。",
     "cta": "联系 Aya",
     "videoTitle": "Kowa 视频短片",
@@ -62,7 +69,7 @@
   },
   "companyProfile": {
     "title": "愿景",
-    "summary": "让有价值的资源永不被浪费。Kowa 致力于让塑料与资源持续循环——通过跨境的回收、再生与贸易，使我们所服务的每一条供应链更清洁、更具循环性，并能为子孙后代持续运转。",
+    "summary": "让有价值的资源永不被浪费。Kowa 致力于让塑料与资源持续循环，通过跨境的回收、再生与贸易，使我们所服务的每一条供应链更清洁、更具循环性，并能为子孙后代持续运转。",
     "introLabel": "愿景",
     "introTitle": "从日本国内回收到全球循环。",
     "introBody": "旧版公司资料把 Kowa 定义为一家以塑料为核心的贸易与加工企业：在日本国内收集，在需要时进行再生处理，再把可用资源重新送回产业链。",
@@ -118,7 +125,7 @@
       {
         "year": "1993",
         "title": "公司创立",
-        "detail": "以有限公司的形式设立广和通商。"
+        "detail": "以有限公司的形式设立広和通商。"
       },
       {
         "year": "1994",
@@ -169,7 +176,7 @@
     "emailRowLabel": "邮箱",
     "email": "kowa@kowatrade.com",
     "hoursLabel": "营业时间",
-    "hours": "9:00–17:30",
+    "hours": "9:00-17:30",
     "formTitle": "给我们留言",
     "companyLabel": "公司名称",
     "emailLabel": "电子邮箱",
@@ -184,7 +191,7 @@
     "addressLabel": "总公司",
     "address": "〒108-0073 东京都港区三田2-10-6 Reoma大厦5楼",
     "directionsLabel": "查看路线",
-    "mapTitle": "显示广和通商位置的地图（东京都港区三田）",
+    "mapTitle": "显示広和通商位置的地图（东京都港区三田）",
     "stationsLabel": "最近车站",
     "stationsClosestBadge": "最近",
     "stationsApproxNote": "步行时间为大致估算。",
@@ -304,8 +311,8 @@
     }
   },
   "brand": {
-    "ariaLabel": "Kowa Trade and Commerce",
-    "name": "Kowa Trade and Commerce Co., Ltd.",
+    "ariaLabel": "広和通商株式会社",
+    "name": "広和通商株式会社",
     "location": ""
   },
   "chat": {
