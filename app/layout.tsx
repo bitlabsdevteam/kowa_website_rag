@@ -1,28 +1,20 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Noto_Sans_JP, Space_Grotesk } from 'next/font/google';
+import { Inter, Noto_Sans_JP } from 'next/font/google';
 import './globals.css';
 
-import { BeamsBackground } from '@/components/ui/beams-background';
 import { LocaleProvider } from '@/components/locale-provider';
 
-// Space Grotesk: clean geometric grotesque for UI and body copy.
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '700'],
-  variable: '--font-english',
-});
-
-// Fraunces: high-contrast editorial serif for display headlines, with optical
-// sizing so large headings pick up the tighter, higher-contrast cut.
-const fraunces = Fraunces({
+// Inter: the single, standardised Latin family for all UI, body and display
+// text. Drives both --font-english and --font-display-serif so headings and
+// body share one typeface site-wide.
+const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-display-serif',
+  variable: '--font-english',
 });
 
+// Noto Sans JP keeps Japanese/Chinese glyphs legible where Inter has no cover.
 const notoSansJp = Noto_Sans_JP({
   subsets: ['latin'],
   display: 'swap',
@@ -40,7 +32,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#f3efe7',
+  themeColor: '#ffffff',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -48,12 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${spaceGrotesk.variable} ${fraunces.variable} ${notoSansJp.variable}`}
+      className={`${inter.variable} ${notoSansJp.variable}`}
     >
       <body>
-        <div className="page-backdrop" data-testid="page-backdrop" aria-hidden="true">
-          <BeamsBackground intensity="strong" />
-        </div>
         <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>

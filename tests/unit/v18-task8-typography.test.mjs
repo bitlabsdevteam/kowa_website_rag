@@ -6,29 +6,32 @@ import test from 'node:test';
 const layoutPath = path.join(process.cwd(), 'app/layout.tsx');
 const cssPath = path.join(process.cwd(), 'app/globals.css');
 
-test('v18 task8: layout loads Fraunces + Space Grotesk via next/font, keeps Noto Sans JP, drops Manrope', async () => {
+test('v18 task8: layout standardises on Inter via next/font, keeps Noto Sans JP, drops Fraunces/Space Grotesk', async () => {
   const source = await readFile(layoutPath, 'utf8');
 
-  assert.match(source, /Fraunces/, 'imports Fraunces display face');
-  assert.match(source, /Space_Grotesk/, 'imports Space Grotesk for UI/body');
-  assert.match(source, /Noto_Sans_JP/, 'retains Noto Sans JP for Japanese');
-  assert.doesNotMatch(source, /Manrope/, 'Manrope is removed');
+  assert.match(source, /\bInter\b/, 'imports Inter as the single latin face');
+  assert.match(source, /Noto_Sans_JP/, 'retains Noto Sans JP for Japanese/Chinese');
+  assert.doesNotMatch(source, /Fraunces/, 'Fraunces is removed');
+  assert.doesNotMatch(source, /Space_Grotesk/, 'Space Grotesk is removed');
 
-  // next/font variable wiring is present for the new faces.
-  assert.match(source, /--font-display-serif/, 'exposes a display-serif CSS variable');
-  assert.match(source, /--font-english/, 'keeps the latin body variable name');
+  // next/font variable wiring drives the latin body/display variable.
+  assert.match(source, /--font-english/, 'exposes the latin font CSS variable');
 });
 
-test('v18 task8: globals.css maps the display variable to Fraunces for the latin locale', async () => {
+test('v18 task8: globals.css maps the latin display + body variables to Inter (--font-english)', async () => {
   const css = await readFile(cssPath, 'utf8');
 
-  assert.match(css, /--font-display-serif/, 'references the Fraunces variable');
   assert.match(
     css,
-    /--font-display:\s*var\(--font-display-serif\)/,
-    'latin --font-display resolves to the Fraunces variable',
+    /html:lang\(en\)[\s\S]*?--font-display:\s*var\(--font-english\)/,
+    'latin --font-display resolves to Inter (--font-english)',
   );
-  // Japanese display must NOT switch to the serif — it stays on Noto Sans JP.
+  assert.match(
+    css,
+    /html:lang\(en\)[\s\S]*?--font-body:\s*var\(--font-english\)/,
+    'latin --font-body resolves to Inter (--font-english)',
+  );
+  // Japanese display must NOT switch to the latin face — it stays on Noto Sans JP.
   assert.match(
     css,
     /html:lang\(ja\)[\s\S]*?--font-display:\s*var\(--font-sans\)/,

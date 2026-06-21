@@ -1,14 +1,23 @@
 'use client';
 
 import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 
-import CardFanCarousel, { type CardItem } from '@/components/ui/card-fan-carousel';
+import type { CardItem } from '@/components/ui/card-fan-carousel';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { PRODUCT_MEDIA } from '@/lib/product-media';
 import { PRODUCT_SHOWCASE_COPY } from '@/lib/product-showcase-copy';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
+
+// The fan carousel pulls in GSAP and only runs on the client, so defer its
+// bundle until the products page mounts. A height-matched placeholder reserves
+// the layout to avoid shift while the chunk loads.
+const CardFanCarousel = dynamic(() => import('@/components/ui/card-fan-carousel'), {
+  ssr: false,
+  loading: () => <div className="card-fan-loading" aria-hidden="true" />,
+});
 
 const PRODUCT_INTRO: Record<Locale, string> = {
   en: 'Recovered scrap, regenerated pellets, and supply-ready resin: the materials Kowa moves through its circular supply.',

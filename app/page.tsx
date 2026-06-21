@@ -1,15 +1,13 @@
 'use client';
 
 import { Recycle, ShoppingCart, Truck } from 'lucide-react';
-import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { useEffect } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { FeatureGrid, type Feature } from '@/components/ui/modern-feature-grid';
+import { HeroSection } from '@/components/ui/hero-section-2';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
-import { OriginButton } from '@/components/ui/origin-button';
-import { Typewriter } from '@/components/ui/typewriter';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
@@ -136,26 +134,12 @@ const HOME_UI: Record<
 
 export default function HomePage() {
   const [locale, setLocale] = useLocale();
-  // When reduced motion is preferred we render the full headline statically
-  // instead of the looping typewriter.
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const heroRef = useRef<HTMLElement | null>(null);
-  // Hero-scoped scroll progress drives the copy-layer parallax drift.
-  const heroProgress = useScrollProgress(heroRef);
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
 
   useEffect(() => {
     document.documentElement.lang = locale;
   }, [locale]);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(mediaQuery.matches);
-    update();
-    mediaQuery.addEventListener('change', update);
-    return () => mediaQuery.removeEventListener('change', update);
-  }, []);
 
   // Map the localized process steps into feature-grid cards (one lucide icon
   // per stage).
@@ -172,57 +156,33 @@ export default function HomePage() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <section
+      <HeroSection
         id="about"
-        ref={heroRef}
-        className="reference-hero cinematic-hero"
         data-testid="landing-primary-box"
-        style={{ '--hero-parallax': heroProgress } as CSSProperties}
-      >
-        <div className="hero-parallax-background" data-testid="hero-parallax-background" aria-hidden="true" />
-        <div className="hero-parallax-mid" data-testid="hero-parallax-mid" aria-hidden="true" />
-        <div className="reference-hero-grid hero-parallax-foreground" data-testid="hero-parallax-foreground">
-          <div className="reference-hero-copy">
-            <h1 className="hero-title reference-hero-title">
-              {reducedMotion ? (
-                copy.hero.title
-              ) : (
-                <>
-                  {copy.hero.titlePrefix}
-                  <Typewriter
-                    text={copy.hero.titleTyped}
-                    speed={55}
-                    deleteSpeed={32}
-                    waitTime={2200}
-                    initialDelay={600}
-                    className="hero-title-typed"
-                    cursorClassName="hero-title-cursor"
-                  />
-                </>
-              )}
-            </h1>
-            <p className="lead reference-hero-lead">{copy.hero.lead}</p>
-            <p className="body-copy reference-hero-body" data-testid="landing-narrative">
-              {copy.hero.body}
-            </p>
-            <div className="hero-actions">
-              <OriginButton
-                onClick={() => {
-                  const target = document.getElementById('business');
-                  if (target) {
-                    target.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
-                  }
-                  if (typeof history !== 'undefined') {
-                    history.replaceState(null, '', '#business');
-                  }
-                }}
-              >
-                {ui.secondaryCta}
-              </OriginButton>
-            </div>
-          </div>
-        </div>
-      </section>
+        logo={{ text: copy.brand.name }}
+        slogan={ui.heroFlag}
+        title={
+          <>
+            {copy.hero.titlePrefix}
+            <br />
+            <span className="hero-section-title-accent">{copy.hero.titleTyped[0]}</span>
+          </>
+        }
+        subtitle={copy.hero.lead}
+        callToAction={{
+          text: ui.secondaryCta,
+          href: '#business',
+          onClick: (event) => {
+            event.preventDefault();
+            const target = document.getElementById('business');
+            target?.scrollIntoView({ behavior: 'smooth' });
+            if (typeof history !== 'undefined') {
+              history.replaceState(null, '', '#business');
+            }
+          },
+        }}
+        backgroundImage="/hero-recycling.svg"
+      />
 
       <section id="business" className="corporate-business-section is-boxless" aria-label={copy.business.title} data-testid="business-section">
         <ScrollReveal variant="fade-up" testId="reveal-business-head">
