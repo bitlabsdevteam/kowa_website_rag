@@ -1,6 +1,6 @@
 :root {
-  --font-body: var(--font-inter), 'Segoe UI', sans-serif;
-  --font-display: 'Helvetica Neue', Helvetica, Arial, var(--font-inter), sans-serif;
+  --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -320,8 +320,8 @@ html:lang(zh) {
 
 /* Silver · Navy · Green editorial redesign overrides (authoritative tokens) */
 :root {
-  --font-body: var(--font-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
-  --font-display: var(--font-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
   --color-canvas: #ffffff;
   --color-canvas-strong: #f4f6f8;
   --color-surface: rgba(255, 255, 255, 0.96);
@@ -6171,8 +6171,8 @@ a:focus-visible {
 }
 
 :root {
-  --font-body: var(--font-inter), 'Segoe UI', sans-serif;
-  --font-display: 'Helvetica Neue', Helvetica, Arial, var(--font-inter), sans-serif;
+  --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
   --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.18);
 }
 
