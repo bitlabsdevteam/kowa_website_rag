@@ -3,13 +3,13 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
 const ROUTE_EXPECTATIONS = [
-  { file: 'app/page.tsx', terms: ["import { SiteFooterBar } from '@/components/site-footer-bar';", '<SiteFooterBar '] },
+  { file: 'app/page.tsx', terms: ["import { LocalizedFooter } from '@/components/localized-footer';", '<LocalizedFooter '] },
   { file: 'app/news/page.tsx', terms: ["import { NewsPageClient } from '@/components/news-page-client';", '<NewsPageClient '] },
-  { file: 'app/products/page.tsx', terms: ["import { SiteFooterBar } from '@/components/site-footer-bar';", '<SiteFooterBar '] },
-  { file: 'app/company_profile/page.tsx', terms: ["import { SiteFooterBar } from '@/components/site-footer-bar';", '<SiteFooterBar '] },
+  { file: 'app/products/page.tsx', terms: ["import { LocalizedFooter } from '@/components/localized-footer';", '<LocalizedFooter '] },
+  { file: 'app/company_profile/page.tsx', terms: ["import { LocalizedFooter } from '@/components/localized-footer';", '<LocalizedFooter '] },
 ];
 
-test('v9 task13 route pages consistently use SiteFooterBar', () => {
+test('v9 task13 route pages consistently use LocalizedFooter', () => {
   for (const { file, terms } of ROUTE_EXPECTATIONS) {
     const content = readFileSync(file, 'utf8');
     for (const term of terms) {

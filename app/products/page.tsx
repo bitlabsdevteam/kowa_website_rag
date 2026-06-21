@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 
 import CardFanCarousel, { type CardItem } from '@/components/ui/card-fan-carousel';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { PRODUCT_MEDIA } from '@/lib/product-media';
 import { PRODUCT_SHOWCASE_COPY } from '@/lib/product-showcase-copy';
@@ -60,9 +60,7 @@ export default function ProductsPage() {
         />
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

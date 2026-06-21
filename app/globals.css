@@ -5384,6 +5384,166 @@ a:focus-visible {
   fill: currentColor;
 }
 
+/* Footer7 — boxless editorial footer (components/ui/footer-7.tsx).
+   Sits directly on the dark "beams" backdrop (no panel) with light cream text to
+   match the boxless page content; navigation mirrors the top menu bar. */
+.footer7 {
+  --footer7-text: rgb(244, 241, 234);
+  --footer7-muted: rgba(244, 241, 234, 0.74);
+  --footer7-faint: rgba(244, 241, 234, 0.22);
+  margin-top: 22px;
+  display: grid;
+  gap: 28px;
+  padding: 8px 8px 0;
+}
+
+.footer7-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: start;
+}
+
+.footer7-brand-col {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  max-width: 44ch;
+}
+
+.footer7-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--footer7-text);
+}
+
+.footer7-title {
+  font-family: var(--font-display);
+  font-size: 1.04rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--footer7-text);
+}
+
+.footer7-desc {
+  margin: 0;
+  color: var(--footer7-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer7-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer7-social a {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--footer7-muted);
+  border: 1px solid var(--footer7-faint);
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.footer7-social a:hover {
+  color: var(--footer7-text);
+  border-color: var(--footer7-text);
+  transform: translateY(-1px);
+}
+
+.footer7-social svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer7-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer7-link {
+  color: var(--footer7-text);
+  text-decoration: none;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.footer7-link:hover {
+  opacity: 0.7;
+}
+
+.footer7-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--footer7-muted);
+  border-top-color: var(--footer7-faint);
+}
+
+.footer7-bar p {
+  color: var(--footer7-muted);
+}
+
+.footer7-legal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer7-legal a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 180ms ease;
+}
+
+.footer7-legal a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .footer7-top {
+    gap: 28px;
+  }
+
+  .footer7-nav {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer7-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer7-bar {
+    justify-content: flex-start;
+  }
+}
+
 .company-profile-surface {
   display: grid;
   gap: 28px;
@@ -9801,4 +9961,61 @@ html:lang(en) .reference-section-title {
 
 .page:not(.reference-site) :is(.location-station-lines, .location-station-walk, .location-stations-note, .location-map-address) {
   color: rgba(244, 241, 234, 0.66) !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Boxless top menu + footer bar on EVERY page (they float over the beams).
+--------------------------------------------------------------------------- */
+.shell-header,
+.top-menu {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Nav links / locale control relit for the dark backdrop. */
+.top-menu-link,
+.top-menu-dropdown-trigger,
+.locale-control,
+.locale-control span,
+.locale-control select {
+  color: #f4f1ea !important;
+}
+
+.top-menu-link:hover,
+.top-menu-dropdown-trigger:hover {
+  color: #ffffff !important;
+}
+
+/* Dropdown submenu as dark glass instead of a white panel. */
+.top-menu-submenu {
+  background: rgba(10, 23, 51, 0.94) !important;
+  border-color: rgba(244, 241, 234, 0.16) !important;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.7) !important;
+}
+
+.top-menu-submenu-link {
+  color: rgba(244, 241, 234, 0.86) !important;
+}
+
+.top-menu-submenu-link:hover {
+  color: #ffffff !important;
+}
+
+/* Mobile hamburger toggle. */
+.top-menu-toggle {
+  background: transparent !important;
+  border-color: rgba(244, 241, 234, 0.3) !important;
+}
+
+.top-menu-toggle-bars span {
+  background: #f4f1ea !important;
+}
+
+/* Footer bar (the light-green strip) goes transparent everywhere. */
+.site-footer-bar {
+  background: transparent !important;
+  border-top-color: rgba(244, 241, 234, 0.16) !important;
 }

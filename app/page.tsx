@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { FeatureGrid, type Feature } from '@/components/ui/modern-feature-grid';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { OriginButton } from '@/components/ui/origin-button';
 import { Typewriter } from '@/components/ui/typewriter';
@@ -229,9 +229,7 @@ export default function HomePage() {
           <FeatureGrid sectionTitle={ui.platformLabel} sectionDescription={copy.business.intro} features={features} />
         </ScrollReveal>
       </section>
-      <footer className="site-footer" data-testid="landing-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { formatNewsDate, getNewsVisibleDate, resolveNewsLocalization } from '@/lib/news/format';
 import type { NewsArticle } from '@/lib/news/types';
@@ -66,9 +66,7 @@ export function NewsPageClient({ initialArticles }: NewsPageClientProps) {
         </section>
       </ScrollReveal>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

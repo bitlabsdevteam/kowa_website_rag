@@ -3,7 +3,7 @@
 import Link from 'next/link';
 
 import { NewsBodyBlocks } from '@/components/news-body-blocks';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { formatNewsDate, getNewsVisibleDate, resolveNewsLocalization } from '@/lib/news/format';
 import type { NewsArticle } from '@/lib/news/types';
@@ -44,9 +44,7 @@ export function NewsArticlePageClient({ article }: NewsArticlePageClientProps) {
         <NewsBodyBlocks blocks={localization.bodyBlocks} />
       </article>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

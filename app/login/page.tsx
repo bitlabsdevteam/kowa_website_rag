@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { setLocalAdminAuth } from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
@@ -78,9 +78,7 @@ export default function LoginPage() {
         {error ? <p style={{ color: '#9f4b44' }}>{error}</p> : null}
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={site.footer.copyright} termsLabel={site.footer.termsLabel} social={site.footer.social} />
-      </footer>
+      <LocalizedFooter copy={site} />
     </main>
   );
 }
