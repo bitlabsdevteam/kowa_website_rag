@@ -9163,6 +9163,46 @@ html:lang(en) .reference-section-title {
   object-fit: cover;
 }
 
+/* Gallery variant: stack the package shot + macro zoom vertically and let the
+   media column scroll independently of the body. */
+.card-fan-modal-media.is-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.card-fan-modal-figure {
+  position: relative;
+  margin: 0;
+  background: var(--surface-muted);
+}
+
+.card-fan-modal-media.is-gallery .card-fan-modal-figure img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-fan-modal-figure figcaption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 11px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(15, 22, 38, 0.62);
+  border-radius: var(--radius-pill);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
 .card-fan-modal-body {
   padding: 32px 32px 36px;
   overflow-y: auto;
@@ -9253,6 +9293,7 @@ html:lang(en) .reference-section-title {
     max-height: 90vh;
   }
   .card-fan-modal-media { min-height: 200px; height: 38vw; max-height: 280px; }
+  .card-fan-modal-media.is-gallery { height: auto; min-height: 0; max-height: 46vh; }
   .card-fan-modal-body { padding: 24px 22px 28px; }
 }
 
@@ -9961,6 +10002,24 @@ html:lang(en) .reference-section-title {
 
 .page:not(.reference-site) :is(.location-station-lines, .location-station-walk, .location-stations-note, .location-map-address) {
   color: rgba(244, 241, 234, 0.66) !important;
+}
+
+/* The product detail modal is a solid white dialog rendered inside the boxless
+   .card section. Opt its text out of the cream "relight" above so it stays
+   dark-on-white and readable. The boxless paragraph rule resolves to (0,4,1)
+   specificity (its :is() list includes `.site-footer p`), so these selectors
+   chain through .card-fan-modal-body to clear that and stay authoritative. */
+.page:not(.reference-site) .card .card-fan-modal-body .card-fan-modal-eyebrow {
+  color: var(--color-accent) !important;
+}
+.page:not(.reference-site) .card .card-fan-modal-body .card-fan-modal-title {
+  color: var(--color-text) !important;
+}
+.page:not(.reference-site) .card .card-fan-modal-body .card-fan-modal-summary {
+  color: var(--color-text-muted) !important;
+}
+.page:not(.reference-site) .card .card-fan-modal-body .card-fan-modal-points li {
+  color: var(--color-text) !important;
 }
 
 /* ---------------------------------------------------------------------------
