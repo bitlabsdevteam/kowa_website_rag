@@ -6,69 +6,107 @@ export type ProductMediaCategory =
   | 'machinery-equipment'
   | 'commerce-distribution';
 
+/** Resin product families currently photographed for the products gallery. */
+export type ProductFamily = 'cd-pcn' | 'gpps' | 'ps-recycle';
+
+/** Each family is shot three ways: the labelled lot bag, a loose pile, and a macro detail. */
+export type ProductView = 'lot' | 'pile' | 'macro';
+
 export type ProductMediaItem = {
   id: string;
+  /** English working title (used by the legacy showcase surface). */
   title: string;
   category: ProductMediaCategory;
+  family: ProductFamily;
+  view: ProductView;
   src: string;
   sourceFile: string;
 };
 
+// Nine source photos: three resin families, each captured as a sealed lot bag
+// (lot), a loose pellet pile (pile), and a macro close-up (macro). Localized,
+// per-family copy lives in `PRODUCT_FAMILY_COPY` / `PRODUCT_VIEW_COPY`
+// (lib/product-showcase-copy.ts).
 export const PRODUCT_MEDIA: ProductMediaItem[] = [
   {
-    id: 'resin-batch-01',
-    title: 'Resin Material Batch 01',
-    category: 'resin-materials',
-    src: '/images/products/81801_0.jpg',
-    sourceFile: 'images/81801_0.jpg',
-  },
-  {
-    id: 'resin-batch-02',
-    title: 'Resin Material Batch 02',
-    category: 'resin-materials',
-    src: '/images/products/86969_0_0.jpg',
-    sourceFile: 'images/86969_0_0.jpg',
-  },
-  {
-    id: 'resin-batch-03',
-    title: 'Resin Material Batch 03',
-    category: 'resin-materials',
-    src: '/images/products/86970_0_0.jpg',
-    sourceFile: 'images/86970_0_0.jpg',
-  },
-  {
-    id: 'cop-pellet',
-    title: 'COP Pellet',
+    id: 'cd-pcn-lot',
+    title: 'CD-PCN Recycled Polycarbonate — Sealed lot',
     category: 'pellets-output',
-    src: '/images/products/cop-pellet.jpg',
-    sourceFile: 'images/COP ペレット.jpg',
+    family: 'cd-pcn',
+    view: 'lot',
+    src: '/images/products/cd-pcn-pellet-lot.jpg',
+    sourceFile: 'CD-PCN Pellet①.jpg',
   },
   {
-    id: 'product-shot-01',
-    title: 'Product Shot 01',
-    category: 'commerce-distribution',
-    src: '/images/products/img-2592.jpg',
-    sourceFile: 'images/IMG_2592.jpg',
-  },
-  {
-    id: 'pe-dango-1',
-    title: 'PE Dango 1',
+    id: 'cd-pcn-pile',
+    title: 'CD-PCN Recycled Polycarbonate — Loose pellets',
     category: 'pellets-output',
-    src: '/images/products/pe-dango-1.jpg',
-    sourceFile: 'images/PEダンゴ１.jpg',
+    family: 'cd-pcn',
+    view: 'pile',
+    src: '/images/products/cd-pcn-pellet-pile.jpg',
+    sourceFile: 'CD-PCN Pellet②.jpg',
   },
   {
-    id: 'pe-crushing',
-    title: 'PE Crushing',
-    category: 'recycling-process',
-    src: '/images/products/pe-crushing.jpg',
-    sourceFile: 'images/PE粉砕.jpg',
+    id: 'cd-pcn-macro',
+    title: 'CD-PCN Recycled Polycarbonate — Macro detail',
+    category: 'pellets-output',
+    family: 'cd-pcn',
+    view: 'macro',
+    src: '/images/products/cd-pcn-pellet-macro.jpg',
+    sourceFile: 'CD-PCN Pellet③.jpg',
   },
   {
-    id: 'plastic-scrap',
-    title: 'Plastic Scrap',
-    category: 'recycling-process',
-    src: '/images/products/plastic-scrap.jpg',
-    sourceFile: 'images/Plastic Scrap.jpg',
+    id: 'gpps-lot',
+    title: 'GPPS Natural Polystyrene — Sealed lot',
+    category: 'pellets-output',
+    family: 'gpps',
+    view: 'lot',
+    src: '/images/products/gpps-pellet-lot.jpg',
+    sourceFile: 'GPPS Pellet①.jpg',
+  },
+  {
+    id: 'gpps-pile',
+    title: 'GPPS Natural Polystyrene — Loose pellets',
+    category: 'pellets-output',
+    family: 'gpps',
+    view: 'pile',
+    src: '/images/products/gpps-pellet-pile.jpg',
+    sourceFile: 'GPPS Pellet②.jpg',
+  },
+  {
+    id: 'gpps-macro',
+    title: 'GPPS Natural Polystyrene — Macro detail',
+    category: 'pellets-output',
+    family: 'gpps',
+    view: 'macro',
+    src: '/images/products/gpps-pellet-macro.jpg',
+    sourceFile: 'GPPS Pellet③.jpg',
+  },
+  {
+    id: 'ps-recycle-lot',
+    title: 'Recycled Polystyrene (White) — Sealed lot',
+    category: 'pellets-output',
+    family: 'ps-recycle',
+    view: 'lot',
+    src: '/images/products/ps-recycle-pellet-lot.jpg',
+    sourceFile: 'PS Recycle Pellet①.jpg',
+  },
+  {
+    id: 'ps-recycle-pile',
+    title: 'Recycled Polystyrene (White) — Loose pellets',
+    category: 'pellets-output',
+    family: 'ps-recycle',
+    view: 'pile',
+    src: '/images/products/ps-recycle-pellet-pile.jpg',
+    sourceFile: 'PS Recycle Pellet②.jpg',
+  },
+  {
+    id: 'ps-recycle-macro',
+    title: 'Recycled Polystyrene (White) — Macro detail',
+    category: 'pellets-output',
+    family: 'ps-recycle',
+    view: 'macro',
+    src: '/images/products/ps-recycle-pellet-macro.jpg',
+    sourceFile: 'PS Recycle Pellet③.jpg',
   },
 ];

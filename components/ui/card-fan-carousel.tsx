@@ -22,6 +22,8 @@ export interface CardItem {
   points?: string[];
   /** When set, the card navigates instead of opening the detail modal. */
   linkUrl?: string;
+  /** Additional images revealed only in the detail modal (e.g. package shot + macro zoom). */
+  detailImages?: { src: string; alt: string; caption?: string }[];
 }
 
 interface CardFanCarouselProps {
@@ -415,9 +417,19 @@ export default function CardFanCarousel({
             >
               <span aria-hidden="true">×</span>
             </button>
-            <div className="card-fan-modal-media">
-              {/* eslint-disable-next-line @next/next/no-img-element -- modal mirrors the card image at natural fit */}
-              <img src={openCard.imgUrl} alt={openCard.alt || openCard.title || 'Product'} />
+            <div className={`card-fan-modal-media${openCard.detailImages?.length ? ' is-gallery' : ''}`}>
+              {openCard.detailImages?.length ? (
+                openCard.detailImages.map((image) => (
+                  <figure key={image.src} className="card-fan-modal-figure">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- natural-fit gallery image */}
+                    <img src={image.src} alt={image.alt} loading="lazy" />
+                    {image.caption ? <figcaption>{image.caption}</figcaption> : null}
+                  </figure>
+                ))
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element -- modal mirrors the card image at natural fit
+                <img src={openCard.imgUrl} alt={openCard.alt || openCard.title || 'Product'} />
+              )}
             </div>
             <div className="card-fan-modal-body">
               {openCard.category ? <p className="card-fan-modal-eyebrow">{openCard.category}</p> : null}
