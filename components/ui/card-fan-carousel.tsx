@@ -75,17 +75,38 @@ function getHeightMultiplier(width: number) {
   return available / idealPx;
 }
 
+// Per-step fan geometry sampled at integer offsets from the centre card
+// (0, 1, 2, 3 cards out). These are the right half of FAN_POSITIONS, so any
+// sub-7 fan reuses the exact spacing of the full fan rather than stretching a
+// few cards across the whole width — keeping a consistent ~11rem overlap step
+// regardless of how many products are shown.
+const FAN_STEP = {
+  rot: [0, 7, 14, 21],
+  scale: [1.0, 0.9346, 0.8498, 0.7756],
+  x: [0, 11, 22, 30],
+  y: [0, 1.3, 4.0, 7.3],
+};
+
+function interpStep(values: number[], absOffset: number) {
+  const clamped = Math.min(absOffset, values.length - 1);
+  const lo = Math.floor(clamped);
+  const hi = Math.min(lo + 1, values.length - 1);
+  return values[lo] + (values[hi] - values[lo]) * (clamped - lo);
+}
+
 function getSlotConfig(totalCards: number, slot: number) {
   if (totalCards >= MAX_VISIBLE) return FAN_POSITIONS[slot];
-  const center = totalCards >> 1;
-  const distance = totalCards > 1 ? (slot - center) / center : 0;
-  const absDistance = Math.abs(distance);
+  // Offset of this slot from the centre, in card-steps. Fractional for even
+  // counts (the fan straddles the midline) so spacing stays symmetric.
+  const offset = slot - (totalCards - 1) / 2;
+  const absOffset = Math.abs(offset);
+  const sign = Math.sign(offset);
   return {
-    rot: distance * 21,
-    scale: 1.0 - 0.2244 * absDistance * absDistance,
-    x: distance * 30,
-    y: absDistance * absDistance * 7.3,
-    zIndex: 10 - Math.abs(slot - center),
+    rot: sign * interpStep(FAN_STEP.rot, absOffset),
+    scale: interpStep(FAN_STEP.scale, absOffset),
+    x: sign * interpStep(FAN_STEP.x, absOffset),
+    y: interpStep(FAN_STEP.y, absOffset),
+    zIndex: 10 - Math.round(absOffset),
   };
 }
 
@@ -105,36 +126,52 @@ export default function CardFanCarousel({
 
   const totalCards = cards.length;
   const needsPagination = totalCards > MAX_VISIBLE;
+  // Whether the fan can rotate at all — a single card has nowhere to go.
+  const canRotate = totalCards > 1;
   const [centerIndex, setCenterIndex] = useState(needsPagination ? HALF : totalCards >> 1);
   // Index of the card whose description modal is open, or null when closed.
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  // Pause the auto-rotate while the user is interacting with the fan.
+  const [isPaused, setIsPaused] = useState(false);
 
   const getVisibleMap = useCallback(
     (center: number) => {
       const map = new Map<number, number>();
-      if (!needsPagination) {
-        cards.forEach((_, i) => map.set(i, i));
-        return map;
-      }
-      for (let slot = 0; slot < MAX_VISIBLE; slot++) {
-        map.set((((center + slot - HALF) % totalCards) + totalCards) % totalCards, slot);
+      // For a full (>7) fan only MAX_VISIBLE cards show, centred on HALF; for a
+      // smaller fan every card shows but the ring still rotates so each product
+      // takes the centre slot in turn.
+      const slotCount = needsPagination ? MAX_VISIBLE : totalCards;
+      const middle = needsPagination ? HALF : totalCards >> 1;
+      for (let slot = 0; slot < slotCount; slot++) {
+        map.set((((center + slot - middle) % totalCards) + totalCards) % totalCards, slot);
       }
       return map;
     },
-    [totalCards, needsPagination, cards],
+    [totalCards, needsPagination],
   );
 
   const cycle = useCallback(
     (direction: 'left' | 'right') => {
-      if (isAnimating.current || !needsPagination) return;
+      if (isAnimating.current || !canRotate) return;
       isAnimating.current = true;
       directionRef.current = direction;
       setCenterIndex((prev) =>
         direction === 'right' ? (prev + 1) % totalCards : (prev - 1 + totalCards) % totalCards,
       );
     },
-    [totalCards, needsPagination],
+    [totalCards, canRotate],
   );
+
+  // Auto-rotate: advance one card every 5s, like a carousel. Pauses on hover,
+  // while the detail modal is open, and when the user prefers reduced motion.
+  useEffect(() => {
+    if (!canRotate || isPaused || openIndex !== null) return undefined;
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return undefined;
+    }
+    const id = window.setInterval(() => cycle('right'), 5000);
+    return () => window.clearInterval(id);
+  }, [canRotate, isPaused, openIndex, cycle]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -333,7 +370,13 @@ export default function CardFanCarousel({
   );
 
   return (
-    <section className="card-fan">
+    <section
+      className="card-fan"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
+    >
       <div className="card-fan-stage">
         <div ref={containerRef} className="fan-layout">
           {cards.map((card, index) => {
