@@ -75,17 +75,38 @@ function getHeightMultiplier(width: number) {
   return available / idealPx;
 }
 
+// Per-step fan geometry sampled at integer offsets from the centre card
+// (0, 1, 2, 3 cards out). These are the right half of FAN_POSITIONS, so any
+// sub-7 fan reuses the exact spacing of the full fan rather than stretching a
+// few cards across the whole width — keeping a consistent ~11rem overlap step
+// regardless of how many products are shown.
+const FAN_STEP = {
+  rot: [0, 7, 14, 21],
+  scale: [1.0, 0.9346, 0.8498, 0.7756],
+  x: [0, 11, 22, 30],
+  y: [0, 1.3, 4.0, 7.3],
+};
+
+function interpStep(values: number[], absOffset: number) {
+  const clamped = Math.min(absOffset, values.length - 1);
+  const lo = Math.floor(clamped);
+  const hi = Math.min(lo + 1, values.length - 1);
+  return values[lo] + (values[hi] - values[lo]) * (clamped - lo);
+}
+
 function getSlotConfig(totalCards: number, slot: number) {
   if (totalCards >= MAX_VISIBLE) return FAN_POSITIONS[slot];
-  const center = totalCards >> 1;
-  const distance = totalCards > 1 ? (slot - center) / center : 0;
-  const absDistance = Math.abs(distance);
+  // Offset of this slot from the centre, in card-steps. Fractional for even
+  // counts (the fan straddles the midline) so spacing stays symmetric.
+  const offset = slot - (totalCards - 1) / 2;
+  const absOffset = Math.abs(offset);
+  const sign = Math.sign(offset);
   return {
-    rot: distance * 21,
-    scale: 1.0 - 0.2244 * absDistance * absDistance,
-    x: distance * 30,
-    y: absDistance * absDistance * 7.3,
-    zIndex: 10 - Math.abs(slot - center),
+    rot: sign * interpStep(FAN_STEP.rot, absOffset),
+    scale: interpStep(FAN_STEP.scale, absOffset),
+    x: sign * interpStep(FAN_STEP.x, absOffset),
+    y: interpStep(FAN_STEP.y, absOffset),
+    zIndex: 10 - Math.round(absOffset),
   };
 }
 
