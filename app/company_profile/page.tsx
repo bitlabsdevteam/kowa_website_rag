@@ -48,43 +48,51 @@ export default function CompanyProfilePage() {
         </div>
 
         <ScrollReveal variant="fade-up">
-          <div className="company-profile-facts">
+          <dl className="company-profile-facts">
             {COMPANY_FACTS.map((fact) => (
               <div key={fact.enTerm} className="cp-fact">
-                <p className="cp-fact-lang cp-fact-lang--ja" lang="ja">
-                  <span className="cp-fact-term">{fact.jaTerm}</span>
-                  <span className="cp-fact-value">{fact.jaValue}</span>
-                </p>
-                <p className="cp-fact-lang cp-fact-lang--en" lang="en">
-                  <span className="cp-fact-term">{fact.enTerm}</span>
-                  <span className="cp-fact-value">{fact.enValue}</span>
-                </p>
+                <dt className="cp-fact-label">
+                  <span className="cp-fact-term cp-fact-term--ja" lang="ja">
+                    {fact.jaTerm}
+                  </span>
+                  <span className="cp-fact-term cp-fact-term--en" lang="en">
+                    {fact.enTerm}
+                  </span>
+                </dt>
+                <dd className="cp-fact-values">
+                  <span className="cp-fact-value cp-fact-value--ja" lang="ja">
+                    {fact.jaValue}
+                  </span>
+                  <span className="cp-fact-value cp-fact-value--en" lang="en">
+                    {fact.enValue}
+                  </span>
+                </dd>
               </div>
             ))}
-          </div>
-        </ScrollReveal>
 
-        <ScrollReveal variant="fade-up">
-          <div className="company-profile-facts company-profile-related">
-            <div className="cp-fact cp-fact--group">
-              <p className="cp-fact-lang cp-fact-lang--ja" lang="ja">
-                <span className="cp-fact-term">関連会社</span>
-              </p>
-              <p className="cp-fact-lang cp-fact-lang--en" lang="en">
-                <span className="cp-fact-term">Corporate Companies</span>
-              </p>
+            <div className="cp-fact">
+              <dt className="cp-fact-label">
+                <span className="cp-fact-term cp-fact-term--ja" lang="ja">
+                  関連会社
+                </span>
+                <span className="cp-fact-term cp-fact-term--en" lang="en">
+                  Corporate Companies
+                </span>
+              </dt>
+              <dd className="cp-fact-values cp-fact-values--list">
+                {RELATED_COMPANIES.map((company) => (
+                  <span key={company.en} className="cp-related">
+                    <span className="cp-fact-value cp-fact-value--ja" lang="ja">
+                      {company.ja}
+                    </span>
+                    <span className="cp-fact-value cp-fact-value--en" lang="en">
+                      {company.en}
+                    </span>
+                  </span>
+                ))}
+              </dd>
             </div>
-            {RELATED_COMPANIES.map((company) => (
-              <div key={company.en} className="cp-fact">
-                <p className="cp-fact-lang cp-fact-lang--ja" lang="ja">
-                  <span className="cp-fact-value">{company.ja}</span>
-                </p>
-                <p className="cp-fact-lang cp-fact-lang--en" lang="en">
-                  <span className="cp-fact-value">{company.en}</span>
-                </p>
-              </div>
-            ))}
-          </div>
+          </dl>
         </ScrollReveal>
       </section>
 
