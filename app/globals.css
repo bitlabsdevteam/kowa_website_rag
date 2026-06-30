@@ -5592,63 +5592,97 @@ a:focus-visible {
   letter-spacing: -0.02em;
 }
 
-/* Elegant bilingual key-facts sheet (資本金 / Capital, 設立 / Established). */
+/* Elegant bilingual key-facts sheet — a label column (JA term over EN term)
+   beside a value column (JA value primary, EN value beneath). */
 .company-profile-facts {
   width: 100%;
-  max-width: 760px;
-  margin: clamp(20px, 4vw, 44px) auto 8px;
-  display: grid;
+  max-width: 720px;
+  margin: clamp(24px, 4vw, 48px) auto 8px;
   border-top: 1px solid var(--color-line);
 }
 
 .cp-fact {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(16px, 4vw, 48px);
+  grid-template-columns: minmax(140px, 0.42fr) 1fr;
+  gap: clamp(20px, 5vw, 56px);
   align-items: baseline;
-  padding: clamp(22px, 3.2vw, 34px) 6px;
+  padding: clamp(20px, 3vw, 30px) 4px;
   border-bottom: 1px solid var(--color-line);
 }
 
-.cp-fact-lang {
+.cp-fact-label {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
+  flex-direction: column;
+  gap: 5px;
   margin: 0;
+  padding-top: 0.35em;
 }
 
 .cp-fact-term {
-  flex: 0 0 auto;
-  min-width: 84px;
-  font-size: 0.82rem;
+  display: block;
+}
+
+.cp-fact-term--ja {
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.cp-fact-term--en {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
-.cp-fact-lang--ja .cp-fact-term {
-  letter-spacing: 0.06em;
-  text-transform: none;
-}
-
-/* Wider gutter so the English values line up under each other (CAPITAL vs ESTABLISHED). */
-.cp-fact-lang--en .cp-fact-term {
-  min-width: 124px;
+.cp-fact-values {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
 }
 
 .cp-fact-value {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
-  line-height: 1.1;
-  color: var(--color-accent-strong);
-  white-space: nowrap;
+  display: block;
 }
 
-@media (max-width: 640px) {
+.cp-fact-value--ja {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+  line-height: 1.18;
+  color: var(--color-accent-strong);
+}
+
+.cp-fact-value--en {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* Related-companies value cell stacks each company as its own JA/EN pair. */
+.cp-fact-values--list {
+  gap: 18px;
+}
+
+.cp-related {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (max-width: 560px) {
   .cp-fact {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cp-fact-label {
+    flex-direction: row;
+    align-items: baseline;
     gap: 10px;
+    padding-top: 0;
   }
 }
 
