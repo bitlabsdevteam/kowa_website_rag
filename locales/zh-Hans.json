@@ -199,9 +199,27 @@
     "stationsResetLabel": "返回办公室地图",
     "stationsRouteHint": "地图上已显示前往办公室的步行路线。",
     "stations": [
-      { "name": "三田站", "lines": "都营浅草线・三田线", "walk": "步行约8分钟", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "田町站", "lines": "JR山手线", "walk": "步行约12分钟", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "赤羽桥站", "lines": "都营大江户线", "walk": "步行约8分钟", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "三田站",
+        "lines": "都营浅草线・三田线",
+        "walk": "步行约8分钟",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "田町站",
+        "lines": "JR山手线",
+        "walk": "步行约12分钟",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "赤羽桥站",
+        "lines": "都营大江户线",
+        "walk": "步行约8分钟",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -424,5 +442,45 @@
     "legacyTitle": "旧站抓取数据集",
     "legacyLead": "所有可访问的旧站页面已被抓取并转换为结构化摘要，用于迁移到新网站。",
     "legacyNoExcerpt": "该资源未提取到可读文本。"
+  },
+  "home": {
+    "news": {
+      "display": "NEWS",
+      "subtitle": "Kowa 最新动态",
+      "viewAll": "查看全部新闻",
+      "badgeLabel": "资讯",
+      "empty": "暂无新闻。"
+    },
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "三条业务通道，一体化循环供应",
+      "linkLabel": "查看业务"
+    },
+    "about": {
+      "display": "ABOUT",
+      "subtitle": "关于我们",
+      "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
+      "linksLabel": "了解 Kowa"
+    },
+    "values": {
+      "display": "TO RESOURCES AGAIN",
+      "subtitle": "我们的承诺",
+      "statement": "我们将通过塑料回收业务为社会做出贡献。",
+      "ctaLabel": "查看我们的业务"
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "业务介绍",
+    "breadcrumbAria": "面包屑导航",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "业务介绍",
+    "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
+    "segmentsLabel": "业务板块",
+    "offeringsProductsLabel": "查看产品",
+    "offeringsMachinesLabel": "查看设备",
+    "ctaTitle": "联系我们的贸易团队",
+    "ctaBody": "无论您是采购再生树脂、关注资源循环，还是探讨贸易合作，只需填写以下信息，我们的团队将通过电子邮件与您联系。",
+    "ctaLabel": "联系我们"
   }
 }

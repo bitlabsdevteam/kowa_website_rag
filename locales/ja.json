@@ -199,9 +199,27 @@
     "stationsResetLabel": "本社の地図に戻る",
     "stationsRouteHint": "本社までの徒歩ルートを地図に表示しています。",
     "stations": [
-      { "name": "三田駅", "lines": "都営浅草線・三田線", "walk": "徒歩約8分", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "田町駅", "lines": "JR山手線", "walk": "徒歩約12分", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "赤羽橋駅", "lines": "都営大江戸線", "walk": "徒歩約8分", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "三田駅",
+        "lines": "都営浅草線・三田線",
+        "walk": "徒歩約8分",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "田町駅",
+        "lines": "JR山手線",
+        "walk": "徒歩約12分",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "赤羽橋駅",
+        "lines": "都営大江戸線",
+        "walk": "徒歩約8分",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -424,5 +442,45 @@
     "legacyTitle": "レガシーサイトクロールデータセット",
     "legacyLead": "到達可能なレガシーページをクロールし、新サイト移行向けに構造化した抜粋へ変換しました。",
     "legacyNoExcerpt": "このアセットから読み取り可能なテキストを抽出できませんでした。"
+  },
+  "home": {
+    "news": {
+      "display": "NEWS",
+      "subtitle": "Kowaの最新情報",
+      "viewAll": "ニュース一覧",
+      "badgeLabel": "トピックス",
+      "empty": "ニュースはまだありません。"
+    },
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "3つの事業レーン、ひとつの循環サプライ",
+      "linkLabel": "事業を見る"
+    },
+    "about": {
+      "display": "ABOUT",
+      "subtitle": "私たちについて",
+      "statement": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。",
+      "linksLabel": "Kowaを知る"
+    },
+    "values": {
+      "display": "TO RESOURCES AGAIN",
+      "subtitle": "私たちの約束",
+      "statement": "プラスチックリサイクル事業を通じて社会に貢献します。",
+      "ctaLabel": "事業を見る"
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "事業紹介",
+    "breadcrumbAria": "パンくずリスト",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "事業紹介",
+    "intro": "Kowaは、プラスチック再資源化を軸に、商流・加工・輸出入を一体で運用する資源循環型の商社です。",
+    "segmentsLabel": "事業セグメント",
+    "offeringsProductsLabel": "製品を見る",
+    "offeringsMachinesLabel": "機械を見る",
+    "ctaTitle": "貿易チームに相談する",
+    "ctaBody": "再生樹脂の調達、資源循環、貿易パートナーシップなど、必要事項をご記入いただければ担当者よりメールにてご連絡いたします。",
+    "ctaLabel": "お問い合わせ"
   }
 }

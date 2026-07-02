@@ -199,9 +199,27 @@
     "stationsResetLabel": "View office",
     "stationsRouteHint": "Walking route to the office shown on the map.",
     "stations": [
-      { "name": "Mita Station", "lines": "Toei Asakusa / Mita lines", "walk": "~8 min walk", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "Tamachi Station", "lines": "JR Yamanote line", "walk": "~12 min walk", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "Akabanebashi Station", "lines": "Toei Oedo line", "walk": "~8 min walk", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "Mita Station",
+        "lines": "Toei Asakusa / Mita lines",
+        "walk": "~8 min walk",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "Tamachi Station",
+        "lines": "JR Yamanote line",
+        "walk": "~12 min walk",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "Akabanebashi Station",
+        "lines": "Toei Oedo line",
+        "walk": "~8 min walk",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -424,5 +442,45 @@
     "legacyTitle": "Legacy Website Crawl Dataset",
     "legacyLead": "All reachable legacy pages were crawled and transformed into structured excerpts for migration into the new site.",
     "legacyNoExcerpt": "No readable text extracted from this asset."
+  },
+  "home": {
+    "news": {
+      "display": "NEWS",
+      "subtitle": "Latest from Kowa",
+      "viewAll": "View all news",
+      "badgeLabel": "Topics",
+      "empty": "No news yet."
+    },
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "Three lanes, one circular supply",
+      "linkLabel": "View business"
+    },
+    "about": {
+      "display": "ABOUT",
+      "subtitle": "Who we are",
+      "statement": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan.",
+      "linksLabel": "Explore Kowa"
+    },
+    "values": {
+      "display": "TO RESOURCES AGAIN",
+      "subtitle": "Our commitment",
+      "statement": "We will contribute to society through the plastic recycling business.",
+      "ctaLabel": "See our business"
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "Business Introduction",
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "Business",
+    "intro": "Kowa runs a resource-circulation trading model centered on plastics recycling, industrial support, and cross-border supply operations.",
+    "segmentsLabel": "Business segments",
+    "offeringsProductsLabel": "View products",
+    "offeringsMachinesLabel": "View machinery",
+    "ctaTitle": "Talk to our trade team",
+    "ctaBody": "Whether you're sourcing recycled resin, exploring resource circulation, or exploring a trade partnership, just share a few details and our team will respond by email.",
+    "ctaLabel": "Get in touch"
   }
 }

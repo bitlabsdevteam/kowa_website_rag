@@ -112,6 +112,51 @@ type ContactPageSection = {
   }>;
 };
 
+type PageHeaderCrumbLabels = {
+  breadcrumbAria: string;
+  breadcrumbHome: string;
+};
+
+type HomeSections = {
+  news: {
+    display: string;
+    subtitle: string;
+    viewAll: string;
+    badgeLabel: string;
+    empty: string;
+  };
+  business: {
+    display: string;
+    subtitle: string;
+    linkLabel: string;
+  };
+  about: {
+    display: string;
+    subtitle: string;
+    statement: string;
+    linksLabel: string;
+  };
+  values: {
+    display: string;
+    subtitle: string;
+    statement: string;
+    ctaLabel: string;
+  };
+};
+
+type BusinessPageSection = PageHeaderCrumbLabels & {
+  display: string;
+  subtitle: string;
+  breadcrumbCurrent: string;
+  intro: string;
+  segmentsLabel: string;
+  offeringsProductsLabel: string;
+  offeringsMachinesLabel: string;
+  ctaTitle: string;
+  ctaBody: string;
+  ctaLabel: string;
+};
+
 export type SiteCopy = {
   menu: MenuLabels;
   brand: {
@@ -157,6 +202,8 @@ export type SiteCopy = {
   business: BusinessSection;
   companyProfile: CompanyProfileSection;
   contactPage: ContactPageSection;
+  home: HomeSections;
+  businessPage: BusinessPageSection;
   news: {
     title: string;
     entries: string[];
