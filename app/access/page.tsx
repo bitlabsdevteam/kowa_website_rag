@@ -1,4 +1,4 @@
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { findLegacyExcerpt } from '@/lib/legacy-content';
 import { SITE_COPY } from '@/lib/site-copy';
@@ -18,9 +18,7 @@ export default function AccessPage() {
         <p className="body-copy">{findLegacyExcerpt('access1.html')}</p>
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={site.footer.copyright} termsLabel={site.footer.termsLabel} social={site.footer.social} />
-      </footer>
+      <LocalizedFooter copy={site} />
     </main>
   );
 }

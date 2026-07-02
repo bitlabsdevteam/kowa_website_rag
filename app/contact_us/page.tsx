@@ -2,7 +2,7 @@
 
 import { ContactForm } from '@/components/contact-form';
 import { LocationMap } from '@/components/location-map';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
@@ -64,9 +64,7 @@ export default function ContactUsPage() {
         <LocationMap copy={contact} />
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

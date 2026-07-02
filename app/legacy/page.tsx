@@ -1,5 +1,5 @@
 import legacyPages from '@/data/legacy-pages.json';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { SITE_COPY } from '@/lib/site-copy';
 
@@ -28,9 +28,7 @@ export default function LegacyPage() {
         ))}
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={site.footer.copyright} termsLabel={site.footer.termsLabel} social={site.footer.social} />
-      </footer>
+      <LocalizedFooter copy={site} />
     </main>
   );
 }

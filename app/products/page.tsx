@@ -1,14 +1,23 @@
 'use client';
 
 import { useMemo } from 'react';
+import dynamic from 'next/dynamic';
 
-import CardFanCarousel, { type CardItem } from '@/components/ui/card-fan-carousel';
-import { SiteFooterBar } from '@/components/site-footer-bar';
+import type { CardItem } from '@/components/ui/card-fan-carousel';
+import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
-import { PRODUCT_MEDIA } from '@/lib/product-media';
-import { PRODUCT_SHOWCASE_COPY } from '@/lib/product-showcase-copy';
+import { PRODUCT_MEDIA, type ProductFamily, type ProductView } from '@/lib/product-media';
+import { PRODUCT_FAMILY_COPY, PRODUCT_VIEW_COPY } from '@/lib/product-showcase-copy';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
+
+// The fan carousel pulls in GSAP and only runs on the client, so defer its
+// bundle until the products page mounts. A height-matched placeholder reserves
+// the layout to avoid shift while the chunk loads.
+const CardFanCarousel = dynamic(() => import('@/components/ui/card-fan-carousel'), {
+  ssr: false,
+  loading: () => <div className="card-fan-loading" aria-hidden="true" />,
+});
 
 const PRODUCT_INTRO: Record<Locale, string> = {
   en: 'Recovered scrap, regenerated pellets, and supply-ready resin: the materials Kowa moves through its circular supply.',
@@ -20,20 +29,36 @@ export default function ProductsPage() {
   const [locale, setLocale] = useLocale();
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
 
-  // Map every product to a fan-carousel card. The caption uses the localized
-  // category label; clicking a card opens a modal with the localized
-  // description and supporting points.
+  // One card per product family. The card face shows the clean loose-pellet
+  // photo (the "pile" view); clicking opens a modal that reveals the package /
+  // lot shot and the macro zoom alongside the localized description.
   const cards = useMemo<CardItem[]>(() => {
-    const categories = PRODUCT_SHOWCASE_COPY[locale].categories;
-    return PRODUCT_MEDIA.map((item) => {
-      const category = categories[item.category];
+    const families = PRODUCT_FAMILY_COPY[locale];
+    const views = PRODUCT_VIEW_COPY[locale];
+    const order: ProductFamily[] = ['cd-pcn', 'gpps', 'ps-recycle'];
+
+    return order.map((familyKey) => {
+      const family = families[familyKey];
+      const items = PRODUCT_MEDIA.filter((m) => m.family === familyKey);
+      const byView = (view: ProductView) => items.find((m) => m.view === view);
+      const pile = byView('pile') ?? items[0];
+      const lot = byView('lot');
+      const macro = byView('macro');
+
+      // Modal gallery: package/lot shot first, then the macro zoom.
+      const detailImages = [
+        lot && { src: lot.src, alt: `${family.title} — ${views.lot}`, caption: views.lot },
+        macro && { src: macro.src, alt: `${family.title} — ${views.macro}`, caption: views.macro },
+      ].filter((image): image is { src: string; alt: string; caption: string } => Boolean(image));
+
       return {
-        imgUrl: item.src,
-        alt: item.title,
-        title: item.title,
-        category: category.label,
-        description: category.summary,
-        points: category.points,
+        imgUrl: pile.src,
+        alt: family.title,
+        title: family.title,
+        category: family.material,
+        description: family.summary,
+        points: family.points,
+        detailImages,
       };
     });
   }, [locale]);
@@ -60,9 +85,7 @@ export default function ProductsPage() {
         />
       </section>
 
-      <footer className="site-footer">
-        <SiteFooterBar copyright={copy.footer.copyright} termsLabel={copy.footer.termsLabel} social={copy.footer.social} />
-      </footer>
+      <LocalizedFooter copy={copy} />
     </main>
   );
 }

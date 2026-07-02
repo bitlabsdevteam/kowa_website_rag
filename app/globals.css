@@ -343,7 +343,7 @@ html:lang(zh) {
 
 html:lang(en) {
   --font-body: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  --font-display: var(--font-display-serif), 'Georgia', 'Times New Roman', serif;
+  --font-display: var(--font-english), 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 html:lang(ja),
@@ -5384,6 +5384,166 @@ a:focus-visible {
   fill: currentColor;
 }
 
+/* Footer7 — boxless editorial footer (components/ui/footer-7.tsx).
+   Sits directly on the dark "beams" backdrop (no panel) with light cream text to
+   match the boxless page content; navigation mirrors the top menu bar. */
+.footer7 {
+  --footer7-text: var(--color-text);
+  --footer7-muted: var(--color-text-muted);
+  --footer7-faint: rgba(27, 42, 74, 0.16);
+  margin-top: 22px;
+  display: grid;
+  gap: 28px;
+  padding: 8px 8px 0;
+}
+
+.footer7-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: start;
+}
+
+.footer7-brand-col {
+  display: grid;
+  gap: 18px;
+  align-content: start;
+  max-width: 44ch;
+}
+
+.footer7-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--footer7-text);
+}
+
+.footer7-title {
+  font-family: var(--font-display);
+  font-size: 1.04rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  color: var(--footer7-text);
+}
+
+.footer7-desc {
+  margin: 0;
+  color: var(--footer7-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.footer7-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer7-social a {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--footer7-muted);
+  border: 1px solid var(--footer7-faint);
+  transition: color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.footer7-social a:hover {
+  color: var(--footer7-text);
+  border-color: var(--footer7-text);
+  transform: translateY(-1px);
+}
+
+.footer7-social svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.footer7-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.footer7-link {
+  color: var(--footer7-text);
+  text-decoration: none;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.footer7-link:hover {
+  opacity: 0.7;
+}
+
+.footer7-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--footer7-muted);
+  border-top-color: var(--footer7-faint);
+}
+
+.footer7-bar p {
+  color: var(--footer7-muted);
+}
+
+.footer7-legal {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer7-legal a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 180ms ease;
+}
+
+.footer7-legal a:hover {
+  opacity: 0.7;
+}
+
+@media (max-width: 860px) {
+  .footer7-top {
+    gap: 28px;
+  }
+
+  .footer7-nav {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 520px) {
+  .footer7-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .footer7-bar {
+    justify-content: flex-start;
+  }
+}
+
 .company-profile-surface {
   display: grid;
   gap: 28px;
@@ -5432,63 +5592,97 @@ a:focus-visible {
   letter-spacing: -0.02em;
 }
 
-/* Elegant bilingual key-facts sheet (資本金 / Capital, 設立 / Established). */
+/* Elegant bilingual key-facts sheet — a label column (JA term over EN term)
+   beside a value column (JA value primary, EN value beneath). */
 .company-profile-facts {
   width: 100%;
-  max-width: 760px;
-  margin: clamp(20px, 4vw, 44px) auto 8px;
-  display: grid;
+  max-width: 720px;
+  margin: clamp(24px, 4vw, 48px) auto 8px;
   border-top: 1px solid var(--color-line);
 }
 
 .cp-fact {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(16px, 4vw, 48px);
+  grid-template-columns: minmax(140px, 0.42fr) 1fr;
+  gap: clamp(20px, 5vw, 56px);
   align-items: baseline;
-  padding: clamp(22px, 3.2vw, 34px) 6px;
+  padding: clamp(20px, 3vw, 30px) 4px;
   border-bottom: 1px solid var(--color-line);
 }
 
-.cp-fact-lang {
+.cp-fact-label {
   display: flex;
-  align-items: baseline;
-  gap: 16px;
+  flex-direction: column;
+  gap: 5px;
   margin: 0;
+  padding-top: 0.35em;
 }
 
 .cp-fact-term {
-  flex: 0 0 auto;
-  min-width: 84px;
-  font-size: 0.82rem;
+  display: block;
+}
+
+.cp-fact-term--ja {
+  font-size: 0.95rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.cp-fact-term--en {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-text-muted);
 }
 
-.cp-fact-lang--ja .cp-fact-term {
-  letter-spacing: 0.06em;
-  text-transform: none;
-}
-
-/* Wider gutter so the English values line up under each other (CAPITAL vs ESTABLISHED). */
-.cp-fact-lang--en .cp-fact-term {
-  min-width: 124px;
+.cp-fact-values {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
 }
 
 .cp-fact-value {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.3vw, 1.9rem);
-  line-height: 1.1;
-  color: var(--color-accent-strong);
-  white-space: nowrap;
+  display: block;
 }
 
-@media (max-width: 640px) {
+.cp-fact-value--ja {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+  line-height: 1.18;
+  color: var(--color-accent-strong);
+}
+
+.cp-fact-value--en {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+/* Related-companies value cell stacks each company as its own JA/EN pair. */
+.cp-fact-values--list {
+  gap: 18px;
+}
+
+.cp-related {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+@media (max-width: 560px) {
   .cp-fact {
     grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cp-fact-label {
+    flex-direction: row;
+    align-items: baseline;
     gap: 10px;
+    padding-top: 0;
   }
 }
 
@@ -8792,6 +8986,13 @@ html:lang(en) .reference-section-title {
   max-width: 80rem;
 }
 
+/* Placeholder shown while the lazy-loaded fan carousel chunk downloads; mirrors
+   the .fan-layout height so swapping in the real carousel causes no shift. */
+.card-fan-loading {
+  width: 100%;
+  height: 42rem;
+}
+
 .fan-layout {
   position: relative;
   display: flex;
@@ -8929,24 +9130,28 @@ html:lang(en) .reference-section-title {
 }
 
 @media (max-width: 1023px) {
-  .fan-layout { height: 38rem; }
+  .fan-layout,
+  .card-fan-loading { height: 38rem; }
   .fan-card { height: 34rem; }
 }
 
 @media (max-width: 767px) {
-  .fan-layout { height: 32rem; }
+  .fan-layout,
+  .card-fan-loading { height: 32rem; }
   .fan-card { height: 28rem; }
 }
 
 @media (max-width: 639px) {
-  .fan-layout { height: 30rem; }
+  .fan-layout,
+  .card-fan-loading { height: 30rem; }
   .fan-card { height: 26rem; }
   .card-fan-arrow { width: 40px; height: 40px; }
   .card-fan-chevron { width: 16px; height: 16px; }
 }
 
 @media (max-width: 479px) {
-  .fan-layout { height: 26rem; }
+  .fan-layout,
+  .card-fan-loading { height: 26rem; }
   .fan-card { height: 22rem; }
 }
 
@@ -9001,6 +9206,46 @@ html:lang(en) .reference-section-title {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Gallery variant: stack the package shot + macro zoom vertically and let the
+   media column scroll independently of the body. */
+.card-fan-modal-media.is-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.card-fan-modal-figure {
+  position: relative;
+  margin: 0;
+  background: var(--surface-muted);
+}
+
+.card-fan-modal-media.is-gallery .card-fan-modal-figure img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-fan-modal-figure figcaption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 4px 11px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(15, 22, 38, 0.62);
+  border-radius: var(--radius-pill);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
 }
 
 .card-fan-modal-body {
@@ -9093,6 +9338,7 @@ html:lang(en) .reference-section-title {
     max-height: 90vh;
   }
   .card-fan-modal-media { min-height: 200px; height: 38vw; max-height: 280px; }
+  .card-fan-modal-media.is-gallery { height: auto; min-height: 0; max-height: 46vh; }
   .card-fan-modal-body { padding: 24px 22px 28px; }
 }
 
@@ -9456,4 +9702,361 @@ html:lang(en) .reference-section-title {
   .dc-modal,
   .dc-modal-panel { animation: none; }
   .display-card { transition: filter 0.3s ease, border-color 0.3s ease; }
+}
+
+
+/* ---------------------------------------------------------------------------
+   Page stacking context — keep fixed UI (chat widget, menus) above content.
+--------------------------------------------------------------------------- */
+.page {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------------------------------------------------------------------------
+   FeatureGrid (components/ui/modern-feature-grid.tsx)
+   "How We Work" as a boxless grid of white feature cards on the white canvas.
+--------------------------------------------------------------------------- */
+.corporate-business-section.is-boxless {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.feature-grid {
+  width: 100%;
+  padding: clamp(32px, 6vw, 64px) 0;
+}
+
+.feature-grid-inner {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 24px);
+}
+
+.feature-grid-head {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.feature-grid-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.feature-grid-desc {
+  margin: 16px auto 0;
+  max-width: 42rem;
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.feature-grid-cards {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 720px) {
+  .feature-grid-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .feature-grid-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(45, 107, 73, 0.35);
+  box-shadow: var(--shadow-soft);
+}
+
+.feature-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid rgba(45, 107, 73, 0.18);
+  background: rgba(45, 107, 73, 0.08);
+  color: var(--color-accent);
+}
+
+.feature-card-icon-svg {
+  width: 24px;
+  height: 24px;
+}
+
+.feature-card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.feature-card-desc {
+  margin: 8px 0 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feature-card {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .feature-card:hover {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   HeroSection (components/ui/hero-section-2.tsx) — split landing hero with an
+   animated clip-path image reveal. White canvas, dark text, green accent.
+--------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: var(--color-canvas);
+  color: var(--color-text);
+}
+
+.hero-section-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: clamp(32px, 6vw, 64px);
+  gap: 48px;
+}
+
+.hero-section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-section-logo {
+  height: 40px;
+  width: auto;
+}
+
+.hero-section-logo-text {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+.hero-section-slogan {
+  margin: 2px 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.hero-section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.3rem, 5.4vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.hero-section-title .hero-section-title-accent {
+  color: var(--color-accent);
+}
+
+.hero-section-rule {
+  width: 80px;
+  height: 4px;
+  margin: 24px 0;
+  border-radius: 999px;
+  background: var(--color-accent);
+}
+
+.hero-section-subtitle {
+  margin: 0 0 32px;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+}
+
+.hero-section-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.hero-section-cta:hover {
+  opacity: 0.75;
+}
+
+.hero-section-footer {
+  width: 100%;
+}
+
+.hero-section-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+}
+
+.hero-section-contact {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.hero-section-contact-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.hero-section-contact-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.hero-section-media {
+  width: 100%;
+  min-height: 280px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .hero-section {
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 88vh;
+  }
+
+  .hero-section-content {
+    width: 58%;
+    padding: clamp(48px, 5vw, 80px);
+  }
+
+  .hero-section-media {
+    width: 42%;
+    min-height: 100%;
+  }
+
+  .hero-section-contact-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section-media {
+    clip-path: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Boxless white pages — strip every white panel/card so content sits directly
+   on the white canvas. Text stays dark (base tokens). Interactive surfaces
+   (form fields, chat widget, menu dropdown/drawer) keep their own backgrounds.
+--------------------------------------------------------------------------- */
+.shell-header,
+.top-menu,
+.page-surface,
+.narrow-surface,
+.card,
+section.card,
+.corporate-content-surface,
+.corporate-hero,
+.contact-page-form-card,
+.machines-page-surface,
+.machines-context-card,
+.machines-return-panel,
+.machines-visual-shell,
+.machines-source-note,
+.machines-selector-panel,
+.machines-selector-button,
+.products-page-surface,
+.products-lead-card,
+.products-feature-card,
+.products-machine-cta,
+.corporate-side-card,
+.corporate-profile-card,
+.location-stations,
+.location-map-card,
+.location-station,
+.feature-card,
+.site-footer {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Keep the feature cards flat on hover too (no box re-appearing). */
+.feature-card:hover {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Faint accent kept on the closest station so it stays distinguishable. */
+.location-station.is-closest {
+  border-left: 2px solid rgba(45, 107, 73, 0.45) !important;
+}
+
+/* Mobile nav drawer still needs a solid backing when the menu is open. */
+@media (max-width: 980px) {
+  .top-menu.is-open .top-menu-panel {
+    background: #ffffff;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 16px;
+  }
 }

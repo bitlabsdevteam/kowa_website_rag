@@ -1,4 +1,4 @@
-import type { ProductMediaCategory } from '@/lib/product-media';
+import type { ProductFamily, ProductMediaCategory, ProductView } from '@/lib/product-media';
 import type { Locale } from '@/lib/site-copy';
 
 type ProductChapterCopy = {
@@ -240,4 +240,96 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
       },
     },
   },
+};
+
+/** Per-product descriptions, grounded in the lot labels and pellet appearance
+ *  visible in each product photograph. */
+type ProductFamilyCopy = {
+  /** Product name shown as the card / modal title. */
+  title: string;
+  /** Material grade label shown as the carousel caption + modal eyebrow. */
+  material: string;
+  /** One-paragraph description shown in the detail modal. */
+  summary: string;
+  /** Supporting bullet points shown in the modal. */
+  points: string[];
+};
+
+export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFamilyCopy>> = {
+  en: {
+    'cd-pcn': {
+      title: 'CD-PCN Recycled Polycarbonate',
+      material: 'Recycled polycarbonate (PC)',
+      summary:
+        'Water-clear polycarbonate reclaimed from optical-disc-grade stock (CD / PC-N, B-off lots). The transparent, cleanly diced granules are sorted and regenerated into a consistent, high-clarity feed for injection and extrusion.',
+      points: ['Optical-disc PC origin (CD / PC-N)', 'Transparent, uniform diced cut', 'B-off reclaimed, regeneration-ready'],
+    },
+    gpps: {
+      title: 'GPPS Pellet — Natural (NCL)',
+      material: 'General-purpose polystyrene (GPPS)',
+      summary:
+        'Glass-clear general-purpose polystyrene in its natural, uncoloured grade (NCL). Rigid, fully transparent pellets supplied in bulk multi-tonne lots for clarity-critical moulding and sheet applications.',
+      points: ['Natural / colourless (NCL) grade', 'High clarity, rigid GPPS', 'Bulk multi-tonne lot supply'],
+    },
+    'ps-recycle': {
+      title: 'Recycled Polystyrene — White',
+      material: 'Recycled polystyrene (PS)',
+      summary:
+        'Opaque white polystyrene regenerated from reclaimed bobbin/spool stock. Cylindrical pellets recovered through Kowa’s circular sort-and-regenerate flow, offering a cost-effective PS supply for general moulding.',
+      points: ['Reclaimed from bobbin / spool PS', 'Regenerated opaque-white pellet', 'Circular, resource-recovery sourced'],
+    },
+  },
+  ja: {
+    'cd-pcn': {
+      title: 'CD-PCN 再生ポリカーボネート',
+      material: '再生ポリカーボネート（PC）',
+      summary:
+        '光ディスクグレード（CD／PC-N、B-off ロット）から回収した透明度の高いポリカーボネート。クリアで均一にカットされたペレットを選別・再生し、射出・押出に向けた安定供給材に仕上げています。',
+      points: ['光ディスク由来 PC（CD／PC-N）', '透明・均一なダイスカット', 'B-off 回収、再生対応'],
+    },
+    gpps: {
+      title: 'GPPS ペレット — ナチュラル（NCL）',
+      material: '汎用ポリスチレン（GPPS）',
+      summary:
+        '無着色のナチュラルグレード（NCL）による、ガラスのように透明な汎用ポリスチレン。剛性が高く完全透明なペレットを、透明性が重視される成形・シート用途向けに大口ロットで供給します。',
+      points: ['ナチュラル／無着色（NCL）グレード', '高透明・高剛性の GPPS', '数トン単位の大口ロット供給'],
+    },
+    'ps-recycle': {
+      title: '再生ポリスチレン — 白',
+      material: '再生ポリスチレン（PS）',
+      summary:
+        '回収したボビン（巻芯）材から再生した不透明な白色ポリスチレン。Kowa の循環型の選別・再生フローで回収した円柱状ペレットで、汎用成形向けに経済的な PS 供給を実現します。',
+      points: ['ボビン（巻芯）PS から回収', '再生・不透明白色ペレット', '循環型の資源回収由来'],
+    },
+  },
+  zh: {
+    'cd-pcn': {
+      title: 'CD-PCN 再生聚碳酸酯',
+      material: '再生聚碳酸酯（PC）',
+      summary:
+        '由光盘级料源（CD／PC-N、B-off 批次）回收的高透明聚碳酸酯。透明、切粒均匀的颗粒经分拣与再生，成为可用于注塑与挤出的稳定高透明料。',
+      points: ['光盘级 PC 来源（CD／PC-N）', '透明、均匀的切粒', 'B-off 回收、可直接再生'],
+    },
+    gpps: {
+      title: 'GPPS 颗粒 — 本色（NCL）',
+      material: '通用聚苯乙烯（GPPS）',
+      summary:
+        '本色、未着色等级（NCL）的玻璃般透明通用聚苯乙烯。刚性高、完全透明的颗粒以数吨级大批量供应，适用于对透明度要求高的成型与片材应用。',
+      points: ['本色／无色（NCL）等级', '高透明、高刚性 GPPS', '数吨级大批量供应'],
+    },
+    'ps-recycle': {
+      title: '再生聚苯乙烯 — 白色',
+      material: '再生聚苯乙烯（PS）',
+      summary:
+        '由回收线轴（绕线管）料再生的不透明白色聚苯乙烯。通过 Kowa 的循环分拣与再生流程回收的圆柱状颗粒，为通用成型提供经济的 PS 供给。',
+      points: ['由线轴／绕线管 PS 回收', '再生不透明白色颗粒', '循环资源回收来源'],
+    },
+  },
+};
+
+/** Short label distinguishing the three shots of each product family. */
+export const PRODUCT_VIEW_COPY: Record<Locale, Record<ProductView, string>> = {
+  en: { lot: 'Sealed lot', pile: 'Loose pellets', macro: 'Macro detail' },
+  ja: { lot: '出荷ロット', pile: 'バラ状ペレット', macro: '拡大ディテール' },
+  zh: { lot: '出货批次', pile: '散装颗粒', macro: '微距细节' },
 };
