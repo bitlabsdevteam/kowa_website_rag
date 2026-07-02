@@ -1,6 +1,6 @@
 import type { Citation } from '@/lib/contracts';
 
-export type AssistantLanguage = 'en' | 'ja' | 'zh';
+export type AssistantLanguage = 'en' | 'ja' | 'zh-Hans' | 'zh-Hant';
 
 export type AssistantChannel = 'website' | 'telegram';
 

@@ -14,26 +14,14 @@ export interface CardItem {
   imgUrl: string;
   alt?: string;
   title?: string;
-  /** Localized category label shown as the always-visible caption + modal subtitle. */
-  category?: string;
-  /** Localized description shown in the click-to-open modal. */
-  description?: string;
-  /** Localized supporting bullet points shown in the modal. */
-  points?: string[];
-  /** When set, the card navigates instead of opening the detail modal. */
+  /** When set, the card navigates instead of just displaying. */
   linkUrl?: string;
-  /** Additional images revealed only in the detail modal (e.g. package shot + macro zoom). */
-  detailImages?: { src: string; alt: string; caption?: string }[];
 }
 
 interface CardFanCarouselProps {
   cards: CardItem[];
   prevLabel?: string;
   nextLabel?: string;
-  /** Accessible label for the detail modal close button. */
-  closeLabel?: string;
-  /** Accessible label announcing a card opens its description. */
-  detailsLabel?: string;
 }
 
 const MAX_VISIBLE = 7;
@@ -114,23 +102,18 @@ export default function CardFanCarousel({
   cards,
   prevLabel = 'Previous',
   nextLabel = 'Next',
-  closeLabel = 'Close',
-  detailsLabel = 'View details',
 }: CardFanCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const isAnimating = useRef(false);
   const hasEntered = useRef(false);
   const directionRef = useRef<'left' | 'right' | null>(null);
   const prevVisible = useRef<Set<number>>(new Set());
-  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const totalCards = cards.length;
   const needsPagination = totalCards > MAX_VISIBLE;
   // Whether the fan can rotate at all — a single card has nowhere to go.
   const canRotate = totalCards > 1;
   const [centerIndex, setCenterIndex] = useState(needsPagination ? HALF : totalCards >> 1);
-  // Index of the card whose description modal is open, or null when closed.
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
   // Pause the auto-rotate while the user is interacting with the fan.
   const [isPaused, setIsPaused] = useState(false);
 
@@ -162,16 +145,30 @@ export default function CardFanCarousel({
     [totalCards, canRotate],
   );
 
-  // Auto-rotate: advance one card every 5s, like a carousel. Pauses on hover,
-  // while the detail modal is open, and when the user prefers reduced motion.
+  // Clicking a card rotates the fan so that card takes the centre slot,
+  // surfacing its name in the caption below.
+  const goToIndex = useCallback(
+    (index: number) => {
+      if (isAnimating.current || !canRotate || index === centerIndex) return;
+      const forwardSteps = (index - centerIndex + totalCards) % totalCards;
+      const direction: 'left' | 'right' = forwardSteps <= totalCards - forwardSteps ? 'right' : 'left';
+      isAnimating.current = true;
+      directionRef.current = direction;
+      setCenterIndex(index);
+    },
+    [totalCards, canRotate, centerIndex],
+  );
+
+  // Auto-rotate: advance one card every 5s, like a carousel. Pauses on hover
+  // and when the user prefers reduced motion.
   useEffect(() => {
-    if (!canRotate || isPaused || openIndex !== null) return undefined;
+    if (!canRotate || isPaused) return undefined;
     if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return undefined;
     }
     const id = window.setInterval(() => cycle('right'), 5000);
     return () => window.clearInterval(id);
-  }, [canRotate, isPaused, openIndex, cycle]);
+  }, [canRotate, isPaused, cycle]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -338,30 +335,9 @@ export default function CardFanCarousel({
     };
   }, [centerIndex, totalCards, getVisibleMap, needsPagination]);
 
-  // Description modal: focus the close button on open, restore focus + handle
-  // Escape on close. Locks body scroll while open.
-  useEffect(() => {
-    if (openIndex === null) return undefined;
-    const previouslyFocused = document.activeElement as HTMLElement | null;
-    closeButtonRef.current?.focus();
-    const { overflow } = document.body.style;
-    document.body.style.overflow = 'hidden';
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpenIndex(null);
-    };
-    window.addEventListener('keydown', onKey);
-    return () => {
-      window.removeEventListener('keydown', onKey);
-      document.body.style.overflow = overflow;
-      previouslyFocused?.focus?.();
-    };
-  }, [openIndex]);
-
   if (!totalCards) return null;
 
-  const caption = cards[centerIndex]?.category ?? cards[centerIndex]?.title;
-  const openCard = openIndex === null ? null : cards[openIndex];
-  const hasDetails = (card: CardItem) => Boolean(card.description || card.points?.length || card.category);
+  const caption = cards[centerIndex]?.title;
 
   const chevron = (direction: 'left' | 'right') => (
     <svg className="card-fan-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -399,14 +375,21 @@ export default function CardFanCarousel({
                 </a>
               );
             }
-            const openable = hasDetails(card);
+            const isCentered = index === centerIndex;
             return (
               <div
                 key={index}
                 className="fan-card"
-                role={openable ? 'button' : undefined}
-                aria-label={openable ? `${card.title ?? card.alt ?? `Product ${index + 1}`} — ${detailsLabel}` : undefined}
-                onClick={openable ? () => setOpenIndex(index) : undefined}
+                role={canRotate ? 'button' : undefined}
+                tabIndex={canRotate && !isCentered ? 0 : undefined}
+                aria-label={canRotate && !isCentered ? card.title ?? card.alt ?? `Product ${index + 1}` : undefined}
+                onClick={() => goToIndex(index)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    goToIndex(index);
+                  }
+                }}
               >
                 {image}
               </div>
@@ -416,14 +399,9 @@ export default function CardFanCarousel({
       </div>
 
       {caption ? (
-        <button
-          type="button"
-          className="card-fan-caption"
-          aria-live="polite"
-          onClick={() => hasDetails(cards[centerIndex]) && setOpenIndex(centerIndex)}
-        >
+        <p className="card-fan-caption" aria-live="polite">
           {caption}
-        </button>
+        </p>
       ) : null}
 
       {needsPagination && (
@@ -442,53 +420,6 @@ export default function CardFanCarousel({
         </div>
       )}
 
-      {openCard ? (
-        <div
-          className="card-fan-modal"
-          role="dialog"
-          aria-modal="true"
-          aria-label={openCard.title ?? openCard.alt ?? 'Product details'}
-          onClick={() => setOpenIndex(null)}
-        >
-          <div className="card-fan-modal-panel" onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              ref={closeButtonRef}
-              className="card-fan-modal-close"
-              onClick={() => setOpenIndex(null)}
-              aria-label={closeLabel}
-            >
-              <span aria-hidden="true">×</span>
-            </button>
-            <div className={`card-fan-modal-media${openCard.detailImages?.length ? ' is-gallery' : ''}`}>
-              {openCard.detailImages?.length ? (
-                openCard.detailImages.map((image) => (
-                  <figure key={image.src} className="card-fan-modal-figure">
-                    {/* eslint-disable-next-line @next/next/no-img-element -- natural-fit gallery image */}
-                    <img src={image.src} alt={image.alt} loading="lazy" />
-                    {image.caption ? <figcaption>{image.caption}</figcaption> : null}
-                  </figure>
-                ))
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element -- modal mirrors the card image at natural fit
-                <img src={openCard.imgUrl} alt={openCard.alt || openCard.title || 'Product'} />
-              )}
-            </div>
-            <div className="card-fan-modal-body">
-              {openCard.category ? <p className="card-fan-modal-eyebrow">{openCard.category}</p> : null}
-              {openCard.title ? <h3 className="card-fan-modal-title">{openCard.title}</h3> : null}
-              {openCard.description ? <p className="card-fan-modal-summary">{openCard.description}</p> : null}
-              {openCard.points?.length ? (
-                <ul className="card-fan-modal-points">
-                  {openCard.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      ) : null}
     </section>
   );
 }

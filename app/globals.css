@@ -300,6 +300,7 @@ html:lang(zh) {
 .chat-mini-guidance,
 .chat-mini-meta {
   color: var(--color-text-muted) !important;
+  font-size: 1.1em;
 }
 
 .chat-mini-bubble.user {
@@ -462,6 +463,7 @@ body {
 .company-profile-summary,
 .company-profile-intro-panel p {
   color: var(--color-text-muted);
+  font-size: 1.1em;
   line-height: 1.8;
 }
 
@@ -564,7 +566,7 @@ body {
 
 .kowa-logo-text small {
   color: var(--color-text-muted);
-  font-size: 0.76rem;
+  font-size: 0.874rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -599,6 +601,7 @@ body {
   border: 0;
   border-radius: 0;
   color: var(--color-text-muted);
+  font-size: 1.1em;
   background: transparent;
 }
 
@@ -919,7 +922,7 @@ body {
 .company-profile-fact-row dt,
 .company-profile-statement-language {
   color: var(--color-text-muted);
-  font-size: 0.76rem;
+  font-size: 0.874rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1076,6 +1079,7 @@ body {
 .reference-route-card p {
   margin: 10px 0 0;
   color: var(--color-text-muted);
+  font-size: 1.1em;
   line-height: 1.7;
 }
 
@@ -1137,7 +1141,7 @@ body {
 
 .reference-side-note span {
   color: var(--color-text-muted);
-  font-size: 0.76rem;
+  font-size: 0.874rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1184,6 +1188,7 @@ body {
   margin: 0;
   padding-left: 18px;
   color: var(--color-text-muted);
+  font-size: 1.1em;
   line-height: 1.7;
 }
 
@@ -1326,6 +1331,7 @@ body {
 
 .machines-blueprint-copy small {
   color: var(--color-text-muted);
+  font-size: 1.1em;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1387,6 +1393,7 @@ body {
 .contact-page-lead {
   max-width: 46ch;
   color: var(--muted);
+  font-size: 1.1em;
 }
 
 .contact-page-detail {
@@ -1413,7 +1420,7 @@ body {
 .contact-page-info-row dt {
   margin: 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.897rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1525,6 +1532,7 @@ body {
 
 .location-map-lead {
   color: var(--muted);
+  font-size: 1.1em;
   margin: 0;
 }
 
@@ -1730,13 +1738,13 @@ body {
 
 .location-station-lines {
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 0.989rem;
 }
 
 .location-station-walk {
   flex: 0 0 auto;
   color: var(--muted);
-  font-size: 0.86rem;
+  font-size: 0.989rem;
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
@@ -1756,7 +1764,7 @@ body {
 .location-stations-note {
   margin: 0;
   color: var(--muted);
-  font-size: 0.8rem;
+  font-size: 0.92rem;
 }
 
 @media (max-width: 640px) {
@@ -1860,7 +1868,7 @@ body {
 .news-meta {
   margin: 0;
   color: var(--color-text-muted);
-  font-size: 0.86rem;
+  font-size: 0.989rem;
 }
 
 .news-article-surface {
@@ -1904,6 +1912,7 @@ body {
 
 .footer-menu-link {
   color: var(--color-text-muted);
+  font-size: 1.1em;
   text-decoration: none;
 }
 
@@ -1917,7 +1926,7 @@ body {
   border-top: 1px solid var(--color-line);
   background: #eef4ef;
   color: var(--color-text-muted);
-  font-size: 0.86rem;
+  font-size: 0.989rem;
 }
 
 .site-footer-social {
@@ -2025,6 +2034,7 @@ body {
 
 .legacy-url {
   color: var(--color-text-muted);
+  font-size: 1.1em;
   word-break: break-word;
 }
 
@@ -2278,7 +2288,7 @@ a:focus-visible {
 }
 
 .fact-item strong {
-  font-size: 0.82rem;
+  font-size: 0.943rem;
   color: var(--muted);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2294,6 +2304,7 @@ a:focus-visible {
   display: grid;
   gap: 10px;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.7;
 }
 
@@ -2338,7 +2349,7 @@ a:focus-visible {
   margin: 0;
   color: var(--muted);
   line-height: 1.72;
-  font-size: 1.02rem;
+  font-size: 1.173rem;
 }
 
 .hero {
@@ -2364,6 +2375,7 @@ a:focus-visible {
 .hero p {
   margin: 0;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.72;
 }
 
@@ -2450,7 +2462,7 @@ a:focus-visible {
 
 .stat-label {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 1.058rem;
   line-height: 1.5;
 }
 
@@ -2572,7 +2584,7 @@ a:focus-visible {
 .meta-item strong {
   display: block;
   margin-bottom: 6px;
-  font-size: 0.9rem;
+  font-size: 1.035rem;
   color: var(--muted);
   font-weight: 600;
 }
@@ -2724,7 +2736,7 @@ a:focus-visible {
 
 .kowa-logo-text small {
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.828rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2745,7 +2757,7 @@ a:focus-visible {
   border-radius: 999px;
   text-decoration: none;
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.943rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   transition: 180ms ease;
@@ -2773,7 +2785,7 @@ a:focus-visible {
   border-radius: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.897rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -2797,6 +2809,7 @@ a:focus-visible {
 
 .auth-link {
   color: var(--muted);
+  font-size: 1.1em;
   text-decoration: none;
 }
 
@@ -3148,6 +3161,7 @@ a:focus-visible {
 
 .kpi span {
   color: var(--muted);
+  font-size: 1.1em;
 }
 
 .form-grid {
@@ -3215,7 +3229,7 @@ a:focus-visible {
 
 .footer-note {
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 1.058rem;
 }
 
 .admin-queue-detail {
@@ -3249,7 +3263,7 @@ a:focus-visible {
 
 .admin-note-item span {
   color: var(--muted);
-  font-size: 0.82rem;
+  font-size: 0.943rem;
   margin-top: 6px;
 }
 
@@ -4056,6 +4070,7 @@ a:focus-visible {
 .machines-spotlight-copy,
 .machines-return-panel {
   color: var(--color-text-muted) !important;
+  font-size: 1.1em;
 }
 
 .machines-selector-button small,
@@ -4106,6 +4121,7 @@ a:focus-visible {
 .product-card p {
   margin: 0;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.6;
 }
 
@@ -4142,7 +4158,7 @@ a:focus-visible {
 }
 
 .product-media-card span {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   color: var(--muted);
   letter-spacing: 0.03em;
   text-transform: uppercase;
@@ -4753,6 +4769,7 @@ a:focus-visible {
   gap: 12px;
   align-items: start;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.6;
   cursor: pointer;
   border-radius: 12px;
@@ -4843,7 +4860,7 @@ a:focus-visible {
   border: 1px solid rgba(32, 26, 21, 0.16);
   background: rgba(255, 255, 255, 0.66);
   color: var(--muted);
-  font-size: 0.73rem;
+  font-size: 0.839rem;
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -5035,7 +5052,7 @@ a:focus-visible {
   padding: 5px 10px;
   background: rgba(32, 26, 21, 0.06);
   color: var(--muted);
-  font-size: 0.72rem;
+  font-size: 0.828rem;
   font-weight: 700;
   letter-spacing: 0.08em;
 }
@@ -5073,7 +5090,7 @@ a:focus-visible {
 .resource-flow-core p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.94rem;
+  font-size: 1.081rem;
   line-height: 1.55;
 }
 
@@ -5088,7 +5105,7 @@ a:focus-visible {
   border: 1px solid rgba(32, 26, 21, 0.12);
   background: rgba(255, 255, 255, 0.66);
   color: var(--muted);
-  font-size: 0.7rem;
+  font-size: 0.805rem;
   line-height: 1;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -5216,6 +5233,7 @@ a:focus-visible {
 .business-pillar-card p {
   margin: 0;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.6;
 }
 
@@ -5230,7 +5248,7 @@ a:focus-visible {
 .business-flow-title {
   margin: 0 0 8px;
   font-weight: 700;
-  font-size: 0.95rem;
+  font-size: 1.092rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--muted);
@@ -5246,6 +5264,7 @@ a:focus-visible {
 
 .business-flow li {
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.65;
 }
 
@@ -5326,7 +5345,7 @@ a:focus-visible {
 }
 
 .footer-facts strong {
-  font-size: 0.84rem;
+  font-size: 0.966rem;
   color: var(--muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -5335,7 +5354,7 @@ a:focus-visible {
 .site-footer p {
   margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1.035rem;
   line-height: 1.6;
 }
 
@@ -5630,7 +5649,7 @@ a:focus-visible {
 }
 
 .cp-fact-term--en {
-  font-size: 0.7rem;
+  font-size: 0.805rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -5656,7 +5675,7 @@ a:focus-visible {
 }
 
 .cp-fact-value--en {
-  font-size: 0.95rem;
+  font-size: 1.092rem;
   line-height: 1.4;
   color: var(--color-text-muted);
 }
@@ -6432,7 +6451,7 @@ body {
 .news-meta {
   margin: 0;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 1.058rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -6484,6 +6503,7 @@ body {
   display: block;
   margin-top: 10px;
   color: var(--muted);
+  font-size: 1.1em;
   font-style: normal;
 }
 
@@ -8448,7 +8468,7 @@ html:lang(en) .reference-section-title {
 }
 
 .process-stage-desc {
-  font-size: 0.95rem;
+  font-size: 1.092rem;
   line-height: 1.55;
   color: var(--color-text-muted);
 }
@@ -8466,7 +8486,7 @@ html:lang(en) .reference-section-title {
 .process-stage-points li {
   position: relative;
   padding-left: 22px;
-  font-size: 0.86rem;
+  font-size: 0.989rem;
   line-height: 1.45;
   color: var(--color-text-muted);
 }
@@ -8745,7 +8765,7 @@ html:lang(en) .reference-section-title {
 
 .pcarousel-category {
   margin: 0;
-  font-size: 0.82rem;
+  font-size: 0.943rem;
   letter-spacing: 0.04em;
   color: var(--muted);
 }
@@ -8753,6 +8773,7 @@ html:lang(en) .reference-section-title {
 .pcarousel-summary {
   margin: 0;
   color: var(--muted);
+  font-size: 1.1em;
   line-height: 1.7;
   max-width: 46ch;
 }
@@ -9041,11 +9062,6 @@ html:lang(en) .reference-section-title {
   color: var(--color-text);
   text-align: center;
   letter-spacing: 0.01em;
-  background: none;
-  border: none;
-  border-radius: var(--radius-pill);
-  cursor: pointer;
-  transition: color 0.25s ease, opacity 0.25s ease;
 }
 
 .card-fan-caption::after {
@@ -9057,15 +9073,6 @@ html:lang(en) .reference-section-title {
   border-radius: 2px;
   background: var(--color-accent);
   opacity: 0.55;
-  transition: width 0.25s ease, opacity 0.25s ease;
-}
-
-.card-fan-caption:hover { color: var(--color-accent-strong); }
-.card-fan-caption:hover::after { width: 44px; opacity: 1; }
-
-.card-fan-caption:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.35);
 }
 
 .card-fan-nav {
@@ -9155,200 +9162,17 @@ html:lang(en) .reference-section-title {
   .fan-card { height: 22rem; }
 }
 
-/* Click-to-open product description modal */
-.card-fan-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  background: rgba(15, 22, 38, 0.55);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  animation: card-fan-modal-fade 0.2s ease;
-}
-
-@keyframes card-fan-modal-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.card-fan-modal-panel {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  width: min(880px, 100%);
-  max-height: 88vh;
-  overflow: hidden;
-  background: var(--surface-card);
-  border: 1px solid rgba(21, 35, 63, 0.08);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  animation: card-fan-modal-rise 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
+/* card-fan-modal-rise is also used by the display-cards modal (see
+   .dc-modal-panel below); keep it even though the fan carousel no longer
+   opens its own modal. */
 @keyframes card-fan-modal-rise {
   from { opacity: 0; transform: translateY(14px) scale(0.98); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.card-fan-modal-media {
-  position: relative;
-  min-height: 280px;
-  background: var(--surface-muted);
-}
-
-.card-fan-modal-media img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Gallery variant: stack the package shot + macro zoom vertically and let the
-   media column scroll independently of the body. */
-.card-fan-modal-media.is-gallery {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-height: 0;
-  overflow-y: auto;
-}
-
-.card-fan-modal-figure {
-  position: relative;
-  margin: 0;
-  background: var(--surface-muted);
-}
-
-.card-fan-modal-media.is-gallery .card-fan-modal-figure img {
-  position: static;
-  display: block;
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.card-fan-modal-figure figcaption {
-  position: absolute;
-  left: 12px;
-  bottom: 12px;
-  padding: 4px 11px;
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(15, 22, 38, 0.62);
-  border-radius: var(--radius-pill);
-  -webkit-backdrop-filter: blur(4px);
-  backdrop-filter: blur(4px);
-}
-
-.card-fan-modal-body {
-  padding: 32px 32px 36px;
-  overflow-y: auto;
-}
-
-.card-fan-modal-eyebrow {
-  margin: 0 0 6px;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-.card-fan-modal-title {
-  margin: 0 0 14px;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3vw, 1.8rem);
-  line-height: 1.15;
-  color: var(--color-text);
-}
-
-.card-fan-modal-summary {
-  margin: 0 0 18px;
-  color: var(--color-text-muted);
-  line-height: 1.6;
-}
-
-.card-fan-modal-points {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 10px;
-}
-
-.card-fan-modal-points li {
-  position: relative;
-  padding-left: 22px;
-  color: var(--color-text);
-  line-height: 1.5;
-}
-
-.card-fan-modal-points li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.55em;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-pill);
-  background: var(--color-accent);
-}
-
-.card-fan-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  font-size: 24px;
-  line-height: 1;
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(21, 35, 63, 0.12);
-  background: var(--surface);
-  color: var(--color-text);
-  cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
-}
-
-.card-fan-modal-close:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
-}
-
-.card-fan-modal-close:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(45, 107, 73, 0.35);
-}
-
-@media (max-width: 720px) {
-  .card-fan-modal-panel {
-    grid-template-columns: 1fr;
-    max-height: 90vh;
-  }
-  .card-fan-modal-media { min-height: 200px; height: 38vw; max-height: 280px; }
-  .card-fan-modal-media.is-gallery { height: auto; min-height: 0; max-height: 46vh; }
-  .card-fan-modal-body { padding: 24px 22px 28px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .card-fan-arrow,
-  .card-fan-dot,
-  .card-fan-caption,
-  .card-fan-caption::after { transition: none; }
-  .card-fan-modal,
-  .card-fan-modal-panel { animation: none; }
+  .card-fan-dot { transition: none; }
 }
 
 /* ---------------------------------------------------------------------------
@@ -9553,7 +9377,7 @@ html:lang(en) .reference-section-title {
 
 .display-card-date {
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.897rem;
   letter-spacing: 0.04em;
   color: var(--color-text-muted);
 }
@@ -9613,7 +9437,7 @@ html:lang(en) .reference-section-title {
 
 .dc-modal-eyebrow {
   margin: 0 0 2px;
-  font-size: 0.74rem;
+  font-size: 0.851rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -9630,6 +9454,7 @@ html:lang(en) .reference-section-title {
 .dc-modal-desc {
   margin: 0 0 18px;
   color: var(--color-text-muted);
+  font-size: 1.1em;
   line-height: 1.6;
 }
 
@@ -9755,7 +9580,7 @@ html:lang(en) .reference-section-title {
   margin: 16px auto 0;
   max-width: 42rem;
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  font-size: 1.208rem;
   line-height: 1.6;
 }
 
@@ -9825,7 +9650,7 @@ html:lang(en) .reference-section-title {
 
 .feature-card-desc {
   margin: 8px 0 0;
-  font-size: 0.95rem;
+  font-size: 1.092rem;
   line-height: 1.55;
   color: var(--color-text-muted);
 }
@@ -9882,7 +9707,7 @@ html:lang(en) .reference-section-title {
 
 .hero-section-slogan {
   margin: 2px 0 0;
-  font-size: 0.72rem;
+  font-size: 0.828rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-muted);
@@ -9913,7 +9738,7 @@ html:lang(en) .reference-section-title {
 .hero-section-subtitle {
   margin: 0 0 32px;
   max-width: 34rem;
-  font-size: 1.05rem;
+  font-size: 1.208rem;
   line-height: 1.65;
   color: var(--color-text-muted);
 }
@@ -9943,7 +9768,7 @@ html:lang(en) .reference-section-title {
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
-  font-size: 0.82rem;
+  font-size: 0.943rem;
   color: var(--color-text-muted);
 }
 

@@ -21,9 +21,12 @@ type TopMenuLabels = {
   localeOptions: {
     en: string;
     ja: string;
-    zh: string;
+    zhHans: string;
+    zhHant: string;
   };
 };
+
+type LocaleValue = 'en' | 'ja' | 'zh-Hans' | 'zh-Hant';
 
 type TopMenuProps = {
   labels: TopMenuLabels;
@@ -33,8 +36,8 @@ type TopMenuProps = {
     location: string;
   };
   localeLabel?: string;
-  locale?: 'en' | 'ja' | 'zh';
-  onLocaleChange?: (locale: 'en' | 'ja' | 'zh') => void;
+  locale?: LocaleValue;
+  onLocaleChange?: (locale: LocaleValue) => void;
   showBrandText?: boolean;
 };
 
@@ -123,12 +126,13 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
             <select
               id="locale-select"
               value={locale}
-              onChange={(event) => onLocaleChange?.(event.target.value as 'en' | 'ja' | 'zh')}
+              onChange={(event) => onLocaleChange?.(event.target.value as LocaleValue)}
               disabled={!onLocaleChange}
             >
               <option value="en">{labels.localeOptions.en}</option>
               <option value="ja">{labels.localeOptions.ja}</option>
-              <option value="zh">{labels.localeOptions.zh}</option>
+              <option value="zh-Hans">{labels.localeOptions.zhHans}</option>
+              <option value="zh-Hant">{labels.localeOptions.zhHant}</option>
             </select>
           </label>
         </div>

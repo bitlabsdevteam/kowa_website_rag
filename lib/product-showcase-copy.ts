@@ -170,7 +170,7 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
       },
     },
   },
-  zh: {
+  'zh-Hans': {
     introEyebrow: '产品通道',
     introBody: 'Kowa 在同一条循环供应链上的产品能力：树脂采购、再生与造粒、电池组支持。先打开一个通道，再用主控件浏览。',
     chapterMediaCountLabel: '项视觉',
@@ -240,6 +240,76 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
       },
     },
   },
+  'zh-Hant': {
+    introEyebrow: '產品通道',
+    introBody: 'Kowa 在同一條循環供應鏈上的產品能力：樹脂採購、再生與造粒、電池組支持。先打開一個通道，再用主控件瀏覽。',
+    chapterMediaCountLabel: '項視覺',
+    chapterButtonLabel: '打開通道',
+    categoryMetaLabel: '類別',
+    visualMetaLabel: '視覺',
+    capabilitiesLabel: '關鍵能力',
+    chapters: [
+      {
+        eyebrow: 'Lane 01',
+        caption: '合成樹脂採購與分銷',
+        categories: ['resin-materials', 'commerce-distribution'],
+      },
+      {
+        eyebrow: 'Lane 02',
+        caption: '再生、造粒與工廠運營',
+        categories: ['recycling-process', 'pellets-output', 'factory-operations'],
+      },
+      {
+        eyebrow: 'Lane 03',
+        caption: '電池組支持與產線準備',
+        categories: ['machinery-equipment', 'factory-operations'],
+      },
+    ],
+    categories: {
+      'resin-materials': {
+        label: '樹脂原料',
+        eyebrow: '採購通道',
+        summary: '面向製造夥伴的批次化樹脂接收與穩定採購管理。',
+        points: ['多等級庫存視圖', '國內外供給路徑', '質量優先的檢查流程'],
+        accent: 'amber',
+      },
+      'recycling-process': {
+        label: '再生處理',
+        eyebrow: '加工通道',
+        summary: '通過分揀與粉碎，把邊角料和廢塑料轉化為可再利用原料。',
+        points: ['按樹脂特性分揀', '粉碎與預處理', '循環材料回收'],
+        accent: 'sea',
+      },
+      'pellets-output': {
+        label: '顆粒產出',
+        eyebrow: '再生通道',
+        summary: '把回收材料整理為顆粒形態，銜接後續供應與混配。',
+        points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+        accent: 'sky',
+      },
+      'factory-operations': {
+        label: '工廠運營',
+        eyebrow: '運營通道',
+        summary: '展示支撐分揀、處理與產線連續性的現場環境。',
+        points: ['現場連續運作', '處理產線可視化', '運營支持環境'],
+        accent: 'mist',
+      },
+      'machinery-equipment': {
+        label: '設備支持',
+        eyebrow: '工程通道',
+        summary: '為穩定處理環境提供設備相關支持與產線準備視角。',
+        points: ['設備場景理解', '產線準備狀態', '工業支持協同'],
+        accent: 'amber',
+      },
+      'commerce-distribution': {
+        label: '貿易與流通',
+        eyebrow: '商貿通道',
+        summary: '從庫存展示到出貨協調的商業流通呈現。',
+        points: ['面向分銷的處理方式', '跨境商流組織', '出貨前展示'],
+        accent: 'sky',
+      },
+    },
+  },
 };
 
 /** Per-product descriptions, grounded in the lot labels and pellet appearance
@@ -302,7 +372,7 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       points: ['ボビン（巻芯）PS から回収', '再生・不透明白色ペレット', '循環型の資源回収由来'],
     },
   },
-  zh: {
+  'zh-Hans': {
     'cd-pcn': {
       title: 'CD-PCN 再生聚碳酸酯',
       material: '再生聚碳酸酯（PC）',
@@ -325,11 +395,35 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       points: ['由线轴／绕线管 PS 回收', '再生不透明白色颗粒', '循环资源回收来源'],
     },
   },
+  'zh-Hant': {
+    'cd-pcn': {
+      title: 'CD-PCN 再生聚碳酸酯',
+      material: '再生聚碳酸酯（PC）',
+      summary:
+        '由光盤級料源（CD／PC-N、B-off 批次）回收的高透明聚碳酸酯。透明、切粒均勻的顆粒經分揀與再生，成為可用於注塑與擠出的穩定高透明料。',
+      points: ['光盤級 PC 來源（CD／PC-N）', '透明、均勻的切粒', 'B-off 回收、可直接再生'],
+    },
+    gpps: {
+      title: 'GPPS 顆粒 — 本色（NCL）',
+      material: '通用聚苯乙烯（GPPS）',
+      summary:
+        '本色、未著色等級（NCL）的玻璃般透明通用聚苯乙烯。剛性高、完全透明的顆粒以數噸級大批量供應，適用於對透明度要求高的成型與片材應用。',
+      points: ['本色／無色（NCL）等級', '高透明、高剛性 GPPS', '數噸級大批量供應'],
+    },
+    'ps-recycle': {
+      title: '再生聚苯乙烯 — 白色',
+      material: '再生聚苯乙烯（PS）',
+      summary:
+        '由回收線軸（繞線管）料再生的不透明白色聚苯乙烯。通過 Kowa 的循環分揀與再生流程回收的圓柱狀顆粒，為通用成型提供經濟的 PS 供給。',
+      points: ['由線軸／繞線管 PS 回收', '再生不透明白色顆粒', '循環資源回收來源'],
+    },
+  },
 };
 
 /** Short label distinguishing the three shots of each product family. */
 export const PRODUCT_VIEW_COPY: Record<Locale, Record<ProductView, string>> = {
   en: { lot: 'Sealed lot', pile: 'Loose pellets', macro: 'Macro detail' },
   ja: { lot: '出荷ロット', pile: 'バラ状ペレット', macro: '拡大ディテール' },
-  zh: { lot: '出货批次', pile: '散装颗粒', macro: '微距细节' },
+  'zh-Hans': { lot: '出货批次', pile: '散装颗粒', macro: '微距细节' },
+  'zh-Hant': { lot: '出貨批次', pile: '散裝顆粒', macro: '微距細節' },
 };

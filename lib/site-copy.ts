@@ -1,8 +1,9 @@
 import enCopy from '@/locales/en.json';
 import jaCopy from '@/locales/ja.json';
-import zhCopy from '@/locales/zh.json';
+import zhHansCopy from '@/locales/zh-Hans.json';
+import zhHantCopy from '@/locales/zh-Hant.json';
 
-export type Locale = 'en' | 'ja' | 'zh';
+export type Locale = 'en' | 'ja' | 'zh-Hans' | 'zh-Hant';
 
 export type MenuLabels = {
   about: string;
@@ -21,7 +22,8 @@ export type MenuLabels = {
   localeOptions: {
     en: string;
     ja: string;
-    zh: string;
+    zhHans: string;
+    zhHant: string;
   };
 };
 
@@ -288,5 +290,6 @@ export type SiteCopy = {
 export const SITE_COPY = {
   en: enCopy,
   ja: jaCopy,
-  zh: zhCopy,
+  'zh-Hans': zhHansCopy,
+  'zh-Hant': zhHantCopy,
 } satisfies Record<Locale, SiteCopy>;

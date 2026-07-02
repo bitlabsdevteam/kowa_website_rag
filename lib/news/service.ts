@@ -123,7 +123,7 @@ function getMemoryState(): NewsMemoryState {
 }
 
 function buildFallbackArticles(): NewsArticle[] {
-  const locales: Locale[] = ['en', 'ja', 'zh'];
+  const locales: Locale[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
 
   return SITE_COPY.en.news.entries.map((_, index) => {
     const publishedAt = new Date(Date.UTC(2026, 0, 15 - index * 4)).toISOString();

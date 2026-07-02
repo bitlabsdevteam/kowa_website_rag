@@ -5,7 +5,7 @@ import { resolveNewsLocalization } from '@/lib/news/format';
 import { type Locale } from '@/lib/site-copy';
 
 function getRequestedLocale(value: string | null): Locale {
-  if (value === 'ja' || value === 'zh') {
+  if (value === 'ja' || value === 'zh-Hans' || value === 'zh-Hant') {
     return value;
   }
 

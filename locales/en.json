@@ -16,7 +16,8 @@
     "localeOptions": {
       "en": "EN",
       "ja": "JP",
-      "zh": "中文"
+      "zhHans": "SC",
+      "zhHant": "TC"
     }
   },
   "hero": {

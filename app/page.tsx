@@ -95,7 +95,7 @@ const HOME_UI: Record<
       },
     ],
   },
-  zh: {
+  'zh-Hans': {
     heroFlag: 'Tokyo, Japan | 全球贸易与资源循环',
     secondaryCta: '了解更多',
     snapshotLabels: ['总部', '运营模型', '企业入口'],
@@ -126,6 +126,41 @@ const HOME_UI: Record<
           '重新打包为可用原料',
           '以东南亚为主出口海外',
           '面向国内产业供应链供给',
+        ],
+      },
+    ],
+  },
+  'zh-Hant': {
+    heroFlag: 'Tokyo, Japan | 全球貿易與資源循環',
+    secondaryCta: '瞭解更多',
+    snapshotLabels: ['總部', '運營模型', '企業入口'],
+    platformLabel: '我們的運作方式',
+    processSteps: [
+      {
+        title: '採購塑料',
+        desc: '採購即將被廢棄的塑料，讓其重新成為資源。',
+        points: [
+          '來自製造商的生產損耗料與廢塑料',
+          '混合及工業來源塑料，以及樹脂採購',
+          '在日本國內回收',
+        ],
+      },
+      {
+        title: '加工塑料',
+        desc: '經過分選與再生，轉化為潔淨、可再利用的原料。',
+        points: [
+          '按樹脂類型與配合進行分選、拆解',
+          '粉碎、壓縮、混合製成原料',
+          '在 G.P. Polymer／群馬產線再生',
+        ],
+      },
+      {
+        title: '打包與銷售',
+        desc: '將再生原料重新打包，送回供應鏈。',
+        points: [
+          '重新打包為可用原料',
+          '以東南亞為主出口海外',
+          '面向國內產業供應鏈供給',
         ],
       },
     ],
