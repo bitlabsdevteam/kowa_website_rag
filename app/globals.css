@@ -5488,12 +5488,35 @@ a:focus-visible {
   fill: currentColor;
 }
 
-.footer7-nav {
+.footer7-nav-groups {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 20px;
-  align-items: center;
+  gap: 32px 48px;
   justify-content: flex-end;
+}
+
+.footer7-nav-group {
+  display: grid;
+  gap: 12px;
+  min-width: 140px;
+}
+
+.footer7-nav-group-title {
+  margin: 0;
+  color: var(--footer7-text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.footer7-nav-group-links {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .footer7-link {
@@ -5546,16 +5569,15 @@ a:focus-visible {
     gap: 28px;
   }
 
-  .footer7-nav {
+  .footer7-nav-groups {
     justify-content: flex-start;
   }
 }
 
 @media (max-width: 520px) {
-  .footer7-nav {
+  .footer7-nav-groups {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    gap: 24px;
   }
 
   .footer7-bar {
@@ -5602,6 +5624,10 @@ a:focus-visible {
   text-align: center;
   gap: 14px;
   grid-template-columns: none;
+}
+
+.corporate-content-surface .company-profile-hero--centered .eyebrow {
+  color: var(--color-text);
 }
 
 .company-profile-hero--centered .company-profile-title {
@@ -5671,7 +5697,7 @@ a:focus-visible {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.1vw, 1.75rem);
   line-height: 1.18;
-  color: var(--color-accent-strong);
+  color: var(--color-text);
 }
 
 .cp-fact-value--en {
@@ -8165,7 +8191,7 @@ html:lang(en) .reference-section-title {
 
 /* Anchor target for the hero "More Info" button — keep the title clear of the
    header after the smooth-scroll jump. */
-#business {
+#products {
   scroll-margin-top: clamp(80px, 12vh, 120px);
 }
 
@@ -8676,6 +8702,59 @@ html:lang(en) .reference-section-title {
 
 .pgallery-head .page-title {
   margin: 0;
+}
+
+/* ── Products category tabs — top-level business-line switcher ───────────── */
+.products-category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 18px 0 4px;
+}
+
+.products-category-tab {
+  padding: 10px 18px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: #f8fbf8;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.products-category-tab:hover,
+.products-category-tab:focus-visible {
+  border-color: rgba(45, 107, 73, 0.28);
+}
+
+.products-category-tab.is-active {
+  border-color: rgba(45, 107, 73, 0.28);
+  background: #edf5ef;
+  font-weight: 600;
+}
+
+.products-category-empty {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+  max-width: 52ch;
+  margin: 40px auto;
+  padding: 32px 24px;
+  border: 1px dashed var(--color-line);
+  border-radius: 16px;
+  background: #f8fbf8;
+}
+
+.products-category-empty-title {
+  margin: 0;
+  font-weight: 600;
+}
+
+.products-category-empty-cta {
+  margin-top: 6px;
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
 /* ── Products carousel — main image + description, thumbnails, dots, 5s auto ──
@@ -10033,25 +10112,38 @@ section.card,
   }
 }
 
+@media (min-width: 640px) and (max-width: 859px) {
+  .segment-cards--five {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 860px) {
+  .segment-cards--five {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Kanematsu-style full-bleed photography tile: the image fills the whole
+   card and the label/link sit on a scrim overlay rather than a body panel
+   below the image. */
 .segment-card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--color-line);
+  display: block;
   border-radius: var(--radius-card);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .segment-card:hover {
-  border-color: var(--color-accent);
-  transform: translateY(-2px);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
 }
 
 .segment-card-media {
   position: relative;
-  aspect-ratio: 3 / 2;
+  aspect-ratio: 4 / 3;
   background: var(--surface-muted);
 }
 
@@ -10062,31 +10154,67 @@ section.card,
   display: block;
 }
 
-.segment-card-body {
+.segment-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(32, 26, 21, 0) 40%, rgba(32, 26, 21, 0.82) 100%);
+}
+
+/* Business lines without grounded photography yet (see lib/product-media.ts)
+   get an honest textured tile instead of a fabricated photo. */
+.segment-card-media--placeholder {
+  background: linear-gradient(155deg, var(--color-accent-strong) 0%, var(--color-accent) 55%, var(--color-canvas-strong) 130%);
+}
+
+.segment-card-media--placeholder::after {
+  background: linear-gradient(180deg, rgba(19, 41, 29, 0) 45%, rgba(19, 41, 29, 0.72) 100%);
+}
+
+.segment-card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
   padding: 20px 22px 24px;
+  z-index: 1;
 }
 
 .segment-card-title {
   margin: 0;
   font-family: var(--font-display);
   font-size: 1.15rem;
-  color: var(--color-text);
-}
-
-.segment-card-desc {
-  margin: 10px 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.92rem;
-  line-height: 1.55;
+  color: #ffffff;
 }
 
 .segment-card-link {
-  margin-top: 14px;
+  margin-top: 10px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--color-accent);
+  color: #ffffff;
   font-size: 0.84rem;
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.segment-card:hover .segment-card-link {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.segment-cta-button {
+  margin-top: 36px;
+  display: inline-flex;
+  padding: 13px 30px;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+
+.segment-cta-button:hover {
+  background: var(--color-accent-strong);
 }
 
 /* --- Home: ABOUT block --------------------------------------------------- */
@@ -10110,40 +10238,104 @@ section.card,
   line-height: 1.7;
 }
 
-.stat-cards {
+/* Kanematsu-style large-number KPI strip — all values are derived from
+   verified facts/arrays in lib/site-copy.ts, never hardcoded. */
+.kpi-strip {
   margin-top: 40px;
   display: grid;
   grid-template-columns: 1fr;
   gap: 18px;
 }
 
-@media (min-width: 720px) {
-  .stat-cards {
+@media (min-width: 560px) {
+  .kpi-strip {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
-.stat-card {
-  padding: 24px;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-card);
-  background: #ffffff;
-  text-align: left;
+.kpi-item {
+  padding: 8px;
 }
 
-.stat-card-value {
+.kpi-value {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
   color: var(--color-accent-strong);
 }
 
-.stat-card-label {
-  margin: 6px 0 0;
+.kpi-label {
+  margin: 8px 0 0;
   color: var(--color-text-muted);
   font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+/* Kanematsu-style "ABOUT" 3-card band, sourced from companyProfile.focusCards. */
+.about-pillars-label {
+  margin: 48px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.about-pillars {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  text-align: left;
+}
+
+@media (min-width: 720px) {
+  .about-pillars {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.about-pillar-card {
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-pillar-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(45, 107, 73, 0.35);
+  box-shadow: var(--shadow-soft);
+}
+
+.about-pillar-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--color-text);
+}
+
+.about-pillar-card-desc {
+  margin: 10px 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.about-history-link {
+  margin-top: 24px;
+  display: inline-flex;
+  color: var(--color-accent);
+  font-size: 0.85rem;
+  text-decoration: none;
+}
+
+.about-history-link:hover {
+  color: var(--color-accent-strong);
+  text-decoration: underline;
 }
 
 .pillar-links {
@@ -10489,6 +10681,7 @@ section.card,
   .segment-card,
   .values-band-cta,
   .business-cta-button,
+  .segment-cta-button,
   .pillar-link {
     transition: none;
   }

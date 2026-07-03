@@ -259,6 +259,21 @@
       "thumbnailsAriaLabel": "製品サムネイル",
       "allFilterLabel": "すべて",
       "filterNavAriaLabel": "カテゴリで製品を絞り込む"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "樹脂",
+        "generalGoods": "雑貨",
+        "foods": "食品",
+        "ffe": "寝具",
+        "timber": "木材"
+      },
+      "tabListAriaLabel": "製品カテゴリーを選択",
+      "empty": {
+        "title": "カタログ準備中",
+        "body": "このカテゴリーの写真・詳細情報を準備しております。取扱状況や仕様についてはお問い合わせください。",
+        "ctaLabel": "お問い合わせ"
+      }
     }
   },
   "footer": {
@@ -456,11 +471,25 @@
       "subtitle": "3つの事業レーン、ひとつの循環サプライ",
       "linkLabel": "事業を見る"
     },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "循環サプライの最新プロダクト",
+      "linkLabel": "製品を見る",
+      "viewMoreLabel": "製品をもっと見る"
+    },
     "about": {
       "display": "ABOUT",
       "subtitle": "私たちについて",
       "statement": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。",
-      "linksLabel": "Kowaを知る"
+      "linksLabel": "Kowaを知る",
+      "pillarsLabel": "私たちの強み",
+      "historyLinkLabel": "沿革を見る →",
+      "kpi": {
+        "yearsLabel": "創業からの年数",
+        "capitalLabel": "資本金",
+        "capitalValue": "5,000万円",
+        "linesLabel": "事業ライン数"
+      }
     },
     "values": {
       "display": "TO RESOURCES AGAIN",

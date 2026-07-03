@@ -176,14 +176,21 @@ export const Footer7 = ({
           </ul>
         </div>
 
-        <nav className="footer7-nav" aria-label={navAria}>
-          {sections
-            .flatMap((section) => section.links)
-            .map((link) => (
-              <FooterLink key={link.name} href={link.href} className="footer7-link">
-                {link.name}
-              </FooterLink>
-            ))}
+        <nav className="footer7-nav-groups" aria-label={navAria}>
+          {sections.map((section) => (
+            <div key={section.title} className="footer7-nav-group">
+              <p className="footer7-nav-group-title">{section.title}</p>
+              <ul className="footer7-nav-group-links">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <FooterLink href={link.href} className="footer7-link">
+                      {link.name}
+                    </FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </div>
 

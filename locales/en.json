@@ -259,6 +259,21 @@
       "thumbnailsAriaLabel": "Product thumbnails",
       "allFilterLabel": "All",
       "filterNavAriaLabel": "Filter products by category"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "Plastics",
+        "generalGoods": "General Goods",
+        "foods": "Foods",
+        "ffe": "FFE",
+        "timber": "Timber / Lumber"
+      },
+      "tabListAriaLabel": "Browse product categories",
+      "empty": {
+        "title": "Catalog in preparation",
+        "body": "We're preparing photography and details for this category. Contact our team for current availability and specifications.",
+        "ctaLabel": "Contact us"
+      }
     }
   },
   "footer": {
@@ -456,11 +471,25 @@
       "subtitle": "Three lanes, one circular supply",
       "linkLabel": "View business"
     },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "Newest from our circular supply",
+      "linkLabel": "View product",
+      "viewMoreLabel": "View More Products"
+    },
     "about": {
       "display": "ABOUT",
       "subtitle": "Who we are",
       "statement": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan.",
-      "linksLabel": "Explore Kowa"
+      "linksLabel": "Explore Kowa",
+      "pillarsLabel": "Our strengths",
+      "historyLinkLabel": "See our full history →",
+      "kpi": {
+        "yearsLabel": "Years of operation",
+        "capitalLabel": "Capital",
+        "capitalValue": "¥50M",
+        "linesLabel": "Business lines"
+      }
     },
     "values": {
       "display": "TO RESOURCES AGAIN",

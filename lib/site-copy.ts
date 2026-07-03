@@ -130,11 +130,26 @@ type HomeSections = {
     subtitle: string;
     linkLabel: string;
   };
+  products: {
+    display: string;
+    subtitle: string;
+    linkLabel: string;
+    viewMoreLabel: string;
+  };
   about: {
     display: string;
     subtitle: string;
     statement: string;
     linksLabel: string;
+    pillarsLabel: string;
+    historyLinkLabel: string;
+    kpi: {
+      yearsLabel: string;
+      capitalLabel: string;
+      /** Short numeral form of companyProfile.facts' verified capital figure (¥50M), not a new fact. */
+      capitalValue: string;
+      linesLabel: string;
+    };
   };
   values: {
     display: string;
@@ -224,6 +239,21 @@ export type SiteCopy = {
       thumbnailsAriaLabel: string;
       allFilterLabel: string;
       filterNavAriaLabel: string;
+    };
+    categories: {
+      tabs: {
+        plastics: string;
+        generalGoods: string;
+        foods: string;
+        ffe: string;
+        timber: string;
+      };
+      tabListAriaLabel: string;
+      empty: {
+        title: string;
+        body: string;
+        ctaLabel: string;
+      };
     };
   };
   footer: {

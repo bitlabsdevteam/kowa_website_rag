@@ -1,15 +1,26 @@
 'use client';
 
-import { useMemo } from 'react';
+import { Suspense, useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
 import type { CardItem } from '@/components/ui/card-fan-carousel';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
-import { PRODUCT_MEDIA, type ProductFamily } from '@/lib/product-media';
+import { PRODUCT_MEDIA, PRODUCT_TOP_CATEGORY_ORDER, type ProductFamily, type ProductTopCategory } from '@/lib/product-media';
 import { PRODUCT_FAMILY_COPY } from '@/lib/product-showcase-copy';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
+
+/** Maps a top-category id to its camelCase key in copy.products.categories.tabs. */
+const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' | 'foods' | 'ffe' | 'timber'> = {
+  plastics: 'plastics',
+  'general-goods': 'generalGoods',
+  foods: 'foods',
+  ffe: 'ffe',
+  timber: 'timber',
+};
 
 // The fan carousel pulls in GSAP and only runs on the client, so defer its
 // bundle until the products page mounts. A height-matched placeholder reserves
@@ -26,13 +37,28 @@ const PRODUCT_INTRO: Record<Locale, string> = {
   'zh-Hant': '回收廢料、再生顆粒與可供應樹脂，皆是 Kowa 在循環供應鏈中流轉的材料。',
 };
 
-export default function ProductsPage() {
+function isProductTopCategory(value: string | null): value is ProductTopCategory {
+  return PRODUCT_TOP_CATEGORY_ORDER.includes(value as ProductTopCategory);
+}
+
+function ProductsPageContent() {
   const [locale, setLocale] = useLocale();
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
+  const searchParams = useSearchParams();
+  const requestedCategory = searchParams.get('category');
+  const [activeCategory, setActiveCategory] = useState<ProductTopCategory>(
+    isProductTopCategory(requestedCategory) ? requestedCategory : 'plastics',
+  );
 
   // One card per product family. The card face shows the clean loose-pellet
-  // photo (the "pile" view), with just the product name shown below.
+  // photo (the "pile" view), with just the product name shown below. Only the
+  // Plastics category has photographed products today; the other categories
+  // are defined as tabs but have no grounded photography yet (see
+  // lib/product-media.ts — PRODUCT_FAMILY_TOP_CATEGORY), so they render an
+  // honest "catalog in preparation" state instead of fabricated products.
   const cards = useMemo<CardItem[]>(() => {
+    if (activeCategory !== 'plastics') return [];
+
     const families = PRODUCT_FAMILY_COPY[locale];
     const order: ProductFamily[] = ['cd-pcn', 'gpps', 'ps-recycle'];
 
@@ -47,7 +73,7 @@ export default function ProductsPage() {
         title: family.title,
       };
     });
-  }, [locale]);
+  }, [locale, activeCategory]);
 
   return (
     <main className="page shell">
@@ -62,14 +88,48 @@ export default function ProductsPage() {
           <p className="body-copy">{PRODUCT_INTRO[locale]}</p>
         </div>
 
-        <CardFanCarousel
-          cards={cards}
-          prevLabel={copy.products.carousel.prevAriaLabel}
-          nextLabel={copy.products.carousel.nextAriaLabel}
-        />
+        <div className="products-category-tabs" role="tablist" aria-label={copy.products.categories.tabListAriaLabel}>
+          {PRODUCT_TOP_CATEGORY_ORDER.map((category) => (
+            <button
+              key={category}
+              type="button"
+              role="tab"
+              aria-selected={activeCategory === category}
+              className={`products-category-tab${activeCategory === category ? ' is-active' : ''}`}
+              onClick={() => setActiveCategory(category)}
+            >
+              {copy.products.categories.tabs[CATEGORY_TAB_COPY_KEY[category]]}
+            </button>
+          ))}
+        </div>
+
+        {cards.length > 0 ? (
+          <CardFanCarousel
+            key={activeCategory}
+            cards={cards}
+            prevLabel={copy.products.carousel.prevAriaLabel}
+            nextLabel={copy.products.carousel.nextAriaLabel}
+          />
+        ) : (
+          <div className="products-category-empty">
+            <p className="products-category-empty-title">{copy.products.categories.empty.title}</p>
+            <p className="body-copy">{copy.products.categories.empty.body}</p>
+            <Link href="/contact_us" className="products-category-empty-cta">
+              {copy.products.categories.empty.ctaLabel}
+            </Link>
+          </div>
+        )}
       </section>
 
       <LocalizedFooter copy={copy} />
     </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={null}>
+      <ProductsPageContent />
+    </Suspense>
   );
 }

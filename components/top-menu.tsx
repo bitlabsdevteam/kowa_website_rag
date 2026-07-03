@@ -82,10 +82,9 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
           <Link href="/" className="top-menu-link" data-testid="top-menu-link-about" onClick={closeMenu}>
             {labels.about}
           </Link>
-          {/* News temporarily hidden from the top menu (route /news still active). Restore to re-expose. */}
-          {/* <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news" onClick={closeMenu}>
+          <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news" onClick={closeMenu}>
             {labels.news}
-          </Link> */}
+          </Link>
           <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products" onClick={closeMenu}>
             {labels.products}
           </Link>

@@ -9,6 +9,18 @@ export type ProductMediaCategory =
 /** Resin product families currently photographed for the products gallery. */
 export type ProductFamily = 'cd-pcn' | 'gpps' | 'ps-recycle';
 
+/** Top-level business-line categories shown as tabs on the products page. */
+export type ProductTopCategory = 'plastics' | 'general-goods' | 'foods' | 'ffe' | 'timber';
+
+export const PRODUCT_TOP_CATEGORY_ORDER: ProductTopCategory[] = ['plastics', 'general-goods', 'foods', 'ffe', 'timber'];
+
+/** Every family belongs to exactly one top category; today all three are plastics. */
+export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCategory> = {
+  'cd-pcn': 'plastics',
+  gpps: 'plastics',
+  'ps-recycle': 'plastics',
+};
+
 /** Each family is shot three ways: the labelled lot bag, a loose pile, and a macro detail. */
 export type ProductView = 'lot' | 'pile' | 'macro';
 

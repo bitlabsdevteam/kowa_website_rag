@@ -95,7 +95,7 @@ export function HomePageClient({ initialArticles }: HomePageClientProps) {
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" testId="reveal-home-about">
-        <HomeAbout copy={copy} />
+        <HomeAbout copy={copy} locale={locale} />
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" testId="reveal-home-values">

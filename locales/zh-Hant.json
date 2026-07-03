@@ -259,6 +259,21 @@
       "thumbnailsAriaLabel": "產品縮略圖",
       "allFilterLabel": "全部",
       "filterNavAriaLabel": "按類別篩選產品"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "塑料",
+        "generalGoods": "日用百貨",
+        "foods": "食品",
+        "ffe": "家具寢具",
+        "timber": "木材"
+      },
+      "tabListAriaLabel": "瀏覽產品分類",
+      "empty": {
+        "title": "目錄籌備中",
+        "body": "我們正在為該分類準備圖片與詳細資料，如需了解現有供應情況與規格，請聯繫我們。",
+        "ctaLabel": "聯繫我們"
+      }
     }
   },
   "footer": {
@@ -456,11 +471,25 @@
       "subtitle": "三條業務通道，一體化循環供應",
       "linkLabel": "查看業務"
     },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "循環供應鏈的最新產品",
+      "linkLabel": "查看產品",
+      "viewMoreLabel": "查看更多產品"
+    },
     "about": {
       "display": "ABOUT",
       "subtitle": "關於我們",
       "statement": "Kowa 在日本國內回收各類廢塑料並出口海外，出口的塑料經再加工後製成各類產品銷往全球。公司設立並營運再生工廠 G.P. Polymer，在推動出口的同時，也持續加強國內的再生加工。",
-      "linksLabel": "了解 Kowa"
+      "linksLabel": "了解 Kowa",
+      "pillarsLabel": "我們的優勢",
+      "historyLinkLabel": "查看完整歷程 →",
+      "kpi": {
+        "yearsLabel": "營運年數",
+        "capitalLabel": "資本金",
+        "capitalValue": "¥5000萬",
+        "linesLabel": "業務板塊"
+      }
     },
     "values": {
       "display": "TO RESOURCES AGAIN",

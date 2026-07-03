@@ -11,20 +11,13 @@ type LocalizedFooterProps = {
  * top menu and the rest of the site. All copy is grounded in `lib/site-copy`.
  */
 export function LocalizedFooter({ copy }: LocalizedFooterProps) {
-  // Mirror the top menu bar exactly (see components/top-menu.tsx): About, Products,
-  // Partners (G.E.T), Company Profile, Contact Us. News stays hidden, matching the header.
-  const sections = [
-    {
-      title: copy.footer.navAria,
-      links: [
-        { name: copy.menu.about, href: '/' },
-        { name: copy.menu.products, href: '/products' },
-        { name: copy.menu.partners, href: 'https://www.greenecotec.co.jp/index.html' },
-        { name: copy.menu.companyProfile, href: '/company_profile' },
-        { name: copy.menu.contactUs, href: '/contact_us' },
-      ],
-    },
-  ];
+  // Kanematsu-style deep sitemap: reuse the already-localized, already-typed
+  // footer.menuGroups (For Business / Company / Career) instead of flattening
+  // everything into a single column.
+  const sections = copy.footer.menuGroups.map((group) => ({
+    title: group.title,
+    links: group.links.map((link) => ({ name: link.label, href: link.href })),
+  }));
 
   return (
     <Footer7
