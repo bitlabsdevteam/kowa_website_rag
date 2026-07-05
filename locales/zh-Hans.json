@@ -459,13 +459,6 @@
     "legacyNoExcerpt": "该资源未提取到可读文本。"
   },
   "home": {
-    "news": {
-      "display": "NEWS",
-      "subtitle": "Kowa 最新动态",
-      "viewAll": "查看全部新闻",
-      "badgeLabel": "资讯",
-      "empty": "暂无新闻。"
-    },
     "business": {
       "display": "BUSINESS",
       "subtitle": "三条业务通道，一体化循环供应",
@@ -477,25 +470,20 @@
       "linkLabel": "查看产品",
       "viewMoreLabel": "查看更多产品"
     },
-    "about": {
-      "display": "ABOUT",
-      "subtitle": "关于我们",
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowa 的业务范围",
       "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
       "linksLabel": "了解 Kowa",
-      "pillarsLabel": "我们的优势",
+      "pillarsLabel": "我们的产品类别",
       "historyLinkLabel": "查看完整历程 →",
-      "kpi": {
-        "yearsLabel": "运营年数",
-        "capitalLabel": "资本金",
-        "capitalValue": "¥5000万",
-        "linesLabel": "业务板块"
+      "categories": {
+        "plastics": "国内回收的废塑料经分拣、破碎后，通过 G.P. Polymer 再生产线制成颗粒料，并完成出口。",
+        "generalGoods": "依托与塑料业务相同的贸易与物流网络，开展日用百货等商品的跨境采购与流通。",
+        "foods": "以同样严谨的采购管理与出货协调，为食品相关商品的贸易提供支持。",
+        "ffe": "为企业与产业客户采购并供应家具、装置及设备（FFE）。",
+        "timber": "在政府许可下计划采伐的缅甸原木，经仰光合作工厂制材后直接进口的实木柚木地板。"
       }
-    },
-    "values": {
-      "display": "TO RESOURCES AGAIN",
-      "subtitle": "我们的承诺",
-      "statement": "我们将通过塑料回收业务为社会做出贡献。",
-      "ctaLabel": "查看我们的业务"
     }
   },
   "businessPage": {

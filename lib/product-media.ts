@@ -4,21 +4,23 @@ export type ProductMediaCategory =
   | 'pellets-output'
   | 'factory-operations'
   | 'machinery-equipment'
-  | 'commerce-distribution';
+  | 'commerce-distribution'
+  | 'timber-flooring';
 
-/** Resin product families currently photographed for the products gallery. */
-export type ProductFamily = 'cd-pcn' | 'gpps' | 'ps-recycle';
+/** Resin product families, plus the Myanmar-teak timber family. */
+export type ProductFamily = 'cd-pcn' | 'gpps' | 'ps-recycle' | 'myanmar-teak';
 
 /** Top-level business-line categories shown as tabs on the products page. */
 export type ProductTopCategory = 'plastics' | 'general-goods' | 'foods' | 'ffe' | 'timber';
 
 export const PRODUCT_TOP_CATEGORY_ORDER: ProductTopCategory[] = ['plastics', 'general-goods', 'foods', 'ffe', 'timber'];
 
-/** Every family belongs to exactly one top category; today all three are plastics. */
+/** Every family belongs to exactly one top category. */
 export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCategory> = {
   'cd-pcn': 'plastics',
   gpps: 'plastics',
   'ps-recycle': 'plastics',
+  'myanmar-teak': 'timber',
 };
 
 /** Each family is shot three ways: the labelled lot bag, a loose pile, and a macro detail. */
@@ -120,5 +122,36 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     view: 'macro',
     src: '/images/products/ps-recycle-pellet-macro.jpg',
     sourceFile: 'PS Recycle Pellet③.jpg',
+  },
+  // Three photos sourced from the Myanmar Teak flooring supplier catalog
+  // (Wood Catalog.pdf): finished flooring in a residential atrium (used as
+  // the card face, "pile" view), tagged raw log intake at the Myanmar log
+  // yard ("lot"), and the Yangon finishing-line factory floor ("macro").
+  {
+    id: 'myanmar-teak-pile',
+    title: 'Myanmar Teak Solid Flooring — Finished installation',
+    category: 'timber-flooring',
+    family: 'myanmar-teak',
+    view: 'pile',
+    src: '/images/products/timber-teak-flooring-atrium.jpg',
+    sourceFile: 'Wood Catalog.pdf (p.2)',
+  },
+  {
+    id: 'myanmar-teak-lot',
+    title: 'Myanmar Teak — Tagged log intake',
+    category: 'timber-flooring',
+    family: 'myanmar-teak',
+    view: 'lot',
+    src: '/images/products/timber-teak-log-intake.jpg',
+    sourceFile: 'Wood Catalog.pdf (p.11)',
+  },
+  {
+    id: 'myanmar-teak-macro',
+    title: 'Myanmar Teak — Yangon finishing line',
+    category: 'timber-flooring',
+    family: 'myanmar-teak',
+    view: 'macro',
+    src: '/images/products/timber-teak-factory-floor.jpg',
+    sourceFile: 'Wood Catalog.pdf (p.11)',
   },
 ];

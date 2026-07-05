@@ -118,13 +118,6 @@ type PageHeaderCrumbLabels = {
 };
 
 type HomeSections = {
-  news: {
-    display: string;
-    subtitle: string;
-    viewAll: string;
-    badgeLabel: string;
-    empty: string;
-  };
   business: {
     display: string;
     subtitle: string;
@@ -136,26 +129,21 @@ type HomeSections = {
     linkLabel: string;
     viewMoreLabel: string;
   };
-  about: {
+  whatWeDo: {
     display: string;
     subtitle: string;
     statement: string;
     linksLabel: string;
     pillarsLabel: string;
     historyLinkLabel: string;
-    kpi: {
-      yearsLabel: string;
-      capitalLabel: string;
-      /** Short numeral form of companyProfile.facts' verified capital figure (¥50M), not a new fact. */
-      capitalValue: string;
-      linesLabel: string;
+    /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
+    categories: {
+      plastics: string;
+      generalGoods: string;
+      foods: string;
+      ffe: string;
+      timber: string;
     };
-  };
-  values: {
-    display: string;
-    subtitle: string;
-    statement: string;
-    ctaLabel: string;
   };
 };
 

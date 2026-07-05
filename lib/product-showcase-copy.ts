@@ -97,6 +97,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['Distribution-facing handling', 'Cross-border commercial flow', 'Shipment-ready presentation'],
         accent: 'sky',
       },
+      'timber-flooring': {
+        label: 'Timber flooring',
+        eyebrow: 'Timber lane',
+        summary: 'Solid Myanmar teak flooring, sourced under government-licensed harvest and finished at a Yangon partner factory before direct import.',
+        points: ['Solid, single-species teak', 'JAS-equivalent factory inspection', 'F☆☆☆☆ formaldehyde-free certified'],
+        accent: 'amber',
+      },
     },
   },
   ja: {
@@ -168,6 +175,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['流通向けハンドリング', '越境商流の整理', '出荷前の見せ方'],
         accent: 'sky',
       },
+      'timber-flooring': {
+        label: '木材フローリング',
+        eyebrow: '木材レーン',
+        summary: '政府許可のもとで計画伐採されたミャンマーチークを、現地提携工場（ヤンゴン）で製品化し直輸入する無垢フローリング。',
+        points: ['単一樹種の無垢材', 'JAS規格に準じた工場検査', 'F☆☆☆☆ ホルムアルデヒド対応認定'],
+        accent: 'amber',
+      },
     },
   },
   'zh-Hans': {
@@ -237,6 +251,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         summary: '从库存展示到出货协调的商业流通呈现。',
         points: ['面向分销的处理方式', '跨境商流组织', '出货前展示'],
         accent: 'sky',
+      },
+      'timber-flooring': {
+        label: '木材地板',
+        eyebrow: '木材通道',
+        summary: '在政府许可下计划采伐的缅甸柚木，经仰光合作工厂加工制成后直接进口的实木地板。',
+        points: ['单一树种实木材质', '符合 JAS 标准的工厂检验', 'F☆☆☆☆ 无醛认证'],
+        accent: 'amber',
       },
     },
   },
@@ -308,6 +329,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['面向分銷的處理方式', '跨境商流組織', '出貨前展示'],
         accent: 'sky',
       },
+      'timber-flooring': {
+        label: '木材地板',
+        eyebrow: '木材通道',
+        summary: '在政府許可下計畫採伐的緬甸柚木，經仰光合作工廠加工製成後直接進口的實木地板。',
+        points: ['單一樹種實木材質', '符合 JAS 標準的工廠檢驗', 'F☆☆☆☆ 無醛認證'],
+        accent: 'amber',
+      },
     },
   },
 };
@@ -348,6 +376,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         'Opaque white polystyrene regenerated from reclaimed bobbin/spool stock. Cylindrical pellets recovered through Kowa’s circular sort-and-regenerate flow, offering a cost-effective PS supply for general moulding.',
       points: ['Reclaimed from bobbin / spool PS', 'Regenerated opaque-white pellet', 'Circular, resource-recovery sourced'],
     },
+    'myanmar-teak': {
+      title: 'Myanmar Teak Solid Flooring',
+      material: 'Solid teak (Tectona grandis), specific gravity 0.65–0.7',
+      summary:
+        'Solid teak flooring milled from government-licensed, selectively harvested Myanmar logs and finished at a partner factory in Yangon before direct import. The uncoated solid board carries no added formaldehyde and is supplied as full boards, finger-jointed lengths, laminated panels, an LL45 soundproof-backed board, and OA flooring block.',
+      points: [
+        'Solid, single-species Myanmar teak — not plantation "green teak"',
+        'JAS-equivalent factory inspection under partner technical guidance',
+        'F☆☆☆☆ formaldehyde-free certified (MLIT-recognised test)',
+      ],
+    },
   },
   ja: {
     'cd-pcn': {
@@ -370,6 +409,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       summary:
         '回収したボビン（巻芯）材から再生した不透明な白色ポリスチレン。Kowa の循環型の選別・再生フローで回収した円柱状ペレットで、汎用成形向けに経済的な PS 供給を実現します。',
       points: ['ボビン（巻芯）PS から回収', '再生・不透明白色ペレット', '循環型の資源回収由来'],
+    },
+    'myanmar-teak': {
+      title: 'ミャンマーチーク無垢フローリング',
+      material: '無垢チーク材（比重0.65〜0.7）',
+      summary:
+        '政府認可のもと計画伐採されたミャンマー産原木を、現地提携工場（ヤンゴン）で製品化し直輸入する無垢フローリング。ホルムアルデヒドを含まない無垢材で、ソリッド・ユニ材・集成材・遮音材（LL45）・フローリングブロックまで、用途に応じた製品構成で供給しています。',
+      points: [
+        '単一樹種の本チーク（植林材＝グリーンチークとは区別）',
+        '提携企業の技術指導のもと、JAS規格に準じた工場検査',
+        'F☆☆☆☆ 相当のホルムアルデヒド対応認定（国交省指定機関試験済み）',
+      ],
     },
   },
   'zh-Hans': {
@@ -394,6 +444,13 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         '由回收线轴（绕线管）料再生的不透明白色聚苯乙烯。通过 Kowa 的循环分拣与再生流程回收的圆柱状颗粒，为通用成型提供经济的 PS 供给。',
       points: ['由线轴／绕线管 PS 回收', '再生不透明白色颗粒', '循环资源回收来源'],
     },
+    'myanmar-teak': {
+      title: '缅甸柚木实木地板',
+      material: '实木柚木（比重 0.65～0.7）',
+      summary:
+        '在政府许可下计划采伐的缅甸原木，经仰光合作工厂加工后直接进口的实木地板。不含甲醛的实木材质，可供应实木长板、指接材、集成材、LL45 隔音基材及 OA 地板块等多种规格。',
+      points: ['单一树种本柚木（区别于人工林"绿柚木"）', '在合作企业技术指导下、符合 JAS 标准的工厂检验', 'F☆☆☆☆ 级无醛认证（经日本国土交通省指定机构检测）'],
+    },
   },
   'zh-Hant': {
     'cd-pcn': {
@@ -416,6 +473,13 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       summary:
         '由回收線軸（繞線管）料再生的不透明白色聚苯乙烯。通過 Kowa 的循環分揀與再生流程回收的圓柱狀顆粒，為通用成型提供經濟的 PS 供給。',
       points: ['由線軸／繞線管 PS 回收', '再生不透明白色顆粒', '循環資源回收來源'],
+    },
+    'myanmar-teak': {
+      title: '緬甸柚木實木地板',
+      material: '實木柚木（比重 0.65～0.7）',
+      summary:
+        '在政府許可下計畫採伐的緬甸原木，經仰光合作工廠加工後直接進口的實木地板。不含甲醛的實木材質，可供應實木長板、指接材、集成材、LL45 隔音基材及 OA 地板塊等多種規格。',
+      points: ['單一樹種本柚木（區別於人工林「綠柚木」）', '在合作企業技術指導下、符合 JAS 標準的工廠檢驗', 'F☆☆☆☆ 級無醛認證（經日本國土交通省指定機構檢測）'],
     },
   },
 };

@@ -7,7 +7,6 @@ import { KowaLogo } from '@/components/kowa-logo';
 
 type TopMenuLabels = {
   about: string;
-  news: string;
   products: string;
   machines: string;
   partners: string;
@@ -81,9 +80,6 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
         <div className="top-menu-links">
           <Link href="/" className="top-menu-link" data-testid="top-menu-link-about" onClick={closeMenu}>
             {labels.about}
-          </Link>
-          <Link href="/news" className="top-menu-link" data-testid="top-menu-link-news" onClick={closeMenu}>
-            {labels.news}
           </Link>
           <Link href="/products" className="top-menu-link" data-testid="top-menu-link-products" onClick={closeMenu}>
             {labels.products}

@@ -459,13 +459,6 @@
     "legacyNoExcerpt": "このアセットから読み取り可能なテキストを抽出できませんでした。"
   },
   "home": {
-    "news": {
-      "display": "NEWS",
-      "subtitle": "Kowaの最新情報",
-      "viewAll": "ニュース一覧",
-      "badgeLabel": "トピックス",
-      "empty": "ニュースはまだありません。"
-    },
     "business": {
       "display": "BUSINESS",
       "subtitle": "3つの事業レーン、ひとつの循環サプライ",
@@ -477,25 +470,20 @@
       "linkLabel": "製品を見る",
       "viewMoreLabel": "製品をもっと見る"
     },
-    "about": {
-      "display": "ABOUT",
-      "subtitle": "私たちについて",
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowaの事業内容",
       "statement": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。",
       "linksLabel": "Kowaを知る",
-      "pillarsLabel": "私たちの強み",
+      "pillarsLabel": "取り扱い製品カテゴリー",
       "historyLinkLabel": "沿革を見る →",
-      "kpi": {
-        "yearsLabel": "創業からの年数",
-        "capitalLabel": "資本金",
-        "capitalValue": "5,000万円",
-        "linesLabel": "事業ライン数"
+      "categories": {
+        "plastics": "国内で収集した廃プラスチックを選別・破砕し、ジーピーポリマーの再生ラインでペレット化して輸出まで一貫して手がけています。",
+        "generalGoods": "プラスチック事業と同じ貿易・物流ネットワークを通じて、日用品・雑貨などの国際調達と流通を行っています。",
+        "foods": "食品関連品の取引を、他事業と同様の確かな調達管理と出荷手配で支援しています。",
+        "ffe": "家具・什器・設備（FFE）を法人・産業向けに調達・供給しています。",
+        "timber": "政府許可のもと計画伐採されたミャンマー産原木を、ヤンゴンの提携工場で製材した無垢チークフローリングを直輸入しています。"
       }
-    },
-    "values": {
-      "display": "TO RESOURCES AGAIN",
-      "subtitle": "私たちの約束",
-      "statement": "プラスチックリサイクル事業を通じて社会に貢献します。",
-      "ctaLabel": "事業を見る"
     }
   },
   "businessPage": {

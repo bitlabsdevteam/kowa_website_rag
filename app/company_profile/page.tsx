@@ -1,10 +1,24 @@
 'use client';
 
+import Image from 'next/image';
+
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { SITE_COPY } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
+
+/** Gunma factory exterior — the G.P. Polymer regeneration line site. Bilingual
+ * caption shown regardless of UI locale, matching the COMPANY_FACTS pattern. */
+const FACTORY_PHOTO = {
+  src: '/images/company/kowa-gunma-factory-exterior.jpg',
+  jaEyebrow: '生産拠点',
+  enEyebrow: 'Production Site',
+  jaTitle: '群馬工場',
+  enTitle: 'Gunma Factory',
+  jaCaption: 'ジーピーポリマー株式会社の再生ラインを擁する、資源循環の現場。',
+  enCaption: 'Home to the G.P. Polymer regeneration line — where collected material re-enters Kowa’s circular supply.',
+};
 
 /** Core corporate facts, shown bilingually (JA / EN) regardless of UI locale. */
 const COMPANY_FACTS = [
@@ -46,6 +60,41 @@ export default function CompanyProfilePage() {
           <span className="eyebrow">{copy.menu.companyProfile}</span>
           <h1 className="page-title company-profile-title">{copy.brand.name}</h1>
         </div>
+
+        <ScrollReveal variant="fade-up">
+          <figure className="cp-factory" data-testid="company-profile-factory">
+            <div className="cp-factory-frame">
+              <Image
+                src={FACTORY_PHOTO.src}
+                alt={`${FACTORY_PHOTO.enTitle} exterior`}
+                fill
+                sizes="(max-width: 860px) 100vw, 860px"
+                className="cp-factory-image"
+                priority={false}
+              />
+              <div className="cp-factory-scrim" aria-hidden="true" />
+              <figcaption className="cp-factory-caption">
+                <span className="cp-factory-eyebrow">
+                  <span lang="ja">{FACTORY_PHOTO.jaEyebrow}</span>
+                  <span className="cp-factory-eyebrow-divider" aria-hidden="true" />
+                  <span lang="en">{FACTORY_PHOTO.enEyebrow}</span>
+                </span>
+                <span className="cp-factory-title" lang="ja">
+                  {FACTORY_PHOTO.jaTitle}
+                </span>
+                <span className="cp-factory-title cp-factory-title--en" lang="en">
+                  {FACTORY_PHOTO.enTitle}
+                </span>
+              </figcaption>
+            </div>
+            <p className="cp-factory-caption-body">
+              <span lang="ja">{FACTORY_PHOTO.jaCaption}</span>
+              <span className="cp-factory-caption-en" lang="en">
+                {FACTORY_PHOTO.enCaption}
+              </span>
+            </p>
+          </figure>
+        </ScrollReveal>
 
         <ScrollReveal variant="fade-up">
           <dl className="company-profile-facts">

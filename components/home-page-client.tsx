@@ -3,14 +3,11 @@
 import { useEffect } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { HomeAbout } from '@/components/home/home-about';
 import { HomeBusinessGrid } from '@/components/home/home-business-grid';
-import { HomeNews } from '@/components/home/home-news';
-import { HomeValues } from '@/components/home/home-values';
+import { HomeWhatWeDo } from '@/components/home/home-what-we-do';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { HeroSection } from '@/components/ui/hero-section-2';
 import { TopMenu } from '@/components/top-menu';
-import type { NewsArticle } from '@/lib/news/types';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
@@ -39,11 +36,7 @@ const HOME_UI: Record<
   },
 };
 
-type HomePageClientProps = {
-  initialArticles: NewsArticle[];
-};
-
-export function HomePageClient({ initialArticles }: HomePageClientProps) {
+export function HomePageClient() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
@@ -86,20 +79,12 @@ export function HomePageClient({ initialArticles }: HomePageClientProps) {
         backgroundImage="/hero-recycling.svg"
       />
 
-      <ScrollReveal variant="fade-up" testId="reveal-home-news">
-        <HomeNews locale={locale} copy={copy} articles={initialArticles} />
-      </ScrollReveal>
-
       <ScrollReveal variant="fade-up" testId="reveal-business-head">
         <HomeBusinessGrid locale={locale} copy={copy} />
       </ScrollReveal>
 
       <ScrollReveal variant="fade-up" testId="reveal-home-about">
-        <HomeAbout copy={copy} locale={locale} />
-      </ScrollReveal>
-
-      <ScrollReveal variant="fade-up" testId="reveal-home-values">
-        <HomeValues copy={copy} />
+        <HomeWhatWeDo copy={copy} />
       </ScrollReveal>
 
       <LocalizedFooter copy={copy} />

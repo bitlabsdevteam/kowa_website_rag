@@ -13,6 +13,14 @@ import { PRODUCT_FAMILY_COPY } from '@/lib/product-showcase-copy';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
+/** Families photographed per top-level category. Categories absent from this
+ * map have no grounded photography yet and render the "catalog in
+ * preparation" empty state instead of fabricated products. */
+const CATEGORY_FAMILIES: Partial<Record<ProductTopCategory, ProductFamily[]>> = {
+  plastics: ['cd-pcn', 'gpps', 'ps-recycle'],
+  timber: ['myanmar-teak'],
+};
+
 /** Maps a top-category id to its camelCase key in copy.products.categories.tabs. */
 const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' | 'foods' | 'ffe' | 'timber'> = {
   plastics: 'plastics',
@@ -50,17 +58,17 @@ function ProductsPageContent() {
     isProductTopCategory(requestedCategory) ? requestedCategory : 'plastics',
   );
 
-  // One card per product family. The card face shows the clean loose-pellet
-  // photo (the "pile" view), with just the product name shown below. Only the
-  // Plastics category has photographed products today; the other categories
-  // are defined as tabs but have no grounded photography yet (see
+  // One card per product family. The card face shows the clean "pile" view
+  // photo, with just the product name shown below. Plastics and Timber have
+  // grounded photography today (see CATEGORY_FAMILIES above); the remaining
+  // categories are defined as tabs but have no grounded photography yet (see
   // lib/product-media.ts — PRODUCT_FAMILY_TOP_CATEGORY), so they render an
   // honest "catalog in preparation" state instead of fabricated products.
   const cards = useMemo<CardItem[]>(() => {
-    if (activeCategory !== 'plastics') return [];
+    const order = CATEGORY_FAMILIES[activeCategory];
+    if (!order) return [];
 
     const families = PRODUCT_FAMILY_COPY[locale];
-    const order: ProductFamily[] = ['cd-pcn', 'gpps', 'ps-recycle'];
 
     return order.map((familyKey) => {
       const family = families[familyKey];
