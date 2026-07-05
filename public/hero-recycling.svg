@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Plastics recycling — chasing-arrows symbol over resin pellets and recyclable bottles">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kowa's resource-circulation business: a rotating recycling symbol at the center of one circular supply, orbited by three business lanes — resin procurement, plant machinery, and battery-pack support">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#1d5a3a"/>
@@ -14,7 +14,8 @@
       <stop offset="1" stop-color="#9ed7ba"/>
     </linearGradient>
 
-    <!-- One chasing arrow; rotated three times to build the recycling symbol. -->
+    <!-- One chasing arrow; rotated three times to build the recycling symbol
+         at the hub — "one circular supply" that unifies the three lanes. -->
     <path id="arrow" d="M259.05 418.7
       A150 150 0 0 1 506.07 363.93
       L518.8 351.2
@@ -23,30 +24,70 @@
       L483.44 386.56
       A118 118 0 0 0 289.1 429.6 Z" fill="url(#arrowFill)"/>
 
-    <!-- Recyclable plastic bottle silhouette. -->
-    <path id="bottle" d="M-13 -75 L13 -75 L13 -65 L18 -60
-      Q22 -56 22 -48 L22 60 Q22 75 7 75 L-7 75
-      Q-22 75 -22 60 L-22 -48 Q-22 -56 -18 -60 L-13 -65 Z"/>
+    <!-- Resin drum — synthetic-resin procurement & distribution lane. -->
+    <path id="drum" d="M-15 -32 Q-15 -38 0 -38 Q15 -38 15 -32 L15 32 Q15 38 0 38 Q-15 38 -15 32 Z
+      M-15 -9 Q0 -4 15 -9 M-15 9 Q0 14 15 9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Battery-pack module — battery-pack support & processing-line lane. -->
+    <path id="battery" d="M-19 -24 L19 -24 L19 24 L-19 24 Z M-7 -24 L-7 -30 L7 -30 L7 -24
+      M0 -9 L0 9 M-9 0 L9 0" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+
+    <!-- Industrial gear — plant machinery & processing-line readiness lane. -->
+    <path id="gear" d="M0 -22 L4.5 -22 L6 -15.5 L12 -13.3 L17 -17.7 L20.7 -14 L16.3 -9 L18.5 -3 L25 -1.5 L25 3 L18.5 4.5 L16.3 10.5 L20.7 15.5 L17 19.2 L12 14.8 L6 17 L4.5 23.5 L0 23.5 L-1.5 17 L-7.5 14.8 L-12.5 19.2 L-16.2 15.5 L-11.8 10.5 L-14 4.5 L-20.5 3 L-20.5 -1.5 L-14 -3 L-11.8 -9 L-16.2 -14 L-12.5 -17.7 L-7.5 -13.3 L-1.5 -15.5 Z
+      M0 -7.5 A7.5 7.5 0 1 0 0.1 -7.5 Z" fill="none" stroke-linejoin="round"/>
+
+    <!-- Reusable lane badge: soft glass disc that frames each business-lane icon. -->
+    <circle id="badge-disc" r="46" fill="rgba(244,241,234,0.07)" stroke="#f4f1ea" stroke-opacity="0.32" stroke-width="1.5"/>
   </defs>
 
   <rect width="800" height="1000" fill="url(#bg)"/>
   <rect width="800" height="1000" fill="url(#glow)"/>
 
-  <!-- faint recyclable-bottle silhouettes in the field -->
-  <g fill="none" stroke="#f4f1ea" stroke-opacity="0.1" stroke-width="2.5">
-    <use href="#bottle" transform="translate(155 215) scale(1.05) rotate(-14)"/>
-    <use href="#bottle" transform="translate(660 760) scale(0.9) rotate(18)"/>
-    <use href="#bottle" transform="translate(120 800) scale(0.7) rotate(8)"/>
+  <!-- faint recyclable-bottle silhouettes for atmosphere -->
+  <g fill="none" stroke="#f4f1ea" stroke-opacity="0.08" stroke-width="2.5">
+    <path d="M-13 -75 L13 -75 L13 -65 L18 -60 Q22 -56 22 -48 L22 60 Q22 75 7 75 L-7 75 Q-22 75 -22 60 L-22 -48 Q-22 -56 -18 -60 L-13 -65 Z" transform="translate(670 90) scale(0.6) rotate(-10)"/>
+    <path d="M-13 -75 L13 -75 L13 -65 L18 -60 Q22 -56 22 -48 L22 60 Q22 75 7 75 L-7 75 Q-22 75 -22 60 L-22 -48 Q-22 -56 -18 -60 L-13 -65 Z" transform="translate(210 900) scale(0.55) rotate(12)"/>
   </g>
 
-  <!-- faint concentric circulation rings -->
-  <g fill="none" stroke="#f4f1ea" stroke-opacity="0.08">
-    <circle cx="400" cy="470" r="222" stroke-width="1.5"/>
-    <circle cx="400" cy="470" r="300" stroke-width="1"/>
+  <!-- orbit ring: the path the three lanes travel around the circulation hub -->
+  <circle cx="400" cy="470" r="300" fill="none" stroke="#f4f1ea" stroke-opacity="0.16" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <circle cx="400" cy="470" r="222" fill="none" stroke="#f4f1ea" stroke-opacity="0.09" stroke-width="1"/>
+
+  <!-- spokes connecting the circulation hub to each business-lane badge -->
+  <g stroke="#f4f1ea" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round">
+    <line x1="400" y1="470" x2="478" y2="180"/>
+    <line x1="400" y1="470" x2="682" y2="573"/>
+    <line x1="400" y1="470" x2="348" y2="765"/>
   </g>
 
-  <!-- recycling symbol: three chasing arrows (Mobius triskelion) -->
+  <!-- lane 1: resin procurement & distribution -->
+  <g transform="translate(478 180)">
+    <use href="#badge-disc"/>
+    <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="3">
+      <use href="#drum"/>
+    </g>
+  </g>
+
+  <!-- lane 2: plant machinery & processing-line operations -->
+  <g transform="translate(682 573)">
+    <use href="#badge-disc"/>
+    <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="2.6">
+      <use href="#gear"/>
+    </g>
+  </g>
+
+  <!-- lane 3: battery-pack support -->
+  <g transform="translate(348 765)">
+    <use href="#badge-disc"/>
+    <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="3">
+      <use href="#battery"/>
+    </g>
+  </g>
+
+  <!-- circulation hub: three chasing arrows (Mobius triskelion), slowly
+       rotating to read as a living circulation, not a static badge. -->
   <g>
+    <animateTransform attributeName="transform" type="rotate" from="0 400 470" to="360 400 470" dur="90s" repeatCount="indefinite"/>
     <use href="#arrow"/>
     <use href="#arrow" transform="rotate(120 400 470)"/>
     <use href="#arrow" transform="rotate(240 400 470)"/>
@@ -56,16 +97,22 @@
   <circle cx="400" cy="470" r="58" fill="none" stroke="#f4f1ea" stroke-opacity="0.22" stroke-width="2"/>
   <text x="400" y="484" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="700" fill="#f4f1ea" fill-opacity="0.9">07</text>
 
-  <!-- drifting resin pellets -->
+  <!-- drifting resin pellets, gently pulsing to suggest continuous motion -->
   <g fill="#f4f1ea">
-    <ellipse cx="690" cy="250" rx="11" ry="7" transform="rotate(-28 690 250)" opacity="0.8"/>
-    <ellipse cx="250" cy="900" rx="12" ry="7.5" transform="rotate(14 250 900)" opacity="0.7"/>
+    <ellipse cx="690" cy="250" rx="11" ry="7" transform="rotate(-28 690 250)" opacity="0.8">
+      <animate attributeName="opacity" values="0.5;0.85;0.5" dur="5s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="250" cy="900" rx="12" ry="7.5" transform="rotate(14 250 900)" opacity="0.7">
+      <animate attributeName="opacity" values="0.45;0.75;0.45" dur="6.5s" repeatCount="indefinite"/>
+    </ellipse>
     <ellipse cx="610" cy="120" rx="9" ry="5.5" transform="rotate(-20 610 120)" opacity="0.55"/>
     <ellipse cx="700" cy="880" rx="10" ry="6" transform="rotate(36 700 880)" opacity="0.6"/>
   </g>
   <g fill="#8fd6ac">
     <ellipse cx="120" cy="430" rx="9" ry="6" transform="rotate(18 120 430)" opacity="0.7"/>
-    <ellipse cx="650" cy="560" rx="10" ry="6.5" transform="rotate(-24 650 560)" opacity="0.6"/>
+    <ellipse cx="580" cy="700" rx="10" ry="6.5" transform="rotate(-24 580 700)" opacity="0.6">
+      <animate attributeName="opacity" values="0.4;0.7;0.4" dur="7s" repeatCount="indefinite"/>
+    </ellipse>
     <ellipse cx="180" cy="600" rx="8" ry="5" transform="rotate(8 180 600)" opacity="0.55"/>
     <ellipse cx="560" cy="930" rx="9" ry="6" transform="rotate(-12 560 930)" opacity="0.5"/>
   </g>
