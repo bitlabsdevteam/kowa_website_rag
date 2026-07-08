@@ -11,7 +11,7 @@ import { SITE_COPY } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
 /** One representative photograph per business lane (see lib/product-showcase-copy.ts chapters). */
-const SEGMENT_IMAGES = ['/images/products/gpps-pellet-lot.jpg', '/images/products/pe-crushing.jpg', '/images/products/mixer-machine.jpg'];
+const SEGMENT_IMAGES = ['/images/products/gpps-pellet-1.jpg', '/images/products/pp-crushed-1.jpg', '/images/products/mixer-machine.jpg'];
 
 /** Categories that lead to the machinery catalog rather than the product gallery. */
 const MACHINE_LINKED_CATEGORIES: ProductMediaCategory[] = ['machinery-equipment', 'factory-operations'];

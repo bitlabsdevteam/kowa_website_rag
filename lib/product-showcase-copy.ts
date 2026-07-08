@@ -104,6 +104,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['Solid, single-species teak', 'JAS-equivalent factory inspection', 'F☆☆☆☆ formaldehyde-free certified'],
         accent: 'amber',
       },
+      'general-goods': {
+        label: 'General goods',
+        eyebrow: 'Trade lane',
+        summary: 'Assorted general merchandise handled through Kowa’s trading network alongside its core resin and timber lines.',
+        points: ['Assorted merchandise sourcing', 'Trade-network distribution', 'General import/export handling'],
+        accent: 'mist',
+      },
     },
   },
   ja: {
@@ -182,6 +189,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['単一樹種の無垢材', 'JAS規格に準じた工場検査', 'F☆☆☆☆ ホルムアルデヒド対応認定'],
         accent: 'amber',
       },
+      'general-goods': {
+        label: '雑貨',
+        eyebrow: 'トレードレーン',
+        summary: '樹脂・木材の主力事業に加え、Kowaの貿易ネットワークで扱う各種一般貨物。',
+        points: ['各種商材の調達', 'トレードネットワークでの流通', '輸出入ハンドリング'],
+        accent: 'mist',
+      },
     },
   },
   'zh-Hans': {
@@ -258,6 +272,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         summary: '在政府许可下计划采伐的缅甸柚木，经仰光合作工厂加工制成后直接进口的实木地板。',
         points: ['单一树种实木材质', '符合 JAS 标准的工厂检验', 'F☆☆☆☆ 无醛认证'],
         accent: 'amber',
+      },
+      'general-goods': {
+        label: '日用杂货',
+        eyebrow: '商贸通道',
+        summary: '在树脂与木材主业之外，Kowa 贸易网络所经手的各类一般商品。',
+        points: ['各类商品采购', '贸易网络分销', '进出口处理'],
+        accent: 'mist',
       },
     },
   },
@@ -336,6 +357,13 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
         points: ['單一樹種實木材質', '符合 JAS 標準的工廠檢驗', 'F☆☆☆☆ 無醛認證'],
         accent: 'amber',
       },
+      'general-goods': {
+        label: '日用雜貨',
+        eyebrow: '商貿通道',
+        summary: '在樹脂與木材主業之外，Kowa 貿易網絡所經手的各類一般商品。',
+        points: ['各類商品採購', '貿易網絡分銷', '進出口處理'],
+        accent: 'mist',
+      },
     },
   },
 };
@@ -355,26 +383,88 @@ type ProductFamilyCopy = {
 
 export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFamilyCopy>> = {
   en: {
-    'cd-pcn': {
-      title: 'CD-PCN Recycled Polycarbonate',
-      material: 'Recycled polycarbonate (PC)',
+    'abs-crushed': {
+      title: 'ABS Crushed Scrap',
+      material: 'Crushed acrylonitrile butadiene styrene (ABS)',
       summary:
-        'Water-clear polycarbonate reclaimed from optical-disc-grade stock (CD / PC-N, B-off lots). The transparent, cleanly diced granules are sorted and regenerated into a consistent, high-clarity feed for injection and extrusion.',
-      points: ['Optical-disc PC origin (CD / PC-N)', 'Transparent, uniform diced cut', 'B-off reclaimed, regeneration-ready'],
+        'Post-industrial ABS scrap sorted and crushed into a reusable feedstock, an early-stage output of Kowa’s collection-to-regeneration recycling flow.',
+      points: ['Sorted by resin type', 'Crushed, regeneration-ready feedstock', 'Circular, resource-recovery sourced'],
     },
-    gpps: {
-      title: 'GPPS Pellet — Natural (NCL)',
+    'hdpe-crushed': {
+      title: 'HDPE Crushed Scrap',
+      material: 'Crushed high-density polyethylene (HDPE)',
+      summary:
+        'Recovered HDPE scrap sorted and crushed into a reusable feedstock ahead of pellet regeneration, handled through Kowa’s circular sort-and-process flow.',
+      points: ['Sorted by resin type', 'Crushed, regeneration-ready feedstock', 'Circular, resource-recovery sourced'],
+    },
+    'hips-crushed': {
+      title: 'HIPS Crushed Scrap',
+      material: 'Crushed high-impact polystyrene (HIPS)',
+      summary:
+        'Recovered HIPS scrap sorted and crushed into a reusable feedstock ahead of pellet regeneration, handled through Kowa’s circular sort-and-process flow.',
+      points: ['Sorted by resin type', 'Crushed, regeneration-ready feedstock', 'Circular, resource-recovery sourced'],
+    },
+    'pp-crushed': {
+      title: 'PP Crushed Scrap',
+      material: 'Crushed polypropylene (PP)',
+      summary:
+        'Recovered PP scrap sorted and crushed into a reusable feedstock ahead of pellet regeneration, handled through Kowa’s circular sort-and-process flow.',
+      points: ['Sorted by resin type', 'Crushed, regeneration-ready feedstock', 'Circular, resource-recovery sourced'],
+    },
+    'gpps-pellet': {
+      title: 'GPPS Regenerated Pellet',
       material: 'General-purpose polystyrene (GPPS)',
       summary:
-        'Glass-clear general-purpose polystyrene in its natural, uncoloured grade (NCL). Rigid, fully transparent pellets supplied in bulk multi-tonne lots for clarity-critical moulding and sheet applications.',
-      points: ['Natural / colourless (NCL) grade', 'High clarity, rigid GPPS', 'Bulk multi-tonne lot supply'],
+        'Recovered GPPS refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
     },
-    'ps-recycle': {
-      title: 'Recycled Polystyrene — White',
-      material: 'Recycled polystyrene (PS)',
+    'hdpe-pellet': {
+      title: 'HDPE Regenerated Pellet',
+      material: 'High-density polyethylene (HDPE)',
       summary:
-        'Opaque white polystyrene regenerated from reclaimed bobbin/spool stock. Cylindrical pellets recovered through Kowa’s circular sort-and-regenerate flow, offering a cost-effective PS supply for general moulding.',
-      points: ['Reclaimed from bobbin / spool PS', 'Regenerated opaque-white pellet', 'Circular, resource-recovery sourced'],
+        'Recovered HDPE refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'pc-pellet': {
+      title: 'PC Regenerated Pellet',
+      material: 'Polycarbonate (PC)',
+      summary:
+        'Recovered polycarbonate refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'pcr-pellet': {
+      title: 'PCR Regenerated Pellet',
+      material: 'Post-consumer recycled resin (PCR)',
+      summary:
+        'Post-consumer recycled resin refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'pir-pellet': {
+      title: 'PIR Regenerated Pellet',
+      material: 'Post-industrial recycled resin (PIR)',
+      summary:
+        'Post-industrial recycled resin refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'pp-pellet': {
+      title: 'PP Regenerated Pellet',
+      material: 'Polypropylene (PP)',
+      summary:
+        'Recovered PP refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'ps-pellet': {
+      title: 'PS Regenerated Pellet',
+      material: 'Polystyrene (PS)',
+      summary:
+        'Recovered PS refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
+      points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
+    },
+    'general-goods-assorted': {
+      title: 'General Goods',
+      material: 'Assorted general merchandise',
+      summary: 'Assorted general merchandise handled through Kowa’s trading network alongside its core resin and timber lines.',
+      points: ['Assorted merchandise sourcing', 'Trade-network distribution', 'General import/export handling'],
     },
     'myanmar-teak': {
       title: 'Myanmar Teak Solid Flooring',
@@ -387,28 +477,103 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         'F☆☆☆☆ formaldehyde-free certified (MLIT-recognised test)',
       ],
     },
+    'wood-flooring-office': {
+      title: 'Wood Flooring — Office Installation',
+      material: 'Hardwood flooring',
+      summary: 'Installation photograph from Kowa’s timber product line, showing hardwood flooring laid in an office meeting space.',
+      points: ['Installed hardwood flooring', 'Office application', 'Timber product line photography'],
+    },
+    'wood-flooring-bedroom': {
+      title: 'Wood Flooring — Bedroom Installation',
+      material: 'Hardwood flooring',
+      summary: 'Installation photograph from Kowa’s timber product line, showing hardwood flooring laid in a bedroom.',
+      points: ['Installed hardwood flooring', 'Residential application', 'Timber product line photography'],
+    },
+    'wood-flooring-living-room': {
+      title: 'Wood Flooring — Living Room Installation',
+      material: 'Hardwood flooring',
+      summary: 'Installation photograph from Kowa’s timber product line, showing hardwood flooring laid in a living room.',
+      points: ['Installed hardwood flooring', 'Residential application', 'Timber product line photography'],
+    },
+    'wood-flooring-deck': {
+      title: 'Wood Flooring — Outdoor Deck Installation',
+      material: 'Outdoor hardwood decking',
+      summary: 'Installation photograph from Kowa’s timber product line, showing hardwood decking laid on an outdoor terrace.',
+      points: ['Installed hardwood decking', 'Outdoor application', 'Timber product line photography'],
+    },
   },
   ja: {
-    'cd-pcn': {
-      title: 'CD-PCN 再生ポリカーボネート',
-      material: '再生ポリカーボネート（PC）',
-      summary:
-        '光ディスクグレード（CD／PC-N、B-off ロット）から回収した透明度の高いポリカーボネート。クリアで均一にカットされたペレットを選別・再生し、射出・押出に向けた安定供給材に仕上げています。',
-      points: ['光ディスク由来 PC（CD／PC-N）', '透明・均一なダイスカット', 'B-off 回収、再生対応'],
+    'abs-crushed': {
+      title: 'ABS 破砕スクラップ',
+      material: '破砕 ABS（アクリロニトリルブタジエンスチレン）',
+      summary: '選別・破砕された ABS スクラップ。Kowa の回収から再生までの循環フローにおける初期工程のアウトプットです。',
+      points: ['樹脂別に選別', '再生対応の破砕原料', '循環型の資源回収由来'],
     },
-    gpps: {
-      title: 'GPPS ペレット — ナチュラル（NCL）',
+    'hdpe-crushed': {
+      title: 'HDPE 破砕スクラップ',
+      material: '破砕 HDPE（高密度ポリエチレン）',
+      summary: '選別・破砕された HDPE スクラップ。Kowa の循環型の選別・処理フローで回収し、ペレット再生の前段階として扱います。',
+      points: ['樹脂別に選別', '再生対応の破砕原料', '循環型の資源回収由来'],
+    },
+    'hips-crushed': {
+      title: 'HIPS 破砕スクラップ',
+      material: '破砕 HIPS（耐衝撃性ポリスチレン）',
+      summary: '選別・破砕された HIPS スクラップ。Kowa の循環型の選別・処理フローで回収し、ペレット再生の前段階として扱います。',
+      points: ['樹脂別に選別', '再生対応の破砕原料', '循環型の資源回収由来'],
+    },
+    'pp-crushed': {
+      title: 'PP 破砕スクラップ',
+      material: '破砕 PP（ポリプロピレン）',
+      summary: '選別・破砕された PP スクラップ。Kowa の循環型の選別・処理フローで回収し、ペレット再生の前段階として扱います。',
+      points: ['樹脂別に選別', '再生対応の破砕原料', '循環型の資源回収由来'],
+    },
+    'gpps-pellet': {
+      title: 'GPPS 再生ペレット',
       material: '汎用ポリスチレン（GPPS）',
-      summary:
-        '無着色のナチュラルグレード（NCL）による、ガラスのように透明な汎用ポリスチレン。剛性が高く完全透明なペレットを、透明性が重視される成形・シート用途向けに大口ロットで供給します。',
-      points: ['ナチュラル／無着色（NCL）グレード', '高透明・高剛性の GPPS', '数トン単位の大口ロット供給'],
+      summary: '回収した GPPS を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
     },
-    'ps-recycle': {
-      title: '再生ポリスチレン — 白',
-      material: '再生ポリスチレン（PS）',
-      summary:
-        '回収したボビン（巻芯）材から再生した不透明な白色ポリスチレン。Kowa の循環型の選別・再生フローで回収した円柱状ペレットで、汎用成形向けに経済的な PS 供給を実現します。',
-      points: ['ボビン（巻芯）PS から回収', '再生・不透明白色ペレット', '循環型の資源回収由来'],
+    'hdpe-pellet': {
+      title: 'HDPE 再生ペレット',
+      material: '高密度ポリエチレン（HDPE）',
+      summary: '回収した HDPE を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'pc-pellet': {
+      title: 'PC 再生ペレット',
+      material: 'ポリカーボネート（PC）',
+      summary: '回収したポリカーボネートを Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'pcr-pellet': {
+      title: 'PCR 再生ペレット',
+      material: 'ポストコンシューマー再生樹脂（PCR）',
+      summary: '回収したポストコンシューマー樹脂を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'pir-pellet': {
+      title: 'PIR 再生ペレット',
+      material: 'ポストインダストリアル再生樹脂（PIR）',
+      summary: '回収したポストインダストリアル樹脂を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'pp-pellet': {
+      title: 'PP 再生ペレット',
+      material: 'ポリプロピレン（PP）',
+      summary: '回収した PP を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'ps-pellet': {
+      title: 'PS 再生ペレット',
+      material: 'ポリスチレン（PS）',
+      summary: '回収した PS を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
+      points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
+    },
+    'general-goods-assorted': {
+      title: '雑貨',
+      material: '各種一般貨物',
+      summary: '樹脂・木材の主力事業に加え、Kowaの貿易ネットワークで扱う各種一般貨物。',
+      points: ['各種商材の調達', 'トレードネットワークでの流通', '輸出入ハンドリング'],
     },
     'myanmar-teak': {
       title: 'ミャンマーチーク無垢フローリング',
@@ -421,28 +586,103 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         'F☆☆☆☆ 相当のホルムアルデヒド対応認定（国交省指定機関試験済み）',
       ],
     },
+    'wood-flooring-office': {
+      title: '木製フローリング — オフィス施工例',
+      material: '木製フローリング',
+      summary: 'Kowaの木材製品ラインより、オフィスの会議スペースに施工された木製フローリングの写真です。',
+      points: ['施工済み木製フローリング', 'オフィス向け施工例', '木材製品ラインの記録写真'],
+    },
+    'wood-flooring-bedroom': {
+      title: '木製フローリング — 寝室施工例',
+      material: '木製フローリング',
+      summary: 'Kowaの木材製品ラインより、寝室に施工された木製フローリングの写真です。',
+      points: ['施工済み木製フローリング', '住宅向け施工例', '木材製品ラインの記録写真'],
+    },
+    'wood-flooring-living-room': {
+      title: '木製フローリング — リビング施工例',
+      material: '木製フローリング',
+      summary: 'Kowaの木材製品ラインより、リビングルームに施工された木製フローリングの写真です。',
+      points: ['施工済み木製フローリング', '住宅向け施工例', '木材製品ラインの記録写真'],
+    },
+    'wood-flooring-deck': {
+      title: '木製フローリング — 屋外デッキ施工例',
+      material: '屋外用木製デッキ材',
+      summary: 'Kowaの木材製品ラインより、屋外テラスに施工された木製デッキ材の写真です。',
+      points: ['施工済み木製デッキ材', '屋外向け施工例', '木材製品ラインの記録写真'],
+    },
   },
   'zh-Hans': {
-    'cd-pcn': {
-      title: 'CD-PCN 再生聚碳酸酯',
-      material: '再生聚碳酸酯（PC）',
-      summary:
-        '由光盘级料源（CD／PC-N、B-off 批次）回收的高透明聚碳酸酯。透明、切粒均匀的颗粒经分拣与再生，成为可用于注塑与挤出的稳定高透明料。',
-      points: ['光盘级 PC 来源（CD／PC-N）', '透明、均匀的切粒', 'B-off 回收、可直接再生'],
+    'abs-crushed': {
+      title: 'ABS 破碎废料',
+      material: '破碎 ABS（丙烯腈丁二烯苯乙烯）',
+      summary: '经分拣、破碎的 ABS 废料，是 Kowa 从回收到再生循环流程中的早期阶段产出。',
+      points: ['按树脂类型分拣', '可直接再生的破碎原料', '循环资源回收来源'],
     },
-    gpps: {
-      title: 'GPPS 颗粒 — 本色（NCL）',
+    'hdpe-crushed': {
+      title: 'HDPE 破碎废料',
+      material: '破碎 HDPE（高密度聚乙烯）',
+      summary: '经分拣、破碎的 HDPE 废料，通过 Kowa 的循环分拣与处理流程回收，作为颗粒再生前段的原料。',
+      points: ['按树脂类型分拣', '可直接再生的破碎原料', '循环资源回收来源'],
+    },
+    'hips-crushed': {
+      title: 'HIPS 破碎废料',
+      material: '破碎 HIPS（高抗冲聚苯乙烯）',
+      summary: '经分拣、破碎的 HIPS 废料，通过 Kowa 的循环分拣与处理流程回收，作为颗粒再生前段的原料。',
+      points: ['按树脂类型分拣', '可直接再生的破碎原料', '循环资源回收来源'],
+    },
+    'pp-crushed': {
+      title: 'PP 破碎废料',
+      material: '破碎 PP（聚丙烯）',
+      summary: '经分拣、破碎的 PP 废料，通过 Kowa 的循环分拣与处理流程回收，作为颗粒再生前段的原料。',
+      points: ['按树脂类型分拣', '可直接再生的破碎原料', '循环资源回收来源'],
+    },
+    'gpps-pellet': {
+      title: 'GPPS 再生颗粒',
       material: '通用聚苯乙烯（GPPS）',
-      summary:
-        '本色、未着色等级（NCL）的玻璃般透明通用聚苯乙烯。刚性高、完全透明的颗粒以数吨级大批量供应，适用于对透明度要求高的成型与片材应用。',
-      points: ['本色／无色（NCL）等级', '高透明、高刚性 GPPS', '数吨级大批量供应'],
+      summary: '回收的 GPPS 经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
     },
-    'ps-recycle': {
-      title: '再生聚苯乙烯 — 白色',
-      material: '再生聚苯乙烯（PS）',
-      summary:
-        '由回收线轴（绕线管）料再生的不透明白色聚苯乙烯。通过 Kowa 的循环分拣与再生流程回收的圆柱状颗粒，为通用成型提供经济的 PS 供给。',
-      points: ['由线轴／绕线管 PS 回收', '再生不透明白色颗粒', '循环资源回收来源'],
+    'hdpe-pellet': {
+      title: 'HDPE 再生颗粒',
+      material: '高密度聚乙烯（HDPE）',
+      summary: '回收的 HDPE 经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'pc-pellet': {
+      title: 'PC 再生颗粒',
+      material: '聚碳酸酯（PC）',
+      summary: '回收的聚碳酸酯经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'pcr-pellet': {
+      title: 'PCR 再生颗粒',
+      material: '消费后再生树脂（PCR）',
+      summary: '回收的消费后再生树脂经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'pir-pellet': {
+      title: 'PIR 再生颗粒',
+      material: '工业后再生树脂（PIR）',
+      summary: '回收的工业后再生树脂经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'pp-pellet': {
+      title: 'PP 再生颗粒',
+      material: '聚丙烯（PP）',
+      summary: '回收的 PP 经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'ps-pellet': {
+      title: 'PS 再生颗粒',
+      material: '聚苯乙烯（PS）',
+      summary: '回收的 PS 经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
+      points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
+    },
+    'general-goods-assorted': {
+      title: '日用杂货',
+      material: '各类一般商品',
+      summary: '在树脂与木材主业之外，Kowa 贸易网络所经手的各类一般商品。',
+      points: ['各类商品采购', '贸易网络分销', '进出口处理'],
     },
     'myanmar-teak': {
       title: '缅甸柚木实木地板',
@@ -451,28 +691,103 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         '在政府许可下计划采伐的缅甸原木，经仰光合作工厂加工后直接进口的实木地板。不含甲醛的实木材质，可供应实木长板、指接材、集成材、LL45 隔音基材及 OA 地板块等多种规格。',
       points: ['单一树种本柚木（区别于人工林"绿柚木"）', '在合作企业技术指导下、符合 JAS 标准的工厂检验', 'F☆☆☆☆ 级无醛认证（经日本国土交通省指定机构检测）'],
     },
+    'wood-flooring-office': {
+      title: '木地板 — 办公室安装实例',
+      material: '实木地板',
+      summary: '来自 Kowa 木材产品线的安装照片，展示铺设于办公室会议空间的木地板。',
+      points: ['已安装实木地板', '办公室应用场景', '木材产品线实景照片'],
+    },
+    'wood-flooring-bedroom': {
+      title: '木地板 — 卧室安装实例',
+      material: '实木地板',
+      summary: '来自 Kowa 木材产品线的安装照片，展示铺设于卧室的木地板。',
+      points: ['已安装实木地板', '住宅应用场景', '木材产品线实景照片'],
+    },
+    'wood-flooring-living-room': {
+      title: '木地板 — 客厅安装实例',
+      material: '实木地板',
+      summary: '来自 Kowa 木材产品线的安装照片，展示铺设于客厅的木地板。',
+      points: ['已安装实木地板', '住宅应用场景', '木材产品线实景照片'],
+    },
+    'wood-flooring-deck': {
+      title: '木地板 — 户外露台安装实例',
+      material: '户外实木露台板',
+      summary: '来自 Kowa 木材产品线的安装照片，展示铺设于户外露台的木质地板材料。',
+      points: ['已安装户外露台板', '户外应用场景', '木材产品线实景照片'],
+    },
   },
   'zh-Hant': {
-    'cd-pcn': {
-      title: 'CD-PCN 再生聚碳酸酯',
-      material: '再生聚碳酸酯（PC）',
-      summary:
-        '由光盤級料源（CD／PC-N、B-off 批次）回收的高透明聚碳酸酯。透明、切粒均勻的顆粒經分揀與再生，成為可用於注塑與擠出的穩定高透明料。',
-      points: ['光盤級 PC 來源（CD／PC-N）', '透明、均勻的切粒', 'B-off 回收、可直接再生'],
+    'abs-crushed': {
+      title: 'ABS 破碎廢料',
+      material: '破碎 ABS（丙烯腈丁二烯苯乙烯）',
+      summary: '經分揀、破碎的 ABS 廢料，是 Kowa 從回收到再生循環流程中的早期階段產出。',
+      points: ['按樹脂類型分揀', '可直接再生的破碎原料', '循環資源回收來源'],
     },
-    gpps: {
-      title: 'GPPS 顆粒 — 本色（NCL）',
+    'hdpe-crushed': {
+      title: 'HDPE 破碎廢料',
+      material: '破碎 HDPE（高密度聚乙烯）',
+      summary: '經分揀、破碎的 HDPE 廢料，通過 Kowa 的循環分揀與處理流程回收，作為顆粒再生前段的原料。',
+      points: ['按樹脂類型分揀', '可直接再生的破碎原料', '循環資源回收來源'],
+    },
+    'hips-crushed': {
+      title: 'HIPS 破碎廢料',
+      material: '破碎 HIPS（高抗衝聚苯乙烯）',
+      summary: '經分揀、破碎的 HIPS 廢料，通過 Kowa 的循環分揀與處理流程回收，作為顆粒再生前段的原料。',
+      points: ['按樹脂類型分揀', '可直接再生的破碎原料', '循環資源回收來源'],
+    },
+    'pp-crushed': {
+      title: 'PP 破碎廢料',
+      material: '破碎 PP（聚丙烯）',
+      summary: '經分揀、破碎的 PP 廢料，通過 Kowa 的循環分揀與處理流程回收，作為顆粒再生前段的原料。',
+      points: ['按樹脂類型分揀', '可直接再生的破碎原料', '循環資源回收來源'],
+    },
+    'gpps-pellet': {
+      title: 'GPPS 再生顆粒',
       material: '通用聚苯乙烯（GPPS）',
-      summary:
-        '本色、未著色等級（NCL）的玻璃般透明通用聚苯乙烯。剛性高、完全透明的顆粒以數噸級大批量供應，適用於對透明度要求高的成型與片材應用。',
-      points: ['本色／無色（NCL）等級', '高透明、高剛性 GPPS', '數噸級大批量供應'],
+      summary: '回收的 GPPS 經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
     },
-    'ps-recycle': {
-      title: '再生聚苯乙烯 — 白色',
-      material: '再生聚苯乙烯（PS）',
-      summary:
-        '由回收線軸（繞線管）料再生的不透明白色聚苯乙烯。通過 Kowa 的循環分揀與再生流程回收的圓柱狀顆粒，為通用成型提供經濟的 PS 供給。',
-      points: ['由線軸／繞線管 PS 回收', '再生不透明白色顆粒', '循環資源回收來源'],
+    'hdpe-pellet': {
+      title: 'HDPE 再生顆粒',
+      material: '高密度聚乙烯（HDPE）',
+      summary: '回收的 HDPE 經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'pc-pellet': {
+      title: 'PC 再生顆粒',
+      material: '聚碳酸酯（PC）',
+      summary: '回收的聚碳酸酯經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'pcr-pellet': {
+      title: 'PCR 再生顆粒',
+      material: '消費後再生樹脂（PCR）',
+      summary: '回收的消費後再生樹脂經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'pir-pellet': {
+      title: 'PIR 再生顆粒',
+      material: '工業後再生樹脂（PIR）',
+      summary: '回收的工業後再生樹脂經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'pp-pellet': {
+      title: 'PP 再生顆粒',
+      material: '聚丙烯（PP）',
+      summary: '回收的 PP 經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'ps-pellet': {
+      title: 'PS 再生顆粒',
+      material: '聚苯乙烯（PS）',
+      summary: '回收的 PS 經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
+      points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
+    },
+    'general-goods-assorted': {
+      title: '日用雜貨',
+      material: '各類一般商品',
+      summary: '在樹脂與木材主業之外，Kowa 貿易網絡所經手的各類一般商品。',
+      points: ['各類商品採購', '貿易網絡分銷', '進出口處理'],
     },
     'myanmar-teak': {
       title: '緬甸柚木實木地板',
@@ -481,13 +796,37 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         '在政府許可下計畫採伐的緬甸原木，經仰光合作工廠加工後直接進口的實木地板。不含甲醛的實木材質，可供應實木長板、指接材、集成材、LL45 隔音基材及 OA 地板塊等多種規格。',
       points: ['單一樹種本柚木（區別於人工林「綠柚木」）', '在合作企業技術指導下、符合 JAS 標準的工廠檢驗', 'F☆☆☆☆ 級無醛認證（經日本國土交通省指定機構檢測）'],
     },
+    'wood-flooring-office': {
+      title: '木地板 — 辦公室安裝實例',
+      material: '實木地板',
+      summary: '來自 Kowa 木材產品線的安裝照片，展示鋪設於辦公室會議空間的木地板。',
+      points: ['已安裝實木地板', '辦公室應用場景', '木材產品線實景照片'],
+    },
+    'wood-flooring-bedroom': {
+      title: '木地板 — 臥室安裝實例',
+      material: '實木地板',
+      summary: '來自 Kowa 木材產品線的安裝照片，展示鋪設於臥室的木地板。',
+      points: ['已安裝實木地板', '住宅應用場景', '木材產品線實景照片'],
+    },
+    'wood-flooring-living-room': {
+      title: '木地板 — 客廳安裝實例',
+      material: '實木地板',
+      summary: '來自 Kowa 木材產品線的安裝照片，展示鋪設於客廳的木地板。',
+      points: ['已安裝實木地板', '住宅應用場景', '木材產品線實景照片'],
+    },
+    'wood-flooring-deck': {
+      title: '木地板 — 戶外露台安裝實例',
+      material: '戶外實木露台板',
+      summary: '來自 Kowa 木材產品線的安裝照片，展示鋪設於戶外露台的木質地板材料。',
+      points: ['已安裝戶外露台板', '戶外應用場景', '木材產品線實景照片'],
+    },
   },
 };
 
 /** Short label distinguishing the three shots of each product family. */
 export const PRODUCT_VIEW_COPY: Record<Locale, Record<ProductView, string>> = {
-  en: { lot: 'Sealed lot', pile: 'Loose pellets', macro: 'Macro detail' },
-  ja: { lot: '出荷ロット', pile: 'バラ状ペレット', macro: '拡大ディテール' },
-  'zh-Hans': { lot: '出货批次', pile: '散装颗粒', macro: '微距细节' },
-  'zh-Hant': { lot: '出貨批次', pile: '散裝顆粒', macro: '微距細節' },
+  en: { lot: 'Sealed lot', pile: 'Loose pellets', macro: 'Macro detail', primary: 'Product view', detail: 'Detail shot' },
+  ja: { lot: '出荷ロット', pile: 'バラ状ペレット', macro: '拡大ディテール', primary: '製品ビュー', detail: 'ディテール' },
+  'zh-Hans': { lot: '出货批次', pile: '散装颗粒', macro: '微距细节', primary: '产品视图', detail: '细节图' },
+  'zh-Hant': { lot: '出貨批次', pile: '散裝顆粒', macro: '微距細節', primary: '產品視圖', detail: '細節圖' },
 };

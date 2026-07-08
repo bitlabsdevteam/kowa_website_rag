@@ -15,11 +15,27 @@ import { useLocale } from '@/lib/use-locale';
 
 /** Families photographed per top-level category. Categories absent from this
  * map have no grounded photography yet and render the "catalog in
- * preparation" empty state instead of fabricated products. */
+ * preparation" empty state instead of fabricated products. Plastics is
+ * further split into "crushed" / "pellet" sub-tabs — see
+ * `PLASTICS_FAMILIES_BY_FORM` below — so it's intentionally absent here. */
 const CATEGORY_FAMILIES: Partial<Record<ProductTopCategory, ProductFamily[]>> = {
-  plastics: ['cd-pcn', 'gpps', 'ps-recycle'],
-  timber: ['myanmar-teak'],
+  'general-goods': ['general-goods-assorted'],
+  timber: ['myanmar-teak', 'wood-flooring-office', 'wood-flooring-bedroom', 'wood-flooring-living-room', 'wood-flooring-deck'],
 };
+
+/** Plastics form — raw crushed scrap feedstock vs. regenerated pellet output. */
+type PlasticsForm = 'crushed' | 'pellet';
+
+const PLASTICS_FORM_ORDER: PlasticsForm[] = ['pellet', 'crushed'];
+
+const PLASTICS_FAMILIES_BY_FORM: Record<PlasticsForm, ProductFamily[]> = {
+  crushed: ['abs-crushed', 'hdpe-crushed', 'hips-crushed', 'pp-crushed'],
+  pellet: ['gpps-pellet', 'hdpe-pellet', 'pc-pellet', 'pcr-pellet', 'pir-pellet', 'pp-pellet', 'ps-pellet'],
+};
+
+function isPlasticsForm(value: string | null): value is PlasticsForm {
+  return value === 'crushed' || value === 'pellet';
+}
 
 /** Maps a top-category id to its camelCase key in copy.products.categories.tabs. */
 const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' | 'foods' | 'ffe' | 'timber'> = {
@@ -57,15 +73,20 @@ function ProductsPageContent() {
   const [activeCategory, setActiveCategory] = useState<ProductTopCategory>(
     isProductTopCategory(requestedCategory) ? requestedCategory : 'plastics',
   );
+  const requestedForm = searchParams.get('form');
+  const [activePlasticsForm, setActivePlasticsForm] = useState<PlasticsForm>(
+    isPlasticsForm(requestedForm) ? requestedForm : 'pellet',
+  );
 
-  // One card per product family. The card face shows the clean "pile" view
-  // photo, with just the product name shown below. Plastics and Timber have
-  // grounded photography today (see CATEGORY_FAMILIES above); the remaining
-  // categories are defined as tabs but have no grounded photography yet (see
+  // One card per product family. The card face shows the clean "primary"
+  // view photo, with just the product name shown below. Plastics, General
+  // Goods, and Timber have grounded photography today (see
+  // CATEGORY_FAMILIES / PLASTICS_FAMILIES_BY_FORM above); Foods and FFE are
+  // defined as tabs but have no grounded photography yet (see
   // lib/product-media.ts — PRODUCT_FAMILY_TOP_CATEGORY), so they render an
   // honest "catalog in preparation" state instead of fabricated products.
   const cards = useMemo<CardItem[]>(() => {
-    const order = CATEGORY_FAMILIES[activeCategory];
+    const order = activeCategory === 'plastics' ? PLASTICS_FAMILIES_BY_FORM[activePlasticsForm] : CATEGORY_FAMILIES[activeCategory];
     if (!order) return [];
 
     const families = PRODUCT_FAMILY_COPY[locale];
@@ -73,7 +94,7 @@ function ProductsPageContent() {
     return order.map((familyKey) => {
       const family = families[familyKey];
       const items = PRODUCT_MEDIA.filter((m) => m.family === familyKey);
-      const pile = items.find((m) => m.view === 'pile') ?? items[0];
+      const pile = items.find((m) => m.view === 'primary' || m.view === 'pile') ?? items[0];
 
       return {
         imgUrl: pile.src,
@@ -81,7 +102,7 @@ function ProductsPageContent() {
         title: family.title,
       };
     });
-  }, [locale, activeCategory]);
+  }, [locale, activeCategory, activePlasticsForm]);
 
   return (
     <main className="page shell">
@@ -111,9 +132,26 @@ function ProductsPageContent() {
           ))}
         </div>
 
+        {activeCategory === 'plastics' ? (
+          <div className="products-form-tabs" role="tablist" aria-label={copy.products.categories.plasticsForms.tabListAriaLabel}>
+            {PLASTICS_FORM_ORDER.map((form) => (
+              <button
+                key={form}
+                type="button"
+                role="tab"
+                aria-selected={activePlasticsForm === form}
+                className={`products-form-tab${activePlasticsForm === form ? ' is-active' : ''}`}
+                onClick={() => setActivePlasticsForm(form)}
+              >
+                {copy.products.categories.plasticsForms[form]}
+              </button>
+            ))}
+          </div>
+        ) : null}
+
         {cards.length > 0 ? (
           <CardFanCarousel
-            key={activeCategory}
+            key={activeCategory === 'plastics' ? `plastics-${activePlasticsForm}` : activeCategory}
             cards={cards}
             prevLabel={copy.products.carousel.prevAriaLabel}
             nextLabel={copy.products.carousel.nextAriaLabel}

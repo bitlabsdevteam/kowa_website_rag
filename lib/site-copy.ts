@@ -237,6 +237,12 @@ export type SiteCopy = {
         timber: string;
       };
       tabListAriaLabel: string;
+      /** Sub-tabs shown only within the Plastics top-category, splitting families by form. */
+      plasticsForms: {
+        pellet: string;
+        crushed: string;
+        tabListAriaLabel: string;
+      };
       empty: {
         title: string;
         body: string;

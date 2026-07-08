@@ -269,6 +269,11 @@
         "timber": "木材"
       },
       "tabListAriaLabel": "製品カテゴリーを選択",
+      "plasticsForms": {
+        "pellet": "ペレット",
+        "crushed": "破砕",
+        "tabListAriaLabel": "樹脂を形状で選択"
+      },
       "empty": {
         "title": "カタログ準備中",
         "body": "このカテゴリーの写真・詳細情報を準備しております。取扱状況や仕様についてはお問い合わせください。",
@@ -283,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "事業概要",
-            "href": "/business"
-          },
-          {
             "label": "製品",
             "href": "/products"
           },
           {
-            "label": "設備",
-            "href": "/machines"
-          },
-          {
-            "label": "営業窓口",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -308,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "ニュース",
-            "href": "/news"
-          },
-          {
-            "label": "アクセス",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "キャリア概要",
-            "href": "/company_profile"
-          },
-          {
-            "label": "採用問い合わせ",
-            "href": "/inquiry"
-          },
-          {
-            "label": "東京オフィス",
-            "href": "/access"
+            "label": "お問い合わせ",
+            "href": "/contact_us"
           }
         ]
       }

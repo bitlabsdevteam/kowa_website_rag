@@ -269,6 +269,11 @@
         "timber": "Timber / Lumber"
       },
       "tabListAriaLabel": "Browse product categories",
+      "plasticsForms": {
+        "pellet": "Pellet",
+        "crushed": "Crushed",
+        "tabListAriaLabel": "Browse plastics by form"
+      },
       "empty": {
         "title": "Catalog in preparation",
         "body": "We're preparing photography and details for this category. Contact our team for current availability and specifications.",
@@ -283,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "Business Overview",
-            "href": "/business"
-          },
-          {
             "label": "Products",
             "href": "/products"
           },
           {
-            "label": "Machines",
-            "href": "/machines"
-          },
-          {
-            "label": "Contact Sales",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -308,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "News",
-            "href": "/news"
-          },
-          {
-            "label": "Access",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "Career Overview",
-            "href": "/company_profile"
-          },
-          {
-            "label": "Open Inquiry",
-            "href": "/inquiry"
-          },
-          {
-            "label": "Tokyo Access",
-            "href": "/access"
+            "label": "Contact Us",
+            "href": "/contact_us"
           }
         ]
       }

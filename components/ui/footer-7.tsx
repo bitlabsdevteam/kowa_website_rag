@@ -89,26 +89,15 @@ const defaultSections: Footer7Section[] = [
   {
     title: 'For Business',
     links: [
-      { name: 'Business Overview', href: '/business' },
       { name: 'Products', href: '/products' },
-      { name: 'Machines', href: '/machines' },
-      { name: 'Contact Sales', href: '/inquiry' },
+      { name: 'G.E.T', href: 'https://www.greenecotec.co.jp/index.html' },
     ],
   },
   {
     title: 'Company',
     links: [
       { name: 'Company Profile', href: '/company_profile' },
-      { name: 'News', href: '/news' },
-      { name: 'Access', href: '/access' },
-    ],
-  },
-  {
-    title: 'Career',
-    links: [
-      { name: 'Career Overview', href: '/company_profile' },
-      { name: 'Open Inquiry', href: '/inquiry' },
-      { name: 'Tokyo Access', href: '/access' },
+      { name: 'Contact Us', href: '/contact_us' },
     ],
   },
 ];

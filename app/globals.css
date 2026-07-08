@@ -8833,6 +8833,39 @@ html:lang(en) .reference-section-title {
   font-weight: 600;
 }
 
+/* ── Plastics form sub-tabs — Pellet / Crushed switcher within Plastics ──── */
+.products-form-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 0 24px;
+}
+
+.products-form-tab {
+  padding: 6px 16px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.products-form-tab:hover,
+.products-form-tab:focus-visible {
+  color: var(--color-text);
+}
+
+.products-form-tab.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+  font-weight: 600;
+}
+
 .products-category-empty {
   display: grid;
   gap: 10px;

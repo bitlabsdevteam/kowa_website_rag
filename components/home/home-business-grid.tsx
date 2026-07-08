@@ -19,11 +19,12 @@ const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoo
   timber: 'timber',
 };
 
-/** Only Plastics and Timber have grounded photography today (see
- * lib/product-media.ts); the remaining lines render an honest text tile
+/** Only Plastics, General Goods, and Timber have grounded photography today
+ * (see lib/product-media.ts); Foods and FFE render an honest text tile
  * rather than a fabricated photo. */
 const CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
-  plastics: PRODUCT_MEDIA.find((m) => m.id === 'gpps-pile')?.src,
+  plastics: PRODUCT_MEDIA.find((m) => m.id === 'gpps-pellet-primary')?.src,
+  'general-goods': PRODUCT_MEDIA.find((m) => m.id === 'general-goods-primary')?.src,
   timber: PRODUCT_MEDIA.find((m) => m.id === 'myanmar-teak-pile')?.src,
 };
 

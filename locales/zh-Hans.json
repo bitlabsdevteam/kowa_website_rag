@@ -269,6 +269,11 @@
         "timber": "木材"
       },
       "tabListAriaLabel": "浏览产品分类",
+      "plasticsForms": {
+        "pellet": "颗粒",
+        "crushed": "破碎",
+        "tabListAriaLabel": "按形态浏览塑料产品"
+      },
       "empty": {
         "title": "目录筹备中",
         "body": "我们正在为该分类准备图片与详细资料，如需了解现有供应情况与规格，请联系我们。",
@@ -283,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "业务概览",
-            "href": "/business"
-          },
-          {
             "label": "产品",
             "href": "/products"
           },
           {
-            "label": "设备",
-            "href": "/machines"
-          },
-          {
-            "label": "联系销售",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -308,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "新闻",
-            "href": "/news"
-          },
-          {
-            "label": "联系地址",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "职业概览",
-            "href": "/company_profile"
-          },
-          {
-            "label": "招聘咨询",
-            "href": "/inquiry"
-          },
-          {
-            "label": "东京办公室",
-            "href": "/access"
+            "label": "联系我们",
+            "href": "/contact_us"
           }
         ]
       }
