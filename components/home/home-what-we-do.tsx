@@ -48,9 +48,6 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
           <Link href="/company_profile" className="pillar-link">
             {copy.menu.companyProfile}
           </Link>
-          <Link href="/business" className="pillar-link">
-            {copy.home.business.display}
-          </Link>
           <Link href="/contact_us" className="pillar-link">
             {copy.menu.contactUs}
           </Link>
