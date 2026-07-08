@@ -24,7 +24,7 @@ const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoo
  * rather than a fabricated photo. */
 const CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
   plastics: PRODUCT_MEDIA.find((m) => m.id === 'gpps-pellet-primary')?.src,
-  'general-goods': PRODUCT_MEDIA.find((m) => m.id === 'general-goods-primary')?.src,
+  'general-goods': PRODUCT_MEDIA.find((m) => m.id === 'general-goods-moisture-charcoal-primary')?.src,
   timber: PRODUCT_MEDIA.find((m) => m.id === 'myanmar-teak-pile')?.src,
 };
 

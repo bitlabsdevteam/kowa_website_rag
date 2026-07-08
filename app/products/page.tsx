@@ -19,7 +19,7 @@ import { useLocale } from '@/lib/use-locale';
  * further split into "crushed" / "pellet" sub-tabs — see
  * `PLASTICS_FAMILIES_BY_FORM` below — so it's intentionally absent here. */
 const CATEGORY_FAMILIES: Partial<Record<ProductTopCategory, ProductFamily[]>> = {
-  'general-goods': ['general-goods-assorted'],
+  'general-goods': ['general-goods-moisture-charcoal', 'general-goods-canvas-tote'],
   timber: ['myanmar-teak', 'wood-flooring-office', 'wood-flooring-bedroom', 'wood-flooring-living-room', 'wood-flooring-deck'],
 };
 
