@@ -460,11 +460,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
         'Recovered PS refined into pellet-form output, ready for onward supply or blending through Kowa’s regeneration line.',
       points: ['Pellet-ready finishing', 'Consistent downstream supply', 'Regenerated material presentation'],
     },
-    'general-goods-assorted': {
-      title: 'General Goods',
-      material: 'Assorted general merchandise',
-      summary: 'Assorted general merchandise handled through Kowa’s trading network alongside its core resin and timber lines.',
-      points: ['Assorted merchandise sourcing', 'Trade-network distribution', 'General import/export handling'],
+    'general-goods-moisture-charcoal': {
+      title: 'Moisture-Control Charcoal',
+      material: 'High-temperature carbonized hardwood charcoal',
+      summary: 'Packaged humidity-control charcoal sachets, handled through Kowa’s trading network alongside its core resin and timber lines.',
+      points: ['Ready-packaged sachet format', 'Trade-network distribution', 'General import/export handling'],
+    },
+    'general-goods-canvas-tote': {
+      title: 'Canvas Tote Bag',
+      material: 'Woven canvas',
+      summary: 'Finished canvas tote bags, sourced and distributed through Kowa’s general-merchandise trading network.',
+      points: ['Finished-goods sourcing', 'Trade-network distribution', 'General import/export handling'],
     },
     'myanmar-teak': {
       title: 'Myanmar Teak Solid Flooring',
@@ -569,11 +575,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       summary: '回収した PS を Kowa の再生ラインでペレット形状へ仕上げ、次工程や供給に接続します。',
       points: ['ペレット向け仕上げ', '安定した下流供給', '再生材の見える化'],
     },
-    'general-goods-assorted': {
-      title: '雑貨',
-      material: '各種一般貨物',
-      summary: '樹脂・木材の主力事業に加え、Kowaの貿易ネットワークで扱う各種一般貨物。',
-      points: ['各種商材の調達', 'トレードネットワークでの流通', '輸出入ハンドリング'],
+    'general-goods-moisture-charcoal': {
+      title: '調湿木炭',
+      material: '高温炭化広葉樹炭',
+      summary: '樹脂・木材の主力事業に加え、Kowaの貿易ネットワークで扱う調湿用木炭パック。',
+      points: ['小分けパック仕様', 'トレードネットワークでの流通', '輸出入ハンドリング'],
+    },
+    'general-goods-canvas-tote': {
+      title: 'キャンバストートバッグ',
+      material: '帆布（キャンバス）',
+      summary: '樹脂・木材の主力事業に加え、Kowaの雑貨貿易ネットワークで扱うキャンバストートバッグ。',
+      points: ['完成品の調達', 'トレードネットワークでの流通', '輸出入ハンドリング'],
     },
     'myanmar-teak': {
       title: 'ミャンマーチーク無垢フローリング',
@@ -678,11 +690,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       summary: '回收的 PS 经 Kowa 再生产线整理为颗粒形态，衔接后续供应与混配。',
       points: ['颗粒化整理', '稳定下游供给', '再生材料展示'],
     },
-    'general-goods-assorted': {
-      title: '日用杂货',
-      material: '各类一般商品',
-      summary: '在树脂与木材主业之外，Kowa 贸易网络所经手的各类一般商品。',
-      points: ['各类商品采购', '贸易网络分销', '进出口处理'],
+    'general-goods-moisture-charcoal': {
+      title: '调湿木炭',
+      material: '高温炭化阔叶木炭',
+      summary: '在树脂与木材主业之外，Kowa 贸易网络所经手的调湿木炭包。',
+      points: ['小包装规格', '贸易网络分销', '进出口处理'],
+    },
+    'general-goods-canvas-tote': {
+      title: '帆布手提袋',
+      material: '帆布',
+      summary: '在树脂与木材主业之外，Kowa 杂货贸易网络所经手的帆布手提袋。',
+      points: ['成品采购', '贸易网络分销', '进出口处理'],
     },
     'myanmar-teak': {
       title: '缅甸柚木实木地板',
@@ -783,11 +801,17 @@ export const PRODUCT_FAMILY_COPY: Record<Locale, Record<ProductFamily, ProductFa
       summary: '回收的 PS 經 Kowa 再生產線整理為顆粒形態，銜接後續供應與混配。',
       points: ['顆粒化整理', '穩定下游供給', '再生材料展示'],
     },
-    'general-goods-assorted': {
-      title: '日用雜貨',
-      material: '各類一般商品',
-      summary: '在樹脂與木材主業之外，Kowa 貿易網絡所經手的各類一般商品。',
-      points: ['各類商品採購', '貿易網絡分銷', '進出口處理'],
+    'general-goods-moisture-charcoal': {
+      title: '調濕木炭',
+      material: '高溫炭化闊葉木炭',
+      summary: '在樹脂與木材主業之外，Kowa 貿易網絡所經手的調濕木炭包。',
+      points: ['小包裝規格', '貿易網絡分銷', '進出口處理'],
+    },
+    'general-goods-canvas-tote': {
+      title: '帆布手提袋',
+      material: '帆布',
+      summary: '在樹脂與木材主業之外，Kowa 雜貨貿易網絡所經手的帆布手提袋。',
+      points: ['成品採購', '貿易網絡分銷', '進出口處理'],
     },
     'myanmar-teak': {
       title: '緬甸柚木實木地板',

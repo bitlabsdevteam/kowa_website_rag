@@ -9,9 +9,6 @@ type HomeWhatWeDoProps = {
   copy: SiteCopy;
 };
 
-/** Kowa's founding year, per the verified company-profile timeline (companyProfile.timeline[0]). */
-const FOUNDING_YEAR = 1993;
-
 /** camelCase key shared by copy.products.categories.tabs and copy.home.whatWeDo.categories. */
 const CATEGORY_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' | 'foods' | 'ffe' | 'timber'> = {
   plastics: 'plastics',
@@ -24,7 +21,6 @@ const CATEGORY_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' 
 export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
   const ui = copy.home.whatWeDo;
   const tabs = copy.products.categories.tabs;
-  const milestoneCount = copy.companyProfile.timeline.length;
 
   return (
     <section id="home-about" className="home-about" aria-label={ui.display}>
@@ -47,10 +43,6 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
             );
           })}
         </div>
-
-        <Link href="/company_profile#timeline" className="about-history-link">
-          {FOUNDING_YEAR} · {milestoneCount} — {ui.historyLinkLabel}
-        </Link>
 
         <nav className="pillar-links" aria-label={ui.linksLabel}>
           <Link href="/company_profile" className="pillar-link">

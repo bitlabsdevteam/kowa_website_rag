@@ -21,7 +21,8 @@ export type ProductFamily =
   | 'pir-pellet'
   | 'pp-pellet'
   | 'ps-pellet'
-  | 'general-goods-assorted'
+  | 'general-goods-moisture-charcoal'
+  | 'general-goods-canvas-tote'
   | 'myanmar-teak'
   | 'wood-flooring-office'
   | 'wood-flooring-bedroom'
@@ -46,7 +47,8 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
   'pir-pellet': 'plastics',
   'pp-pellet': 'plastics',
   'ps-pellet': 'plastics',
-  'general-goods-assorted': 'general-goods',
+  'general-goods-moisture-charcoal': 'general-goods',
+  'general-goods-canvas-tote': 'general-goods',
   'myanmar-teak': 'timber',
   'wood-flooring-office': 'timber',
   'wood-flooring-bedroom': 'timber',
@@ -273,21 +275,24 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     src: '/images/products/ps-pellet-2.jpg',
     sourceFile: 'PS PELLET 1-2.jpg',
   },
+  // The two supplied general-goods photos show two distinct products (a
+  // moisture-control charcoal sachet and a canvas tote bag), not two views of
+  // one item — each gets its own family so both appear on the products page.
   {
-    id: 'general-goods-primary',
-    title: 'General Goods — Primary',
+    id: 'general-goods-moisture-charcoal-primary',
+    title: 'Moisture-Control Charcoal — Primary',
     category: 'general-goods',
-    family: 'general-goods-assorted',
+    family: 'general-goods-moisture-charcoal',
     view: 'primary',
     src: '/images/products/general-goods-1.jpg',
     sourceFile: 'General Goods1.jpg',
   },
   {
-    id: 'general-goods-detail',
-    title: 'General Goods — Detail',
+    id: 'general-goods-canvas-tote-primary',
+    title: 'Canvas Tote Bag — Primary',
     category: 'general-goods',
-    family: 'general-goods-assorted',
-    view: 'detail',
+    family: 'general-goods-canvas-tote',
+    view: 'primary',
     src: '/images/products/general-goods-2.jpg',
     sourceFile: 'General Goods2.jpg',
   },
