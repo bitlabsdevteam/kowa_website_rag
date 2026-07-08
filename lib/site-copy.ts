@@ -1,8 +1,9 @@
 import enCopy from '@/locales/en.json';
 import jaCopy from '@/locales/ja.json';
-import zhCopy from '@/locales/zh.json';
+import zhHansCopy from '@/locales/zh-Hans.json';
+import zhHantCopy from '@/locales/zh-Hant.json';
 
-export type Locale = 'en' | 'ja' | 'zh';
+export type Locale = 'en' | 'ja' | 'zh-Hans' | 'zh-Hant';
 
 export type MenuLabels = {
   about: string;
@@ -21,7 +22,8 @@ export type MenuLabels = {
   localeOptions: {
     en: string;
     ja: string;
-    zh: string;
+    zhHans: string;
+    zhHant: string;
   };
 };
 
@@ -110,6 +112,54 @@ type ContactPageSection = {
   }>;
 };
 
+type PageHeaderCrumbLabels = {
+  breadcrumbAria: string;
+  breadcrumbHome: string;
+};
+
+type HomeSections = {
+  business: {
+    display: string;
+    subtitle: string;
+    linkLabel: string;
+  };
+  products: {
+    display: string;
+    subtitle: string;
+    linkLabel: string;
+    viewMoreLabel: string;
+  };
+  whatWeDo: {
+    display: string;
+    subtitle: string;
+    statement: string;
+    linksLabel: string;
+    pillarsLabel: string;
+    historyLinkLabel: string;
+    /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
+    categories: {
+      plastics: string;
+      generalGoods: string;
+      foods: string;
+      ffe: string;
+      timber: string;
+    };
+  };
+};
+
+type BusinessPageSection = PageHeaderCrumbLabels & {
+  display: string;
+  subtitle: string;
+  breadcrumbCurrent: string;
+  intro: string;
+  segmentsLabel: string;
+  offeringsProductsLabel: string;
+  offeringsMachinesLabel: string;
+  ctaTitle: string;
+  ctaBody: string;
+  ctaLabel: string;
+};
+
 export type SiteCopy = {
   menu: MenuLabels;
   brand: {
@@ -155,6 +205,8 @@ export type SiteCopy = {
   business: BusinessSection;
   companyProfile: CompanyProfileSection;
   contactPage: ContactPageSection;
+  home: HomeSections;
+  businessPage: BusinessPageSection;
   news: {
     title: string;
     entries: string[];
@@ -175,6 +227,27 @@ export type SiteCopy = {
       thumbnailsAriaLabel: string;
       allFilterLabel: string;
       filterNavAriaLabel: string;
+    };
+    categories: {
+      tabs: {
+        plastics: string;
+        generalGoods: string;
+        foods: string;
+        ffe: string;
+        timber: string;
+      };
+      tabListAriaLabel: string;
+      /** Sub-tabs shown only within the Plastics top-category, splitting families by form. */
+      plasticsForms: {
+        pellet: string;
+        crushed: string;
+        tabListAriaLabel: string;
+      };
+      empty: {
+        title: string;
+        body: string;
+        ctaLabel: string;
+      };
     };
   };
   footer: {
@@ -288,5 +361,6 @@ export type SiteCopy = {
 export const SITE_COPY = {
   en: enCopy,
   ja: jaCopy,
-  zh: zhCopy,
+  'zh-Hans': zhHansCopy,
+  'zh-Hant': zhHantCopy,
 } satisfies Record<Locale, SiteCopy>;

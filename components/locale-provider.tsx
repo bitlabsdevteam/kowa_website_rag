@@ -5,7 +5,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState } 
 import { type Locale } from '@/lib/site-copy';
 
 const STORAGE_KEY = 'kowa-locale';
-const SUPPORTED: readonly Locale[] = ['en', 'ja', 'zh'];
+const SUPPORTED: readonly Locale[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
 
 function isLocale(value: string | null): value is Locale {
   return value !== null && (SUPPORTED as readonly string[]).includes(value);

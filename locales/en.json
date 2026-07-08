@@ -16,7 +16,8 @@
     "localeOptions": {
       "en": "EN",
       "ja": "JP",
-      "zh": "中文"
+      "zhHans": "SC",
+      "zhHant": "TC"
     }
   },
   "hero": {
@@ -198,9 +199,27 @@
     "stationsResetLabel": "View office",
     "stationsRouteHint": "Walking route to the office shown on the map.",
     "stations": [
-      { "name": "Mita Station", "lines": "Toei Asakusa / Mita lines", "walk": "~8 min walk", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "Tamachi Station", "lines": "JR Yamanote line", "walk": "~12 min walk", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "Akabanebashi Station", "lines": "Toei Oedo line", "walk": "~8 min walk", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "Mita Station",
+        "lines": "Toei Asakusa / Mita lines",
+        "walk": "~8 min walk",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "Tamachi Station",
+        "lines": "JR Yamanote line",
+        "walk": "~12 min walk",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "Akabanebashi Station",
+        "lines": "Toei Oedo line",
+        "walk": "~8 min walk",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -240,6 +259,26 @@
       "thumbnailsAriaLabel": "Product thumbnails",
       "allFilterLabel": "All",
       "filterNavAriaLabel": "Filter products by category"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "Plastics",
+        "generalGoods": "General Goods",
+        "foods": "Foods",
+        "ffe": "FFE",
+        "timber": "Timber / Lumber"
+      },
+      "tabListAriaLabel": "Browse product categories",
+      "plasticsForms": {
+        "pellet": "Pellet",
+        "crushed": "Crushed",
+        "tabListAriaLabel": "Browse plastics by form"
+      },
+      "empty": {
+        "title": "Catalog in preparation",
+        "body": "We're preparing photography and details for this category. Contact our team for current availability and specifications.",
+        "ctaLabel": "Contact us"
+      }
     }
   },
   "footer": {
@@ -249,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "Business Overview",
-            "href": "/business"
-          },
-          {
             "label": "Products",
             "href": "/products"
           },
           {
-            "label": "Machines",
-            "href": "/machines"
-          },
-          {
-            "label": "Contact Sales",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -274,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "News",
-            "href": "/news"
-          },
-          {
-            "label": "Access",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "Career Overview",
-            "href": "/company_profile"
-          },
-          {
-            "label": "Open Inquiry",
-            "href": "/inquiry"
-          },
-          {
-            "label": "Tokyo Access",
-            "href": "/access"
+            "label": "Contact Us",
+            "href": "/contact_us"
           }
         ]
       }
@@ -423,5 +433,47 @@
     "legacyTitle": "Legacy Website Crawl Dataset",
     "legacyLead": "All reachable legacy pages were crawled and transformed into structured excerpts for migration into the new site.",
     "legacyNoExcerpt": "No readable text extracted from this asset."
+  },
+  "home": {
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "Three lanes, one circular supply",
+      "linkLabel": "View business"
+    },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "Newest from our circular supply",
+      "linkLabel": "View product",
+      "viewMoreLabel": "View More Products"
+    },
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowa's trading lines",
+      "statement": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan.",
+      "linksLabel": "Explore Kowa",
+      "pillarsLabel": "Our product categories",
+      "historyLinkLabel": "See our full history →",
+      "categories": {
+        "plastics": "Domestic collection through export: waste and loss plastics are sorted, crushed, and regenerated into pellet-form material through our G.P. Polymer line.",
+        "generalGoods": "Cross-border sourcing and distribution of general merchandise, moved through the same trading and logistics network as our plastics business.",
+        "foods": "Trade support for food-related goods, handled with the same disciplined sourcing and shipment coordination as our other lines.",
+        "ffe": "Furniture, fixtures, and equipment sourced and distributed for commercial and industrial buyers.",
+        "timber": "Solid Myanmar teak flooring, milled at a Yangon partner factory from government-licensed logs and imported direct."
+      }
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "Business Introduction",
+    "breadcrumbAria": "Breadcrumb",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "Business",
+    "intro": "Kowa runs a resource-circulation trading model centered on plastics recycling, industrial support, and cross-border supply operations.",
+    "segmentsLabel": "Business segments",
+    "offeringsProductsLabel": "View products",
+    "offeringsMachinesLabel": "View machinery",
+    "ctaTitle": "Talk to our trade team",
+    "ctaBody": "Whether you're sourcing recycled resin, exploring resource circulation, or exploring a trade partnership, just share a few details and our team will respond by email.",
+    "ctaLabel": "Get in touch"
   }
 }

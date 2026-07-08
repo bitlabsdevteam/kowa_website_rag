@@ -62,13 +62,21 @@ function formatRequiredFields(locale: Locale, fields: AssistantTurnResponse['req
       country: '国名',
       notes: '補足',
     },
-    zh: {
+    'zh-Hans': {
       name: '姓名',
       company: '公司名称',
       email: '邮箱',
       phone: '电话',
       country: '国家',
       notes: '备注',
+    },
+    'zh-Hant': {
+      name: '姓名',
+      company: '公司名稱',
+      email: '郵箱',
+      phone: '電話',
+      country: '國家',
+      notes: '備註',
     },
   };
 
@@ -77,7 +85,8 @@ function formatRequiredFields(locale: Locale, fields: AssistantTurnResponse['req
 
 function requiredFieldsLead(locale: Locale) {
   if (locale === 'ja') return '社内連携に必要な情報: ';
-  if (locale === 'zh') return '转交办公室所需信息：';
+  if (locale === 'zh-Hans') return '转交办公室所需信息：';
+  if (locale === 'zh-Hant') return '轉交辦公室所需信息：';
   return 'Needed for office routing: ';
 }
 
@@ -189,9 +198,11 @@ export function ChatWidget({ labels, locale }: ChatWidgetProps) {
         text:
           locale === 'ja'
             ? '連絡先情報をこのセッションに保存しました。準備ができたら要約を作成してください。'
-            : locale === 'zh'
+            : locale === 'zh-Hans'
               ? '联系信息已保存到当前会话，准备好后可以生成办公室摘要。'
-              : 'Your contact details are saved for this session. Prepare the office summary when you are ready.',
+              : locale === 'zh-Hant'
+                ? '聯繫信息已保存到當前會話，準備好後可以生成辦公室摘要。'
+                : 'Your contact details are saved for this session. Prepare the office summary when you are ready.',
       },
     ]);
   };

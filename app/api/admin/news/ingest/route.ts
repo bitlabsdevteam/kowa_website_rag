@@ -19,7 +19,7 @@ function isBodyBlocks(value: unknown): value is NewsBodyBlock[] {
 }
 
 function isLocale(value: unknown): value is Locale {
-  return value === 'en' || value === 'ja' || value === 'zh';
+  return value === 'en' || value === 'ja' || value === 'zh-Hans' || value === 'zh-Hant';
 }
 
 function validateIngestPayload(value: unknown): NewsIngestInput {

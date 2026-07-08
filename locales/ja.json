@@ -16,7 +16,8 @@
     "localeOptions": {
       "en": "EN",
       "ja": "JP",
-      "zh": "中文"
+      "zhHans": "簡体字",
+      "zhHant": "繁体字"
     }
   },
   "hero": {
@@ -198,9 +199,27 @@
     "stationsResetLabel": "本社の地図に戻る",
     "stationsRouteHint": "本社までの徒歩ルートを地図に表示しています。",
     "stations": [
-      { "name": "三田駅", "lines": "都営浅草線・三田線", "walk": "徒歩約8分", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "田町駅", "lines": "JR山手線", "walk": "徒歩約12分", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "赤羽橋駅", "lines": "都営大江戸線", "walk": "徒歩約8分", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "三田駅",
+        "lines": "都営浅草線・三田線",
+        "walk": "徒歩約8分",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "田町駅",
+        "lines": "JR山手線",
+        "walk": "徒歩約12分",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "赤羽橋駅",
+        "lines": "都営大江戸線",
+        "walk": "徒歩約8分",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -240,6 +259,26 @@
       "thumbnailsAriaLabel": "製品サムネイル",
       "allFilterLabel": "すべて",
       "filterNavAriaLabel": "カテゴリで製品を絞り込む"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "樹脂",
+        "generalGoods": "雑貨",
+        "foods": "食品",
+        "ffe": "寝具",
+        "timber": "木材"
+      },
+      "tabListAriaLabel": "製品カテゴリーを選択",
+      "plasticsForms": {
+        "pellet": "ペレット",
+        "crushed": "破砕",
+        "tabListAriaLabel": "樹脂を形状で選択"
+      },
+      "empty": {
+        "title": "カタログ準備中",
+        "body": "このカテゴリーの写真・詳細情報を準備しております。取扱状況や仕様についてはお問い合わせください。",
+        "ctaLabel": "お問い合わせ"
+      }
     }
   },
   "footer": {
@@ -249,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "事業概要",
-            "href": "/business"
-          },
-          {
             "label": "製品",
             "href": "/products"
           },
           {
-            "label": "設備",
-            "href": "/machines"
-          },
-          {
-            "label": "営業窓口",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -274,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "ニュース",
-            "href": "/news"
-          },
-          {
-            "label": "アクセス",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "キャリア概要",
-            "href": "/company_profile"
-          },
-          {
-            "label": "採用問い合わせ",
-            "href": "/inquiry"
-          },
-          {
-            "label": "東京オフィス",
-            "href": "/access"
+            "label": "お問い合わせ",
+            "href": "/contact_us"
           }
         ]
       }
@@ -423,5 +433,47 @@
     "legacyTitle": "レガシーサイトクロールデータセット",
     "legacyLead": "到達可能なレガシーページをクロールし、新サイト移行向けに構造化した抜粋へ変換しました。",
     "legacyNoExcerpt": "このアセットから読み取り可能なテキストを抽出できませんでした。"
+  },
+  "home": {
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "3つの事業レーン、ひとつの循環サプライ",
+      "linkLabel": "事業を見る"
+    },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "循環サプライの最新プロダクト",
+      "linkLabel": "製品を見る",
+      "viewMoreLabel": "製品をもっと見る"
+    },
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowaの事業内容",
+      "statement": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。",
+      "linksLabel": "Kowaを知る",
+      "pillarsLabel": "取り扱い製品カテゴリー",
+      "historyLinkLabel": "沿革を見る →",
+      "categories": {
+        "plastics": "国内で収集した廃プラスチックを選別・破砕し、ジーピーポリマーの再生ラインでペレット化して輸出まで一貫して手がけています。",
+        "generalGoods": "プラスチック事業と同じ貿易・物流ネットワークを通じて、日用品・雑貨などの国際調達と流通を行っています。",
+        "foods": "食品関連品の取引を、他事業と同様の確かな調達管理と出荷手配で支援しています。",
+        "ffe": "家具・什器・設備（FFE）を法人・産業向けに調達・供給しています。",
+        "timber": "政府許可のもと計画伐採されたミャンマー産原木を、ヤンゴンの提携工場で製材した無垢チークフローリングを直輸入しています。"
+      }
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "事業紹介",
+    "breadcrumbAria": "パンくずリスト",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "事業紹介",
+    "intro": "Kowaは、プラスチック再資源化を軸に、商流・加工・輸出入を一体で運用する資源循環型の商社です。",
+    "segmentsLabel": "事業セグメント",
+    "offeringsProductsLabel": "製品を見る",
+    "offeringsMachinesLabel": "機械を見る",
+    "ctaTitle": "貿易チームに相談する",
+    "ctaBody": "再生樹脂の調達、資源循環、貿易パートナーシップなど、必要事項をご記入いただければ担当者よりメールにてご連絡いたします。",
+    "ctaLabel": "お問い合わせ"
   }
 }

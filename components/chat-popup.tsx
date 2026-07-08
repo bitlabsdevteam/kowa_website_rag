@@ -35,7 +35,8 @@ type ChatPopupProps = {
 export function ChatPopup({ triggerLabel = 'Talk to Aya', locale, popupAriaLabel, closeAriaLabel, chatLabels }: ChatPopupProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const statusLabel = locale === 'ja' ? 'オンライン' : locale === 'zh' ? '在线' : 'Online';
+  const statusLabel =
+    locale === 'ja' ? 'オンライン' : locale === 'zh-Hans' ? '在线' : locale === 'zh-Hant' ? '線上' : 'Online';
 
   useEffect(() => {
     setMounted(true);

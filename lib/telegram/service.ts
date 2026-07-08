@@ -9,7 +9,12 @@ export const TELEGRAM_SECRET_HEADER = 'x-telegram-bot-api-secret-token';
 function mapTelegramLanguage(languageCode?: string): AssistantLanguage {
   const normalized = languageCode?.toLowerCase() ?? '';
   if (normalized.startsWith('ja')) return 'ja';
-  if (normalized.startsWith('zh')) return 'zh';
+  if (normalized.startsWith('zh')) {
+    if (normalized.includes('hant') || normalized.includes('tw') || normalized.includes('hk') || normalized.includes('mo')) {
+      return 'zh-Hant';
+    }
+    return 'zh-Hans';
+  }
   return 'en';
 }
 

@@ -24,6 +24,7 @@ import {
   resolveAssistantStage,
 } from '@/lib/assistant/policy';
 import type {
+  AssistantLanguage,
   AssistantSessionRequest,
   AssistantSessionResponse,
   AdminQueueNoteRequest,
@@ -61,7 +62,7 @@ const RETRIEVAL_KEYWORD_MAP: Array<{ pattern: RegExp; replacement: string }> = [
   { pattern: /(樹脂|再生|plastic|plastics|recycled|pellet|树脂|塑料)/i, replacement: ' resin recycled plastics pellet processing ' },
 ];
 
-const FIELD_LABELS: Record<'en' | 'ja' | 'zh', Record<keyof VisitorProfile, string>> = {
+const FIELD_LABELS: Record<AssistantLanguage, Record<keyof VisitorProfile, string>> = {
   en: {
     name: 'name',
     company: 'company',
@@ -78,13 +79,21 @@ const FIELD_LABELS: Record<'en' | 'ja' | 'zh', Record<keyof VisitorProfile, stri
     country: '国名',
     notes: '補足',
   },
-  zh: {
+  'zh-Hans': {
     name: '姓名',
     company: '公司名称',
     email: '邮箱',
     phone: '电话',
     country: '国家',
     notes: '备注',
+  },
+  'zh-Hant': {
+    name: '姓名',
+    company: '公司名稱',
+    email: '郵箱',
+    phone: '電話',
+    country: '國家',
+    notes: '備註',
   },
 };
 
@@ -97,7 +106,7 @@ function questionKind(query: string): 'established' | 'address' | 'phone' | 'gen
 }
 
 function localizeText(
-  language: 'en' | 'ja' | 'zh',
+  language: AssistantLanguage,
   key:
     | 'unknown'
     | 'answer_prefix'
@@ -142,7 +151,7 @@ function localizeText(
       address: `Kowaの所在地は${value}です。`,
       phone: `Kowaの連絡先は${value}です。`,
     },
-    zh: {
+    'zh-Hans': {
       unknown: '根据当前可用的 Kowa 资料，我无法确认这一点。',
       answer_prefix: '根据现有 Kowa 资料，最相关的信息是：',
       follow_up_prefix: '继续上一轮问题，为您补充说明：',
@@ -156,12 +165,26 @@ function localizeText(
       address: `Kowa 的地址是 ${value}。`,
       phone: `Kowa 的联系电话是 ${value}。`,
     },
+    'zh-Hant': {
+      unknown: '根據當前可用的 Kowa 資料，我無法確認這一點。',
+      answer_prefix: '根據現有 Kowa 資料，最相關的信息是：',
+      follow_up_prefix: '繼續上一輪問題，為您補充說明：',
+      grounded_low_1: '該回答有資料依據，但置信度較低，請結合引用信息確認細節。',
+      grounded_low_2: '如果您需要報價或採購溝通，請告訴我產品、市場和時間要求。',
+      unknown_1: '您可以詢問 Kowa 的成立時間、地址、聯繫方式或業務範圍。',
+      unknown_2: '也可以諮詢再生塑料、樹脂貿易、設備或國際物流支持。',
+      qualification_done: '目前的聯繫信息已足夠在下一階段準備轉交辦公室團隊。',
+      qualification_need: '為了準確轉交給 Kowa 辦公室團隊，請提供以下信息：',
+      established: `Kowa 成立於 ${value}。`,
+      address: `Kowa 的地址是 ${value}。`,
+      phone: `Kowa 的聯繫電話是 ${value}。`,
+    },
   } as const;
 
   return dictionaries[language][key];
 }
 
-function heuristics(sourceContent: string, query: string, language: 'en' | 'ja' | 'zh'): string | null {
+function heuristics(sourceContent: string, query: string, language: AssistantLanguage): string | null {
   const c = sourceContent;
   const kind = questionKind(query);
 
@@ -224,7 +247,7 @@ function summarizeForOffice(message: string, profile: VisitorProfile, intent: Ha
   return parts.join(' ');
 }
 
-function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof VisitorProfile>, language: 'en' | 'ja' | 'zh'): string {
+function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof VisitorProfile>, language: AssistantLanguage): string {
   if (!missingFields.length) {
     return `${baseAnswer} ${localizeText(language, 'qualification_done')}`;
   }
@@ -233,7 +256,7 @@ function buildQualificationAnswer(baseAnswer: string, missingFields: Array<keyof
   return `${baseAnswer} ${localizeText(language, 'qualification_need')} ${fields}.`;
 }
 
-function normalizeRetrievalQuery(message: string, language: 'en' | 'ja' | 'zh') {
+function normalizeRetrievalQuery(message: string, language: AssistantLanguage) {
   if (language === 'en') return message;
 
   let normalized = message;
@@ -248,7 +271,7 @@ function isFollowUpQuestion(message: string) {
   return FOLLOW_UP_PATTERNS.some((pattern) => pattern.test(trimmed));
 }
 
-function buildContextualQuery(message: string, language: 'en' | 'ja' | 'zh', conversationId: string) {
+function buildContextualQuery(message: string, language: AssistantLanguage, conversationId: string) {
   const normalized = normalizeRetrievalQuery(message, language);
   const history = listAssistantMessages(conversationId);
   const recentUserContext = history
@@ -267,7 +290,7 @@ function buildContextualQuery(message: string, language: 'en' | 'ja' | 'zh', con
   };
 }
 
-function buildRecoveryGuidance(language: 'en' | 'ja' | 'zh', grounded: boolean) {
+function buildRecoveryGuidance(language: AssistantLanguage, grounded: boolean) {
   return grounded
     ? [localizeText(language, 'grounded_low_1'), localizeText(language, 'grounded_low_2')]
     : [localizeText(language, 'unknown_1'), localizeText(language, 'unknown_2')];
@@ -474,9 +497,11 @@ export function previewHandoff(input: {
     content:
       session.language === 'ja'
         ? '社内確認用の要約を準備しました。内容を確認して送信してください。'
-        : session.language === 'zh'
+        : session.language === 'zh-Hans'
           ? '我已整理好提交给办公室的摘要，请确认后发送。'
-          : 'I prepared the summary for office review. Confirm it when you are ready to submit.',
+          : session.language === 'zh-Hant'
+            ? '我已整理好提交給辦公室的摘要，請確認後發送。'
+            : 'I prepared the summary for office review. Confirm it when you are ready to submit.',
     citations: [],
     createdAt: new Date().toISOString(),
   });
@@ -490,9 +515,11 @@ export function previewHandoff(input: {
     message:
       session.language === 'ja'
         ? '社内共有用の要約を確認できます。'
-        : session.language === 'zh'
+        : session.language === 'zh-Hans'
           ? '您现在可以确认并提交办公室摘要。'
-          : 'Your office handoff summary is ready for confirmation.',
+          : session.language === 'zh-Hant'
+            ? '您現在可以確認並提交辦公室摘要。'
+            : 'Your office handoff summary is ready for confirmation.',
   };
 }
 
@@ -539,9 +566,11 @@ export function confirmHandoff(input: { sessionId: string; conversationId?: stri
     content:
       session.language === 'ja'
         ? '要約をオフィスキューへ送信しました。担当者からの連絡をお待ちください。'
-        : session.language === 'zh'
+        : session.language === 'zh-Hans'
           ? '摘要已提交到办公室队列，请等待团队联系您。'
-          : 'The summary has been submitted to the office queue. Please wait for a follow-up from the team.',
+          : session.language === 'zh-Hant'
+            ? '摘要已提交到辦公室隊列，請等待團隊聯繫您。'
+            : 'The summary has been submitted to the office queue. Please wait for a follow-up from the team.',
     citations: [],
     createdAt: confirmedAt,
   });
@@ -552,9 +581,11 @@ export function confirmHandoff(input: { sessionId: string; conversationId?: stri
     message:
       session.language === 'ja'
         ? 'オフィスキューへの送信が完了しました。'
-        : session.language === 'zh'
+        : session.language === 'zh-Hans'
           ? '已成功提交到办公室队列。'
-          : 'The office handoff has been submitted successfully.',
+          : session.language === 'zh-Hant'
+            ? '已成功提交到辦公室隊列。'
+            : 'The office handoff has been submitted successfully.',
   };
 }
 

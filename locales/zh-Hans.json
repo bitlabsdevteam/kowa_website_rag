@@ -16,7 +16,8 @@
     "localeOptions": {
       "en": "EN",
       "ja": "JP",
-      "zh": "中文"
+      "zhHans": "简体中文",
+      "zhHant": "繁體中文"
     }
   },
   "hero": {
@@ -198,9 +199,27 @@
     "stationsResetLabel": "返回办公室地图",
     "stationsRouteHint": "地图上已显示前往办公室的步行路线。",
     "stations": [
-      { "name": "三田站", "lines": "都营浅草线・三田线", "walk": "步行约8分钟", "closest": true, "mapQuery": "Mita Station, Minato-ku, Tokyo" },
-      { "name": "田町站", "lines": "JR山手线", "walk": "步行约12分钟", "closest": false, "mapQuery": "Tamachi Station, Minato-ku, Tokyo" },
-      { "name": "赤羽桥站", "lines": "都营大江户线", "walk": "步行约8分钟", "closest": false, "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo" }
+      {
+        "name": "三田站",
+        "lines": "都营浅草线・三田线",
+        "walk": "步行约8分钟",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "田町站",
+        "lines": "JR山手线",
+        "walk": "步行约12分钟",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "赤羽桥站",
+        "lines": "都营大江户线",
+        "walk": "步行约8分钟",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
     ]
   },
   "news": {
@@ -240,6 +259,26 @@
       "thumbnailsAriaLabel": "产品缩略图",
       "allFilterLabel": "全部",
       "filterNavAriaLabel": "按类别筛选产品"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "塑料",
+        "generalGoods": "日用百货",
+        "foods": "食品",
+        "ffe": "家具寝具",
+        "timber": "木材"
+      },
+      "tabListAriaLabel": "浏览产品分类",
+      "plasticsForms": {
+        "pellet": "颗粒",
+        "crushed": "破碎",
+        "tabListAriaLabel": "按形态浏览塑料产品"
+      },
+      "empty": {
+        "title": "目录筹备中",
+        "body": "我们正在为该分类准备图片与详细资料，如需了解现有供应情况与规格，请联系我们。",
+        "ctaLabel": "联系我们"
+      }
     }
   },
   "footer": {
@@ -249,20 +288,12 @@
         "title": "For Business",
         "links": [
           {
-            "label": "业务概览",
-            "href": "/business"
-          },
-          {
             "label": "产品",
             "href": "/products"
           },
           {
-            "label": "设备",
-            "href": "/machines"
-          },
-          {
-            "label": "联系销售",
-            "href": "/inquiry"
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
           }
         ]
       },
@@ -274,29 +305,8 @@
             "href": "/company_profile"
           },
           {
-            "label": "新闻",
-            "href": "/news"
-          },
-          {
-            "label": "联系地址",
-            "href": "/access"
-          }
-        ]
-      },
-      {
-        "title": "Career",
-        "links": [
-          {
-            "label": "职业概览",
-            "href": "/company_profile"
-          },
-          {
-            "label": "招聘咨询",
-            "href": "/inquiry"
-          },
-          {
-            "label": "东京办公室",
-            "href": "/access"
+            "label": "联系我们",
+            "href": "/contact_us"
           }
         ]
       }
@@ -423,5 +433,47 @@
     "legacyTitle": "旧站抓取数据集",
     "legacyLead": "所有可访问的旧站页面已被抓取并转换为结构化摘要，用于迁移到新网站。",
     "legacyNoExcerpt": "该资源未提取到可读文本。"
+  },
+  "home": {
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "三条业务通道，一体化循环供应",
+      "linkLabel": "查看业务"
+    },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "循环供应链的最新产品",
+      "linkLabel": "查看产品",
+      "viewMoreLabel": "查看更多产品"
+    },
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowa 的业务范围",
+      "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
+      "linksLabel": "了解 Kowa",
+      "pillarsLabel": "我们的产品类别",
+      "historyLinkLabel": "查看完整历程 →",
+      "categories": {
+        "plastics": "国内回收的废塑料经分拣、破碎后，通过 G.P. Polymer 再生产线制成颗粒料，并完成出口。",
+        "generalGoods": "依托与塑料业务相同的贸易与物流网络，开展日用百货等商品的跨境采购与流通。",
+        "foods": "以同样严谨的采购管理与出货协调，为食品相关商品的贸易提供支持。",
+        "ffe": "为企业与产业客户采购并供应家具、装置及设备（FFE）。",
+        "timber": "在政府许可下计划采伐的缅甸原木，经仰光合作工厂制材后直接进口的实木柚木地板。"
+      }
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "业务介绍",
+    "breadcrumbAria": "面包屑导航",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "业务介绍",
+    "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
+    "segmentsLabel": "业务板块",
+    "offeringsProductsLabel": "查看产品",
+    "offeringsMachinesLabel": "查看设备",
+    "ctaTitle": "联系我们的贸易团队",
+    "ctaBody": "无论您是采购再生树脂、关注资源循环，还是探讨贸易合作，只需填写以下信息，我们的团队将通过电子邮件与您联系。",
+    "ctaLabel": "联系我们"
   }
 }

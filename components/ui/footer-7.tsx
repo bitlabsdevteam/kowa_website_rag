@@ -89,26 +89,15 @@ const defaultSections: Footer7Section[] = [
   {
     title: 'For Business',
     links: [
-      { name: 'Business Overview', href: '/business' },
       { name: 'Products', href: '/products' },
-      { name: 'Machines', href: '/machines' },
-      { name: 'Contact Sales', href: '/inquiry' },
+      { name: 'G.E.T', href: 'https://www.greenecotec.co.jp/index.html' },
     ],
   },
   {
     title: 'Company',
     links: [
       { name: 'Company Profile', href: '/company_profile' },
-      { name: 'News', href: '/news' },
-      { name: 'Access', href: '/access' },
-    ],
-  },
-  {
-    title: 'Career',
-    links: [
-      { name: 'Career Overview', href: '/company_profile' },
-      { name: 'Open Inquiry', href: '/inquiry' },
-      { name: 'Tokyo Access', href: '/access' },
+      { name: 'Contact Us', href: '/contact_us' },
     ],
   },
 ];
@@ -176,14 +165,21 @@ export const Footer7 = ({
           </ul>
         </div>
 
-        <nav className="footer7-nav" aria-label={navAria}>
-          {sections
-            .flatMap((section) => section.links)
-            .map((link) => (
-              <FooterLink key={link.name} href={link.href} className="footer7-link">
-                {link.name}
-              </FooterLink>
-            ))}
+        <nav className="footer7-nav-groups" aria-label={navAria}>
+          {sections.map((section) => (
+            <div key={section.title} className="footer7-nav-group">
+              <p className="footer7-nav-group-title">{section.title}</p>
+              <ul className="footer7-nav-group-links">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <FooterLink href={link.href} className="footer7-link">
+                      {link.name}
+                    </FooterLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </nav>
       </div>
 

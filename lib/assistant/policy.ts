@@ -10,7 +10,8 @@ const COMMERCIAL_INTENT_KEYWORDS: Array<[AssistantIntent, string[]]> = [
 
 export function detectAssistantLanguage(input: string, fallback: AssistantLanguage = 'en'): AssistantLanguage {
   if (/[\u3040-\u30ff]/.test(input)) return 'ja';
-  if (/[这来们为请问产品业务联系电话报价价格采购树脂塑料地址成立]/.test(input)) return 'zh';
+  if (/[這來們為請問產業聯繫報採購樹脂塑]/.test(input)) return 'zh-Hant';
+  if (/[这来们为请问产业联系报采购树脂塑]/.test(input)) return 'zh-Hans';
   if (/[\u4e00-\u9fff]/.test(input)) return fallback;
   return fallback;
 }

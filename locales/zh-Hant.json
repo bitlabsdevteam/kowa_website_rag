@@ -1,0 +1,479 @@
+{
+  "menu": {
+    "about": "關於",
+    "news": "新聞",
+    "products": "產品",
+    "machines": "設備",
+    "partners": "合作伙伴",
+    "companyProfile": "公司簡介",
+    "contactUs": "聯繫我們",
+    "login": "用戶登錄",
+    "onlineShop": "在線購物",
+    "localeLabel": "語言",
+    "navAria": "主導航",
+    "homeAria": "広和通商株式会社 首頁",
+    "menuToggleLabel": "菜單",
+    "localeOptions": {
+      "en": "EN",
+      "ja": "JP",
+      "zhHans": "簡體中文",
+      "zhHant": "繁體中文"
+    }
+  },
+  "hero": {
+    "eyebrow": "關於",
+    "title": "讓資源循環，傳承給下一代。",
+    "titlePrefix": "讓資源循環，",
+    "titleTyped": [
+      "傳承給下一代。",
+      "構建更潔淨的供應鏈。",
+      "減少廢棄排放。",
+      "實現資源再生。"
+    ],
+    "lead": "從國內回收到海外出口，広和讓塑料持續循環，帶來更潔淨的供應鏈、更少的廢棄、實實在在的資源再生。",
+    "body": "作為1994年成立的東京貿易伙伴，我們在日本各地採購廢塑料與損耗料，通過 G.P. Polymer 再生產線再資源化，並在全球開展再生材料與樹脂貿易、電池組支持及工業機械進出口。",
+    "cta": "聯繫 Aya",
+    "videoTitle": "Kowa 視頻短片",
+    "visualAria": "Kowa 業務可視圖",
+    "visualAlt": "Kowa 業務概覽圖"
+  },
+  "business": {
+    "title": "KOWA 的業務是什麼？",
+    "intro": "Kowa 以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
+    "flowTitle": "資源循環流程",
+    "flowPhases": [
+      {
+        "nodeLabel": "採購與回收",
+        "title": "採購與回收",
+        "step": "採購並回收生產損耗料和廢塑料。",
+        "detail": "資料中的流程起點包括樹脂、生產損耗料、廢塑料、混合塑料以及加工損耗料的接收與彙集。"
+      },
+      {
+        "nodeLabel": "分選與拆解",
+        "title": "分選與拆解",
+        "step": "按樹脂特性、混配狀態和材料狀況進行分選與拆解。",
+        "detail": "來料會先被區分到合適的處理路徑，再進入粉碎和再生工序，以保證不同材料流向正確。"
+      },
+      {
+        "nodeLabel": "粉碎與再生",
+        "title": "粉碎與再生",
+        "step": "通過粉碎、壓縮與混合，恢復為可再利用原料。",
+        "detail": "該階段對應資料中的粉碎機、壓縮設備和 ribbon mixer 等處理設備，把塑料重新變成可用原料。"
+      },
+      {
+        "nodeLabel": "出口 / 國內銷售",
+        "title": "出口 / 國內銷售",
+        "step": "把再生後的原料接入出口、海外供給和日本國內銷售。",
+        "detail": "最終階段是出貨與流通，把處理完成的原料送往出口通道、海外市場以及日本國內銷售。"
+      }
+    ]
+  },
+  "companyProfile": {
+    "title": "願景",
+    "summary": "讓有價值的資源永不被浪費。Kowa 致力於讓塑料與資源持續循環，通過跨境的回收、再生與貿易，使我們所服務的每一條供應鏈更清潔、更具循環性，並能為子孫後代持續運轉。",
+    "introLabel": "願景",
+    "introTitle": "從日本國內回收到全球循環。",
+    "introBody": "舊版公司資料把 Kowa 定義為一家以塑料為核心的貿易與加工企業：在日本國內收集，在需要時進行再生處理，再把可用資源重新送回產業鏈。",
+    "statementLabel": "資料原文",
+    "statements": [
+      {
+        "language": "Japanese",
+        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
+      },
+      {
+        "language": "English",
+        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+      }
+    ],
+    "focusLabel": "運營重點",
+    "focusCards": [
+      {
+        "title": "回收與出口通道",
+        "detail": "在日本國內完成回收和預處理後，再接入面向東南亞等地區的循環流通路線。"
+      },
+      {
+        "title": "日本國內再生能力",
+        "detail": "除出口外，還通過 G.P. Polymer 和群馬加工線推進粉碎與再生處理。"
+      },
+      {
+        "title": "重視資源價值的執行",
+        "detail": "資料強調珍惜有限資源、以客戶視角運營，並把循環價值落實到實際業務中。"
+      }
+    ],
+    "factLabel": "概覽",
+    "facts": [
+      {
+        "label": "創立與改組",
+        "value": "1993 年創立，1994 年增資並改組為股份公司"
+      },
+      {
+        "label": "現有資本金",
+        "value": "2015 年增資後為 5,000 萬日元"
+      },
+      {
+        "label": "總部",
+        "value": "日本東京都港區三田 2-10-6 Reoma 大樓 5F"
+      },
+      {
+        "label": "聯繫電話",
+        "value": "+81-3-3455-1699"
+      }
+    ],
+    "timelineLabel": "沿革",
+    "timelineTitle": "從貿易公司擴展到倉儲與加工運營。",
+    "timelineIntro": "這條時間線展示了 Kowa 如何逐步從商流業務擴展到倉庫、自有工廠和大型塑料粉碎設備運營。",
+    "timeline": [
+      {
+        "year": "1993",
+        "title": "公司創立",
+        "detail": "以有限公司的形式設立広和通商。"
+      },
+      {
+        "year": "1994",
+        "title": "改組為股份公司",
+        "detail": "資本金增至 1,000 萬日元，並改組為股份公司。"
+      },
+      {
+        "year": "2003",
+        "title": "群馬倉儲基地啟動",
+        "detail": "群馬自營流通倉庫開始運作，成為北關東據點。"
+      },
+      {
+        "year": "2005",
+        "title": "富士倉庫啟動",
+        "detail": "富士流通倉庫開始運作，成為東海地區據點。"
+      },
+      {
+        "year": "2015",
+        "title": "資本金擴大",
+        "detail": "資本金增至 5,000 萬日元。"
+      },
+      {
+        "year": "2016",
+        "title": "群馬加工工廠建成",
+        "detail": "群馬加工工廠竣工，並導入第一套大型破碎/粉碎設備。"
+      },
+      {
+        "year": "2017",
+        "title": "大型混合機導入",
+        "detail": "為擴充加工能力，新增大型工業混合機。"
+      },
+      {
+        "year": "2019",
+        "title": "第二套粉碎線導入",
+        "detail": "新增第二套大型破碎/粉碎設備。"
+      }
+    ]
+  },
+  "contactPage": {
+    "eyebrow": "聯繫我們",
+    "title": "讓我們開始溝通",
+    "lead": "無論您是採購再生樹脂、關注資源循環，還是探討貿易合作，只需填寫以下信息，我們的團隊將通過電子郵件與您聯繫。",
+    "detailLabel": "聯繫方式",
+    "phoneLabel": "電話",
+    "phone": "+81-3-3455-1699",
+    "faxLabel": "傳真",
+    "fax": "+81-3-3455-1691",
+    "emailRowLabel": "郵箱",
+    "email": "kowa@kowatrade.com",
+    "hoursLabel": "營業時間",
+    "hours": "9:00-17:30",
+    "formTitle": "給我們留言",
+    "companyLabel": "公司名稱",
+    "emailLabel": "電子郵箱",
+    "queryLabel": "諮詢內容",
+    "submitLabel": "發送信息",
+    "sendingLabel": "發送中…",
+    "successMessage": "感謝您的留言，信息已發送。我們的團隊將盡快與您聯繫。",
+    "errorMessage": "抱歉，信息發送失敗。請稍後再試。",
+    "locationEyebrow": "到訪我們",
+    "locationTitle": "東京辦公室",
+    "locationLead": "位於港區中心地帶，距田町站與三田站均為步行可達。",
+    "addressLabel": "總公司",
+    "address": "〒108-0073 東京都港區三田2-10-6 Reoma大廈5樓",
+    "directionsLabel": "查看路線",
+    "mapTitle": "顯示広和通商位置的地圖（東京都港區三田）",
+    "stationsLabel": "最近車站",
+    "stationsClosestBadge": "最近",
+    "stationsApproxNote": "步行時間為大致估算。",
+    "stationsResetLabel": "返回辦公室地圖",
+    "stationsRouteHint": "地圖上已顯示前往辦公室的步行路線。",
+    "stations": [
+      {
+        "name": "三田站",
+        "lines": "都營淺草線・三田線",
+        "walk": "步行約8分鐘",
+        "closest": true,
+        "mapQuery": "Mita Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "田町站",
+        "lines": "JR山手線",
+        "walk": "步行約12分鐘",
+        "closest": false,
+        "mapQuery": "Tamachi Station, Minato-ku, Tokyo"
+      },
+      {
+        "name": "赤羽橋站",
+        "lines": "都營大江戶線",
+        "walk": "步行約8分鐘",
+        "closest": false,
+        "mapQuery": "Akabanebashi Station, Minato-ku, Tokyo"
+      }
+    ]
+  },
+  "news": {
+    "title": "新聞",
+    "entries": [
+      "第二季度採購更新：面向區域客戶擴大再生樹脂接收能力。",
+      "電池包支持計劃新增快速原型可行性評估。",
+      "新增工業機械進出口通道，支持更靈活的排期。"
+    ]
+  },
+  "products": {
+    "title": "產品",
+    "entries": [
+      {
+        "name": "合成樹脂原料",
+        "detail": "為製造夥伴提供穩定、質量優先的供給體系。"
+      },
+      {
+        "name": "再生塑料處理",
+        "detail": "面向循環運營的回收與加工路徑。"
+      },
+      {
+        "name": "電池包開發支持",
+        "detail": "從方案諮詢到量產準備的跨團隊支持。"
+      }
+    ],
+    "carousel": {
+      "ariaLabel": "產品媒體輪播",
+      "prevAriaLabel": "上一個產品",
+      "nextAriaLabel": "下一個產品",
+      "prevButton": "上一項",
+      "nextButton": "下一項",
+      "pagesAriaLabel": "輪播分頁",
+      "goToSlideLabel": "跳轉到第",
+      "enlargeLabel": "點擊放大",
+      "closeLabel": "關閉",
+      "thumbnailsAriaLabel": "產品縮略圖",
+      "allFilterLabel": "全部",
+      "filterNavAriaLabel": "按類別篩選產品"
+    },
+    "categories": {
+      "tabs": {
+        "plastics": "塑料",
+        "generalGoods": "日用百貨",
+        "foods": "食品",
+        "ffe": "家具寢具",
+        "timber": "木材"
+      },
+      "tabListAriaLabel": "瀏覽產品分類",
+      "plasticsForms": {
+        "pellet": "顆粒",
+        "crushed": "破碎",
+        "tabListAriaLabel": "按形態瀏覽塑料產品"
+      },
+      "empty": {
+        "title": "目錄籌備中",
+        "body": "我們正在為該分類準備圖片與詳細資料，如需了解現有供應情況與規格，請聯繫我們。",
+        "ctaLabel": "聯繫我們"
+      }
+    }
+  },
+  "footer": {
+    "navAria": "頁腳導航",
+    "menuGroups": [
+      {
+        "title": "For Business",
+        "links": [
+          {
+            "label": "產品",
+            "href": "/products"
+          },
+          {
+            "label": "G.E.T",
+            "href": "https://www.greenecotec.co.jp/index.html"
+          }
+        ]
+      },
+      {
+        "title": "Company",
+        "links": [
+          {
+            "label": "公司簡介",
+            "href": "/company_profile"
+          },
+          {
+            "label": "聯繫我們",
+            "href": "/contact_us"
+          }
+        ]
+      }
+    ],
+    "copyright": "© 2026 KOWA TRADE AND COMMERCE CO.,LTD.",
+    "termsLabel": "使用條款",
+    "social": {
+      "groupAria": "社交鏈接",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "x": "X"
+    }
+  },
+  "brand": {
+    "ariaLabel": "広和通商株式会社",
+    "name": "広和通商株式会社",
+    "location": ""
+  },
+  "chat": {
+    "popupAriaLabel": "Aya 助手彈窗",
+    "closeAriaLabel": "關閉聊天",
+    "promoTitle": "通過聊天聯繫我們",
+    "promoBody": "如果您有任何問題，請發送消息給我們。我們會盡快回復您。",
+    "messagePlaceholder": "輸入消息",
+    "typeMessageAriaLabel": "輸入消息",
+    "connectionIssue": "連接異常，請稍後再試。",
+    "contactFieldsTitle": "轉交辦公室所需的聯繫信息",
+    "contactFieldsBody": "如涉及報價、採購、支持或合作，請先填寫聯繫信息，再準備辦公室摘要。",
+    "saveContact": "保存信息",
+    "prepareHandoff": "準備辦公室摘要",
+    "confirmHandoff": "確認並提交",
+    "handoffReady": "辦公室摘要已準備好",
+    "handoffSubmitted": "已提交到辦公室隊列",
+    "nameLabel": "姓名",
+    "companyLabel": "公司名稱",
+    "emailLabel": "郵箱",
+    "phoneLabel": "電話",
+    "countryLabel": "國家"
+  },
+  "loginPage": {
+    "eyebrow": "Supabase 身份認證",
+    "title": "管理員登錄",
+    "lead": "登錄後可訪問來源管理、健康狀態可視化，以及後續的重建索引與發佈控制。",
+    "emailPlaceholder": "郵箱",
+    "passwordPlaceholder": "密碼",
+    "submit": "登錄",
+    "fallbackError": "登錄失敗"
+  },
+  "adminPage": {
+    "loadingEyebrow": "管理控制台",
+    "loadingTitle": "正在加載管理工作流...",
+    "deniedEyebrow": "管理員認證",
+    "deniedTitle": "需要管理員認證",
+    "deniedLead": "登錄後可訪問來源創建/編輯、發佈/取消發佈、重建索引等工作流。",
+    "goToLogin": "前往登錄",
+    "returnHome": "返回首頁",
+    "heroEyebrow": "管理控制台",
+    "heroTitle": "來源運維現已整合到主產品界面。",
+    "headingEdit": "編輯所選來源，保存後再執行發佈或重建索引操作。",
+    "headingCreate": "在同一運維界面中完成來源創建、發佈與重建索引，並帶確認步驟。",
+    "logout": "退出登錄",
+    "workflowBadge": "來源工作流",
+    "sourceHealthBadge": "來源健康狀態",
+    "sourceTitlePlaceholder": "來源標題",
+    "sourceUrlPlaceholder": "來源 URL",
+    "sourceContentPlaceholder": "來源內容預覽",
+    "saveEdit": "保存編輯",
+    "cancelEdit": "取消編輯",
+    "createSource": "創建來源",
+    "statusPublished": "已發佈",
+    "statusDraft": "草稿",
+    "lastIngestionPrefix": "最近一次攝取",
+    "never": "從未",
+    "edit": "編輯",
+    "unpublish": "取消發佈",
+    "publish": "發佈",
+    "reindex": "重建索引",
+    "confirmPublish": "確認發佈該來源？",
+    "confirmUnpublish": "確認取消發佈該來源？",
+    "confirmReindex": "確認對該來源觸發重建索引？",
+    "noSources": "暫無來源。請先創建來源，再進行發佈和重建索引。",
+    "inboxBadge": "助手收件箱",
+    "inboxTitle": "已確認的訪客摘要會集中進入這個辦公室隊列。",
+    "inboxEmpty": "當前還沒有轉交記錄。先在網站助手中確認摘要後，這裡才會出現項目。",
+    "detailBadge": "轉交詳情",
+    "detailEmpty": "選擇一個轉交項目後，可查看訪客資料、摘要、會話預覽和內部備註。",
+    "detailSummary": "英文摘要",
+    "detailOriginal": "原始請求",
+    "detailRequestedAction": "請求動作",
+    "detailVisitor": "訪客資料",
+    "detailTranscript": "會話預覽",
+    "detailNotes": "內部備註",
+    "assigneePlaceholder": "填寫負責人",
+    "assignAction": "保存負責人",
+    "notePlaceholder": "添加內部備註",
+    "addNote": "添加備註",
+    "statusTriaged": "標記為已分揀",
+    "statusAssigned": "標記為已指派",
+    "statusResolved": "標記為已解決",
+    "statusDismissed": "駁回",
+    "confirmStatusChange": "確認更新此轉交狀態？",
+    "inboxSessionPrefix": "會話",
+    "inboxIntentPrefix": "意圖",
+    "inboxAssigneePrefix": "負責人",
+    "inboxUpdatedPrefix": "更新於",
+    "metricsBadge": "助手指標",
+    "metricsSessions": "會話數",
+    "metricsTurns": "輪次數",
+    "metricsConfirmed": "已確認轉交",
+    "metricsRateLimited": "限流次數"
+  },
+  "migratedPages": {
+    "businessBadge": "Business Items（已遷移）",
+    "businessTitle": "Business Items",
+    "factoryBadge": "群馬門店 / 工廠（已遷移）",
+    "factoryTitle": "群馬門店 / 工廠",
+    "welcomeBadge": "Welcome Note（已遷移）",
+    "welcomeTitle": "Welcome",
+    "accessBadge": "Access（已遷移）",
+    "accessTitle": "Access",
+    "inquiryBadge": "Inquiry（已遷移）",
+    "inquiryTitle": "Inquiry",
+    "legacyBadge": "已遷移舊站內容",
+    "legacyTitle": "舊站抓取數據集",
+    "legacyLead": "所有可訪問的舊站頁面已被抓取並轉換為結構化摘要，用於遷移到新網站。",
+    "legacyNoExcerpt": "該資源未提取到可讀文本。"
+  },
+  "home": {
+    "business": {
+      "display": "BUSINESS",
+      "subtitle": "三條業務通道，一體化循環供應",
+      "linkLabel": "查看業務"
+    },
+    "products": {
+      "display": "PRODUCTS",
+      "subtitle": "循環供應鏈的最新產品",
+      "linkLabel": "查看產品",
+      "viewMoreLabel": "查看更多產品"
+    },
+    "whatWeDo": {
+      "display": "WHAT WE DO",
+      "subtitle": "Kowa 的業務範圍",
+      "statement": "Kowa 在日本國內回收各類廢塑料並出口海外，出口的塑料經再加工後製成各類產品銷往全球。公司設立並營運再生工廠 G.P. Polymer，在推動出口的同時，也持續加強國內的再生加工。",
+      "linksLabel": "了解 Kowa",
+      "pillarsLabel": "我們的產品類別",
+      "historyLinkLabel": "查看完整歷程 →",
+      "categories": {
+        "plastics": "國內回收的廢塑料經分揀、破碎後，透過 G.P. Polymer 再生產線製成顆粒料，並完成出口。",
+        "generalGoods": "依託與塑料業務相同的貿易與物流網絡，開展日用百貨等商品的跨境採購與流通。",
+        "foods": "以同樣嚴謹的採購管理與出貨協調，為食品相關商品的貿易提供支援。",
+        "ffe": "為企業與產業客戶採購並供應家具、裝置及設備（FFE）。",
+        "timber": "在政府許可下計畫採伐的緬甸原木，經仰光合作工廠製材後直接進口的實木柚木地板。"
+      }
+    }
+  },
+  "businessPage": {
+    "display": "BUSINESS",
+    "subtitle": "業務介紹",
+    "breadcrumbAria": "麵包屑導航",
+    "breadcrumbHome": "TOP",
+    "breadcrumbCurrent": "業務介紹",
+    "intro": "Kowa 以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
+    "segmentsLabel": "業務板塊",
+    "offeringsProductsLabel": "查看產品",
+    "offeringsMachinesLabel": "查看設備",
+    "ctaTitle": "聯繫我們的貿易團隊",
+    "ctaBody": "無論您是採購再生樹脂、關注資源循環，還是探討貿易合作，只需填寫以下信息，我們的團隊將通過電子郵件與您聯繫。",
+    "ctaLabel": "聯繫我們"
+  }
+}

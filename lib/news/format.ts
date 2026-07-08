@@ -5,7 +5,8 @@ import type { NewsArticle, NewsArticleLocalization, NewsBodyBlock } from '@/lib/
 const DATE_LOCALES: Record<Locale, string> = {
   en: 'en-US',
   ja: 'ja-JP',
-  zh: 'zh-CN',
+  'zh-Hans': 'zh-CN',
+  'zh-Hant': 'zh-TW',
 };
 
 export function flattenNewsBodyBlocks(blocks: NewsBodyBlock[]): string {

@@ -8,10 +8,11 @@ async function assertLocaleSelector(page: Page) {
 
   await expect(select.locator('option[value="en"]')).toHaveText('EN');
   await expect(select.locator('option[value="ja"]')).toHaveText('JP');
-  await expect(select.locator('option[value="zh"]')).toHaveText('中文');
+  await expect(select.locator('option[value="zh-Hans"]')).toHaveText('SC');
+  await expect(select.locator('option[value="zh-Hant"]')).toHaveText('TC');
 }
 
-test('v7 task5 locale selector is visible with EN default and EN/JP/中文 options on core pages', async ({ page }) => {
+test('v7 task5 locale selector is visible with EN default and EN/JP/SC/TC options on core pages', async ({ page }) => {
   await page.goto('/');
   await assertLocaleSelector(page);
   await page.screenshot({ path: 'tests/screenshots/task5-step1-v7-locale-home.png', fullPage: true });
