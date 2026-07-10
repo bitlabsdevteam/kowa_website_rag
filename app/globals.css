@@ -5831,6 +5831,125 @@ a:focus-visible {
   }
 }
 
+/* Company history timeline — company_profile page. */
+.cp-timeline {
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(32px, 5vw, 56px);
+  border-top: 1px solid var(--color-line);
+  display: grid;
+  gap: 24px;
+}
+
+.cp-timeline-eyebrow {
+  margin: 0;
+  color: var(--color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cp-timeline-intro {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.cp-timeline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.cp-timeline-item {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: start;
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.cp-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 12px;
+  bottom: -10px;
+  width: 2px;
+  transform: translateX(-1px);
+  background: linear-gradient(180deg, var(--color-accent), rgba(45, 107, 73, 0.25));
+}
+
+.cp-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.cp-timeline-item:last-child::before {
+  bottom: auto;
+  height: 16px;
+}
+
+.cp-timeline-year {
+  position: relative;
+  padding-top: 3px;
+  padding-right: 12px;
+  text-align: right;
+  color: var(--color-accent-strong);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.cp-timeline-year::after {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--color-canvas);
+  border: 2.5px solid var(--color-accent);
+  z-index: 2;
+}
+
+.cp-timeline-card {
+  padding: 4px 0 0 20px;
+}
+
+.cp-timeline-card h3 {
+  margin: 0 0 4px;
+  color: var(--color-text);
+  font-size: 1.02rem;
+  font-weight: 700;
+}
+
+.cp-timeline-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .cp-timeline-item {
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .cp-timeline-item::before,
+  .cp-timeline-year::after {
+    left: 64px;
+  }
+}
+
 .company-profile-intro-panel,
 .company-profile-facts-panel,
 .company-profile-statement-card,
@@ -10252,6 +10371,58 @@ section.card,
 }
 
 /* --- Home: ABOUT block --------------------------------------------------- */
+/* Landing "Our Business" story band — moved here from the company profile
+   page as the scroll-driven narrative directly under the hero, ahead of the
+   business grid. Paragraphs drift at different rates via --story-parallax /
+   --story-parallax-offset (set inline from useScrollProgress) for a subtle
+   parallax read as the section crosses the viewport. */
+.home-business-story {
+  padding: clamp(40px, 7vw, 80px) 0;
+  background: var(--color-canvas);
+  text-align: center;
+  overflow: hidden;
+}
+
+.home-business-story-inner {
+  width: var(--content);
+  max-width: 52rem;
+  margin: 0 auto;
+  transform: translate3d(0, calc(var(--story-parallax, 0) * -18px), 0);
+  will-change: transform;
+}
+
+.home-business-story-title {
+  margin: 14px auto 0;
+  max-width: 44rem;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  line-height: 1.65;
+}
+
+.home-business-story-body {
+  display: grid;
+  gap: 18px;
+  margin-top: clamp(20px, 3vw, 32px);
+  text-align: left;
+}
+
+.home-business-story-paragraph {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  transform: translate3d(0, calc(var(--story-parallax, 0) * var(--story-parallax-offset, 1) * -14px), 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-business-story-inner,
+  .home-business-story-paragraph {
+    transform: none;
+  }
+}
+
 .home-about {
   padding: clamp(48px, 8vw, 96px) 0;
   border-top: 1px solid var(--color-line);
@@ -10270,6 +10441,25 @@ section.card,
   color: var(--color-text);
   font-size: 1.1rem;
   line-height: 1.7;
+}
+
+/* Landing "Machines" carousel — recycling-line photography, reuses the
+   card-fan carousel (components/ui/card-fan-carousel.tsx). */
+.home-machines {
+  padding: clamp(48px, 8vw, 96px) 0;
+  border-top: 1px solid var(--color-line);
+  background: var(--color-canvas);
+  text-align: center;
+}
+
+.home-machines-inner {
+  width: var(--content);
+  margin: 0 auto;
+}
+
+.home-machines-inner .card-fan,
+.home-machines-inner .card-fan-loading {
+  margin-top: 32px;
 }
 
 /* Editorial numbered list of Kowa's five business lines, sourced from
@@ -10565,6 +10755,37 @@ section.card,
   display: inline-flex;
   color: var(--color-accent);
   font-size: 0.8rem;
+}
+
+/* Products & Services explainer — /products, below the photo carousel. */
+.products-services-head {
+  max-width: 62ch;
+}
+
+.products-services-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.products-services-intro {
+  margin-top: 10px;
+}
+
+.products-services-grid {
+  margin-top: 28px;
+}
+
+@media (min-width: 900px) {
+  .products-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.products-services-card {
+  cursor: default;
+}
+
+.products-services-card:hover {
+  border-color: var(--color-line);
 }
 
 .business-flow-strip {

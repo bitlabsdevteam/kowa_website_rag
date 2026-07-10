@@ -22,15 +22,15 @@
   },
   "hero": {
     "eyebrow": "会社情報",
-    "title": "資源と産業を、次の世代へ循環させる。",
-    "titlePrefix": "資源と産業を、",
+    "title": "もう一度、資源へ。",
+    "titlePrefix": "もう一度、",
     "titleTyped": [
-      "次の世代へ循環させる。",
+      "資源へ。",
       "プラスチックから樹脂、機械まで循環させる。",
       "東京から世界のサプライチェーンへつなぐ。",
       "確かな循環型サプライチェーンへ。"
     ],
-    "lead": "国内での回収から海外への輸出まで、広和はプラスチックを止めることなく循環させます。よりクリーンなサプライチェーン、より少ない廃棄、確かな資源の再生を。",
+    "lead": "プラスチックのリサイクル事業を通じて、持続可能な社会の実現に貢献します。",
     "body": "1994年創業の東京の商社として、日本各地で廃プラスチック・ロス材を仕入れ、G.P.ポリマーの再生ラインで再資源化。再生材・樹脂の取引、バッテリーパック支援、産業機械の輸出入をグローバルに展開しています。",
     "cta": "Ayaに相談",
     "videoTitle": "Kowa ビデオクリップ",
@@ -69,20 +69,20 @@
     ]
   },
   "companyProfile": {
-    "title": "ビジョン",
-    "summary": "価値あるものを、決して無駄にしない世界へ。Kowaは、プラスチックと資源を循環させ続けることを使命とし、国境を越えて回収・再生・取引を行うことで、私たちが関わるすべてのサプライチェーンを、よりクリーンで、より循環型で、次の世代へと続くものにしていきます。",
-    "introLabel": "ビジョン",
-    "introTitle": "国内回収から世界への循環へ。",
-    "introBody": "旧会社案内では、Kowaをプラスチックを軸にした商社兼加工事業者として位置づけています。国内で回収し、必要に応じて再生加工し、資源を再び産業の流れへ戻すという考え方です。",
+    "title": "事業紹介",
+    "summary": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。",
+    "introLabel": "事業紹介",
+    "introTitle": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。",
+    "introBody": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。これらは現地で再加工され、新たな製品として世界中へ出荷されています。\n\nさらに、自社再生工場（ジー・ピー・ポリマー株式会社）と合弁工場(ジー・イー・ティー株式会社)を設立・稼働させ、輸出に留まらず国内でのリサイクル事業にも注力しています。企業様から買い取らせていただいた廃棄プラスチックやロス材を粉砕・再資源化することで、価値ある資源の国内循環を実現しています。\n\n当社の事業は、輸出先における現地産業の発展に不可欠な存在となっており、雇用の拡大や生活の安定など、多角的な形で地域社会の発展に貢献しています。",
     "statementLabel": "プロフィール本文",
     "statements": [
       {
         "language": "日本語",
-        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
+        "text": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。これらは現地で再加工され、新たな製品として世界中へ出荷されています。さらに、自社再生工場（ジー・ピー・ポリマー株式会社）と合弁工場(ジー・イー・ティー株式会社)を設立・稼働させ、輸出に留まらず国内でのリサイクル事業にも注力しています。企業様から買い取らせていただいた廃棄プラスチックやロス材を粉砕・再資源化することで、価値ある資源の国内循環を実現しています。当社の事業は、輸出先における現地産業の発展に不可欠な存在となっており、雇用の拡大や生活の安定など、多角的な形で地域社会の発展に貢献しています。"
       },
       {
         "language": "English",
-        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+        "text": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia. These materials are reprocessed locally into various products and shipped worldwide. To strengthen our domestic operations, we established and now operate our own recycling factory, GP Polymer Co., Ltd., and joint venture factory, Green Eco Technology Co., Ltd. By crushing and recycling waste materials and production losses purchased from our corporate partners, we successfully recirculate valuable resources. The waste plastics we source have become an indispensable asset to local industries in destination countries, driving job creation and supporting community stability."
       }
     ],
     "focusLabel": "運営の重点",
@@ -125,43 +125,48 @@
     "timeline": [
       {
         "year": "1993",
-        "title": "有限会社広和通商 設立",
-        "detail": "有限会社として広和通商を設立。"
+        "title": "設立",
+        "detail": "広和通商 有限会社を設立。"
       },
       {
         "year": "1994",
-        "title": "株式会社へ組織変更",
-        "detail": "資本金1,000万円に増資し、株式会社として組織変更。"
+        "title": "組織変更",
+        "detail": "資本金１０００万円に増資し、プラスチック原料の輸出入に伴い広和通商株式会社として組織変更。"
       },
       {
         "year": "2003",
         "title": "群馬流通倉庫 稼働",
-        "detail": "北関東地方の拠点として群馬自社流通倉庫が稼働。"
+        "detail": "北関東地方拠点として群馬自社流通倉庫が稼働。"
       },
       {
         "year": "2005",
         "title": "富士流通倉庫 稼働",
-        "detail": "東海地方の拠点として富士流通倉庫が稼働。"
+        "detail": "東海地方拠点として富士流通倉庫が稼働。"
+      },
+      {
+        "year": "2007",
+        "title": "群馬工場・G.P.ポリマー設立",
+        "detail": "群馬県伊勢崎市に工場兼物流倉庫を購入し、ジー・ピー・ポリマー株式会社を設立。"
       },
       {
         "year": "2015",
-        "title": "資本金を増資",
-        "detail": "資本金を5,000万円へ増資。"
+        "title": "増資",
+        "detail": "資本金5,000万円に増資。"
       },
       {
         "year": "2016",
-        "title": "群馬加工工場 竣工",
-        "detail": "群馬加工工場が竣工し、大型破砕・粉砕機1号機を導入。"
+        "title": "群馬加工工場竣工",
+        "detail": "群馬加工工場が竣工し、大型破砕・粉砕１号機を導入。"
       },
       {
         "year": "2017",
-        "title": "大型ミキサー導入",
-        "detail": "加工体制の拡張として大型ミキサーを導入。"
+        "title": "リボンミキサー導入",
+        "detail": "大型リボンミキサーを導入。"
       },
       {
         "year": "2019",
-        "title": "2号機導入",
-        "detail": "大型破砕・粉砕機2号機を導入。"
+        "title": "破砕・粉砕2号機導入",
+        "detail": "大型破砕、粉砕2号機を導入。"
       }
     ]
   },
@@ -460,6 +465,19 @@
         "ffe": "家具・什器・設備（FFE）を法人・産業向けに調達・供給しています。",
         "timber": "政府許可のもと計画伐採されたミャンマー産原木を、ヤンゴンの提携工場で製材した無垢チークフローリングを直輸入しています。"
       }
+    },
+    "machines": {
+      "display": "MACHINES",
+      "subtitle": "群馬工場の処理ラインより",
+      "slides": [
+        "破砕工程へつながる選別・投入ライン",
+        "スクラップをリグラインドへ処理するシュレッダー",
+        "破砕チャンバーへのコンベア投入"
+      ]
+    },
+    "mission": {
+      "display": "OUR MISSION",
+      "statement": "私たちは常に顧客の視点に立ち、地球の限られた資源を有効かつ大切に扱いながら、持続可能で環境に優しい社会の実現を目指してまいります。"
     }
   },
   "businessPage": {

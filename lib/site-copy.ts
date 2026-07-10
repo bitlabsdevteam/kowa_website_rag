@@ -145,6 +145,17 @@ type HomeSections = {
       timber: string;
     };
   };
+  machines: {
+    display: string;
+    subtitle: string;
+    /** Localized captions for the recycling-line photos in the carousel, in display order. */
+    slides: string[];
+  };
+  /** Company mission statement, shown in a dedicated band right after the hero. */
+  mission: {
+    display: string;
+    statement: string;
+  };
 };
 
 type BusinessPageSection = PageHeaderCrumbLabels & {

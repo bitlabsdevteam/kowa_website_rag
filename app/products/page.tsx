@@ -10,6 +10,7 @@ import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
 import { PRODUCT_MEDIA, PRODUCT_TOP_CATEGORY_ORDER, type ProductFamily, type ProductTopCategory } from '@/lib/product-media';
 import { PRODUCT_FAMILY_COPY } from '@/lib/product-showcase-copy';
+import { PRODUCT_SERVICES_COPY } from '@/lib/product-services-copy';
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
@@ -30,7 +31,18 @@ const PLASTICS_FORM_ORDER: PlasticsForm[] = ['pellet', 'crushed'];
 
 const PLASTICS_FAMILIES_BY_FORM: Record<PlasticsForm, ProductFamily[]> = {
   crushed: ['abs-crushed', 'hdpe-crushed', 'hips-crushed', 'pp-crushed'],
-  pellet: ['gpps-pellet', 'hdpe-pellet', 'pc-pellet', 'pcr-pellet', 'pir-pellet', 'pp-pellet', 'ps-pellet'],
+  pellet: [
+    'gpps-pellet',
+    'hdpe-pellet',
+    'pc-pellet',
+    'pcr-pellet',
+    'pir-pellet',
+    'pp-pellet',
+    'ps-pellet',
+    'rpp-pellet',
+    'rhips-pellet',
+    'rabs-pellet',
+  ],
 };
 
 function isPlasticsForm(value: string | null): value is PlasticsForm {
@@ -165,6 +177,25 @@ function ProductsPageContent() {
             </Link>
           </div>
         )}
+      </section>
+
+      <section className="card page-surface corporate-content-surface products-services-surface" aria-labelledby="products-services-heading">
+        <div className="products-services-head">
+          <span className="eyebrow">{PRODUCT_SERVICES_COPY[locale].label}</span>
+          <h2 className="page-title products-services-title" id="products-services-heading">
+            {PRODUCT_SERVICES_COPY[locale].title}
+          </h2>
+          <p className="body-copy products-services-intro">{PRODUCT_SERVICES_COPY[locale].intro}</p>
+        </div>
+
+        <div className="offering-cards products-services-grid">
+          {PRODUCT_SERVICES_COPY[locale].services.map((service) => (
+            <div key={service.title} className="offering-card products-services-card">
+              <p className="offering-card-title">{service.title}</p>
+              <p className="offering-card-body">{service.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       <LocalizedFooter copy={copy} />

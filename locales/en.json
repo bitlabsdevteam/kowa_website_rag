@@ -22,15 +22,15 @@
   },
   "hero": {
     "eyebrow": "ABOUT",
-    "title": "Circulating resources, powering industries, for the next generation.",
-    "titlePrefix": "Circulating resources, powering industries, ",
+    "title": "Back to Resources, Forward to the Future.",
+    "titlePrefix": "Back to Resources,",
     "titleTyped": [
-      "for the next generation.",
+      "Forward to the Future.",
       "across plastics, resin, and machinery.",
       "from Tokyo to global supply chains.",
       "one circular supply chain at a time."
     ],
-    "lead": "From domestic collection to global export, Kowa keeps plastics in continuous motion: cleaner supply chains, less waste, and real resource recovery.",
+    "lead": "Contributing to society through our innovative plastic recycling business.",
     "body": "A Tokyo trading partner since 1994: we buy waste and loss plastics across Japan, regenerate them through our G.P. Polymer line, and trade recycled material, resin, battery-pack support, and industrial machinery worldwide.",
     "cta": "Talk to Aya",
     "videoTitle": "Kowa Video Clip",
@@ -69,20 +69,20 @@
     ]
   },
   "companyProfile": {
-    "title": "Vision",
-    "summary": "A world where nothing of value is wasted. Kowa exists to keep plastics and resources in continuous circulation, collecting, regenerating, and trading materials across borders so that every supply chain we serve becomes cleaner, more circular, and more resilient for the generations ahead.",
-    "introLabel": "Vision",
-    "introTitle": "From domestic collection to global circulation.",
-    "introBody": "The legacy profile frames Kowa as a plastics-centered trading and processing company: collect domestically, regenerate where needed, and return usable resources to industrial supply chains.",
+    "title": "Our Business",
+    "summary": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia.",
+    "introLabel": "OUR BUSINESS",
+    "introTitle": "We collect and process various types of waste plastics within Japan, exporting them to overseas markets.",
+    "introBody": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia. These materials are reprocessed locally into various products and shipped worldwide.\n\nTo strengthen our domestic operations, we established and now operate our own recycling factory, GP Polymer Co., Ltd., and joint venture factory, Green Eco Technology Co., Ltd. By crushing and recycling waste materials and production losses purchased from our corporate partners, we successfully recirculate valuable resources.\n\nThe waste plastics we source have become an indispensable asset to local industries in destination countries, driving job creation and supporting community stability.",
     "statementLabel": "Source narrative",
     "statements": [
       {
         "language": "Japanese",
-        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
+        "text": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。これらは現地で再加工され、新たな製品として世界中へ出荷されています。さらに、自社再生工場（ジー・ピー・ポリマー株式会社）と合弁工場(ジー・イー・ティー株式会社)を設立・稼働させ、輸出に留まらず国内でのリサイクル事業にも注力しています。企業様から買い取らせていただいた廃棄プラスチックやロス材を粉砕・再資源化することで、価値ある資源の国内循環を実現しています。当社の事業は、輸出先における現地産業の発展に不可欠な存在となっており、雇用の拡大や生活の安定など、多角的な形で地域社会の発展に貢献しています。"
       },
       {
         "language": "English",
-        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+        "text": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia. These materials are reprocessed locally into various products and shipped worldwide. To strengthen our domestic operations, we established and now operate our own recycling factory, GP Polymer Co., Ltd., and joint venture factory, Green Eco Technology Co., Ltd. By crushing and recycling waste materials and production losses purchased from our corporate partners, we successfully recirculate valuable resources. The waste plastics we source have become an indispensable asset to local industries in destination countries, driving job creation and supporting community stability."
       }
     ],
     "focusLabel": "Operating priorities",
@@ -126,42 +126,47 @@
       {
         "year": "1993",
         "title": "Foundation",
-        "detail": "Kowa Tsusho was founded as a limited company."
+        "detail": "Established Kowa Trade and Commerce (Limited Company)."
       },
       {
         "year": "1994",
         "title": "Corporate reorganization",
-        "detail": "Capital increased to 10 million yen and the company reorganized as a joint-stock company."
+        "detail": "Increased capital to 10 million yen and reorganized into Kowa Trade and Commerce Co., Ltd. to handle the import and export of plastic materials."
       },
       {
         "year": "2003",
-        "title": "North-Kanto logistics base",
-        "detail": "A self-operated Gunma distribution warehouse started operations as the North-Kanto base."
+        "title": "Gunma Distribution Center",
+        "detail": "Opened and commenced operations at the Gunma Distribution Center as a base for the Northern Kanto region."
       },
       {
         "year": "2005",
-        "title": "Tokai warehouse start",
-        "detail": "Fuji distribution warehouse began operating as the Tokai regional base."
+        "title": "Fuji Distribution Center",
+        "detail": "Opened and commenced operations at the Fuji Distribution Center as a base for the Tokai region."
+      },
+      {
+        "year": "2007",
+        "title": "Gunma factory and G.P. Polymer",
+        "detail": "Purchased a factory and logistics warehouse in Isesaki City, Gunma Prefecture, and established G.P. Polymer Co., Ltd."
       },
       {
         "year": "2015",
         "title": "Capital expansion",
-        "detail": "Capital increased to 50 million yen."
+        "detail": "Increased capital to 50 million yen."
       },
       {
         "year": "2016",
         "title": "Gunma processing factory",
-        "detail": "The Gunma processing factory was completed and the first large crushing and grinding line was introduced."
+        "detail": "Completed construction of the Gunma Processing Factory and introduced the first large-scale crushing and shredding machine."
       },
       {
         "year": "2017",
-        "title": "Mixer installation",
-        "detail": "A large industrial mixer was added to the processing setup."
+        "title": "Ribbon mixer",
+        "detail": "Introduced a large-scale ribbon mixer."
       },
       {
         "year": "2019",
         "title": "Second crushing line",
-        "detail": "A second large crushing and grinding machine was introduced."
+        "detail": "Introduced the second large-scale crushing and shredding machine."
       }
     ]
   },
@@ -460,6 +465,19 @@
         "ffe": "Furniture, fixtures, and equipment sourced and distributed for commercial and industrial buyers.",
         "timber": "Solid Myanmar teak flooring, milled at a Yangon partner factory from government-licensed logs and imported direct."
       }
+    },
+    "machines": {
+      "display": "MACHINES",
+      "subtitle": "Inside the Gunma processing line",
+      "slides": [
+        "Sorting and bagging line feeding the crushing stage",
+        "Shredder unit reducing scrap to regrind",
+        "Conveyor feed into the shredding chamber"
+      ]
+    },
+    "mission": {
+      "display": "OUR MISSION",
+      "statement": "Guided by a customer-centric approach, we are dedicated to maximizing the value of the Earth's limited resources, ensuring a sustainable global circulation for generations to come."
     }
   },
   "businessPage": {

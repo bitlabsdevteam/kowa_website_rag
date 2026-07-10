@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kowa circulates resources and powers industries: a rotating recycling symbol at the center pulses energy out along three spokes to resin procurement, plant machinery, and battery-pack support">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Kowa's plastic recycling loop: collected waste plastic travels a continuous circular path, is crushed and reprocessed, and returns as fresh regenerated pellets — resources circulating back to the start">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#1d5a3a"/>
@@ -15,7 +15,7 @@
     </linearGradient>
 
     <!-- One chasing arrow; rotated three times to build the recycling symbol
-         at the hub — "one circular supply" that unifies the three lanes. -->
+         at the hub — the "engine" driving the loop around it. -->
     <path id="arrow" d="M259.05 418.7
       A150 150 0 0 1 506.07 363.93
       L518.8 351.2
@@ -24,20 +24,27 @@
       L483.44 386.56
       A118 118 0 0 0 289.1 429.6 Z" fill="url(#arrowFill)"/>
 
-    <!-- Resin drum — synthetic-resin procurement & distribution lane. -->
-    <path id="drum" d="M-15 -32 Q-15 -38 0 -38 Q15 -38 15 -32 L15 32 Q15 38 0 38 Q-15 38 -15 32 Z
-      M-15 -9 Q0 -4 15 -9 M-15 9 Q0 14 15 9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Waste-plastic fragment — the loop's intake stage. -->
+    <path id="frag" d="M-16 -10 L-4 -22 L10 -14 L18 -18 L20 2 L8 14 L-10 20 L-20 6 Z" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
 
-    <!-- Battery-pack module — battery-pack support & processing-line lane. -->
-    <path id="battery" d="M-19 -24 L19 -24 L19 24 L-19 24 Z M-7 -24 L-7 -30 L7 -30 L7 -24
-      M0 -9 L0 9 M-9 0 L9 0" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-
-    <!-- Industrial gear — plant machinery & processing-line readiness lane. -->
+    <!-- Crushing / reprocessing gear — the loop's mid stage. -->
     <path id="gear" d="M0 -22 L4.5 -22 L6 -15.5 L12 -13.3 L17 -17.7 L20.7 -14 L16.3 -9 L18.5 -3 L25 -1.5 L25 3 L18.5 4.5 L16.3 10.5 L20.7 15.5 L17 19.2 L12 14.8 L6 17 L4.5 23.5 L0 23.5 L-1.5 17 L-7.5 14.8 L-12.5 19.2 L-16.2 15.5 L-11.8 10.5 L-14 4.5 L-20.5 3 L-20.5 -1.5 L-14 -3 L-11.8 -9 L-16.2 -14 L-12.5 -17.7 L-7.5 -13.3 L-1.5 -15.5 Z
       M0 -7.5 A7.5 7.5 0 1 0 0.1 -7.5 Z" fill="none" stroke-linejoin="round"/>
 
-    <!-- Reusable lane badge: soft glass disc that frames each business-lane icon. -->
+    <!-- Regenerated pellets — the loop's output stage, feeding back to intake. -->
+    <g id="pellets">
+      <circle cx="-8" cy="-4" r="6"/>
+      <circle cx="7" cy="-6" r="5"/>
+      <circle cx="0" cy="8" r="6.5"/>
+    </g>
+
+    <!-- Reusable stage badge: soft glass disc that frames each loop-stage icon. -->
     <circle id="badge-disc" r="46" fill="rgba(244,241,234,0.07)" stroke="#f4f1ea" stroke-opacity="0.32" stroke-width="1.5"/>
+
+    <!-- Hidden circular path (radius 260, centered on the hub) driving the
+         clockwise material flow: intake (top) → crushing (lower-right) →
+         pellet output (lower-left) → back to intake. -->
+    <path id="loop-path" d="M660 470 A260 260 0 1 1 140 470 A260 260 0 1 1 660 470 Z" fill="none" stroke="none"/>
   </defs>
 
   <rect width="800" height="1000" fill="url(#bg)"/>
@@ -49,77 +56,66 @@
     <path d="M-13 -75 L13 -75 L13 -65 L18 -60 Q22 -56 22 -48 L22 60 Q22 75 7 75 L-7 75 Q-22 75 -22 60 L-22 -48 Q-22 -56 -18 -60 L-13 -65 Z" transform="translate(210 900) scale(0.55) rotate(12)"/>
   </g>
 
-  <!-- orbit ring: the path the three lanes travel around the circulation hub -->
-  <circle cx="400" cy="470" r="300" fill="none" stroke="#f4f1ea" stroke-opacity="0.16" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round"/>
+  <!-- the circulation loop: a dashed ring tracing the path material travels
+       around the hub -->
+  <circle cx="400" cy="470" r="260" fill="none" stroke="#f4f1ea" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round"/>
   <circle cx="400" cy="470" r="222" fill="none" stroke="#f4f1ea" stroke-opacity="0.09" stroke-width="1"/>
 
-  <!-- spokes connecting the circulation hub to each business-lane badge -->
-  <g stroke="#f4f1ea" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round">
-    <line id="spoke-resin" x1="400" y1="470" x2="478" y2="180"/>
-    <line id="spoke-machinery" x1="400" y1="470" x2="682" y2="573"/>
-    <line id="spoke-battery" x1="400" y1="470" x2="348" y2="765"/>
-  </g>
-
-  <!-- power pulses: the hub's regenerated output travelling out to each trading
-       lane, reading as the circulation actively powering resin, machinery, and
-       battery-pack operations rather than three static orbiting badges. -->
+  <!-- flowing material: three markers travelling the loop continuously,
+       clockwise from intake to crushing to pellet output and back — reading
+       as resources actively circulating rather than static stage icons. -->
   <g fill="#9ed7ba">
-    <circle r="5">
-      <animateMotion dur="2.6s" begin="0s" repeatCount="indefinite">
-        <mpath href="#spoke-resin"/>
+    <circle r="6">
+      <animateMotion dur="8s" begin="0s" repeatCount="indefinite">
+        <mpath href="#loop-path"/>
       </animateMotion>
-      <animate attributeName="opacity" values="0;0.9;0" dur="2.6s" begin="0s" repeatCount="indefinite"/>
     </circle>
-    <circle r="5">
-      <animateMotion dur="2.6s" begin="0.85s" repeatCount="indefinite">
-        <mpath href="#spoke-machinery"/>
+    <circle r="6">
+      <animateMotion dur="8s" begin="-2.67s" repeatCount="indefinite">
+        <mpath href="#loop-path"/>
       </animateMotion>
-      <animate attributeName="opacity" values="0;0.9;0" dur="2.6s" begin="0.85s" repeatCount="indefinite"/>
     </circle>
-    <circle r="5">
-      <animateMotion dur="2.6s" begin="1.7s" repeatCount="indefinite">
-        <mpath href="#spoke-battery"/>
+    <circle r="6">
+      <animateMotion dur="8s" begin="-5.33s" repeatCount="indefinite">
+        <mpath href="#loop-path"/>
       </animateMotion>
-      <animate attributeName="opacity" values="0;0.9;0" dur="2.6s" begin="1.7s" repeatCount="indefinite"/>
     </circle>
   </g>
 
-  <!-- lane 1: resin procurement & distribution -->
-  <g transform="translate(478 180)">
+  <!-- stage 1: waste-plastic intake -->
+  <g transform="translate(400 210)">
     <use href="#badge-disc"/>
     <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="3">
-      <use href="#drum"/>
+      <use href="#frag"/>
     </g>
   </g>
 
-  <!-- lane 2: plant machinery & processing-line operations -->
-  <g transform="translate(682 573)">
+  <!-- stage 2: crushing / reprocessing -->
+  <g transform="translate(625 600)">
     <use href="#badge-disc"/>
     <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="2.6">
       <use href="#gear"/>
     </g>
   </g>
 
-  <!-- lane 3: battery-pack support -->
-  <g transform="translate(348 765)">
+  <!-- stage 3: regenerated pellet output, feeding back to intake -->
+  <g transform="translate(175 600)">
     <use href="#badge-disc"/>
-    <g stroke="#f4f1ea" stroke-opacity="0.85" stroke-width="3">
-      <use href="#battery"/>
+    <g fill="#f4f1ea" fill-opacity="0.85">
+      <use href="#pellets"/>
     </g>
   </g>
 
   <!-- circulation hub: three chasing arrows (Mobius triskelion), slowly
-       rotating to read as a living circulation, not a static badge. -->
-  <g>
-    <animateTransform attributeName="transform" type="rotate" from="0 400 470" to="360 400 470" dur="90s" repeatCount="indefinite"/>
-    <use href="#arrow"/>
-    <use href="#arrow" transform="rotate(120 400 470)"/>
-    <use href="#arrow" transform="rotate(240 400 470)"/>
+       rotating to read as a living circulation at the heart of the loop. -->
+  <g transform="translate(400 470) scale(0.62) translate(-400 -470)">
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 400 470" to="360 400 470" dur="90s" repeatCount="indefinite"/>
+      <use href="#arrow"/>
+      <use href="#arrow" transform="rotate(120 400 470)"/>
+      <use href="#arrow" transform="rotate(240 400 470)"/>
+    </g>
   </g>
-
-  <!-- resin number "07 / OTHER"-style hint at the heart of the loop -->
-  <circle cx="400" cy="470" r="58" fill="none" stroke="#f4f1ea" stroke-opacity="0.22" stroke-width="2"/>
-  <text x="400" y="484" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="42" font-weight="700" fill="#f4f1ea" fill-opacity="0.9">07</text>
 
   <!-- drifting resin pellets, gently pulsing to suggest continuous motion -->
   <g fill="#f4f1ea">

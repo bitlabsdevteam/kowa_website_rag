@@ -36,3 +36,30 @@ export const MACHINE_CATALOG: MachineCatalogItem[] = [
     sourceFile: 'images/DSC_0028.JPG',
   },
 ];
+
+/** Home-page "Machines" carousel: recycling-line photography from the Gunma
+ * plant, distinct from MACHINE_CATALOG above (used on /machines). Order
+ * matches `home.machines.slides` captions in locales/*.json. */
+export const HOME_MACHINE_CAROUSEL: MachineCatalogItem[] = [
+  {
+    id: 'sorting-bagging-line',
+    legacyLabel: 'Sorting and Bagging Line',
+    displayOrder: 1,
+    src: '/images/products/machine-line-0005.jpg',
+    sourceFile: 'Factory_Machines_images/DSC_0005.JPG',
+  },
+  {
+    id: 'shredder-unit',
+    legacyLabel: 'Shredder Unit',
+    displayOrder: 2,
+    src: '/images/products/machine-shredder-0008.jpg',
+    sourceFile: 'Factory_Machines_images/DSC_0008.JPG',
+  },
+  {
+    id: 'shredder-conveyor-feed',
+    legacyLabel: 'Shredder Conveyor Feed',
+    displayOrder: 3,
+    src: '/images/products/dsc-0011.jpg',
+    sourceFile: 'Factory_Machines_images/DSC_0011.JPG',
+  },
+];
