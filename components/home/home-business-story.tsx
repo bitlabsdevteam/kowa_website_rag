@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
+import { Typewriter } from '@/components/ui/typewriter';
 import type { SiteCopy } from '@/lib/site-copy';
 
 type HomeBusinessStoryProps = {
@@ -35,7 +36,16 @@ export function HomeBusinessStory({ copy }: HomeBusinessStoryProps) {
         <p className="section-heading-display" id="home-business-story-heading">
           {profile.introLabel}
         </p>
-        <h2 className="home-business-story-title">{profile.introTitle}</h2>
+        <h2 className="home-business-story-title">
+          <Typewriter
+            text={profile.introTitle}
+            speed={35}
+            initialDelay={200}
+            loop={false}
+            showCursor
+            cursorClassName="typewriter-cursor home-business-story-cursor"
+          />
+        </h2>
         <div className="home-business-story-body">
           {paragraphs.map((paragraph, index) => (
             <p

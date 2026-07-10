@@ -9523,6 +9523,13 @@ html:lang(en) .reference-section-title {
   display: none;
 }
 
+/* Intro-title sentence on the landing page's business-story section types in
+   on load via components/ui/typewriter.tsx; cursor picks up the accent so it
+   reads as a live cue rather than stray punctuation. */
+.home-business-story-cursor {
+  color: var(--color-accent);
+}
+
 /* Hero headline: the typed tail picks up the forest-green accent so the
    rotating phrase reads as the emphasized clause. */
 .hero-title-typed {
@@ -10782,10 +10789,26 @@ section.card,
 
 .products-services-card {
   cursor: default;
+  padding: 22px 24px;
 }
 
 .products-services-card:hover {
   border-color: var(--color-line);
+}
+
+/* Elevate title over body copy — the base .offering-card sizes (0.95rem
+   title / 0.85rem body) read too flat for this longer, denser service list. */
+.products-services-card .offering-card-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.products-services-card .offering-card-body {
+  margin-top: 10px;
+  font-size: 0.92rem;
+  line-height: 1.65;
 }
 
 .business-flow-strip {
