@@ -19,11 +19,6 @@ const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoo
   timber: 'timber',
 };
 
-/** Per-card parallax depth (px of translateZ per unit drift) — alternating
- * signs so neighbouring cards counter-drift and the row reads as a 3D relief
- * rather than a flat sheet sliding together. */
-const CARD_DEPTHS = [46, -28, 64, -36, 52];
-
 export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
   const ui = copy.home.business;
   const tabs = copy.products.categories.tabs;
@@ -35,7 +30,7 @@ export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
         <p className="section-heading-subtitle">{ui.subtitle}</p>
 
         <div className="segment-cards segment-cards--five">
-          {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
+          {PRODUCT_TOP_CATEGORY_ORDER.map((category) => {
             const title = tabs[CATEGORY_TAB_COPY_KEY[category]];
             const image = TOP_CATEGORY_IMAGE[category];
 
@@ -44,7 +39,6 @@ export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
                 key={category}
                 href={`/products?category=${category}`}
                 className="segment-card"
-                style={{ '--card-depth': CARD_DEPTHS[index % CARD_DEPTHS.length] } as React.CSSProperties}
               >
                 <div className={`segment-card-media${image ? '' : ' segment-card-media--placeholder'}`}>
                   {image ? (

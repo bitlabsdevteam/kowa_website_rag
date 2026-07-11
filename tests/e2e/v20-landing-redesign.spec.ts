@@ -6,7 +6,7 @@ import en from '../../locales/en.json' with { type: 'json' };
 // WHAT WE DO sticky-media split.
 
 test.describe('hero circulation visual', () => {
-  test('renders the image-free 3D scene (or fallback) with four labelled stage nodes', async ({ page }) => {
+  test('renders the image-free 3D scene (or fallback) with the wireframe globe', async ({ page }) => {
     await page.goto('/');
 
     const visual = page.locator('[data-testid="hero-circulation"]');
@@ -20,13 +20,11 @@ test.describe('hero circulation visual', () => {
     // The redesigned visual is image-free — no photography inside the pane.
     await expect(visual.locator('img')).toHaveCount(0);
 
-    // Four glass nodes carrying the verified circulation-stage labels, in order.
-    const nodes = visual.locator('.hero-circulation-node-label');
-    await expect(nodes).toHaveCount(4);
-    await expect(nodes.nth(0)).toHaveText(en.business.flowPhases[0].nodeLabel);
-    await expect(nodes.nth(1)).toHaveText(en.business.flowPhases[1].nodeLabel);
-    await expect(nodes.nth(2)).toHaveText(en.business.flowPhases[2].nodeLabel);
-    await expect(nodes.nth(3)).toHaveText(en.business.flowPhases[3].nodeLabel);
+    // The wireframe globe: dashed outer ring plus meridian/latitude hairlines,
+    // and no text labels.
+    await expect(visual.locator('.hero-circulation-arc')).toHaveCount(1);
+    await expect(visual.locator('.hero-circulation-arc-grid')).toHaveCount(1);
+    await expect(visual.locator('.hero-circulation-node-label')).toHaveCount(0);
 
     // Two pulse beads orbit the arc.
     await expect(visual.locator('.hero-circulation-pulse')).toHaveCount(2);
@@ -65,7 +63,7 @@ test.describe('hero circulation visual', () => {
 });
 
 test.describe('our business / products parallax', () => {
-  test('cards travel their depth transforms mid-scroll', async ({ page }) => {
+  test('cards sit level while the ghost watermark drifts mid-scroll', async ({ page }) => {
     await page.goto('/');
 
     const wrapper = page.locator('[data-testid="home-business-parallax"]');
@@ -81,21 +79,31 @@ test.describe('our business / products parallax', () => {
     // The grid heading now reads PRODUCTS.
     await expect(page.locator('#business .section-heading-display')).toHaveText(en.home.business.display);
 
+    const ghost = page.locator('[data-testid="home-business-band-products"] .home-business-band-ghost');
+
     // Scroll until the grid is mid-viewport so --biz-drift is non-zero.
     await page.locator('#business').scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollBy(0, 200));
     await page.waitForTimeout(300);
 
-    const transform = await page
+    // The ghost watermark still carries the band's scroll parallax…
+    const ghostBefore = await ghost.evaluate((el) => getComputedStyle(el).transform);
+    await page.evaluate(() => window.scrollBy(0, 200));
+    await page.waitForTimeout(300);
+    const ghostAfter = await ghost.evaluate((el) => getComputedStyle(el).transform);
+    expect(ghostAfter).not.toBe(ghostBefore);
+
+    // …but the cards themselves sit level and equal — no per-card 3D transform.
+    const cardTransform = await page
       .locator('.segment-card')
       .first()
       .evaluate((element) => getComputedStyle(element).transform);
-    expect(transform).not.toBe('none');
+    expect(cardTransform).toBe('none');
 
     await page.screenshot({ path: 'tests/screenshots/v20-02-business-parallax.png', fullPage: false });
   });
 
-  test('reduced motion pins every parallax transform flat', async ({ browser }) => {
+  test('reduced motion pins the ghost watermark flat', async ({ browser }) => {
     const context = await browser.newContext({ reducedMotion: 'reduce' });
     const page = await context.newPage();
     await page.goto('/');
@@ -103,11 +111,20 @@ test.describe('our business / products parallax', () => {
     await page.locator('#business').scrollIntoViewIfNeeded();
     await page.waitForTimeout(300);
 
-    const transform = await page
+    // Cards stay level (they never carry a transform now)…
+    const cardTransform = await page
       .locator('.segment-card')
       .first()
       .evaluate((element) => getComputedStyle(element).transform);
-    expect(transform).toBe('none');
+    expect(cardTransform).toBe('none');
+
+    // …and the ghost watermark no longer drifts with scroll.
+    const ghost = page.locator('[data-testid="home-business-band-products"] .home-business-band-ghost');
+    const ghostBefore = await ghost.evaluate((el) => getComputedStyle(el).transform);
+    await page.evaluate(() => window.scrollBy(0, 200));
+    await page.waitForTimeout(300);
+    const ghostAfter = await ghost.evaluate((el) => getComputedStyle(el).transform);
+    expect(ghostAfter).toBe(ghostBefore);
 
     await context.close();
   });

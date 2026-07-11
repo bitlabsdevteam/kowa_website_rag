@@ -10164,10 +10164,9 @@ html:lang(en) .reference-section-title {
 }
 
 /* --- Hero media: resource-circulation composition ---------------------------
-   The 3D stage-ring scene (or its static poster) fills the pane; three photo
-   chips — scrap regrind → regenerated pellet → the Gunma line — sit on a
-   slowly rotating dashed arc and drift at different depths off the hero
-   scroll progress (--hero-progress, set inline by HeroCirculationVisual). */
+   The 3D stage-ring scene (or its static poster) fills the pane; a slowly
+   rotating wireframe globe (dashed outer ring + meridian/latitude hairlines)
+   sits over it, with two glowing pulse dots orbiting the outer ring. */
 .hero-circulation {
   position: absolute;
   inset: 0;
@@ -10203,73 +10202,10 @@ html:lang(en) .reference-section-title {
   }
 }
 
-/* Four stage-marker nodes sit at compass points on the arc — each a small
-   white-glass pill (same family as the section cards) carrying its verified
-   circulation-stage label, drifting vertically off the hero scroll progress
-   at its own depth (--node-depth, set inline by HeroCirculationVisual).
-   --par is the shared parallax offset; each position variant composes it with
-   its own centering translate so the transform stays single-source. */
-.hero-circulation-node {
-  --par: calc(var(--hero-progress, 0) * var(--node-depth, 1) * -44px);
-  position: absolute;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
-  max-width: 44%;
-  padding: 8px 14px;
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius-pill);
-  background: var(--glass-raised);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  box-shadow: var(--shadow-card);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  will-change: transform;
-}
-
-.hero-circulation-node-index {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  color: var(--color-accent);
-}
-
-.hero-circulation-node-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: #15233f;
-}
-
-.hero-circulation-node--1 {
-  /* 12 o'clock */
-  top: 11%;
-  left: 50%;
-  transform: translate3d(-50%, var(--par), 0);
-}
-
-.hero-circulation-node--2 {
-  /* 3 o'clock */
-  top: 50%;
-  right: 6%;
-  transform: translate3d(0, calc(-50% + var(--par)), 0);
-}
-
-.hero-circulation-node--3 {
-  /* 6 o'clock */
-  bottom: 11%;
-  left: 50%;
-  transform: translate3d(-50%, var(--par), 0);
-}
-
-.hero-circulation-node--4 {
-  /* 9 o'clock — sits inside the pane's diagonal left edge so its index
-     numeral never clips. */
-  top: 50%;
-  left: 10%;
-  transform: translate3d(0, calc(-50% + var(--par)), 0);
+/* Interior globe hairlines sit fainter than the dashed outer ring so the
+   sphere reads as depth, not a flat grid. */
+.hero-circulation-arc-grid {
+  opacity: 0.55;
 }
 
 /* Two glowing beads orbit the arc at different rates (one reversed), tracing
@@ -10315,29 +10251,10 @@ html:lang(en) .reference-section-title {
   }
 }
 
-/* Stacked mobile pane: taller stage, tighter node pills tucked toward centre
-   so the four markers never collide on the narrower stage. */
+/* Stacked mobile pane: taller stage for the globe. */
 @media (max-width: 767px) {
   .hero-section-media {
     min-height: 400px;
-  }
-
-  .hero-circulation-node {
-    padding: 6px 11px;
-    max-width: 52%;
-  }
-
-  .hero-circulation-node-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.07em;
-  }
-
-  .hero-circulation-node--2 {
-    right: 3%;
-  }
-
-  .hero-circulation-node--4 {
-    left: 3%;
   }
 }
 
@@ -10349,16 +10266,6 @@ html:lang(en) .reference-section-title {
   .hero-circulation-pulse {
     animation: none;
     opacity: 0;
-  }
-
-  .hero-circulation-node--1,
-  .hero-circulation-node--3 {
-    transform: translate3d(-50%, 0, 0);
-  }
-
-  .hero-circulation-node--2,
-  .hero-circulation-node--4 {
-    transform: translate3d(0, -50%, 0);
   }
 }
 
@@ -10629,32 +10536,17 @@ section.card,
   background: transparent;
 }
 
-.home-business-band .segment-grid-inner {
-  perspective: 1400px;
-  perspective-origin: 50% 30%;
-}
-
-.home-business-band .segment-cards--five {
-  transform-style: preserve-3d;
-  transform: rotateX(calc(var(--biz-drift, 0) * -1.6deg));
-  will-change: transform;
-}
-
+/* Cards sit level and equal — the band keeps its scroll life via the drifting
+   ghost watermark, not per-card parallax. Hover feedback stays inside the tile:
+   the photo zooms gently instead of the card lifting. */
 .home-business-band .segment-card {
-  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 1px))
-    translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.6px));
   transition: box-shadow 0.25s ease;
-  will-change: transform;
 }
 
 .home-business-band .segment-card:hover {
-  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 1px))
-    translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.6px));
   box-shadow: var(--shadow-card);
 }
 
-/* Hover feedback moves inside the tile (the card's own transform is now
-   scroll-owned): the photo zooms gently instead of the card lifting. */
 .home-business-band .segment-card-media img {
   transition: transform 0.35s ease;
 }
@@ -10667,23 +10559,10 @@ section.card,
   .home-business-band-ghost {
     font-size: clamp(3.2rem, 17vw, 5rem);
   }
-
-  /* Single/double-column stacks: drop the stage tilt, halve the card travel. */
-  .home-business-band .segment-cards--five {
-    transform: none;
-  }
-
-  .home-business-band .segment-card,
-  .home-business-band .segment-card:hover {
-    transform: translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.3px));
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .home-business-band-ghost,
-  .home-business-band .segment-cards--five,
-  .home-business-band .segment-card,
-  .home-business-band .segment-card:hover,
   .home-business-band .segment-card-media img {
     transform: none;
     transition: none;
@@ -11239,20 +11118,29 @@ section.card,
 }
 
 /* Products & Services explainer — /products, below the photo carousel. */
+.products-services-surface {
+  padding: clamp(32px, 4.5vw, 52px);
+}
+
 .products-services-head {
-  max-width: 62ch;
+  max-width: 60ch;
 }
 
 .products-services-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  margin: 16px 0 0;
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
 }
 
 .products-services-intro {
-  margin-top: 10px;
+  margin-top: 14px;
+  max-width: 56ch;
+  font-size: 1.02rem;
+  line-height: 1.75;
 }
 
 .products-services-grid {
-  margin-top: 28px;
+  margin-top: clamp(32px, 4vw, 44px);
+  gap: 20px;
 }
 
 @media (min-width: 900px) {
@@ -11263,7 +11151,7 @@ section.card,
 
 .products-services-card {
   cursor: default;
-  padding: 22px 24px;
+  padding: 26px 28px;
 }
 
 .products-services-card:hover {
@@ -11274,15 +11162,17 @@ section.card,
    title / 0.85rem body) read too flat for this longer, denser service list. */
 .products-services-card .offering-card-title {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  line-height: 1.35;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
 }
 
 .products-services-card .offering-card-body {
-  margin-top: 10px;
-  font-size: 0.92rem;
-  line-height: 1.65;
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .business-flow-strip {

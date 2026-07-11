@@ -9,26 +9,15 @@ import type { SiteCopy } from '@/lib/site-copy';
 
 const Hero3DScene = dynamic(() => import('@/components/hero-3d/hero-3d-scene'), { ssr: false });
 
-/** The four verified circulation stages (copy.business.flowPhases), staged as
- * glass marker nodes around the rotating arc — no photography. Each node sits
- * at a clock position on the arc (12 / 3 / 6 / 9) and drifts at its own depth
- * off the hero scroll progress, echoing material moving "back to resources,
- * forward to the future": collection → sorting → regeneration → export. */
-const FLOW_NODES = [
-  { phaseIndex: 0, depth: 1 },
-  { phaseIndex: 1, depth: 0.7 },
-  { phaseIndex: 2, depth: 0.5 },
-  { phaseIndex: 3, depth: 0.85 },
-] as const;
-
 type HeroCirculationVisualProps = {
   copy: SiteCopy;
 };
 
 /** The hero's media pane: the resource-circulation 3D scene (stage rings +
- * flow stream) as the backdrop, with four labelled stage nodes and two
- * glowing pulse dots arranged along an animated dashed arc — image-free. The
- * 3D canvas mounts only on wide viewports with WebGL and no reduced-motion
+ * flow stream) as the backdrop, with a slowly rotating wireframe globe —
+ * dashed outer ring plus meridian/latitude hairlines — and two glowing pulse
+ * dots orbiting it. Image-free; the globe reads as Kowa's global trade loop.
+ * The 3D canvas mounts only on wide viewports with WebGL and no reduced-motion
  * preference; everyone else gets the static poster. */
 export function HeroCirculationVisual({ copy }: HeroCirculationVisualProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -57,6 +46,7 @@ export function HeroCirculationVisual({ copy }: HeroCirculationVisualProps) {
       {canRender3D ? <Hero3DScene progressRef={progressRef} cameraMode="hero" /> : <HeroFallback />}
 
       <svg className="hero-circulation-arc" viewBox="0 0 100 100" aria-hidden="true">
+        {/* Outer ring — dashed, keeps the orbit radius the pulse dots track. */}
         <circle
           cx="50"
           cy="50"
@@ -67,6 +57,16 @@ export function HeroCirculationVisual({ copy }: HeroCirculationVisualProps) {
           strokeDasharray="2.5 4.5"
           strokeLinecap="round"
         />
+        {/* Wireframe globe: meridians + latitudes as faint hairlines. */}
+        <g className="hero-circulation-arc-grid" fill="none" stroke="currentColor" strokeWidth="0.4">
+          <circle cx="50" cy="50" r="44" />
+          <ellipse cx="50" cy="50" rx="15" ry="44" />
+          <ellipse cx="50" cy="50" rx="30" ry="44" />
+          <ellipse cx="50" cy="50" rx="44" ry="15" />
+          <ellipse cx="50" cy="50" rx="44" ry="30" />
+          <line x1="6" y1="50" x2="94" y2="50" />
+          <line x1="50" y1="6" x2="50" y2="94" />
+        </g>
       </svg>
 
       <span className="hero-circulation-pulse hero-circulation-pulse--1" aria-hidden="true">
@@ -75,20 +75,6 @@ export function HeroCirculationVisual({ copy }: HeroCirculationVisualProps) {
       <span className="hero-circulation-pulse hero-circulation-pulse--2" aria-hidden="true">
         <span className="hero-circulation-pulse-dot" />
       </span>
-
-      {FLOW_NODES.map((node, index) => (
-        <span
-          key={node.phaseIndex}
-          className={`hero-circulation-node hero-circulation-node--${index + 1}`}
-          style={{ '--node-depth': node.depth } as React.CSSProperties}
-          aria-hidden="true"
-        >
-          <span className="hero-circulation-node-index">{String(index + 1).padStart(2, '0')}</span>
-          <span className="hero-circulation-node-label">
-            {copy.business.flowPhases[node.phaseIndex]?.nodeLabel}
-          </span>
-        </span>
-      ))}
     </div>
   );
 }
