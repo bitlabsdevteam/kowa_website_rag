@@ -34,7 +34,7 @@
     "body": "A Tokyo trading partner since 1994: we buy waste and loss plastics across Japan, regenerate them through our G.P. Polymer line, and trade recycled material, resin, battery-pack support, and industrial machinery worldwide.",
     "cta": "Talk to Aya",
     "videoTitle": "Kowa Video Clip",
-    "visualAria": "Kowa business visual",
+    "visualAria": "Resource-circulation ring — a rotating dashed arc marking Kowa's four stages (collection, sorting, regeneration, export) over a drifting particle field.",
     "visualAlt": "Kowa business overview visual"
   },
   "business": {
@@ -73,7 +73,7 @@
     "summary": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia.",
     "introLabel": "OUR BUSINESS",
     "introTitle": "We collect and process various types of waste plastics within Japan, exporting them to overseas markets.",
-    "introBody": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia. These materials are reprocessed locally into various products and shipped worldwide.\n\nTo strengthen our domestic operations, we established and now operate our own recycling factory, GP Polymer Co., Ltd., and joint venture factory, Green Eco Technology Co., Ltd. By crushing and recycling waste materials and production losses purchased from our corporate partners, we successfully recirculate valuable resources.\n\nThe waste plastics we source have become an indispensable asset to local industries in destination countries, driving job creation and supporting community stability.",
+    "introBody": "We collect and process various types out of specification, post-consumer and industrial waste plastics within Japan, exporting them to overseas markets, primarily in Southeast Asia. These materials are reprocessed locally into various products and shipped worldwide.\n\nTo strengthen our domestic operations, we established and now operate our own recycling factory, GP Polymer Co., Ltd., and joint venture factory, Green Eco Technology Co., Ltd. By crushing and recycling waste materials and production losses purchased from our corporate partners, we successfully recirculate valuable resources.\n\nThe waste plastics we source have become an indispensable asset to local industries in destination countries, driving job creation and supporting community stability.\n\nGuided by a customer-centric approach, we are dedicated to maximizing the value of the Earth's limited resources, ensuring a sustainable global circulation for generations to come.",
     "statementLabel": "Source narrative",
     "statements": [
       {
@@ -441,7 +441,7 @@
   },
   "home": {
     "business": {
-      "display": "BUSINESS",
+      "display": "PRODUCTS",
       "subtitle": "Three lanes, one circular supply",
       "linkLabel": "View business"
     },

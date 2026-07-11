@@ -5,9 +5,13 @@ import { useMemo, useRef } from 'react';
 import { MathUtils } from 'three';
 import type { Points } from 'three';
 
-import { computeCameraPath } from './camera-rig-math';
+import { CAMERA_BASE_POSITION, computeCameraPath, computeCameraTarget } from './camera-rig-math';
 
 type ProgressRef = { readonly current: number };
+
+/** 'hero' eases along the short hero-scoped dolly/tilt; 'page' travels the
+ * longer full-document path with a lateral pan. */
+type CameraMode = 'hero' | 'page';
 
 // Backdrop hue is the single source of truth: pure WHITE. The CSS light-glass
 // surfaces (.reference-site …) and the .hero-3d-fallback poster all derive from
@@ -208,7 +212,7 @@ function FlowStream() {
   );
 }
 
-function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
+function CameraRig({ progressRef, cameraMode = 'page' }: { progressRef?: ProgressRef; cameraMode?: CameraMode }) {
   const easedRef = useRef(0);
 
   useFrame((state, delta) => {
@@ -216,7 +220,10 @@ function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
     const eased = MathUtils.damp(easedRef.current, progress, 3, delta);
     easedRef.current = eased;
 
-    const target = computeCameraPath(eased);
+    const target =
+      cameraMode === 'hero'
+        ? { x: CAMERA_BASE_POSITION.x, ...computeCameraTarget(eased) }
+        : computeCameraPath(eased);
     state.camera.position.x = target.x;
     state.camera.position.y = target.y;
     state.camera.position.z = target.z;
@@ -229,7 +236,13 @@ function CameraRig({ progressRef }: { progressRef?: ProgressRef }) {
   return null;
 }
 
-export default function Hero3DScene({ progressRef }: { progressRef?: ProgressRef }) {
+export default function Hero3DScene({
+  progressRef,
+  cameraMode = 'page',
+}: {
+  progressRef?: ProgressRef;
+  cameraMode?: CameraMode;
+}) {
   return (
     <div className="hero-3d-scene" data-testid="hero-3d-scene" aria-hidden="true">
       <Canvas
@@ -239,7 +252,7 @@ export default function Hero3DScene({ progressRef }: { progressRef?: ProgressRef
       >
         <color attach="background" args={[PALETTE.backdrop]} />
         <fog attach="fog" args={[PALETTE.fog, 14, 40]} />
-        <CameraRig progressRef={progressRef} />
+        <CameraRig progressRef={progressRef} cameraMode={cameraMode} />
         <AmbientField />
         {STAGE_RINGS.map((ring) => (
           <StageRing key={ring.seed} {...ring} />

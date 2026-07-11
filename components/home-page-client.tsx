@@ -3,8 +3,8 @@
 import { useEffect } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { HomeBusinessGrid } from '@/components/home/home-business-grid';
-import { HomeBusinessStory } from '@/components/home/home-business-story';
+import { HeroCirculationVisual } from '@/components/home/hero-circulation-visual';
+import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
 import { HomeWhatWeDo } from '@/components/home/home-what-we-do';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { HeroSection } from '@/components/ui/hero-section-2';
@@ -77,16 +77,10 @@ export function HomePageClient() {
             }
           },
         }}
-        backgroundImage="/hero-recycling.svg"
+        media={<HeroCirculationVisual copy={copy} />}
       />
 
-      <ScrollReveal variant="fade-up" testId="reveal-home-business-story">
-        <HomeBusinessStory copy={copy} />
-      </ScrollReveal>
-
-      <ScrollReveal variant="fade-up" testId="reveal-business-head">
-        <HomeBusinessGrid locale={locale} copy={copy} />
-      </ScrollReveal>
+      <HomeBusinessParallax locale={locale} copy={copy} />
 
       <ScrollReveal variant="fade-up" testId="reveal-home-about">
         <HomeWhatWeDo copy={copy} />

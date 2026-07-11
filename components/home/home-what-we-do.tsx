@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
-import { PRODUCT_TOP_CATEGORY_ORDER, type ProductTopCategory } from '@/lib/product-media';
+import { PRODUCT_TOP_CATEGORY_ORDER, TOP_CATEGORY_IMAGE, type ProductTopCategory } from '@/lib/product-media';
 import type { SiteCopy } from '@/lib/site-copy';
 
 type HomeWhatWeDoProps = {
@@ -18,9 +19,44 @@ const CATEGORY_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoods' 
   timber: 'timber',
 };
 
+/** Editorial split: the numbered business-line rows on the right, and a
+ * sticky media frame on the left that crossfades to the active line's
+ * grounded photo (or an honest placeholder tile for lines without
+ * photography). Hover/focus sets the active line directly; an
+ * IntersectionObserver keyed to the viewport's middle band drives it from
+ * plain scrolling on touch. Below 900px the media frame is hidden and the
+ * rows read exactly as before. */
 export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
   const ui = copy.home.whatWeDo;
   const tabs = copy.products.categories.tabs;
+
+  const listRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<ProductTopCategory>(PRODUCT_TOP_CATEGORY_ORDER[0]);
+
+  useEffect(() => {
+    // Scroll-driven activation is for touch surfaces only; on pointer devices
+    // hover/focus own the active row and the observer would fight them.
+    if (window.matchMedia('(hover: hover)').matches) {
+      return undefined;
+    }
+    const rows = listRef.current?.querySelectorAll<HTMLElement>('[data-category]');
+    if (!rows?.length || typeof IntersectionObserver === 'undefined') {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActive((entry.target as HTMLElement).dataset.category as ProductTopCategory);
+          }
+        }
+      },
+      { rootMargin: '-45% 0px -45% 0px' },
+    );
+    rows.forEach((row) => observer.observe(row));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="home-about" className="home-about" aria-label={ui.display}>
@@ -30,18 +66,52 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
         <p className="home-about-statement">{ui.statement}</p>
 
         <p className="about-pillars-label">{ui.pillarsLabel}</p>
-        <div className="business-lines">
-          {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
-            const copyKey = CATEGORY_COPY_KEY[category];
+        <div className="home-about-split">
+          <div className="home-about-media" aria-hidden="true">
+            {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
+              const image = TOP_CATEGORY_IMAGE[category];
+              const isActive = active === category;
 
-            return (
-              <Link key={category} href={`/products?category=${category}`} className="business-line-row">
-                <p className="business-line-index">{String(index + 1).padStart(2, '0')}</p>
-                <h3 className="business-line-title">{tabs[copyKey]}</h3>
-                <p className="business-line-desc">{ui.categories[copyKey]}</p>
-              </Link>
-            );
-          })}
+              return (
+                <div
+                  key={category}
+                  className={`home-about-media-layer${image ? '' : ' home-about-media-layer--placeholder'}`}
+                  data-category={category}
+                  data-active={isActive}
+                >
+                  {image ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- decorative category photo mirrored by the row text
+                    <img src={image} alt="" loading="lazy" />
+                  ) : (
+                    <span className="home-about-media-index">{String(index + 1).padStart(2, '0')}</span>
+                  )}
+                  <p className="home-about-media-caption">{tabs[CATEGORY_COPY_KEY[category]]}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="business-lines" ref={listRef}>
+            {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
+              const copyKey = CATEGORY_COPY_KEY[category];
+
+              return (
+                <Link
+                  key={category}
+                  href={`/products?category=${category}`}
+                  className="business-line-row"
+                  data-category={category}
+                  data-active={active === category}
+                  onMouseEnter={() => setActive(category)}
+                  onFocus={() => setActive(category)}
+                >
+                  <p className="business-line-index">{String(index + 1).padStart(2, '0')}</p>
+                  <h3 className="business-line-title">{tabs[copyKey]}</h3>
+                  <p className="business-line-desc">{ui.categories[copyKey]}</p>
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         <nav className="pillar-links" aria-label={ui.linksLabel}>

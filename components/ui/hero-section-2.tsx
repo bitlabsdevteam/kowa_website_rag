@@ -38,7 +38,8 @@ interface HeroSectionProps {
     href: string;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   };
-  backgroundImage: string;
+  /** Rendered inside the clip-path-revealed media pane beside the copy. */
+  media: React.ReactNode;
   contactInfo?: {
     website: string;
     phone: string;
@@ -64,7 +65,7 @@ const itemVariants = {
 };
 
 export const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
-  ({ className, logo, slogan, title, subtitle, callToAction, backgroundImage, contactInfo, ...props }, ref) => {
+  ({ className, logo, slogan, title, subtitle, callToAction, media, contactInfo, ...props }, ref) => {
     return (
       <motion.section
         ref={ref}
@@ -130,11 +131,12 @@ export const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
 
         <motion.div
           className="hero-section-media"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
           initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
           animate={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
           transition={{ duration: 1.2, ease: 'circOut' }}
-        />
+        >
+          {media}
+        </motion.div>
       </motion.section>
     );
   },

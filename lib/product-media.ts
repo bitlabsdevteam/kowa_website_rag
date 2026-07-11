@@ -62,6 +62,16 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
   'wood-flooring-deck': 'timber',
 };
 
+/** Representative card-face photo per top category, shared by the home
+ * business grid and the WHAT WE DO media panel. Only Plastics, General Goods,
+ * and Timber have grounded photography today; Foods and FFE stay undefined so
+ * surfaces render an honest placeholder tile instead of a fabricated photo. */
+export const TOP_CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
+  plastics: '/images/products/gpps-pellet-1.jpg',
+  'general-goods': '/images/products/general-goods-1.jpg',
+  timber: '/images/products/timber-teak-flooring-atrium.jpg',
+};
+
 /** Most families are shot two ways: a primary card-face photo and a close-up detail. The Myanmar-teak family keeps its original three-shot set (lot / pile / macro). */
 export type ProductView = 'lot' | 'pile' | 'macro' | 'primary' | 'detail';
 

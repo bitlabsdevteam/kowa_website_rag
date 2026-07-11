@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 
-import { PRODUCT_MEDIA, PRODUCT_TOP_CATEGORY_ORDER, type ProductTopCategory } from '@/lib/product-media';
+import { PRODUCT_TOP_CATEGORY_ORDER, TOP_CATEGORY_IMAGE, type ProductTopCategory } from '@/lib/product-media';
 import type { Locale, SiteCopy } from '@/lib/site-copy';
 
 type HomeBusinessGridProps = {
@@ -19,14 +19,10 @@ const CATEGORY_TAB_COPY_KEY: Record<ProductTopCategory, 'plastics' | 'generalGoo
   timber: 'timber',
 };
 
-/** Only Plastics, General Goods, and Timber have grounded photography today
- * (see lib/product-media.ts); Foods and FFE render an honest text tile
- * rather than a fabricated photo. */
-const CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
-  plastics: PRODUCT_MEDIA.find((m) => m.id === 'gpps-pellet-primary')?.src,
-  'general-goods': PRODUCT_MEDIA.find((m) => m.id === 'general-goods-moisture-charcoal-primary')?.src,
-  timber: PRODUCT_MEDIA.find((m) => m.id === 'myanmar-teak-pile')?.src,
-};
+/** Per-card parallax depth (px of translateZ per unit drift) — alternating
+ * signs so neighbouring cards counter-drift and the row reads as a 3D relief
+ * rather than a flat sheet sliding together. */
+const CARD_DEPTHS = [46, -28, 64, -36, 52];
 
 export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
   const ui = copy.home.business;
@@ -39,12 +35,17 @@ export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
         <p className="section-heading-subtitle">{ui.subtitle}</p>
 
         <div className="segment-cards segment-cards--five">
-          {PRODUCT_TOP_CATEGORY_ORDER.map((category) => {
+          {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
             const title = tabs[CATEGORY_TAB_COPY_KEY[category]];
-            const image = CATEGORY_IMAGE[category];
+            const image = TOP_CATEGORY_IMAGE[category];
 
             return (
-              <Link key={category} href={`/products?category=${category}`} className="segment-card">
+              <Link
+                key={category}
+                href={`/products?category=${category}`}
+                className="segment-card"
+                style={{ '--card-depth': CARD_DEPTHS[index % CARD_DEPTHS.length] } as React.CSSProperties}
+              >
                 <div className={`segment-card-media${image ? '' : ' segment-card-media--placeholder'}`}>
                   {image ? (
                     // eslint-disable-next-line @next/next/no-img-element -- decorative business-line photo, natural aspect crop

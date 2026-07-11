@@ -10128,11 +10128,11 @@ html:lang(en) .reference-section-title {
 }
 
 .hero-section-media {
+  position: relative;
   width: 100%;
   min-height: 280px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden;
+  background: var(--color-canvas-strong);
 }
 
 @media (min-width: 768px) {
@@ -10160,6 +10160,205 @@ html:lang(en) .reference-section-title {
 @media (prefers-reduced-motion: reduce) {
   .hero-section-media {
     clip-path: none !important;
+  }
+}
+
+/* --- Hero media: resource-circulation composition ---------------------------
+   The 3D stage-ring scene (or its static poster) fills the pane; three photo
+   chips — scrap regrind → regenerated pellet → the Gunma line — sit on a
+   slowly rotating dashed arc and drift at different depths off the hero
+   scroll progress (--hero-progress, set inline by HeroCirculationVisual). */
+.hero-circulation {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-circulation .hero-3d-scene {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.hero-circulation-arc {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(76%, 520px);
+  aspect-ratio: 1;
+  color: var(--color-accent);
+  opacity: 0.5;
+  transform: translate(-50%, -50%);
+  animation: hero-arc-spin 90s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-arc-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Four stage-marker nodes sit at compass points on the arc — each a small
+   white-glass pill (same family as the section cards) carrying its verified
+   circulation-stage label, drifting vertically off the hero scroll progress
+   at its own depth (--node-depth, set inline by HeroCirculationVisual).
+   --par is the shared parallax offset; each position variant composes it with
+   its own centering translate so the transform stays single-source. */
+.hero-circulation-node {
+  --par: calc(var(--hero-progress, 0) * var(--node-depth, 1) * -44px);
+  position: absolute;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  max-width: 44%;
+  padding: 8px 14px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+  background: var(--glass-raised);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+.hero-circulation-node-index {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--color-accent);
+}
+
+.hero-circulation-node-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #15233f;
+}
+
+.hero-circulation-node--1 {
+  /* 12 o'clock */
+  top: 11%;
+  left: 50%;
+  transform: translate3d(-50%, var(--par), 0);
+}
+
+.hero-circulation-node--2 {
+  /* 3 o'clock */
+  top: 50%;
+  right: 6%;
+  transform: translate3d(0, calc(-50% + var(--par)), 0);
+}
+
+.hero-circulation-node--3 {
+  /* 6 o'clock */
+  bottom: 11%;
+  left: 50%;
+  transform: translate3d(-50%, var(--par), 0);
+}
+
+.hero-circulation-node--4 {
+  /* 9 o'clock — sits inside the pane's diagonal left edge so its index
+     numeral never clips. */
+  top: 50%;
+  left: 10%;
+  transform: translate3d(0, calc(-50% + var(--par)), 0);
+}
+
+/* Two glowing beads orbit the arc at different rates (one reversed), tracing
+   the circulation loop. The wrapper matches the arc box and spins; the dot is
+   pinned to the arc radius by its offset, so rotating the wrapper carries it
+   around the ring — no offset-path needed. */
+.hero-circulation-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(76%, 520px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero-circulation-pulse--1 {
+  animation: hero-pulse-orbit 26s linear infinite;
+}
+
+.hero-circulation-pulse--2 {
+  animation: hero-pulse-orbit 38s linear infinite reverse;
+}
+
+.hero-circulation-pulse-dot {
+  position: absolute;
+  top: 6%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin-left: -4.5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px 2px rgba(45, 107, 73, 0.55), 0 0 2px 1px rgba(127, 198, 160, 0.85);
+}
+
+@keyframes hero-pulse-orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Stacked mobile pane: taller stage, tighter node pills tucked toward centre
+   so the four markers never collide on the narrower stage. */
+@media (max-width: 767px) {
+  .hero-section-media {
+    min-height: 400px;
+  }
+
+  .hero-circulation-node {
+    padding: 6px 11px;
+    max-width: 52%;
+  }
+
+  .hero-circulation-node-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.07em;
+  }
+
+  .hero-circulation-node--2 {
+    right: 3%;
+  }
+
+  .hero-circulation-node--4 {
+    left: 3%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-circulation-arc {
+    animation: none;
+  }
+
+  .hero-circulation-pulse {
+    animation: none;
+    opacity: 0;
+  }
+
+  .hero-circulation-node--1,
+  .hero-circulation-node--3 {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .hero-circulation-node--2,
+  .hero-circulation-node--4 {
+    transform: translate3d(0, -50%, 0);
   }
 }
 
@@ -10377,12 +10576,130 @@ section.card,
   background: var(--color-accent-strong);
 }
 
+/* --- Home: OUR BUSINESS / PRODUCTS parallax bands ------------------------- */
+/* HomeBusinessParallax renders two independent bands. Each Band measures its
+   OWN scroll progress and exposes --biz-drift (-1 → 1) to just its subtree, so
+   the two sections read as visibly separate stages that drift on their own
+   timelines: a ghost display word behind each, the story's text layers, and
+   the card grid tilting on a perspective stage with per-card translateZ depth
+   (--card-depth, set inline). The tonal step between bands + the products
+   band's top rule replace the old single-block seam. */
+.home-business-band {
+  position: relative;
+  overflow: clip;
+  padding: clamp(56px, 8vw, 104px) 0;
+}
+
+.home-business-band--story {
+  background: var(--color-canvas);
+}
+
+.home-business-band--products {
+  background: var(--color-canvas-strong);
+  border-top: 1px solid var(--color-line);
+}
+
+.home-business-band-ghost {
+  position: absolute;
+  top: clamp(4px, 2vw, 28px);
+  left: 50%;
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 12rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(27, 42, 74, 0.06);
+  transform: translate3d(-50%, calc(var(--biz-drift, 0) * -60px), 0);
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+/* The band owns the section's padding + background, so the inner story/grid
+   drop their own vertical padding and backgrounds — no compounded seam — and
+   sit transparent above the watermark. */
+.home-business-band .home-business-story,
+.home-business-band .segment-grid {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  border-top: 0;
+  background: transparent;
+}
+
+.home-business-band .segment-grid-inner {
+  perspective: 1400px;
+  perspective-origin: 50% 30%;
+}
+
+.home-business-band .segment-cards--five {
+  transform-style: preserve-3d;
+  transform: rotateX(calc(var(--biz-drift, 0) * -1.6deg));
+  will-change: transform;
+}
+
+.home-business-band .segment-card {
+  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 1px))
+    translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.6px));
+  transition: box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+.home-business-band .segment-card:hover {
+  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 1px))
+    translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.6px));
+  box-shadow: var(--shadow-card);
+}
+
+/* Hover feedback moves inside the tile (the card's own transform is now
+   scroll-owned): the photo zooms gently instead of the card lifting. */
+.home-business-band .segment-card-media img {
+  transition: transform 0.35s ease;
+}
+
+.home-business-band .segment-card:hover .segment-card-media img {
+  transform: scale(1.045);
+}
+
+@media (max-width: 859px) {
+  .home-business-band-ghost {
+    font-size: clamp(3.2rem, 17vw, 5rem);
+  }
+
+  /* Single/double-column stacks: drop the stage tilt, halve the card travel. */
+  .home-business-band .segment-cards--five {
+    transform: none;
+  }
+
+  .home-business-band .segment-card,
+  .home-business-band .segment-card:hover {
+    transform: translateY(calc(var(--biz-drift, 0) * var(--card-depth, 0) * -0.3px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-business-band-ghost,
+  .home-business-band .segment-cards--five,
+  .home-business-band .segment-card,
+  .home-business-band .segment-card:hover,
+  .home-business-band .segment-card-media img {
+    transform: none;
+    transition: none;
+  }
+
+  .home-business-band-ghost {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 /* --- Home: ABOUT block --------------------------------------------------- */
 /* Landing "Our Business" story band — moved here from the company profile
    page as the scroll-driven narrative directly under the hero, ahead of the
-   business grid. Paragraphs drift at different rates via --story-parallax /
-   --story-parallax-offset (set inline from useScrollProgress) for a subtle
-   parallax read as the section crosses the viewport. */
+   business grid. Label, title, and paragraphs drift at staggered rates via
+   --biz-drift (inherited from HomeBusinessParallax) / --biz-depth for a
+   layered parallax read as the section crosses the viewport. */
 .home-business-story {
   padding: clamp(40px, 7vw, 80px) 0;
   background: var(--color-canvas);
@@ -10394,7 +10711,12 @@ section.card,
   width: var(--content);
   max-width: 52rem;
   margin: 0 auto;
-  transform: translate3d(0, calc(var(--story-parallax, 0) * -18px), 0);
+  transform: translate3d(0, calc(var(--biz-drift, 0) * -18px), 0);
+  will-change: transform;
+}
+
+.home-business-story .section-heading-display {
+  transform: translate3d(0, calc(var(--biz-drift, 0) * 0.35 * -14px), 0);
   will-change: transform;
 }
 
@@ -10405,6 +10727,8 @@ section.card,
   font-family: var(--font-display);
   font-size: clamp(1.2rem, 2.4vw, 1.5rem);
   line-height: 1.65;
+  transform: translate3d(0, calc(var(--biz-drift, 0) * 0.6 * -14px), 0);
+  will-change: transform;
 }
 
 .home-business-story-body {
@@ -10416,15 +10740,17 @@ section.card,
 
 .home-business-story-paragraph {
   margin: 0;
-  color: var(--color-muted);
+  color: var(--color-text-muted);
   font-size: 1.02rem;
   line-height: 1.75;
-  transform: translate3d(0, calc(var(--story-parallax, 0) * var(--story-parallax-offset, 1) * -14px), 0);
+  transform: translate3d(0, calc(var(--biz-drift, 0) * var(--biz-depth, 1) * -14px), 0);
   will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .home-business-story-inner,
+  .home-business-story .section-heading-display,
+  .home-business-story-title,
   .home-business-story-paragraph {
     transform: none;
   }
@@ -10479,13 +10805,122 @@ section.card,
   text-transform: uppercase;
 }
 
+/* WHAT WE DO editorial split: sticky media frame on the left crossfading to
+   the active business line's photo; the numbered rows stay on the right.
+   Below 900px the frame is hidden and the rows read exactly as before. */
+.home-about-split {
+  margin-top: 18px;
+}
+
+.home-about-media {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .home-about-split {
+    display: grid;
+    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+    gap: clamp(36px, 5vw, 72px);
+    align-items: start;
+    text-align: left;
+  }
+
+  .home-about-media {
+    display: block;
+    position: sticky;
+    top: clamp(72px, 12vh, 128px);
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    background: var(--surface-muted);
+  }
+}
+
+.home-about-media-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.home-about-media-layer[data-active='true'] {
+  opacity: 1;
+}
+
+.home-about-media-layer img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-about-media-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(32, 26, 21, 0) 55%, rgba(32, 26, 21, 0.72) 100%);
+}
+
+/* Lines without grounded photography (see lib/product-media.ts) keep the
+   honest accent tile used by the segment cards, with the row's numeral. */
+.home-about-media-layer--placeholder {
+  background: linear-gradient(155deg, var(--color-accent-strong) 0%, var(--color-accent) 55%, var(--color-canvas-strong) 130%);
+}
+
+.home-about-media-index {
+  position: absolute;
+  top: 22px;
+  left: 26px;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.home-about-media-caption {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  bottom: 22px;
+  margin: 0;
+  z-index: 1;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-about-media-layer,
+  .business-line-index,
+  .business-line-title,
+  .business-line-desc,
+  .business-line-row::after {
+    transition: none;
+  }
+
+  .business-line-row:hover .business-line-index,
+  .business-line-row:hover .business-line-title,
+  .business-line-row:hover .business-line-desc,
+  .business-line-row[data-active='true'] .business-line-index,
+  .business-line-row[data-active='true'] .business-line-title,
+  .business-line-row[data-active='true'] .business-line-desc {
+    transform: none;
+  }
+}
+
 .business-lines {
   margin-top: 18px;
   text-align: left;
   border-top: 1px solid var(--color-line);
 }
 
+@media (min-width: 900px) {
+  .home-about-split .business-lines {
+    margin-top: 0;
+  }
+}
+
 .business-line-row {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 6px 24px;
@@ -10493,7 +10928,6 @@ section.card,
   border-bottom: 1px solid var(--color-line);
   text-decoration: none;
   color: inherit;
-  transition: background 0.2s ease;
 }
 
 @media (min-width: 720px) {
@@ -10504,8 +10938,48 @@ section.card,
   }
 }
 
-.business-line-row:hover {
-  background: var(--surface-card);
+/* Elegant active/hover treatment — no flat panel fill. The row's text slides a
+   touch to the right and warms to the accent, while an accent hairline draws
+   in from the left over the divider. The row box (and its divider) stay put so
+   neighbours don't jump. */
+.business-line-index,
+.business-line-title,
+.business-line-desc {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-line-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-line-row:hover::after,
+.business-line-row[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+.business-line-row:hover .business-line-index,
+.business-line-row:hover .business-line-title,
+.business-line-row:hover .business-line-desc,
+.business-line-row[data-active='true'] .business-line-index,
+.business-line-row[data-active='true'] .business-line-title,
+.business-line-row[data-active='true'] .business-line-desc {
+  transform: translateX(8px);
+}
+
+.business-line-row:hover .business-line-index,
+.business-line-row:hover .business-line-title,
+.business-line-row[data-active='true'] .business-line-index,
+.business-line-row[data-active='true'] .business-line-title {
+  color: var(--color-accent);
 }
 
 .business-line-index {
