@@ -2,63 +2,38 @@ import { expect, test } from '@playwright/test';
 
 import en from '../../locales/en.json' with { type: 'json' };
 
-// v20: landing redesign — hero circulation visual, OUR BUSINESS 3D parallax,
-// WHAT WE DO sticky-media split.
+// v20/v22: landing — full-bleed container-yard photo hero, OUR BUSINESS
+// parallax bands, WHAT WE DO sticky-media split.
 
-test.describe('hero circulation visual', () => {
-  test('renders the image-free 3D scene (or fallback) with the wireframe globe', async ({ page }) => {
+test.describe('hero container-yard photo backdrop', () => {
+  test('the yard photo fills the hero behind light-on-photo copy', async ({ page }) => {
     await page.goto('/');
 
-    const visual = page.locator('[data-testid="hero-circulation"]');
-    await expect(visual).toBeVisible();
-    await expect(visual).toHaveAttribute('aria-label', en.hero.visualAria);
+    const hero = page.getByTestId('landing-primary-box');
+    await expect(hero).toBeVisible();
 
-    // Scene or static poster, exactly one of the two.
-    const scene = visual.locator('[data-testid="hero-3d-scene"], [data-testid="hero-3d-fallback"]');
-    await expect(scene.first()).toBeAttached({ timeout: 30000 });
+    // Full-bleed variant: the media pane is the hero backdrop, not a side pane.
+    await expect(hero).toHaveClass(/hero-section--full-bleed/);
 
-    // The redesigned visual is image-free — no photography inside the pane.
-    await expect(visual.locator('img')).toHaveCount(0);
+    const yard = page.getByTestId('hero-yard');
+    await expect(yard).toBeVisible();
+    const photo = yard.locator('img.hero-yard-photo');
+    await expect(photo).toHaveAttribute('src', /container-yard\.jpg/);
+    await expect(photo).toHaveJSProperty('complete', true);
 
-    // The wireframe globe: dashed outer ring plus meridian/latitude hairlines,
-    // and no text labels.
-    await expect(visual.locator('.hero-circulation-arc')).toHaveCount(1);
-    await expect(visual.locator('.hero-circulation-arc-grid')).toHaveCount(1);
-    await expect(visual.locator('.hero-circulation-node-label')).toHaveCount(0);
+    // The forest scrim grades the photo so the headline stays legible.
+    await expect(yard.locator('.hero-yard-scrim')).toHaveCount(1);
 
-    // Two pulse beads orbit the arc.
-    await expect(visual.locator('.hero-circulation-pulse')).toHaveCount(2);
+    // The old circulation globe is gone from the hero.
+    await expect(hero.locator('[data-testid="hero-circulation"]')).toHaveCount(0);
+
+    // Light-on-photo copy: white headline with the soft leaf-green accent line.
+    const heading = hero.locator('h1');
+    await expect(heading).toHaveCSS('color', 'rgb(255, 255, 255)');
+    await expect(heading.locator('.hero-section-title-accent')).toHaveCSS('color', 'rgb(163, 217, 189)');
 
     await page.waitForTimeout(800);
-    await page.screenshot({ path: 'tests/screenshots/v20-01-hero-circulation.png', fullPage: false });
-  });
-
-  test('the hero camera rig advances as the page scrolls', async ({ page }) => {
-    await page.goto('/');
-
-    const canvas = page.locator('[data-testid="hero-circulation"] [data-testid="hero-3d-scene"] canvas');
-    await expect(canvas).toBeVisible({ timeout: 30000 });
-
-    await page.waitForTimeout(700);
-    const restProgress = Number(await canvas.getAttribute('data-hero-progress'));
-    expect(restProgress).toBeLessThan(0.15);
-
-    await page.evaluate(() => window.scrollTo({ top: 900, behavior: 'instant' as ScrollBehavior }));
-    await expect
-      .poll(async () => Number(await canvas.getAttribute('data-hero-progress')), { timeout: 5000 })
-      .toBeGreaterThan(0.3);
-  });
-
-  test('reduced motion renders the static poster instead of the canvas', async ({ browser }) => {
-    const context = await browser.newContext({ reducedMotion: 'reduce' });
-    const page = await context.newPage();
-    await page.goto('/');
-
-    const visual = page.locator('[data-testid="hero-circulation"]');
-    await expect(visual.locator('[data-testid="hero-3d-fallback"]')).toBeAttached();
-    await expect(visual.locator('[data-testid="hero-3d-scene"]')).toHaveCount(0);
-
-    await context.close();
+    await page.screenshot({ path: 'tests/screenshots/v22-01-hero-yard.png', fullPage: false });
   });
 });
 

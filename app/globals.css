@@ -335,6 +335,10 @@ html:lang(zh) {
   --color-text-muted: #586379;
   --color-accent: #2d6b49;
   --color-accent-strong: #1f5235;
+  /* Light leaf tint of the accent — type/CTA sitting on the photo-hero scrim. */
+  --color-accent-soft: #a3d9bd;
+  /* Deep forest base of the photo-hero scrim gradients (landing hero only). */
+  --color-hero-scrim: #0c1e15;
   --color-silver: #c3cad6;
   --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.16);
   --shadow-soft: 0 22px 60px rgba(21, 35, 63, 0.08);
@@ -10163,109 +10167,140 @@ html:lang(en) .reference-section-title {
   }
 }
 
-/* --- Hero media: resource-circulation composition ---------------------------
-   The 3D stage-ring scene (or its static poster) fills the pane; a slowly
-   rotating wireframe globe (dashed outer ring + meridian/latitude hairlines)
-   sits over it, with two glowing pulse dots orbiting the outer ring. */
-.hero-circulation {
-  position: absolute;
-  inset: 0;
+/* --- Hero media: full-bleed container-yard photo -----------------------------
+   The media pane stretches behind the copy (hero-section--full-bleed). The
+   photo is graded by a deep forest scrim that rises from the left so the
+   headline sits on quiet dark green while the jet and sun flare on the right
+   stay clear. Copy flips to light-on-photo with a soft leaf-green accent. */
+.hero-section--full-bleed {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--color-hero-scrim);
 }
 
-.hero-circulation .hero-3d-scene {
+.hero-section--full-bleed .hero-section-media {
   position: absolute;
   inset: 0;
+  width: 100%;
   min-height: 0;
-  border: 0;
-  border-radius: 0;
+  z-index: 0;
+  background: var(--color-hero-scrim);
 }
 
-.hero-circulation-arc {
+.hero-section--full-bleed .hero-section-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-yard {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(76%, 520px);
-  aspect-ratio: 1;
-  color: var(--color-accent);
-  opacity: 0.5;
-  transform: translate(-50%, -50%);
-  animation: hero-arc-spin 90s linear infinite;
-  pointer-events: none;
+  inset: 0;
 }
 
-@keyframes hero-arc-spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+.hero-yard-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 64% 42%;
 }
 
-/* Interior globe hairlines sit fainter than the dashed outer ring so the
-   sphere reads as depth, not a flat grid. */
-.hero-circulation-arc-grid {
-  opacity: 0.55;
-}
-
-/* Two glowing beads orbit the arc at different rates (one reversed), tracing
-   the circulation loop. The wrapper matches the arc box and spins; the dot is
-   pinned to the arc radius by its offset, so rotating the wrapper carries it
-   around the ring — no offset-path needed. */
-.hero-circulation-pulse {
+/* Gradient stops are --color-hero-scrim (#0c1e15) at fixed alphas, written as
+   rgba literals: color-mix() stops made this full-viewport paint expensive
+   enough to starve smooth scrolling on software rasterizers. */
+.hero-yard-scrim {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(76%, 520px);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
+  inset: 0;
+  /* Own compositor layer: without it this full-hero translucent overlay
+     re-rasters on every frame and starves smooth scrolling on software
+     rasterizers (headless test runs). */
+  transform: translateZ(0);
+  background:
+    linear-gradient(
+      99deg,
+      rgba(12, 30, 21, 0.88) 0%,
+      rgba(12, 30, 21, 0.66) 40%,
+      rgba(12, 30, 21, 0.2) 72%,
+      rgba(12, 30, 21, 0.32) 100%
+    ),
+    linear-gradient(to top, rgba(12, 30, 21, 0.62) 0%, rgba(12, 30, 21, 0) 36%);
 }
 
-.hero-circulation-pulse--1 {
-  animation: hero-pulse-orbit 26s linear infinite;
+/* Light-on-photo copy. */
+.hero-section--full-bleed .hero-section-logo-text,
+.hero-section--full-bleed .hero-section-title {
+  color: #ffffff;
 }
 
-.hero-circulation-pulse--2 {
-  animation: hero-pulse-orbit 38s linear infinite reverse;
+.hero-section--full-bleed .hero-section-slogan {
+  color: rgba(255, 255, 255, 0.72);
 }
 
-.hero-circulation-pulse-dot {
-  position: absolute;
-  top: 6%;
-  left: 50%;
-  width: 9px;
-  height: 9px;
-  margin-left: -4.5px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 8px 2px rgba(45, 107, 73, 0.55), 0 0 2px 1px rgba(127, 198, 160, 0.85);
+.hero-section--full-bleed .hero-section-subtitle {
+  color: rgba(255, 255, 255, 0.85);
 }
 
-@keyframes hero-pulse-orbit {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
+.hero-section--full-bleed .hero-section-title-accent {
+  color: var(--color-accent-soft);
+}
+
+/* The accent line goes italic only where the display face has a true italic
+   (Latin); CJK display text stays upright. */
+html:lang(en) .hero-section--full-bleed .hero-section-title-accent {
+  font-style: italic;
+}
+
+.hero-section--full-bleed .hero-section-rule {
+  background: var(--color-accent-soft);
+}
+
+.hero-section--full-bleed .hero-section-cta {
+  color: var(--color-accent-soft);
+}
+
+.hero-section--full-bleed .hero-section-contact-grid {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-section--full-bleed .hero-section-contact-icon {
+  color: var(--color-accent-soft);
+}
+
+/* Full-bleed hero keeps the split hero's height without reserving a media
+   column: the copy takes the full row and caps its own measure. */
+@media (min-width: 768px) {
+  .hero-section--full-bleed .hero-section-content {
+    width: 100%;
   }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
-}
 
-/* Stacked mobile pane: taller stage for the globe. */
-@media (max-width: 767px) {
-  .hero-section-media {
-    min-height: 400px;
+  .hero-section--full-bleed .hero-section-title,
+  .hero-section--full-bleed .hero-section-subtitle {
+    max-width: 34rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-circulation-arc {
-    animation: none;
+  .hero-section--full-bleed .hero-section-media {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-section--full-bleed {
+    min-height: 82vh;
   }
 
-  .hero-circulation-pulse {
-    animation: none;
-    opacity: 0;
+  /* Stronger grade on small screens — the copy spans the whole photo. */
+  .hero-yard-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(12, 30, 21, 0.8) 0%,
+      rgba(12, 30, 21, 0.55) 55%,
+      rgba(12, 30, 21, 0.78) 100%
+    );
   }
 }
 

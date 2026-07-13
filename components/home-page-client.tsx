@@ -3,7 +3,6 @@
 import { useEffect } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { HeroCirculationVisual } from '@/components/home/hero-circulation-visual';
 import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
 import { HomeWhatWeDo } from '@/components/home/home-what-we-do';
 import { LocalizedFooter } from '@/components/localized-footer';
@@ -77,7 +76,13 @@ export function HomePageClient() {
             }
           },
         }}
-        media={<HeroCirculationVisual copy={copy} />}
+        fullBleed
+        media={
+          <div className="hero-yard" data-testid="hero-yard">
+            <img src="/images/company/container-yard.jpg" alt={copy.hero.visualAlt} className="hero-yard-photo" />
+            <span className="hero-yard-scrim" aria-hidden="true" />
+          </div>
+        }
       />
 
       <HomeBusinessParallax locale={locale} copy={copy} />
