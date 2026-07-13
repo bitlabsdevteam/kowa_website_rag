@@ -3,6 +3,8 @@
 import { useEffect } from 'react';
 
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
+import { HeroParallaxStage } from '@/components/home/hero-parallax-stage';
+import { HeroYardParallax } from '@/components/home/hero-yard-parallax';
 import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
 import { HomeWhatWeDo } from '@/components/home/home-what-we-do';
 import { LocalizedFooter } from '@/components/localized-footer';
@@ -51,7 +53,8 @@ export function HomePageClient() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <HeroSection
+      <HeroParallaxStage>
+        <HeroSection
         id="about"
         data-testid="landing-primary-box"
         logo={{ text: copy.brand.name }}
@@ -77,13 +80,9 @@ export function HomePageClient() {
           },
         }}
         fullBleed
-        media={
-          <div className="hero-yard" data-testid="hero-yard">
-            <img src="/images/company/container-yard.jpg" alt={copy.hero.visualAlt} className="hero-yard-photo" />
-            <span className="hero-yard-scrim" aria-hidden="true" />
-          </div>
-        }
-      />
+        media={<HeroYardParallax src="/images/company/container-yard.jpg" alt={copy.hero.visualAlt} />}
+        />
+      </HeroParallaxStage>
 
       <HomeBusinessParallax locale={locale} copy={copy} />
 

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
+import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import { PRODUCT_TOP_CATEGORY_ORDER, TOP_CATEGORY_IMAGE, type ProductTopCategory } from '@/lib/product-media';
 import type { SiteCopy } from '@/lib/site-copy';
 
@@ -31,7 +32,10 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
   const tabs = copy.products.categories.tabs;
 
   const listRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState<ProductTopCategory>(PRODUCT_TOP_CATEGORY_ORDER[0]);
+  const scrollProgress = useScrollProgress(sectionRef);
+  const aboutDrift = (scrollProgress - 0.5) * 2;
 
   useEffect(() => {
     // Scroll-driven activation is for touch surfaces only; on pointer devices
@@ -59,14 +63,14 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
   }, []);
 
   return (
-    <section id="home-about" className="home-about" aria-label={ui.display}>
+    <section id="home-about" className="home-about" aria-label={ui.display} ref={sectionRef}>
       <div className="home-about-inner">
         <p className="section-heading-display">{ui.display}</p>
         <p className="section-heading-subtitle">{ui.subtitle}</p>
         <p className="home-about-statement">{ui.statement}</p>
 
         <p className="about-pillars-label">{ui.pillarsLabel}</p>
-        <div className="home-about-split">
+        <div className="home-about-split" style={{ '--about-drift': aboutDrift } as React.CSSProperties}>
           <div className="home-about-media" aria-hidden="true">
             {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
               const image = TOP_CATEGORY_IMAGE[category];

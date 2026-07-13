@@ -30,15 +30,17 @@ export function HomeBusinessGrid({ locale, copy }: HomeBusinessGridProps) {
         <p className="section-heading-subtitle">{ui.subtitle}</p>
 
         <div className="segment-cards segment-cards--five">
-          {PRODUCT_TOP_CATEGORY_ORDER.map((category) => {
+          {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
             const title = tabs[CATEGORY_TAB_COPY_KEY[category]];
             const image = TOP_CATEGORY_IMAGE[category];
+            const depth = index / Math.max(1, PRODUCT_TOP_CATEGORY_ORDER.length - 1);
 
             return (
               <Link
                 key={category}
                 href={`/products?category=${category}`}
                 className="segment-card"
+                style={{ '--card-depth': depth } as React.CSSProperties}
               >
                 <div className={`segment-card-media${image ? '' : ' segment-card-media--placeholder'}`}>
                   {image ? (

@@ -540,21 +540,21 @@ body {
 }
 
 .kowa-logo-core {
-  fill: #edf5ef;
+  fill: #faf7f1;
 }
 
 .kowa-logo-ring {
-  fill: rgba(255, 255, 255, 0.6);
-  stroke: rgba(45, 107, 73, 0.2);
+  fill: rgba(255, 252, 246, 0.6);
+  stroke: rgba(169, 129, 61, 0.55);
   stroke-width: 1.2;
 }
 
 .kowa-logo-mark {
-  fill: url(#kowaLogoGold);
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #2d6b49;
+  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -2720,11 +2720,11 @@ a:focus-visible {
 }
 
 .kowa-logo-mark {
-  fill: #1d2a3c;
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #c8a868;
+  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -5837,11 +5837,33 @@ a:focus-visible {
 
 /* Company history timeline — company_profile page. */
 .cp-timeline {
+  position: relative;
   margin-top: clamp(40px, 6vw, 72px);
   padding-top: clamp(32px, 5vw, 56px);
   border-top: 1px solid var(--color-line);
   display: grid;
   gap: 24px;
+  overflow: hidden;
+}
+
+.cp-timeline::after {
+  content: '';
+  position: absolute;
+  right: clamp(-60px, -4vw, -20px);
+  top: clamp(24px, 6vw, 72px);
+  width: min(440px, 46%);
+  aspect-ratio: 1;
+  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cp-timeline-eyebrow,
+.cp-timeline-intro,
+.cp-timeline-list {
+  position: relative;
+  z-index: 1;
 }
 
 .cp-timeline-eyebrow {
@@ -5908,6 +5930,7 @@ a:focus-visible {
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.04em;
+  transition: transform 0.28s ease, color 0.28s ease;
 }
 
 .cp-timeline-year::after {
@@ -5922,10 +5945,16 @@ a:focus-visible {
   background: var(--color-canvas);
   border: 2.5px solid var(--color-accent);
   z-index: 2;
+  transition: background 0.28s ease, border-color 0.28s ease,
+    box-shadow 0.28s ease, transform 0.28s ease;
 }
 
 .cp-timeline-card {
-  padding: 4px 0 0 20px;
+  padding: 6px 16px 6px 20px;
+  border-radius: 14px;
+  background: transparent;
+  transition: transform 0.28s ease, background 0.28s ease,
+    box-shadow 0.28s ease;
 }
 
 .cp-timeline-card h3 {
@@ -5933,6 +5962,32 @@ a:focus-visible {
   color: var(--color-text);
   font-size: 1.02rem;
   font-weight: 700;
+  transition: color 0.28s ease;
+}
+
+.cp-timeline-item:hover .cp-timeline-card,
+.cp-timeline-item:focus-within .cp-timeline-card {
+  transform: translateX(6px);
+  background: rgba(45, 107, 73, 0.06);
+  box-shadow: 0 10px 26px -18px rgba(31, 82, 53, 0.5);
+}
+
+.cp-timeline-item:hover .cp-timeline-card h3,
+.cp-timeline-item:focus-within .cp-timeline-card h3 {
+  color: var(--color-accent-strong);
+}
+
+.cp-timeline-item:hover .cp-timeline-year,
+.cp-timeline-item:focus-within .cp-timeline-year {
+  transform: translateX(-2px);
+}
+
+.cp-timeline-item:hover .cp-timeline-year::after,
+.cp-timeline-item:focus-within .cp-timeline-year::after {
+  background: var(--color-accent);
+  border-color: var(--color-accent-strong);
+  box-shadow: 0 0 0 5px rgba(45, 107, 73, 0.14);
+  transform: translate(-50%, -50%) scale(1.12);
 }
 
 .cp-timeline-card p {
@@ -5951,6 +6006,20 @@ a:focus-visible {
   .cp-timeline-item::before,
   .cp-timeline-year::after {
     left: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-timeline-item:hover .cp-timeline-card,
+  .cp-timeline-item:focus-within .cp-timeline-card,
+  .cp-timeline-item:hover .cp-timeline-year,
+  .cp-timeline-item:focus-within .cp-timeline-year {
+    transform: none;
+  }
+
+  .cp-timeline-item:hover .cp-timeline-year::after,
+  .cp-timeline-item:focus-within .cp-timeline-year::after {
+    transform: translate(-50%, -50%);
   }
 }
 
@@ -6521,20 +6590,22 @@ body {
   color: rgba(236, 241, 247, 0.92);
 }
 
+/* Header sits on the light canvas (see the top-menu cleanup further down),
+   so the logo keeps the light treatment: forest mark + gold ring. */
 .kowa-logo-ring {
-  stroke: rgba(216, 191, 143, 0.75);
+  stroke: rgba(169, 129, 61, 0.55);
 }
 
 .kowa-logo-core {
-  fill: rgba(255, 255, 255, 0.04);
+  fill: rgba(255, 252, 246, 0.9);
 }
 
 .kowa-logo-mark {
-  fill: #f3f6fb;
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #e0c38f;
+  fill: url(#kowaLogoGold);
 }
 
 .top-menu-link:hover,
@@ -10201,10 +10272,18 @@ html:lang(en) .reference-section-title {
 
 .hero-yard-photo {
   display: block;
+  position: absolute;
+  inset: -10% 0;
   width: 100%;
-  height: 100%;
+  height: 120%;
   object-fit: cover;
   object-position: 64% 42%;
+  /* Far plane. Parallax lag: the photo trails the scroll (drifts down as the
+     page moves up), so it reads slower than the foreground copy. Pure
+     transform — stays off the raster path. -10% 0 / 120% gives ~90px of
+     overscan, comfortably covering the 54px drift. */
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * 54px), 0);
+  will-change: transform;
 }
 
 /* Gradient stops are --color-hero-scrim (#0c1e15) at fixed alphas, written as
@@ -10212,11 +10291,13 @@ html:lang(en) .reference-section-title {
    enough to starve smooth scrolling on software rasterizers. */
 .hero-yard-scrim {
   position: absolute;
-  inset: 0;
-  /* Own compositor layer: without it this full-hero translucent overlay
-     re-rasters on every frame and starves smooth scrolling on software
-     rasterizers (headless test runs). */
-  transform: translateZ(0);
+  /* Oversized so the mid-plane drift never exposes an ungraded strip. */
+  inset: -32px 0;
+  /* Mid plane: drifts opposite the far photo at a gentler rate, deepening the
+     depth read. A non-none transform still forces its own compositor layer —
+     without one this full-hero translucent overlay re-rasters every frame and
+     starves smooth scrolling on software rasterizers (headless test runs). */
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * 20px), 0);
   background:
     linear-gradient(
       99deg,
@@ -10226,6 +10307,15 @@ html:lang(en) .reference-section-title {
       rgba(12, 30, 21, 0.32) 100%
     ),
     linear-gradient(to top, rgba(12, 30, 21, 0.62) 0%, rgba(12, 30, 21, 0) 36%);
+}
+
+/* Near plane: the copy exits slightly faster than the scroll and fades, so it
+   leads the photo/scrim as the hero clears — opacity/transform only, per the
+   full-viewport performance contract. */
+.hero-section--full-bleed .hero-section-content {
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * -26px), 0);
+  opacity: calc(1 - var(--hero-yard-drift, 0) * 0.28);
+  will-change: transform, opacity;
 }
 
 /* Light-on-photo copy. */
@@ -10285,6 +10375,20 @@ html:lang(en) .hero-section--full-bleed .hero-section-title-accent {
   .hero-section--full-bleed .hero-section-media {
     opacity: 1 !important;
     transform: none !important;
+  }
+
+  .hero-yard-photo {
+    transform: none !important;
+  }
+
+  /* Keep the scrim's own compositor layer (not none) so grading stays cheap. */
+  .hero-yard-scrim {
+    transform: translateZ(0) !important;
+  }
+
+  .hero-section--full-bleed .hero-section-content {
+    transform: none !important;
+    opacity: 1 !important;
   }
 }
 
@@ -10530,6 +10634,7 @@ section.card,
   position: relative;
   overflow: clip;
   padding: clamp(56px, 8vw, 104px) 0;
+  perspective: 1200px;
 }
 
 .home-business-band--story {
@@ -10553,7 +10658,11 @@ section.card,
   line-height: 1;
   white-space: nowrap;
   color: rgba(27, 42, 74, 0.06);
-  transform: translate3d(-50%, calc(var(--biz-drift, 0) * -60px), 0);
+  /* True 3D depth under the band's perspective: pushed back on Z with scale
+     compensation (1200 / (1200 + 180) ≈ 0.87, so ×1.15 restores apparent
+     size), so its -60px drift projects to ~-52px — genuine perspective
+     attenuation. Translate first so -50% centering isn't scaled. */
+  transform: translate3d(-50%, calc(var(--biz-drift, 0) * -60px), 0) translateZ(-180px) scale(1.15);
   pointer-events: none;
   user-select: none;
   will-change: transform;
@@ -10571,11 +10680,20 @@ section.card,
   background: transparent;
 }
 
-/* Cards sit level and equal — the band keeps its scroll life via the drifting
-   ghost watermark, not per-card parallax. Hover feedback stays inside the tile:
-   the photo zooms gently instead of the card lifting. */
+/* Cards sit on a shared 3D stage: each carries --card-depth (set inline by
+   HomeBusinessGrid, 0→1 across the row) and drifts along Z + tilts on X as
+   the band's --biz-drift sweeps through the viewport, so cards read as
+   independently-depthed layers rather than a flat grid. Hover feedback stays
+   inside the tile: the photo zooms gently instead of the card lifting. */
+.home-business-band .segment-cards {
+  transform-style: preserve-3d;
+}
+
 .home-business-band .segment-card {
-  transition: box-shadow 0.25s ease;
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 40px))
+    rotateX(calc(var(--biz-drift, 0) * -2deg));
+  will-change: transform;
 }
 
 .home-business-band .segment-card:hover {
@@ -10668,6 +10786,10 @@ section.card,
   .home-business-story-paragraph {
     transform: none;
   }
+
+  .home-business-band .segment-card {
+    transform: none;
+  }
 }
 
 .home-about {
@@ -10755,6 +10877,11 @@ section.card,
   inset: 0;
   opacity: 0;
   transition: opacity 0.45s ease;
+  /* Drifts gently inside the sticky frame as the section scrolls through the
+     viewport — parallax depth contained within a pinned panel rather than
+     across the whole page. */
+  transform: translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
+  will-change: transform;
 }
 
 .home-about-media-layer[data-active='true'] {
@@ -10766,6 +10893,13 @@ section.card,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Settle-in scale on each category crossfade reinforces the depth read. */
+  transform: scale(1.08);
+  transition: transform 0.6s ease;
+}
+
+.home-about-media-layer[data-active='true'] img {
+  transform: scale(1);
 }
 
 .home-about-media-layer::after {
@@ -10800,6 +10934,10 @@ section.card,
   font-family: var(--font-display);
   font-size: 1.2rem;
   color: #ffffff;
+  /* Nearer plane than the photo behind it: adds its own drift on top of the
+     layer's, so caption and image separate in depth inside the pinned frame. */
+  transform: translate3d(0, calc(var(--about-drift, 0) * -12px), 0);
+  will-change: transform;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -10817,6 +10955,13 @@ section.card,
   .business-line-row[data-active='true'] .business-line-index,
   .business-line-row[data-active='true'] .business-line-title,
   .business-line-row[data-active='true'] .business-line-desc {
+    transform: none;
+  }
+
+  .home-about-media-layer,
+  .home-about-media-layer img,
+  .home-about-media-layer[data-active='true'] img,
+  .home-about-media-caption {
     transform: none;
   }
 }
@@ -11154,7 +11299,31 @@ section.card,
 
 /* Products & Services explainer — /products, below the photo carousel. */
 .products-services-surface {
+  position: relative;
+  overflow: hidden;
   padding: clamp(32px, 4.5vw, 52px);
+}
+
+/* Brand watermark filling the empty space beside the heading. Purely
+ * decorative, sits behind the content, and stays faint so card copy keeps
+ * its ≥4.5:1 contrast. */
+.products-services-surface::before {
+  content: '';
+  position: absolute;
+  top: clamp(-40px, -3vw, -16px);
+  right: clamp(-56px, -4vw, -24px);
+  width: clamp(220px, 34vw, 460px);
+  aspect-ratio: 1;
+  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.products-services-head,
+.products-services-grid {
+  position: relative;
+  z-index: 1;
 }
 
 .products-services-head {
@@ -11185,12 +11354,34 @@ section.card,
 }
 
 .products-services-card {
-  cursor: default;
   padding: 26px 28px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  will-change: transform;
 }
 
 .products-services-card:hover {
-  border-color: var(--color-line);
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.products-services-card .offering-card-title {
+  transition: color 0.25s ease;
+}
+
+.products-services-card:hover .offering-card-title {
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-services-card {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .products-services-card:hover {
+    transform: none;
+  }
 }
 
 /* Elevate title over body copy — the base .offering-card sizes (0.95rem
