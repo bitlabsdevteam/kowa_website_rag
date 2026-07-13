@@ -10800,8 +10800,42 @@ section.card,
 }
 
 .home-about-inner {
+  position: relative;
   width: var(--content);
   margin: 0 auto;
+}
+
+/* Giant ghosted brand word behind the heading — purely decorative editorial
+   backdrop (aria-hidden, sourced from copy.home.whatWeDo.watermark). Mirrors
+   the .home-business-band-ghost idiom but sits static in this centered
+   section. Opacity stays ~0.05 so the heading keeps its contrast, and it's
+   clipped by the section's flow so it never bleeds onto neighbours. */
+.home-about-watermark {
+  position: absolute;
+  top: clamp(-18px, -1.5vw, -6px);
+  left: 50%;
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 17vw, 13rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(32, 26, 21, 0.05);
+  transform: translateX(-50%);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* The heading block sits above the watermark; the pillars label and split
+   below it also lift onto the same plane so the ghost never paints over any
+   real content (positioned z-index:0 boxes otherwise paint above in-flow
+   siblings). */
+.home-about-head,
+.about-pillars-label,
+.home-about-split {
+  position: relative;
+  z-index: 1;
 }
 
 .home-about-statement {
@@ -10877,11 +10911,6 @@ section.card,
   inset: 0;
   opacity: 0;
   transition: opacity 0.45s ease;
-  /* Drifts gently inside the sticky frame as the section scrolls through the
-     viewport — parallax depth contained within a pinned panel rather than
-     across the whole page. */
-  transform: translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
-  will-change: transform;
 }
 
 .home-about-media-layer[data-active='true'] {
@@ -10893,13 +10922,18 @@ section.card,
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Settle-in scale on each category crossfade reinforces the depth read. */
-  transform: scale(1.08);
+  /* Settle-in scale plus a gentle scroll-driven drift, both scoped to the
+     photo itself — the caption/index/watermark stay pinned inside the
+     clipped frame so they never get cut off by the drift (see incident:
+     captions were clipping under overflow:hidden when the whole layer,
+     caption included, carried this transform). */
+  transform: scale(1.08) translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
   transition: transform 0.6s ease;
+  will-change: transform;
 }
 
 .home-about-media-layer[data-active='true'] img {
-  transform: scale(1);
+  transform: scale(1) translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
 }
 
 .home-about-media-layer::after {
@@ -10922,6 +10956,28 @@ section.card,
   font-family: var(--font-display);
   font-size: 3rem;
   color: rgba(255, 255, 255, 0.85);
+}
+
+/* "Coming soon" watermark for lines without grounded photography yet (Foods,
+   FFE — see lib/product-media.ts TOP_CATEGORY_IMAGE). Sits diagonally across
+   the accent placeholder tile, stamp-style, without competing with the
+   numeral or caption. */
+.home-about-media-watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 12%;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-style: italic;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  transform: rotate(-10deg);
+  pointer-events: none;
 }
 
 .home-about-media-caption {
@@ -11054,6 +11110,23 @@ section.card,
   font-size: 1.15rem;
   color: var(--color-text);
   grid-column: 2;
+}
+
+/* Badge for lines without grounded photography yet (Foods, FFE). Non-italic,
+   muted pill so it reads as status metadata, not part of the display title. */
+.business-line-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  vertical-align: middle;
 }
 
 @media (min-width: 720px) {

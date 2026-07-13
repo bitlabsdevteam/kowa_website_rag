@@ -136,6 +136,10 @@ type HomeSections = {
     linksLabel: string;
     pillarsLabel: string;
     historyLinkLabel: string;
+    /** Giant ghosted display word behind the section heading — purely decorative brand backdrop (aria-hidden). */
+    watermark: string;
+    /** Badge/watermark label for lines without grounded photography yet (Foods, FFE — see lib/product-media.ts TOP_CATEGORY_IMAGE). */
+    comingSoonLabel: string;
     /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
     categories: {
       plastics: string;

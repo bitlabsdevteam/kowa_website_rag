@@ -65,9 +65,14 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
   return (
     <section id="home-about" className="home-about" aria-label={ui.display} ref={sectionRef}>
       <div className="home-about-inner">
-        <p className="section-heading-display">{ui.display}</p>
-        <p className="section-heading-subtitle">{ui.subtitle}</p>
-        <p className="home-about-statement">{ui.statement}</p>
+        <p className="home-about-watermark" aria-hidden="true">
+          {ui.watermark}
+        </p>
+        <div className="home-about-head">
+          <p className="section-heading-display">{ui.display}</p>
+          <p className="section-heading-subtitle">{ui.subtitle}</p>
+          <p className="home-about-statement">{ui.statement}</p>
+        </div>
 
         <p className="about-pillars-label">{ui.pillarsLabel}</p>
         <div className="home-about-split" style={{ '--about-drift': aboutDrift } as React.CSSProperties}>
@@ -87,7 +92,12 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
                     // eslint-disable-next-line @next/next/no-img-element -- decorative category photo mirrored by the row text
                     <img src={image} alt="" loading="lazy" />
                   ) : (
-                    <span className="home-about-media-index">{String(index + 1).padStart(2, '0')}</span>
+                    <>
+                      <span className="home-about-media-index">{String(index + 1).padStart(2, '0')}</span>
+                      <span className="home-about-media-watermark" aria-hidden="true">
+                        {ui.comingSoonLabel}
+                      </span>
+                    </>
                   )}
                   <p className="home-about-media-caption">{tabs[CATEGORY_COPY_KEY[category]]}</p>
                 </div>
@@ -98,6 +108,7 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
           <div className="business-lines" ref={listRef}>
             {PRODUCT_TOP_CATEGORY_ORDER.map((category, index) => {
               const copyKey = CATEGORY_COPY_KEY[category];
+              const isComingSoon = !TOP_CATEGORY_IMAGE[category];
 
               return (
                 <Link
@@ -110,7 +121,10 @@ export function HomeWhatWeDo({ copy }: HomeWhatWeDoProps) {
                   onFocus={() => setActive(category)}
                 >
                   <p className="business-line-index">{String(index + 1).padStart(2, '0')}</p>
-                  <h3 className="business-line-title">{tabs[copyKey]}</h3>
+                  <h3 className="business-line-title">
+                    {tabs[copyKey]}
+                    {isComingSoon ? <span className="business-line-badge">{ui.comingSoonLabel}</span> : null}
+                  </h3>
                   <p className="business-line-desc">{ui.categories[copyKey]}</p>
                 </Link>
               );
