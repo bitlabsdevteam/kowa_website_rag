@@ -5,6 +5,7 @@ import { useRef, type ReactNode } from 'react';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { HomeBusinessGrid } from '@/components/home/home-business-grid';
 import { HomeBusinessStory } from '@/components/home/home-business-story';
+import { HomeFactoryScene } from '@/components/home/home-factory-scene';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
 import type { Locale, SiteCopy } from '@/lib/site-copy';
 
@@ -47,7 +48,12 @@ function Band({ variant, ghost, testId, children }: BandProps) {
 }
 
 /** The OUR BUSINESS narrative and the PRODUCTS grid, each on its own parallax
- * band so they read as two separate, independently-drifting sections. */
+ * band so they read as two separate, independently-drifting sections. The
+ * scroll-scrubbed factory diorama sits between them as a full-bleed
+ * interlude — outside both bands (its 320vh track would wreck their
+ * progress-based drift) and never inside a ScrollReveal (a track taller than
+ * ~5 viewports can't hit the observer's 0.2 threshold and would stay
+ * invisible). */
 export function HomeBusinessParallax({ locale, copy }: HomeBusinessParallaxProps) {
   return (
     <div className="home-business-parallax" data-testid="home-business-parallax">
@@ -56,6 +62,8 @@ export function HomeBusinessParallax({ locale, copy }: HomeBusinessParallaxProps
           <HomeBusinessStory copy={copy} />
         </ScrollReveal>
       </Band>
+
+      <HomeFactoryScene copy={copy} />
 
       <Band variant="products" ghost={copy.home.business.display} testId="home-business-band-products">
         <ScrollReveal variant="fade-up" testId="reveal-business-head">

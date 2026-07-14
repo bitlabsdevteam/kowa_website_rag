@@ -2,7 +2,6 @@
 
 import { useEffect } from 'react';
 
-import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { HeroParallaxStage } from '@/components/home/hero-parallax-stage';
 import { HeroYardParallax } from '@/components/home/hero-yard-parallax';
 import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
@@ -84,11 +83,11 @@ export function HomePageClient() {
         />
       </HeroParallaxStage>
 
+      {/* The 320vh factory scroll track renders inside HomeBusinessParallax,
+          between the OUR BUSINESS and PRODUCTS bands. */}
       <HomeBusinessParallax locale={locale} copy={copy} />
 
-      <ScrollReveal variant="fade-up" testId="reveal-home-about">
-        <HomeWhatWeDo copy={copy} />
-      </ScrollReveal>
+      <HomeWhatWeDo copy={copy} />
 
       <LocalizedFooter copy={copy} />
     </main>

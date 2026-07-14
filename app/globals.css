@@ -10622,6 +10622,20 @@ section.card,
   background: var(--color-accent-strong);
 }
 
+/* --- Home: full-bleed band breakout ----------------------------------------
+   The OUR BUSINESS / PRODUCTS bands and WHAT WE DO stretch edge-to-edge like
+   .hero-section--full-bleed (same 100vw breakout; the body's overflow-x: clip
+   absorbs the scrollbar overhang). Inner wrappers (.home-business-story-inner,
+   .segment-grid-inner, .home-about-inner) keep the text column at
+   var(--content). No overflow set here: .home-about contains sticky
+   children. */
+.home-business-parallax,
+.home-about {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 /* --- Home: OUR BUSINESS / PRODUCTS parallax bands ------------------------- */
 /* HomeBusinessParallax renders two independent bands. Each Band measures its
    OWN scroll progress and exposes --biz-drift (-1 → 1) to just its subtree, so
@@ -10805,45 +10819,10 @@ section.card,
   margin: 0 auto;
 }
 
-/* Giant ghosted brand word behind the heading — purely decorative editorial
-   backdrop (aria-hidden, sourced from copy.home.whatWeDo.watermark). Mirrors
-   the .home-business-band-ghost idiom but sits static in this centered
-   section. Opacity stays ~0.05 so the heading keeps its contrast, and it's
-   clipped by the section's flow so it never bleeds onto neighbours. */
-.home-about-watermark {
-  position: absolute;
-  top: clamp(-18px, -1.5vw, -6px);
-  left: 50%;
-  z-index: 0;
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 17vw, 13rem);
-  letter-spacing: 0.08em;
-  line-height: 1;
-  white-space: nowrap;
-  color: rgba(32, 26, 21, 0.05);
-  transform: translateX(-50%);
-  pointer-events: none;
-  user-select: none;
-}
-
-/* The heading block sits above the watermark; the pillars label and split
-   below it also lift onto the same plane so the ghost never paints over any
-   real content (positioned z-index:0 boxes otherwise paint above in-flow
-   siblings). */
-.home-about-head,
 .about-pillars-label,
-.home-about-split {
+.home-about .business-lines {
   position: relative;
   z-index: 1;
-}
-
-.home-about-statement {
-  max-width: 44rem;
-  margin: 18px auto 0;
-  color: var(--color-text);
-  font-size: 1.1rem;
-  line-height: 1.7;
 }
 
 /* Landing "Machines" carousel — recycling-line photography, reuses the
@@ -10868,136 +10847,90 @@ section.card,
 /* Editorial numbered list of Kowa's five business lines, sourced from
    copy.home.whatWeDo.categories (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
 .about-pillars-label {
-  margin: 48px 0 0;
+  margin: 0;
   color: var(--color-text-muted);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-/* WHAT WE DO editorial split: sticky media frame on the left crossfading to
-   the active business line's photo; the numbered rows stay on the right.
-   Below 900px the frame is hidden and the rows read exactly as before. */
-.home-about-split {
-  margin-top: 18px;
+/* Factory diorama (between the OUR BUSINESS and PRODUCTS bands): a
+   full-bleed 320vh scroll track (same 100vw
+   breakout as .hero-section--full-bleed) whose sticky full-viewport stage
+   hosts the scroll-scrubbed Three.js recycling-line scene
+   (components/factory-3d). The track height minus the viewport is the camera
+   journey's scroll runway — components/home/home-factory-scene.tsx
+   PINNED_FRACTION mirrors the track/stage heights set here, so change them
+   together. In poster mode (no WebGL, reduced motion, <900px) the track
+   collapses into a plain static full-width figure showing the FactoryPoster
+   SVG. The frame animates nothing itself: only the native sticky and the
+   WebGL canvas move (CLAUDE.md perf contract). */
+.home-factory-track {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: 320vh;
 }
 
-.home-about-media {
-  display: none;
+.home-factory-track[data-mode='poster'] {
+  height: auto;
 }
 
-@media (min-width: 900px) {
-  .home-about-split {
-    display: grid;
-    grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
-    gap: clamp(36px, 5vw, 72px);
-    align-items: start;
-    text-align: left;
-  }
-
-  .home-about-media {
-    display: block;
-    position: sticky;
-    top: clamp(72px, 12vh, 128px);
-    aspect-ratio: 4 / 5;
-    border-radius: var(--radius-card);
-    overflow: hidden;
-    background: var(--surface-muted);
-  }
+.home-factory-frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--color-canvas-strong);
 }
 
-.home-about-media-layer {
+.home-factory-track[data-mode='poster'] .home-factory-frame {
+  position: static;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.factory-3d-scene {
   position: absolute;
   inset: 0;
-  opacity: 0;
-  transition: opacity 0.45s ease;
 }
 
-.home-about-media-layer[data-active='true'] {
-  opacity: 1;
-}
-
-.home-about-media-layer img {
+.factory-3d-scene canvas,
+.home-factory-poster {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  /* Settle-in scale plus a gentle scroll-driven drift, both scoped to the
-     photo itself — the caption/index/watermark stay pinned inside the
-     clipped frame so they never get cut off by the drift (see incident:
-     captions were clipping under overflow:hidden when the whole layer,
-     caption included, carried this transform). */
-  transform: scale(1.08) translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
-  transition: transform 0.6s ease;
-  will-change: transform;
 }
 
-.home-about-media-layer[data-active='true'] img {
-  transform: scale(1) translate3d(0, calc(var(--about-drift, 0) * -30px), 0);
+@media (max-width: 899px) {
+  .home-factory-track {
+    height: auto;
+  }
+
+  .home-factory-frame {
+    position: static;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
 }
 
-.home-about-media-layer::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(32, 26, 21, 0) 55%, rgba(32, 26, 21, 0.72) 100%);
-}
+/* Belt-and-braces with the JS gate: reduced motion never keeps a pinned
+   scroll track, even if the scene somehow mounted. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-track {
+    height: auto;
+  }
 
-/* Lines without grounded photography (see lib/product-media.ts) keep the
-   honest accent tile used by the segment cards, with the row's numeral. */
-.home-about-media-layer--placeholder {
-  background: linear-gradient(155deg, var(--color-accent-strong) 0%, var(--color-accent) 55%, var(--color-canvas-strong) 130%);
-}
-
-.home-about-media-index {
-  position: absolute;
-  top: 22px;
-  left: 26px;
-  font-family: var(--font-display);
-  font-size: 3rem;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-/* "Coming soon" watermark for lines without grounded photography yet (Foods,
-   FFE — see lib/product-media.ts TOP_CATEGORY_IMAGE). Sits diagonally across
-   the accent placeholder tile, stamp-style, without competing with the
-   numeral or caption. */
-.home-about-media-watermark {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 12%;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3vw, 1.9rem);
-  font-style: italic;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  transform: rotate(-10deg);
-  pointer-events: none;
-}
-
-.home-about-media-caption {
-  position: absolute;
-  left: 26px;
-  right: 26px;
-  bottom: 22px;
-  margin: 0;
-  z-index: 1;
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  color: #ffffff;
-  /* Nearer plane than the photo behind it: adds its own drift on top of the
-     layer's, so caption and image separate in depth inside the pinned frame. */
-  transform: translate3d(0, calc(var(--about-drift, 0) * -12px), 0);
-  will-change: transform;
+  .home-factory-frame {
+    position: static;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .home-about-media-layer,
   .business-line-index,
   .business-line-title,
   .business-line-desc,
@@ -11013,25 +10946,12 @@ section.card,
   .business-line-row[data-active='true'] .business-line-desc {
     transform: none;
   }
-
-  .home-about-media-layer,
-  .home-about-media-layer img,
-  .home-about-media-layer[data-active='true'] img,
-  .home-about-media-caption {
-    transform: none;
-  }
 }
 
 .business-lines {
   margin-top: 18px;
   text-align: left;
   border-top: 1px solid var(--color-line);
-}
-
-@media (min-width: 900px) {
-  .home-about-split .business-lines {
-    margin-top: 0;
-  }
 }
 
 .business-line-row {

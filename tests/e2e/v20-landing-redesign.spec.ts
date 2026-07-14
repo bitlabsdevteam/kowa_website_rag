@@ -3,7 +3,8 @@ import { expect, test } from '@playwright/test';
 import en from '../../locales/en.json' with { type: 'json' };
 
 // v20/v22: landing — full-bleed container-yard photo hero, OUR BUSINESS
-// parallax bands, WHAT WE DO sticky-media split.
+// parallax bands, WHAT WE DO business-line rows (the section's media is the
+// v24 factory scene, covered in v24-factory-scene.spec.ts).
 
 test.describe('hero container-yard photo backdrop', () => {
   test('the yard photo fills the hero behind light-on-photo copy', async ({ page }) => {
@@ -59,14 +60,17 @@ test.describe('our business / products parallax', () => {
     // Scroll until the grid is mid-viewport so --biz-drift is non-zero.
     await page.locator('#business').scrollIntoViewIfNeeded();
     await page.evaluate(() => window.scrollBy(0, 200));
-    await page.waitForTimeout(300);
 
-    // The ghost watermark still carries the band's scroll parallax…
+    // The ghost watermark still carries the band's scroll parallax… Poll
+    // rather than sleeping a fixed interval: the WebGL factory interlude just
+    // above this band lazy-mounts around this scroll position, and its first
+    // SwiftShader frame can stall the band's rAF measure well past any fixed
+    // wait.
     const ghostBefore = await ghost.evaluate((el) => getComputedStyle(el).transform);
     await page.evaluate(() => window.scrollBy(0, 200));
-    await page.waitForTimeout(300);
-    const ghostAfter = await ghost.evaluate((el) => getComputedStyle(el).transform);
-    expect(ghostAfter).not.toBe(ghostBefore);
+    await expect
+      .poll(() => ghost.evaluate((el) => getComputedStyle(el).transform))
+      .not.toBe(ghostBefore);
 
     // …but the cards themselves sit level and equal — no per-card 3D transform.
     const cardTransform = await page
@@ -105,30 +109,26 @@ test.describe('our business / products parallax', () => {
   });
 });
 
-test.describe('what we do sticky-media split', () => {
-  test('hovering a row activates its media layer', async ({ page }) => {
+test.describe('what we do business-line rows', () => {
+  test('hovering a row highlights it', async ({ page }) => {
     await page.goto('/');
-    await page.locator('#home-about').scrollIntoViewIfNeeded();
-
-    const media = page.locator('.home-about-media');
-    await expect(media).toBeVisible();
+    await page.locator('.business-lines').scrollIntoViewIfNeeded();
 
     await page.locator('.business-line-row[data-category="timber"]').hover();
-    await expect(page.locator('.home-about-media-layer[data-category="timber"]')).toHaveAttribute(
-      'data-active',
-      'true',
-    );
     await expect(page.locator('.business-line-row[data-category="timber"]')).toHaveAttribute('data-active', 'true');
 
     await page.screenshot({ path: 'tests/screenshots/v20-03-what-we-do.png', fullPage: false });
   });
 
-  test('all five rows keep their product links; media panel hides on mobile', async ({ browser }) => {
+  test('all five rows keep their product links; mobile gets the poster figure', async ({ browser }) => {
     const context = await browser.newContext({ viewport: { width: 390, height: 844 } });
     const page = await context.newPage();
     await page.goto('/');
 
-    await expect(page.locator('.home-about-media')).toBeHidden();
+    // Narrow viewports get the static factory poster instead of the canvas.
+    await page.getByTestId('home-factory-scene').scrollIntoViewIfNeeded();
+    await expect(page.getByTestId('home-factory-scene')).toHaveAttribute('data-mode', 'poster');
+    await expect(page.getByTestId('home-factory-poster')).toBeVisible();
 
     const rows = page.locator('.business-line-row');
     await expect(rows).toHaveCount(5);

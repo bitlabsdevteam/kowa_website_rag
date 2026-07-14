@@ -140,6 +140,8 @@ type HomeSections = {
     watermark: string;
     /** Badge/watermark label for lines without grounded photography yet (Foods, FFE — see lib/product-media.ts TOP_CATEGORY_IMAGE). */
     comingSoonLabel: string;
+    /** Accessible name for the animated recycling-line factory scene (components/home/home-factory-scene.tsx). */
+    factoryAria: string;
     /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
     categories: {
       plastics: string;
