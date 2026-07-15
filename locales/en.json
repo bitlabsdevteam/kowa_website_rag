@@ -460,7 +460,9 @@
       "historyLinkLabel": "See our full history →",
       "watermark": "KOWA",
       "comingSoonLabel": "Coming soon",
-      "factoryAria": "Illustrated animation of Kowa's plastics recycling line — collection, crushing, washing, extrusion, pelletizing, and export",
+      "factoryAria": "Illustrated animation of Kowa's plastics recycling line — collection, crushing, washing, extrusion, pelletizing, and export loaded onto a departing cargo plane",
+      "storytellingLabel": "Storytelling",
+      "storytellingHint": "Scroll to follow the journey from collection to export.",
       "categories": {
         "plastics": "Domestic collection through export: waste and loss plastics are sorted, crushed, and regenerated into pellet-form material through our G.P. Polymer line.",
         "generalGoods": "Cross-border sourcing and distribution of general merchandise, moved through the same trading and logistics network as our plastics business.",

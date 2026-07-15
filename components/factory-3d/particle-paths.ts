@@ -104,11 +104,11 @@ export function steamPath(u: number, jitter: number, source: 0 | 1): ParticlePos
   const x0 = source === 0 ? STAGE_X.wash + 0.35 : STAGE_X.extruder + 1.1;
   const y0 = source === 0 ? 1.95 : 1.55;
   return {
-    x: x0 + jitter * 0.3 + u * (0.25 + jitter * 0.2),
+    x: x0 + jitter * 0.3 + u * (0.35 + jitter * 0.3),
     y: y0 + u * (1.1 + jitter * 0.5),
     z: WATER_Z,
     rotation: jitter * Math.PI,
-    scale: u < 0.35 ? (u / 0.35) * (0.7 + jitter * 0.6) : (1 - u) / 0.65 + 0.15,
+    scale: u < 0.35 ? (u / 0.35) * (1.0 + jitter * 0.7) : (1 - u) / 0.65 + 0.15,
   };
 }
 

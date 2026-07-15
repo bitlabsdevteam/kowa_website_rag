@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import type { Group, Mesh } from 'three';
 
 import { FACTORY_PALETTE, STAGE_X } from '../factory-palette';
-import { IndicatorLight, RoundedPanel } from './primitives';
+import { BlobShadow, IndicatorLight, RoundedPanel } from './primitives';
 
 const BAG_WIDTH = 0.74;
 const BAG_HEIGHT = 0.95;
@@ -45,19 +45,20 @@ export function Bagging() {
 
   return (
     <group name="bagging">
-      {/* Gantry frame over the bag row. */}
+      {/* Gantry frame over the bag row — square box sections. */}
       <mesh position={[x - 1.75, 1.15, -0.1]}>
-        <planeGeometry args={[0.1, 2.3]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.inkSoft} />
+        <boxGeometry args={[0.1, 2.3, 0.1]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.inkSoft} />
       </mesh>
       <mesh position={[x + 1.75, 1.15, -0.1]}>
-        <planeGeometry args={[0.1, 2.3]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.inkSoft} />
+        <boxGeometry args={[0.1, 2.3, 0.1]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.inkSoft} />
       </mesh>
       <mesh position={[x, 2.3, -0.1]}>
-        <planeGeometry args={[3.6, 0.1]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.inkSoft} />
+        <boxGeometry args={[3.6, 0.1, 0.1]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.inkSoft} />
       </mesh>
+      <BlobShadow x={x} radius={2.0} strength={0.8} />
       <IndicatorLight position={[x, 2.16, 0.02]} phase={0.9} />
       {BAG_OFFSETS.map((offset, index) => (
         <group

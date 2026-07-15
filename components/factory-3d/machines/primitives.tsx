@@ -30,6 +30,50 @@ export function useRoundedRect(width: number, height: number, radius: number): S
   }, [width, height, radius]);
 }
 
+/** Extrude options for the solid panels: the shape extrudes toward −z after
+ * the mesh offset in ExtrudedShape, so the lit front face stays exactly at the
+ * authored z and every existing +0.01…+0.08 decal layer keeps working. Bevel
+ * is clamped so thin strips (legs, platforms) never self-intersect. */
+function useExtrudeOptions(depth: number, maxBevel: number) {
+  const bevel = Math.max(0.001, Math.min(0.02, maxBevel));
+  return useMemo(
+    () => ({
+      depth,
+      bevelEnabled: true,
+      bevelThickness: bevel,
+      bevelSize: bevel,
+      bevelOffset: -bevel, // silhouette stays at the authored width/height
+      bevelSegments: 2,
+      curveSegments: 8,
+    }),
+    [depth, bevel],
+  );
+}
+
+type ExtrudedShapeProps = {
+  shape: Shape;
+  depth: number;
+  maxBevel: number;
+  color: string;
+  opacity?: number;
+  position: Vec3;
+  rotation?: number;
+};
+
+/** Solid lit panel body: front bevel face lands exactly at the authored z,
+ * body extends backward (−z). Lambert so the light rig shades tops/sides. */
+export function ExtrudedShape({ shape, depth, maxBevel, color, opacity = 1, position, rotation = 0 }: ExtrudedShapeProps) {
+  const options = useExtrudeOptions(depth, maxBevel);
+  return (
+    <group position={position} rotation={[0, 0, rotation]}>
+      <mesh position={[0, 0, -(depth + options.bevelThickness)]}>
+        <extrudeGeometry args={[shape, options]} />
+        <meshLambertMaterial color={color} transparent={opacity < 1} opacity={opacity} />
+      </mesh>
+    </group>
+  );
+}
+
 type RoundedPanelProps = {
   width: number;
   height: number;
@@ -38,15 +82,22 @@ type RoundedPanelProps = {
   opacity?: number;
   position: Vec3;
   rotation?: number;
+  /** Extrusion depth toward −z; front face stays at the authored z. */
+  depth?: number;
 };
 
-export function RoundedPanel({ width, height, radius = 0.06, color, opacity = 1, position, rotation = 0 }: RoundedPanelProps) {
+export function RoundedPanel({ width, height, radius = 0.06, color, opacity = 1, position, rotation = 0, depth = 0.35 }: RoundedPanelProps) {
   const shape = useRoundedRect(width, height, radius);
   return (
-    <mesh position={position} rotation={[0, 0, rotation]}>
-      <shapeGeometry args={[shape]} />
-      <meshBasicMaterial color={color} transparent={opacity < 1} opacity={opacity} />
-    </mesh>
+    <ExtrudedShape
+      shape={shape}
+      depth={depth}
+      maxBevel={Math.min(width, height) / 4}
+      color={color}
+      opacity={opacity}
+      position={position}
+      rotation={rotation}
+    />
   );
 }
 
@@ -56,10 +107,11 @@ type TrapezoidPanelProps = {
   height: number;
   color: string;
   position: Vec3;
+  depth?: number;
 };
 
 /** Symmetric trapezoid centered on the origin — hoppers and chutes. */
-export function TrapezoidPanel({ topWidth, bottomWidth, height, color, position }: TrapezoidPanelProps) {
+export function TrapezoidPanel({ topWidth, bottomWidth, height, color, position, depth = 0.35 }: TrapezoidPanelProps) {
   const shape = useMemo(() => {
     const s = new Shape();
     const h = height / 2;
@@ -71,10 +123,13 @@ export function TrapezoidPanel({ topWidth, bottomWidth, height, color, position 
     return s;
   }, [topWidth, bottomWidth, height]);
   return (
-    <mesh position={position}>
-      <shapeGeometry args={[shape]} />
-      <meshBasicMaterial color={color} />
-    </mesh>
+    <ExtrudedShape
+      shape={shape}
+      depth={depth}
+      maxBevel={Math.min(topWidth, bottomWidth, height) / 4}
+      color={color}
+      position={position}
+    />
   );
 }
 
@@ -166,11 +221,38 @@ export function MachineLegs({ xs, topY, color = FACTORY_PALETTE.inkSoft, width =
   return (
     <>
       {xs.map((x) => (
-        <mesh key={x} position={[x, topY / 2, -0.05]}>
-          <planeGeometry args={[width, topY]} />
-          <meshBasicMaterial color={color} />
+        <mesh key={x} position={[x, topY / 2, -0.11]}>
+          <boxGeometry args={[width, topY, 0.22]} />
+          <meshLambertMaterial color={color} />
         </mesh>
       ))}
     </>
+  );
+}
+
+type BlobShadowProps = {
+  x: number;
+  z?: number;
+  /** Half-width of the outer shadow ellipse, world units. */
+  radius: number;
+  /** Overall opacity multiplier (1 = grounded, fade toward 0 for lift-off). */
+  strength?: number;
+};
+
+/** Fake grounding shadow: two stacked flat ellipses on the floor plane —
+ * deterministic, zero per-frame cost, cheaper than any shadow map and enough
+ * to sit the machines onto the new ground plane. */
+export function BlobShadow({ x, z = 0, radius, strength = 1 }: BlobShadowProps) {
+  return (
+    <group position={[x, 0, z]}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.015, 0]} scale={[radius, radius * 0.28, 1]}>
+        <circleGeometry args={[1, 24]} />
+        <meshBasicMaterial color={FACTORY_PALETTE.ink} transparent opacity={0.1 * strength} depthWrite={false} />
+      </mesh>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0.02, 0]} scale={[radius * 0.62, radius * 0.62 * 0.28, 1]}>
+        <circleGeometry args={[1, 24]} />
+        <meshBasicMaterial color={FACTORY_PALETTE.ink} transparent opacity={0.08 * strength} depthWrite={false} />
+      </mesh>
+    </group>
   );
 }

@@ -17,6 +17,7 @@ export const FACTORY_PALETTE = {
   accentSoft: '#a3d9bd', // --color-accent-soft
   bottle: '#a9cdb8', // pale collection green — matches hero-3d ringCollection
   heat: '#c9803e', // extruder melt glow — the one warm note in the scene
+  steam: '#93a2b4', // visible steam grey-blue — reads on both backdrop and wall
 } as const;
 
 /** World-space x anchor of each production station, left to right along the

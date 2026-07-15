@@ -6,7 +6,7 @@ import { Object3D } from 'three';
 import type { InstancedMesh } from 'three';
 
 import { FACTORY_PALETTE } from '../factory-palette';
-import { RoundedPanel, SpokedWheel } from './primitives';
+import { BlobShadow, RoundedPanel, SpokedWheel } from './primitives';
 
 type Point = { x: number; y: number };
 
@@ -60,8 +60,11 @@ export function Conveyor({ start, end, speed, z = 0.1 }: ConveyorProps) {
   });
 
   return (
-    <group position={[midX, midY - BELT_THICKNESS / 2, z]} rotation={[0, 0, angle]}>
-      <RoundedPanel width={length} height={BELT_THICKNESS} radius={BELT_THICKNESS / 2} color={FACTORY_PALETTE.ink} position={[0, 0, 0]} />
+    <>
+      {/* Soft grounding shadow on the floor beneath the belt run. */}
+      <BlobShadow x={midX} z={z} radius={length * 0.42} strength={0.45} />
+      <group position={[midX, midY - BELT_THICKNESS / 2, z]} rotation={[0, 0, angle]}>
+      <RoundedPanel width={length} height={BELT_THICKNESS} radius={BELT_THICKNESS / 2} color={FACTORY_PALETTE.ink} depth={0.3} position={[0, 0, 0]} />
       {/* Tread marks riding the top surface — the belt's visible motion. */}
       <instancedMesh ref={treadsRef} args={[undefined, undefined, treadCount]}>
         <planeGeometry args={[0.07, 0.045]} />
@@ -80,6 +83,7 @@ export function Conveyor({ start, end, speed, z = 0.1 }: ConveyorProps) {
           hubRadius={0.03}
         />
       ))}
-    </group>
+      </group>
+    </>
   );
 }

@@ -460,7 +460,9 @@
       "historyLinkLabel": "查看完整歷程 →",
       "watermark": "KOWA",
       "comingSoonLabel": "即將推出",
-      "factoryAria": "Kowa 塑膠再生產線的動畫插圖 — 回收、破碎、清洗、擠出、造粒與出口",
+      "factoryAria": "Kowa 塑膠再生產線的動畫插圖 — 回收、破碎、清洗、擠出、造粒，並裝載至起飛的貨機出口",
+      "storytellingLabel": "故事敘述",
+      "storytellingHint": "向下捲動，跟隨從回收到出口的再生產線故事。",
       "categories": {
         "plastics": "國內回收的廢塑料經分揀、破碎後，透過 G.P. Polymer 再生產線製成顆粒料，並完成出口。",
         "generalGoods": "依託與塑料業務相同的貿易與物流網絡，開展日用百貨等商品的跨境採購與流通。",

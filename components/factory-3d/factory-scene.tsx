@@ -9,6 +9,7 @@ import { FACTORY_PALETTE, FLAKE_BELT_Y, INTAKE_BELT_END, INTAKE_BELT_START, STAG
 import { FactoryForeground, FactoryShell } from './factory-shell';
 import { FactoryParticles } from './factory-particles';
 import { Bagging } from './machines/bagging';
+import { CargoPlane } from './machines/cargo-plane';
 import { Conveyor } from './machines/conveyor';
 import { Crusher } from './machines/crusher';
 import { ExportVignette } from './machines/export-vignette';
@@ -60,10 +61,25 @@ export default function FactoryScene({ progressRef, visible }: FactorySceneProps
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
       >
         <color attach="background" args={[FACTORY_PALETTE.backdrop]} />
-        <fog attach="fog" args={[FACTORY_PALETTE.backdrop, 26, 46]} />
+        <fog attach="fog" args={[FACTORY_PALETTE.backdrop, 16, 38]} />
         <CameraRig progressRef={progressRef} />
 
+        {/* Light rig for the Lambert machine bodies: hemisphere base fill,
+            warm key from upper-left-front, cool fill from the right — front
+            faces receive ~1.0 combined irradiance so the palette hexes still
+            read true while tops brighten and undersides cool off. */}
+        <hemisphereLight args={['#ffffff', '#dfe5ec', 0.75]} />
+        <directionalLight position={[-4, 9, 10]} color="#fff6ea" intensity={0.85} />
+        <directionalLight position={[10, 3, 7]} color="#dce6f5" intensity={0.35} />
+
         <FactoryShell />
+
+        {/* Horizontal ground plane under the machines — the receding floor is
+            what makes the extruded bodies read as standing in real space. */}
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[12, 0, -1]}>
+          <planeGeometry args={[56, 11]} />
+          <meshLambertMaterial color={FACTORY_PALETTE.floor} />
+        </mesh>
 
         <group name="mid-machines">
           {/* Inclined intake belt lifting waste up to the crusher hopper. */}
@@ -80,6 +96,7 @@ export default function FactoryScene({ progressRef, visible }: FactorySceneProps
           <Pelletizer />
           <Bagging />
           <ExportVignette progressRef={progressRef} />
+          <CargoPlane progressRef={progressRef} />
         </group>
 
         <FactoryForeground />

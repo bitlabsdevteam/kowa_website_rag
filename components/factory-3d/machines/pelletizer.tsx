@@ -1,7 +1,7 @@
 'use client';
 
 import { FACTORY_PALETTE, STAGE_X } from '../factory-palette';
-import { IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
+import { BlobShadow, IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
 
 /** Pelletizer: the strands from the extruder die enter the intake slot, a
  * fast cutter wheel spins behind the cutaway, and fresh pellets pour from the
@@ -26,6 +26,7 @@ export function Pelletizer() {
       {/* Pellet chute angled toward the first bag. */}
       <TrapezoidPanel topWidth={0.42} bottomWidth={0.2} height={0.5} color={FACTORY_PALETTE.inkSoft} position={[x + 0.62, 0.68, 0.01]} />
       <MachineLegs xs={[x - 0.45, x + 0.45]} topY={0.46} />
+      <BlobShadow x={x} radius={0.85} />
       <IndicatorLight position={[x - 0.45, 1.55, 0.05]} phase={5.1} />
     </group>
   );

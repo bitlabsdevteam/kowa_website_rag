@@ -7,10 +7,10 @@ import type { Group } from 'three';
 import { FACTORY_PALETTE, mulberry32 } from './factory-palette';
 import { SpokedWheel } from './machines/primitives';
 
-const SHELL_SPAN = { left: -6, right: 30 };
+const SHELL_SPAN = { left: -6, right: 34 };
 const SHELL_CENTER_X = (SHELL_SPAN.left + SHELL_SPAN.right) / 2;
-const WINDOW_XS = [-2, 2, 6, 10, 14, 18, 22, 26];
-const TRUSS_XS = [-4, 0, 4, 8, 12, 16, 20, 24, 28];
+const WINDOW_XS = [-2, 2, 6, 10, 14, 18, 22, 26, 30];
+const TRUSS_XS = [-4, 0, 4, 8, 12, 16, 20, 24, 28, 32];
 const FAN_XS = [2, 12, 21];
 /** Camera x the parallax counter-translate is centered on (mid-line). */
 const PARALLAX_ORIGIN_X = 11.5;

@@ -106,8 +106,13 @@ export function FactoryParticles() {
       <InstancedFlow count={36} speed={0.055} seed={101} path={bottlePath} color={FACTORY_PALETTE.bottle} size={[0.11, 0.26]} />
       <InstancedFlow count={220} speed={0.09} seed={211} path={flakePath} color={FACTORY_PALETTE.accentSoft} size={[0.055, 0.055]} />
       <InstancedFlow count={48} speed={0.16} seed={307} path={bubblePath} color={FACTORY_PALETTE.white} size={0.042} opacity={0.75} />
-      <InstancedFlow count={8} speed={0.07} seed={401} path={(u, j) => steamPath(u, j, 0)} color={FACTORY_PALETTE.white} size={0.1} opacity={0.3} />
-      <InstancedFlow count={8} speed={0.06} seed={409} path={(u, j) => steamPath(u, j, 1)} color={FACTORY_PALETTE.white} size={0.09} opacity={0.28} />
+      {/* Two-tone steam: a grey-blue base layer that actually reads against
+          the pale wall, with smaller offset white highlights riding above it
+          so each puff gets a lit top edge — "solid" smoke without textures. */}
+      <InstancedFlow count={10} speed={0.06} seed={401} path={(u, j) => steamPath(u, j, 0)} color={FACTORY_PALETTE.steam} size={0.16} opacity={0.5} />
+      <InstancedFlow count={6} speed={0.07} seed={419} path={(u, j) => steamPath(u, j, 0)} color={FACTORY_PALETTE.white} size={0.09} opacity={0.6} />
+      <InstancedFlow count={10} speed={0.055} seed={409} path={(u, j) => steamPath(u, j, 1)} color={FACTORY_PALETTE.steam} size={0.14} opacity={0.45} />
+      <InstancedFlow count={6} speed={0.065} seed={431} path={(u, j) => steamPath(u, j, 1)} color={FACTORY_PALETTE.white} size={0.08} opacity={0.55} />
       <InstancedFlow count={140} speed={0.24} seed={503} path={pelletPath} color={FACTORY_PALETTE.accentStrong} size={0.03} />
       <DustField seed={601} z={-2.4} drift={0.6} />
       <DustField seed={607} z={2.1} drift={1} />

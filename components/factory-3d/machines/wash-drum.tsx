@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import type { Mesh } from 'three';
 
 import { FACTORY_PALETTE, STAGE_X } from '../factory-palette';
-import { IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel } from './primitives';
+import { BlobShadow, IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel } from './primitives';
 
 /** Washing station: slatted drum turning behind a cutaway, two counter-phased
  * water lines lapping above it (bubbles rise from here — see bubblePath), a
@@ -44,20 +44,22 @@ export function WashDrum() {
       </mesh>
       {/* Drying fan spinning fast at the outlet side. */}
       <SpokedWheel radius={0.15} spokes={3} speed={6.5} color={FACTORY_PALETTE.inkSoft} position={[x + 0.62, 2.06, 0.03]} spokeWidth={0.05} />
-      {/* Overhead duct to the extruder hopper: riser, run, and drop. */}
-      <mesh position={[x + 0.35, 2.2, -0.4]}>
-        <planeGeometry args={[0.14, 1.1]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.silver} />
+      {/* Overhead duct to the extruder hopper: riser, run, and drop — square
+          box sections so the pipe run reads solid under the light rig. */}
+      <mesh position={[x + 0.35, 2.2, -0.47]}>
+        <boxGeometry args={[0.14, 1.1, 0.14]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.silver} />
       </mesh>
-      <mesh position={[(x + 0.35 + STAGE_X.extruder - 0.7) / 2, 2.7, -0.4]}>
-        <planeGeometry args={[STAGE_X.extruder - 0.7 - (x + 0.35), 0.14]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.silver} />
+      <mesh position={[(x + 0.35 + STAGE_X.extruder - 0.7) / 2, 2.7, -0.47]}>
+        <boxGeometry args={[STAGE_X.extruder - 0.7 - (x + 0.35), 0.14, 0.14]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.silver} />
       </mesh>
-      <mesh position={[STAGE_X.extruder - 0.7, 2.35, -0.4]}>
-        <planeGeometry args={[0.14, 0.85]} />
-        <meshBasicMaterial color={FACTORY_PALETTE.silver} />
+      <mesh position={[STAGE_X.extruder - 0.7, 2.35, -0.47]}>
+        <boxGeometry args={[0.14, 0.85, 0.14]} />
+        <meshLambertMaterial color={FACTORY_PALETTE.silver} />
       </mesh>
       <MachineLegs xs={[x - 0.6, x + 0.6]} topY={0.16} />
+      <BlobShadow x={x} radius={1.0} />
       <IndicatorLight position={[x - 0.55, 1.62, 0.06]} phase={1.7} />
     </group>
   );

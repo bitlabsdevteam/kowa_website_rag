@@ -1,7 +1,7 @@
 'use client';
 
 import { FACTORY_PALETTE, STAGE_X } from '../factory-palette';
-import { IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
+import { BlobShadow, IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
 
 /** The crusher: hopper on top swallowing bottles, a cutaway window showing
  * two counter-rotating blade wheels, and a lower outlet chute the flake
@@ -28,6 +28,7 @@ export function Crusher() {
       {/* Outlet chute feeding the flake transfer belt. */}
       <TrapezoidPanel topWidth={0.5} bottomWidth={0.26} height={0.45} color={FACTORY_PALETTE.inkSoft} position={[x + 0.7, 0.42, 0.01]} />
       <MachineLegs xs={[x - 0.75, x + 0.75]} topY={0.18} />
+      <BlobShadow x={x} radius={1.15} />
       <IndicatorLight position={[x - 0.7, 2.02, 0.05]} phase={0.4} />
       <IndicatorLight position={[x - 0.48, 2.02, 0.05]} phase={2.9} speed={1.6} color={FACTORY_PALETTE.silver} />
     </group>

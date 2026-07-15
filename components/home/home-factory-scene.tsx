@@ -27,7 +27,10 @@ const PINNED_FRACTION = (320 - 100) / 320;
  * mounts on wide viewports with WebGL and no reduced-motion preference —
  * everyone else gets the static FactoryPoster, and the scroll track collapses
  * to a plain figure. An IntersectionObserver parks the render loop while the
- * section is offscreen. */
+ * section is offscreen. The scene/poster sits in its own role="img" wrapper
+ * (home-factory-visual) so the "Storytelling" caption stays real, readable
+ * text for screen readers instead of being swallowed by the image's
+ * accessible name. */
 export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
   const ui = copy.home.whatWeDo;
 
@@ -71,8 +74,16 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
       data-testid="home-factory-scene"
       data-mode={canRender3D ? 'scene' : 'poster'}
     >
-      <div className="home-factory-frame" role="img" aria-label={ui.factoryAria}>
-        {canRender3D ? <FactoryScene progressRef={progressRef} visible={visible} /> : <FactoryPoster />}
+      <div className="home-factory-frame">
+        <div className="home-factory-visual" role="img" aria-label={ui.factoryAria}>
+          {canRender3D ? <FactoryScene progressRef={progressRef} visible={visible} /> : <FactoryPoster />}
+        </div>
+        <div className="home-factory-caption">
+          <p className="home-factory-caption-label">{ui.storytellingLabel}</p>
+          {/* Only the pinned scene is actually scroll-driven — the poster
+              fallback is a static image, so scrolling it does nothing. */}
+          {canRender3D ? <p className="home-factory-caption-hint">{ui.storytellingHint}</p> : null}
+        </div>
       </div>
     </div>
   );

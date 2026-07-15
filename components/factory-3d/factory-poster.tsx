@@ -16,6 +16,7 @@ const P = {
   accentStrong: '#1f5235',
   accentSoft: '#a3d9bd',
   bottle: '#a9cdb8',
+  steam: '#93a2b4',
 } as const;
 
 const WINDOW_XS = [30, 180, 330, 480, 630, 780, 930, 1080];
@@ -110,6 +111,26 @@ export function FactoryPoster() {
       <rect x="1122" y="486" width="52" height="72" rx="8" fill={P.white} />
       <rect x="1128" y="516" width="40" height="36" rx="4" fill={P.accentStrong} opacity="0.85" />
       <rect x="1128" y="512" width="40" height="6" fill={P.accent} />
+
+      {/* Steam over the wash tank and the extruder die — grey-blue so it
+          reads against the pale wall (parity with the scene's steam tint). */}
+      <circle cx="642" cy="384" r="12" fill={P.steam} opacity="0.5" />
+      <circle cx="662" cy="366" r="9" fill={P.steam} opacity="0.4" />
+      <circle cx="654" cy="350" r="6" fill={P.white} opacity="0.6" />
+      <circle cx="954" cy="406" r="10" fill={P.steam} opacity="0.5" />
+      <circle cx="968" cy="390" r="7" fill={P.steam} opacity="0.35" />
+      <circle cx="962" cy="378" r="5" fill={P.white} opacity="0.6" />
+
+      {/* Export finale: cargo jet climbing out upper-right with a dashed
+          contrail — the poster's version of the fly-out. */}
+      <line x1="920" y1="228" x2="1016" y2="188" stroke={P.steam} strokeWidth="4" strokeDasharray="10 12" strokeLinecap="round" opacity="0.6" />
+      <g transform="rotate(-18 1080 160)">
+        <path d="M1030 168 L1114 168 Q1132 167 1134 156 Q1132 148 1112 146 L1042 146 Q1030 152 1030 168 Z" fill={P.white} />
+        <path d="M1036 148 L1044 122 L1056 122 L1050 147 Z" fill={P.accentStrong} />
+        <path d="M1078 158 L1104 158 L1090 174 L1072 174 Z" fill={P.silver} />
+        <rect x="1050" y="162" width="70" height="4" fill={P.accent} />
+        <path d="M1118 150 L1128 150 L1124 156 L1116 156 Z" fill={P.ink} />
+      </g>
     </svg>
   );
 }

@@ -66,8 +66,35 @@ test.describe('factory scene scrub', () => {
     await scrollToFilmProgress(page, 0.95);
     await page.screenshot({ path: 'tests/screenshots/v24-03-export.png', fullPage: false });
 
-    // Scrubbing backwards reverses the camera exactly (scrubbed, not played).
+    // Bottom of the runway: the cargo plane's takeoff (data-factory-flight,
+    // written by components/factory-3d/machines/cargo-plane.tsx) converges
+    // toward 1 as the jet climbs out.
+    await scrollToFilmProgress(page, 1.0);
+    await page.waitForFunction(
+      () => {
+        const canvas = document.querySelector('[data-testid="factory-3d-scene"] canvas');
+        if (!canvas) return false;
+        const flight = Number.parseFloat(canvas.getAttribute('data-factory-flight') ?? '');
+        return Number.isFinite(flight) && flight > 0.9;
+      },
+      undefined,
+      { polling: 100 },
+    );
+    await page.screenshot({ path: 'tests/screenshots/v24-04-takeoff.png', fullPage: false });
+
+    // Scrubbing backwards reverses the camera exactly (scrubbed, not played)
+    // — including the flight, which lands back at its parked state.
     await scrollToFilmProgress(page, 0.12);
+    await page.waitForFunction(
+      () => {
+        const canvas = document.querySelector('[data-testid="factory-3d-scene"] canvas');
+        if (!canvas) return false;
+        const flight = Number.parseFloat(canvas.getAttribute('data-factory-flight') ?? '');
+        return Number.isFinite(flight) && flight < 0.05;
+      },
+      undefined,
+      { polling: 100 },
+    );
   });
 
   test('the display title is gone but the section keeps its landmark name', async ({ page }) => {
@@ -77,8 +104,20 @@ test.describe('factory scene scrub', () => {
     await expect(section).toHaveAttribute('aria-label', en.home.whatWeDo.display);
     await expect(section.locator('.section-heading-display')).toHaveCount(0);
 
-    // The frame carries the grounded accessible description of the line.
-    await expect(page.locator('.home-factory-frame')).toHaveAttribute('aria-label', en.home.whatWeDo.factoryAria);
+    // The visual wrapper carries the grounded accessible description of the
+    // line, scoped away from the caption so its text stays real and readable.
+    await expect(page.locator('.home-factory-visual')).toHaveAttribute('aria-label', en.home.whatWeDo.factoryAria);
+  });
+
+  test('the storytelling caption names the sequence and explains the scroll', async ({ page }) => {
+    await page.goto('/');
+
+    const track = page.getByTestId('home-factory-scene');
+    await track.scrollIntoViewIfNeeded();
+    await expect(track).toHaveAttribute('data-mode', 'scene');
+
+    await expect(page.locator('.home-factory-caption-label')).toHaveText(en.home.whatWeDo.storytellingLabel);
+    await expect(page.locator('.home-factory-caption-hint')).toHaveText(en.home.whatWeDo.storytellingHint);
   });
 });
 
@@ -99,6 +138,11 @@ test.describe('factory scene fallbacks', () => {
     const viewportHeight = page.viewportSize()!.height;
     expect(trackBox).not.toBeNull();
     expect(trackBox!.height).toBeLessThanOrEqual(viewportHeight * 1.5);
+
+    // The title still names the illustration, but the scroll hint is dropped
+    // since the poster doesn't animate on scroll.
+    await expect(page.locator('.home-factory-caption-label')).toHaveText(en.home.whatWeDo.storytellingLabel);
+    await expect(page.locator('.home-factory-caption-hint')).toHaveCount(0);
 
     await context.close();
   });

@@ -142,6 +142,10 @@ type HomeSections = {
     comingSoonLabel: string;
     /** Accessible name for the animated recycling-line factory scene (components/home/home-factory-scene.tsx). */
     factoryAria: string;
+    /** Overlay title shown atop the factory scene/poster, naming the scroll-driven sequence. */
+    storytellingLabel: string;
+    /** Short instruction under storytellingLabel explaining scroll drives the animation. */
+    storytellingHint: string;
     /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
     categories: {
       plastics: string;

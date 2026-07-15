@@ -6,7 +6,7 @@ import { Color } from 'three';
 import type { Group, Mesh, MeshBasicMaterial } from 'three';
 
 import { FACTORY_PALETTE, STAGE_X } from '../factory-palette';
-import { IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
+import { BlobShadow, IndicatorLight, MachineLegs, RoundedPanel, SpokedWheel, TrapezoidPanel } from './primitives';
 
 const HEAT_BAND_XS = [-0.4, 0, 0.4];
 const STRAND_YS = [1.14, 1.07, 1.0];
@@ -78,6 +78,7 @@ export function Extruder() {
         </mesh>
       ))}
       <MachineLegs xs={[x - 0.9, x + 0.9]} topY={0.87} />
+      <BlobShadow x={x} radius={1.7} />
       <IndicatorLight position={[x - 1.45, 1.48, 0.05]} phase={3.8} />
     </group>
   );

@@ -13,10 +13,12 @@ interface CameraBeat extends CameraPose {
   at: number;
 }
 
-/** The nine-beat journey: establishing wide → dolly to intake → crusher →
+/** The ten-beat journey: establishing wide → dolly to intake → crusher →
  * wash → mid pull-back breath → extruder close-up → pelletizer/bagging →
- * export vignette → final full-line pull-back. x values track STAGE_X in
- * factory-palette.ts. */
+ * export vignette → container loading beside the cargo plane → final
+ * pull-back tilted up-right to follow the jet's climb-out. x values track
+ * STAGE_X in factory-palette.ts; the last two beats frame the flight
+ * timeline in factory-flight-math.ts. */
 export const FACTORY_BEATS: readonly CameraBeat[] = [
   { at: 0.0, position: { x: 9.5, y: 3.5, z: 14.5 }, target: { x: 10.5, y: 1.55, z: 0 } },
   { at: 0.12, position: { x: 0.5, y: 1.9, z: 6.5 }, target: { x: 0.8, y: 1.3, z: 0 } },
@@ -25,8 +27,9 @@ export const FACTORY_BEATS: readonly CameraBeat[] = [
   { at: 0.5, position: { x: 10.5, y: 3.4, z: 11 }, target: { x: 10.5, y: 1.2, z: 0 } },
   { at: 0.62, position: { x: 12.6, y: 1.5, z: 5.0 }, target: { x: 12.8, y: 1.1, z: 0 } },
   { at: 0.76, position: { x: 17.6, y: 1.8, z: 6.0 }, target: { x: 17.6, y: 1.0, z: 0 } },
-  { at: 0.9, position: { x: 21.5, y: 2.6, z: 9.0 }, target: { x: 22.0, y: 1.6, z: 0 } },
-  { at: 1.0, position: { x: 14.0, y: 4.8, z: 17 }, target: { x: 12.5, y: 1.6, z: 0 } },
+  { at: 0.86, position: { x: 21.5, y: 2.6, z: 9.0 }, target: { x: 22.0, y: 1.6, z: 0 } },
+  { at: 0.93, position: { x: 24.6, y: 2.2, z: 8.0 }, target: { x: 26.2, y: 1.4, z: 0 } },
+  { at: 1.0, position: { x: 20.5, y: 5.2, z: 16.0 }, target: { x: 25.5, y: 3.4, z: 0 } },
 ] as const;
 
 function clampProgress(progress: number): number {
