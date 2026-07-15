@@ -32,6 +32,47 @@ export const FACTORY_BEATS: readonly CameraBeat[] = [
   { at: 1.0, position: { x: 20.5, y: 5.2, z: 16.0 }, target: { x: 25.5, y: 3.4, z: 0 } },
 ] as const;
 
+/** Story stage the spotlight is on at a given film progress — drives the
+ * annotation card in components/home/home-factory-scene.tsx. */
+export type FactoryStageId =
+  | 'overview'
+  | 'intake'
+  | 'crushing'
+  | 'washing'
+  | 'line'
+  | 'extrusion'
+  | 'pelletizing'
+  | 'export'
+  | 'takeoff';
+
+/** Film-progress ranges per story stage: each stage runs from the previous
+ * entry's `until` up to its own. Boundaries sit at the midpoints between the
+ * FACTORY_BEATS anchors so a stage flips as the camera commits to its move. */
+export const FACTORY_STAGES: readonly { id: FactoryStageId; until: number }[] = [
+  { id: 'overview', until: 0.06 },
+  { id: 'intake', until: 0.19 }, // beat 0.12
+  { id: 'crushing', until: 0.33 }, // beat 0.26
+  { id: 'washing', until: 0.45 }, // beat 0.4
+  { id: 'line', until: 0.56 }, // pull-back breath, beat 0.5
+  { id: 'extrusion', until: 0.69 }, // beat 0.62
+  { id: 'pelletizing', until: 0.81 }, // beat 0.76 (incl. bagging)
+  { id: 'export', until: 0.965 }, // beats 0.86 + 0.93
+  { id: 'takeoff', until: 1 }, // beat 1.0
+] as const;
+
+/**
+ * Maps normalized film progress (0–1) to the story stage the spotlight is
+ * explaining. Shares computeFactoryCamera's clamping, so non-finite or
+ * out-of-range progress resolves to the establishing/final stage.
+ */
+export function computeFactoryStage(progress: number): FactoryStageId {
+  const clamped = clampProgress(progress);
+  for (const stage of FACTORY_STAGES) {
+    if (clamped <= stage.until) return stage.id;
+  }
+  return FACTORY_STAGES[FACTORY_STAGES.length - 1].id;
+}
+
 function clampProgress(progress: number): number {
   return Number.isFinite(progress) ? Math.min(1, Math.max(0, progress)) : 0;
 }

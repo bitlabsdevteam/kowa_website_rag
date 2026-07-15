@@ -146,6 +146,21 @@ type HomeSections = {
     storytellingLabel: string;
     /** Short instruction under storytellingLabel explaining scroll drives the animation. */
     storytellingHint: string;
+    /** Per-stage spotlight annotations for the factory scene, keyed by
+     * FactoryStageId (components/factory-3d/factory-camera-math.ts) — the
+     * small card naming the machine the tracking spotlight is on. */
+    stages: Record<
+      | 'overview'
+      | 'intake'
+      | 'crushing'
+      | 'washing'
+      | 'line'
+      | 'extrusion'
+      | 'pelletizing'
+      | 'export'
+      | 'takeoff',
+      { title: string; note: string }
+    >;
     /** Grounded one-line descriptions per top-level product category (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
     categories: {
       plastics: string;

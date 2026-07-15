@@ -10962,6 +10962,59 @@ section.card,
   color: var(--color-text-muted);
 }
 
+/* Stage annotation: the small glass card naming the machine the tracking
+   spotlight is on (scene mode only — home-factory-scene.tsx remounts it per
+   stage). The fade-in animates opacity only, on the card's own compositor
+   layer; the full-viewport canvas/frame stays free of animated raster-bound
+   properties (CLAUDE.md perf contract). */
+.home-factory-annotation {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  z-index: 2;
+  max-width: 20rem;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--color-line);
+  background: rgba(255, 252, 246, 0.84);
+  backdrop-filter: blur(10px);
+  will-change: opacity;
+  animation: home-factory-annotation-in 240ms ease-out both;
+}
+
+@keyframes home-factory-annotation-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.home-factory-annotation-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.home-factory-annotation-note {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+/* Belt-and-braces: the scene (and with it the annotation card) never mounts
+   under reduced motion, but if it ever did, the card must not fade. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-annotation {
+    animation: none;
+  }
+}
+
 @media (max-width: 899px) {
   .home-factory-track {
     height: auto;

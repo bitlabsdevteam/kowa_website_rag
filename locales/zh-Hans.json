@@ -463,6 +463,17 @@
       "factoryAria": "Kowa 塑料再生生产线的动画插图 — 回收、破碎、清洗、挤出、造粒，并装载至起飞的货机出口",
       "storytellingLabel": "故事叙述",
       "storytellingHint": "向下滚动，跟随从回收到出口的再生产线故事。",
+      "stages": {
+        "overview": { "title": "再生产线", "note": "一条连续的产线将回收塑料加工成可出口的再生原料。" },
+        "intake": { "title": "回收进料", "note": "回收的废塑料由传送带送入破碎机。" },
+        "crushing": { "title": "破碎", "note": "破碎机将分选后的塑料粉碎成碎片。" },
+        "washing": { "title": "清洗", "note": "碎片在清洗滚筒中翻滚洗净。" },
+        "line": { "title": "产线运转", "note": "洗净的碎片继续进入再生工序。" },
+        "extrusion": { "title": "挤出", "note": "加热带熔化碎片，熔条从模头挤出。" },
+        "pelletizing": { "title": "造粒与装袋", "note": "熔条被切成颗粒并装袋。" },
+        "export": { "title": "出口装运", "note": "袋装颗粒装载后发往海外。" },
+        "takeoff": { "title": "发往客户", "note": "再生原料启程运往海外买家。" }
+      },
       "categories": {
         "plastics": "国内回收的废塑料经分拣、破碎后，通过 G.P. Polymer 再生产线制成颗粒料，并完成出口。",
         "generalGoods": "依托与塑料业务相同的贸易与物流网络，开展日用百货等商品的跨境采购与流通。",

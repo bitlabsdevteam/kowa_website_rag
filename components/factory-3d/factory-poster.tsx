@@ -21,6 +21,18 @@ const P = {
 
 const WINDOW_XS = [30, 180, 330, 480, 630, 780, 930, 1080];
 
+/** Printed station labels along the floor band — the poster's static stand-in
+ * for the scene's scroll-synced stage annotations. Decorative (the SVG is
+ * aria-hidden; the wrapper's factoryAria narrates the line for readers). */
+const STATION_LABELS = [
+  { x: 225, width: 76, row: 0, label: 'Intake' },
+  { x: 385, width: 96, row: 0, label: 'Crushing' },
+  { x: 656, width: 94, row: 0, label: 'Washing' },
+  { x: 868, width: 102, row: 0, label: 'Extrusion' },
+  { x: 1058, width: 112, row: 0, label: 'Pelletizing' },
+  { x: 1148, width: 86, row: 1, label: 'Bagging' }, // dropped a row so it clears the pelletizing pill
+] as const;
+
 export function FactoryPoster() {
   return (
     <svg
@@ -30,6 +42,15 @@ export function FactoryPoster() {
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
     >
+      <defs>
+        {/* Warm shaft fading toward the floor — same #ffe9c4 as the scene's
+            tracking spotlight, so poster and WebGL scene share one lamp. */}
+        <linearGradient id="factory-poster-beam" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#ffe9c4" stopOpacity="0.5" />
+          <stop offset="1" stopColor="#ffe9c4" stopOpacity="0.08" />
+        </linearGradient>
+      </defs>
+
       {/* Shell: wall, floor, window band, roof line, pipe runs. */}
       <rect width="1200" height="675" fill={P.backdrop} />
       <rect width="1200" height="560" fill={P.wall} />
@@ -112,6 +133,13 @@ export function FactoryPoster() {
       <rect x="1128" y="516" width="40" height="36" rx="4" fill={P.accentStrong} opacity="0.85" />
       <rect x="1128" y="512" width="40" height="6" fill={P.accent} />
 
+      {/* Stage spotlight over the crusher — the poster's static twin of the
+          scene's scroll-tracked beam: roof lamp, warm shaft raking from the
+          roof line down over the machine, light pool on the floor. */}
+      <rect x="371" y="58" width="28" height="12" rx="4" fill={P.ink} />
+      <polygon points="373,70 397,70 500,560 270,560" fill="url(#factory-poster-beam)" />
+      <ellipse cx="385" cy="560" rx="122" ry="12" fill="#ffe9c4" opacity="0.28" />
+
       {/* Steam over the wash tank and the extruder die — grey-blue so it
           reads against the pale wall (parity with the scene's steam tint). */}
       <circle cx="642" cy="384" r="12" fill={P.steam} opacity="0.5" />
@@ -120,6 +148,32 @@ export function FactoryPoster() {
       <circle cx="954" cy="406" r="10" fill={P.steam} opacity="0.5" />
       <circle cx="968" cy="390" r="7" fill={P.steam} opacity="0.35" />
       <circle cx="962" cy="378" r="5" fill={P.white} opacity="0.6" />
+
+      {/* Printed station labels on the floor band under each machine. */}
+      {STATION_LABELS.map(({ x, width, row, label }) => (
+        <g key={label}>
+          <rect
+            x={x - width / 2}
+            y={580 + row * 30}
+            width={width}
+            height={22}
+            rx={11}
+            fill={P.white}
+            opacity="0.72"
+          />
+          <text
+            x={x}
+            y={595.5 + row * 30}
+            textAnchor="middle"
+            fill={P.ink}
+            fontSize="13"
+            letterSpacing="1.5"
+            style={{ textTransform: 'uppercase' }}
+          >
+            {label}
+          </text>
+        </g>
+      ))}
 
       {/* Export finale: cargo jet climbing out upper-right with a dashed
           contrail — the poster's version of the fly-out. */}

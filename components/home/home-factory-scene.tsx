@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
+import { computeFactoryStage } from '@/components/factory-3d/factory-camera-math';
 import { FactoryPoster } from '@/components/factory-3d/factory-poster';
 import { supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
@@ -41,6 +42,11 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
   useEffect(() => {
     progressRef.current = Math.min(1, progress / PINNED_FRACTION);
   }, [progress]);
+
+  /* Which production stage the spotlight is explaining right now — drives the
+     annotation card. Raw (undamped) film progress is fine here: the beam's
+     damped sweep converges on the same beat within a few hundred ms. */
+  const stage = computeFactoryStage(Math.min(1, progress / PINNED_FRACTION));
 
   const [canRender3D, setCanRender3D] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -84,6 +90,23 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
               fallback is a static image, so scrolling it does nothing. */}
           {canRender3D ? <p className="home-factory-caption-hint">{ui.storytellingHint}</p> : null}
         </div>
+        {/* Stage annotation: names the machine the tracking spotlight is on
+            and says what it does, crossfading as the story beat changes. The
+            key remounts the card per stage so the opacity-only fade-in
+            replays (small compositor-layer card — the full-viewport canvas
+            itself never animates raster-bound properties). Scene mode only:
+            the static poster has its own printed labels. */}
+        {canRender3D ? (
+          <div
+            className="home-factory-annotation"
+            data-testid="home-factory-stage"
+            data-stage={stage}
+            key={stage}
+          >
+            <p className="home-factory-annotation-title">{ui.stages[stage].title}</p>
+            <p className="home-factory-annotation-note">{ui.stages[stage].note}</p>
+          </div>
+        ) : null}
       </div>
     </div>
   );
