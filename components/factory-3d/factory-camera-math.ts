@@ -46,6 +46,28 @@ function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
+/** Where the tracking spotlight's lamp hangs relative to the story focus —
+ * above and in front, so the beam rakes down onto the active machine. */
+export const SPOTLIGHT_OFFSET = { x: 1.2, y: 6.5, z: 4.0 } as const;
+
+/**
+ * Maps normalized film progress (0–1) to the stage-spotlight pose: the beam
+ * aims at the same story focus the camera looks at (the machine featured by
+ * the current beat), with the lamp offset overhead. Shares the camera path's
+ * clamping and per-beat smoothstep easing.
+ */
+export function computeFactorySpotlight(progress: number): CameraPose {
+  const { target } = computeFactoryCamera(progress);
+  return {
+    position: {
+      x: target.x + SPOTLIGHT_OFFSET.x,
+      y: target.y + SPOTLIGHT_OFFSET.y,
+      z: target.z + SPOTLIGHT_OFFSET.z,
+    },
+    target,
+  };
+}
+
 /**
  * Maps normalized film progress (0–1) to the camera pose the rig should ease
  * toward: piecewise smoothstep interpolation across FACTORY_BEATS. Non-finite

@@ -4,9 +4,9 @@
 // factory-scene.tsx, hand-drawn as one flat SVG.
 
 const P = {
-  backdrop: '#f4f6f8',
-  wall: '#eef1f4',
-  floor: '#e4e9ee',
+  backdrop: '#9fabbc',
+  wall: '#8f9cae',
+  floor: '#7d8a9c',
   ink: '#15233f',
   inkSoft: '#586379',
   silver: '#c3cad6',
@@ -16,7 +16,7 @@ const P = {
   accentStrong: '#1f5235',
   accentSoft: '#a3d9bd',
   bottle: '#a9cdb8',
-  steam: '#93a2b4',
+  steam: '#cfd8e2',
 } as const;
 
 const WINDOW_XS = [30, 180, 330, 480, 630, 780, 930, 1080];

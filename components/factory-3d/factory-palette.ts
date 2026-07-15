@@ -4,9 +4,9 @@
 // CLAUDE.md, which that block supersedes. Keep the two in sync by hand: the
 // canvas is WebGL, so it cannot read CSS custom properties.
 export const FACTORY_PALETTE = {
-  backdrop: '#f4f6f8', // --color-canvas-strong (the section background)
-  wall: '#eef1f4',
-  floor: '#e4e9ee',
+  backdrop: '#9fabbc', // --color-factory-backdrop (the section background) — dusk grey-blue so the stage spotlight pool reads
+  wall: '#8f9cae',
+  floor: '#7d8a9c',
   ink: '#15233f', // --color-text
   inkSoft: '#586379', // --color-text-muted
   silver: '#c3cad6', // --color-silver
@@ -17,7 +17,7 @@ export const FACTORY_PALETTE = {
   accentSoft: '#a3d9bd', // --color-accent-soft
   bottle: '#a9cdb8', // pale collection green — matches hero-3d ringCollection
   heat: '#c9803e', // extruder melt glow — the one warm note in the scene
-  steam: '#93a2b4', // visible steam grey-blue — reads on both backdrop and wall
+  steam: '#cfd8e2', // visible steam — lighter than the dusk wall so vapor still reads
 } as const;
 
 /** World-space x anchor of each production station, left to right along the

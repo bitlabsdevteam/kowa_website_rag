@@ -340,6 +340,9 @@ html:lang(zh) {
   /* Deep forest base of the photo-hero scrim gradients (landing hero only). */
   --color-hero-scrim: #0c1e15;
   --color-silver: #c3cad6;
+  /* Dusk grey-blue backdrop of the factory diorama band — mirrored by hand
+     into components/factory-3d/factory-palette.ts (WebGL can't read tokens). */
+  --color-factory-backdrop: #9fabbc;
   --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.16);
   --shadow-soft: 0 22px 60px rgba(21, 35, 63, 0.08);
   --shadow-card: 0 18px 34px rgba(21, 35, 63, 0.06);
@@ -10883,7 +10886,7 @@ section.card,
   top: 0;
   height: 100svh;
   overflow: hidden;
-  background: var(--color-canvas-strong);
+  background: var(--color-factory-backdrop);
 }
 
 .home-factory-track[data-mode='poster'] .home-factory-frame {
