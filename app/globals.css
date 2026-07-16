@@ -10962,32 +10962,57 @@ section.card,
   color: var(--color-text-muted);
 }
 
-/* Stage annotation: the small glass card naming the machine the tracking
-   spotlight is on (scene mode only — home-factory-scene.tsx remounts it per
-   stage). The fade-in animates opacity only, on the card's own compositor
-   layer; the full-viewport canvas/frame stays free of animated raster-bound
-   properties (CLAUDE.md perf contract). */
+/* Stage dialog: a cinematic title card, top-center of the frame, naming the
+   machine the tracking spotlight has settled on (scene mode only —
+   home-factory-scene.tsx remounts it per stage and briefly keeps the previous
+   card mounted with the --leaving modifier so the beats crossfade). Dark
+   glass derived from --color-hero-scrim (#0c1e15) so it reads as part of the
+   dusk-lit scene. Both animations touch opacity/transform only, on the
+   card's own compositor layer; the full-viewport canvas/frame stays free of
+   animated raster-bound properties (CLAUDE.md perf contract). */
 .home-factory-annotation {
   position: absolute;
-  left: 24px;
-  bottom: 24px;
+  left: 50%;
+  top: 24px;
   z-index: 2;
-  max-width: 20rem;
-  padding: 12px 16px;
+  max-width: 22rem;
+  padding: 14px 22px;
   border-radius: 14px;
-  border: 1px solid var(--color-line);
-  background: rgba(255, 252, 246, 0.84);
+  border: 1px solid rgba(255, 252, 246, 0.18);
+  background: rgba(12, 30, 21, 0.72);
   backdrop-filter: blur(10px);
-  will-change: opacity;
-  animation: home-factory-annotation-in 240ms ease-out both;
+  text-align: center;
+  transform: translate(-50%, 0);
+  will-change: opacity, transform;
+  animation: home-factory-annotation-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Duration must stay in sync with ANNOTATION_EXIT_MS in
+   home-factory-scene.tsx, which unmounts the leaving card. */
+.home-factory-annotation--leaving {
+  pointer-events: none;
+  animation: home-factory-annotation-out 280ms ease-in both;
 }
 
 @keyframes home-factory-annotation-in {
   from {
     opacity: 0;
+    transform: translate(-50%, -18px);
   }
   to {
     opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes home-factory-annotation-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -10px);
   }
 }
 
@@ -10997,20 +11022,21 @@ section.card,
   font-size: 1rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-accent-soft);
 }
 
 .home-factory-annotation-note {
   margin: 4px 0 0;
   font-size: 0.82rem;
   line-height: 1.45;
-  color: var(--color-text-muted);
+  color: rgba(255, 252, 246, 0.85);
 }
 
-/* Belt-and-braces: the scene (and with it the annotation card) never mounts
-   under reduced motion, but if it ever did, the card must not fade. */
+/* Belt-and-braces: the scene (and with it the stage dialog) never mounts
+   under reduced motion, but if it ever did, the cards must not animate. */
 @media (prefers-reduced-motion: reduce) {
-  .home-factory-annotation {
+  .home-factory-annotation,
+  .home-factory-annotation--leaving {
     animation: none;
   }
 }

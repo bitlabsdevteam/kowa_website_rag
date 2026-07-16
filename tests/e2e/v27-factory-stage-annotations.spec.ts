@@ -2,9 +2,10 @@ import { expect, test, type Page } from '@playwright/test';
 
 import en from '../../locales/en.json' with { type: 'json' };
 
-// v27: stage annotations for the factory diorama — a small glass card that
-// names the machine the tracking spotlight is on and says what it does,
-// crossfading as scroll moves the story between beats in either direction
+// v27: stage annotations for the factory diorama — a cinematic dialog card
+// that drops in from the top-center of the frame, naming the machine the
+// tracking spotlight is on. On each beat change the outgoing card fades out
+// (aria-hidden, no testid) while the new one drops in
 // (components/home/home-factory-scene.tsx + computeFactoryStage in
 // components/factory-3d/factory-camera-math.ts).
 
@@ -58,6 +59,11 @@ test.describe('factory stage annotations', () => {
     await scrollToFilmProgress(page, 0.12);
     await expect(annotation).toHaveAttribute('data-stage', 'intake');
     await expect(annotation).toContainText(en.home.whatWeDo.stages.intake.title);
+
+    // The crossfade never strands a ghost card: once the exit animation
+    // settles, only the active dialog remains mounted.
+    await expect(page.locator('.home-factory-annotation--leaving')).toHaveCount(0);
+    await expect(page.locator('.home-factory-annotation')).toHaveCount(1);
   });
 
   test('poster mode gets printed station labels instead of the live annotation card', async ({ browser }) => {

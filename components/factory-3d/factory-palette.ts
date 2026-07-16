@@ -18,6 +18,11 @@ export const FACTORY_PALETTE = {
   bottle: '#a9cdb8', // pale collection green — matches hero-3d ringCollection
   heat: '#c9803e', // extruder melt glow — the one warm note in the scene
   steam: '#cfd8e2', // visible steam — lighter than the dusk wall so vapor still reads
+  // Scene-only nature/sun tones for the window wall (no CSS token mirrors):
+  sky: '#eef4ea', // warm daylight seen through the glazing
+  foliage: '#3f7d58', // near-canopy green outside the windows
+  foliageDeep: '#2d6b49', // far-canopy green — reuses the accent hex
+  sunbeam: '#ffe9c4', // shared warm lamp/sun hex (tracking spotlight + window shafts)
 } as const;
 
 /** World-space x anchor of each production station, left to right along the

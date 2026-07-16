@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 
-import { computeFactoryStage } from '@/components/factory-3d/factory-camera-math';
+import { computeFactoryStage, type FactoryStageId } from '@/components/factory-3d/factory-camera-math';
 import { FactoryPoster } from '@/components/factory-3d/factory-poster';
 import { supportsHero3DScene } from '@/components/hero-3d/hero-fallback';
 import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
@@ -20,6 +20,10 @@ type HomeFactorySceneProps = {
  * .home-factory-frame in globals.css). The film completes exactly there so
  * the final pull-back holds while the stage releases. */
 const PINNED_FRACTION = (320 - 100) / 320;
+
+/** Matches the home-factory-annotation-out duration in globals.css — how long
+ * the leaving dialog stays mounted to finish its fade-out. */
+const ANNOTATION_EXIT_MS = 280;
 
 /** Full-bleed interlude between the OUR BUSINESS and PRODUCTS bands: a
  * scroll-scrubbed cinematic camera flying through the always-running
@@ -47,6 +51,20 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
      annotation card. Raw (undamped) film progress is fine here: the beam's
      damped sweep converges on the same beat within a few hundred ms. */
   const stage = computeFactoryStage(Math.min(1, progress / PINNED_FRACTION));
+
+  /* Crossfade choreography for the stage dialog: when the story beat changes,
+     the previous card stays mounted just long enough to play its fade-out
+     while the new one drops in from the top. */
+  const [leavingStage, setLeavingStage] = useState<FactoryStageId | null>(null);
+  const prevStageRef = useRef<FactoryStageId>(stage);
+
+  useEffect(() => {
+    if (prevStageRef.current === stage) return undefined;
+    setLeavingStage(prevStageRef.current);
+    prevStageRef.current = stage;
+    const timeout = window.setTimeout(() => setLeavingStage(null), ANNOTATION_EXIT_MS);
+    return () => window.clearTimeout(timeout);
+  }, [stage]);
 
   const [canRender3D, setCanRender3D] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -90,12 +108,25 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
               fallback is a static image, so scrolling it does nothing. */}
           {canRender3D ? <p className="home-factory-caption-hint">{ui.storytellingHint}</p> : null}
         </div>
-        {/* Stage annotation: names the machine the tracking spotlight is on
-            and says what it does, crossfading as the story beat changes. The
-            key remounts the card per stage so the opacity-only fade-in
-            replays (small compositor-layer card — the full-viewport canvas
-            itself never animates raster-bound properties). Scene mode only:
-            the static poster has its own printed labels. */}
+        {/* Stage dialog: a cinematic title card that drops in from the top of
+            the frame, naming the machine the tracking spotlight has settled
+            on. On each story beat the outgoing card fades out (aria-hidden,
+            no testid — Playwright must only ever match the active card) while
+            the incoming one, remounted via key, replays its drop-in. Both
+            animate opacity/transform only on their own compositor layers —
+            the full-viewport canvas itself never animates raster-bound
+            properties. Scene mode only: the static poster has its own printed
+            labels. */}
+        {canRender3D && leavingStage !== null && leavingStage !== stage ? (
+          <div
+            className="home-factory-annotation home-factory-annotation--leaving"
+            aria-hidden="true"
+            key={`leaving-${leavingStage}`}
+          >
+            <p className="home-factory-annotation-title">{ui.stages[leavingStage].title}</p>
+            <p className="home-factory-annotation-note">{ui.stages[leavingStage].note}</p>
+          </div>
+        ) : null}
         {canRender3D ? (
           <div
             className="home-factory-annotation"

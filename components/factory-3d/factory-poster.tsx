@@ -17,9 +17,32 @@ const P = {
   accentSoft: '#a3d9bd',
   bottle: '#a9cdb8',
   steam: '#cfd8e2',
+  sky: '#eef4ea',
+  foliage: '#3f7d58',
+  foliageDeep: '#2d6b49',
+  sunbeam: '#ffe9c4',
 } as const;
 
 const WINDOW_XS = [30, 180, 330, 480, 630, 780, 930, 1080];
+/** Windows with the low sun disc outside — mirrors the scene's SUN_WINDOW_XS. */
+const SUN_WINDOW_XS = [180, 630];
+/** Windows casting a static sun-shaft polygon into the room. */
+const SHAFT_WINDOW_XS = [180, 630, 930];
+
+/** Hand-varied paper-cut grove outside the glazing (trunk rect + clustered
+ * canopy circles), mirroring the scene's seeded window trees. dx is the
+ * trunk's offset inside the 110-wide opening; trunkH the trunk height above
+ * the sill; r the main canopy radius. */
+const WINDOW_TREES: Record<number, { dx: number; trunkH: number; r: number; deep?: boolean }[]> = {
+  30: [{ dx: 34, trunkH: 96, r: 22 }],
+  180: [{ dx: 24, trunkH: 118, r: 26, deep: true }, { dx: 80, trunkH: 84, r: 18 }],
+  330: [{ dx: 62, trunkH: 104, r: 24 }],
+  480: [{ dx: 30, trunkH: 90, r: 20, deep: true }, { dx: 84, trunkH: 122, r: 24 }],
+  630: [{ dx: 70, trunkH: 100, r: 22, deep: true }],
+  780: [{ dx: 28, trunkH: 112, r: 25 }, { dx: 82, trunkH: 88, r: 18, deep: true }],
+  930: [{ dx: 48, trunkH: 96, r: 23 }],
+  1080: [{ dx: 32, trunkH: 120, r: 24, deep: true }, { dx: 86, trunkH: 92, r: 19 }],
+};
 
 /** Printed station labels along the floor band — the poster's static stand-in
  * for the scene's scroll-synced stage annotations. Decorative (the SVG is
@@ -57,12 +80,41 @@ export function FactoryPoster() {
       <rect y="560" width="1200" height="115" fill={P.floor} />
       <line x1="0" y1="560" x2="1200" y2="560" stroke={P.silver} strokeWidth="2" />
       <line x1="0" y1="64" x2="1200" y2="64" stroke={P.silver} strokeWidth="4" />
+      {/* Tall window wall: sky, sun disc, and tree grove outside each
+          opening, then a faint glaze sheen and the silver mullion grid. */}
       {WINDOW_XS.map((x) => (
         <g key={x}>
-          <rect x={x} y="96" width="110" height="118" fill={P.white} opacity="0.65" />
-          <line x1={x + 55} y1="96" x2={x + 55} y2="214" stroke={P.silver} strokeWidth="3" />
-          <line x1={x} y1="155" x2={x + 110} y2="155" stroke={P.silver} strokeWidth="3" />
+          <rect x={x} y="96" width="110" height="330" fill={P.sky} />
+          {SUN_WINDOW_XS.includes(x) ? <circle cx={x + 28} cy="140" r="26" fill={P.sunbeam} opacity="0.85" /> : null}
+          {(WINDOW_TREES[x] ?? []).map(({ dx, trunkH, r, deep }, i) => {
+            const cx = x + dx;
+            const cy = 426 - trunkH - r * 0.6;
+            const tone = deep ? P.foliageDeep : P.foliage;
+            return (
+              <g key={i}>
+                <rect x={cx - 4} y={426 - trunkH} width="8" height={trunkH} fill={P.inkSoft} />
+                <circle cx={cx} cy={cy} r={r} fill={tone} />
+                <circle cx={cx - r * 0.6} cy={cy + r * 0.35} r={r * 0.75} fill={tone} />
+                <circle cx={cx + r * 0.55} cy={cy + r * 0.3} r={r * 0.65} fill={tone} />
+              </g>
+            );
+          })}
+          <rect x={x} y="96" width="110" height="330" fill={P.white} opacity="0.18" />
+          <line x1={x + 55} y1="96" x2={x + 55} y2="426" stroke={P.silver} strokeWidth="3" />
+          {[178, 261, 343].map((y) => (
+            <line key={y} x1={x} y1={y} x2={x + 110} y2={y} stroke={P.silver} strokeWidth="3" />
+          ))}
         </g>
+      ))}
+      {/* Static sun shafts raking from a few window heads to the floor —
+          the poster's twin of the scene's breathing SunShaft quads. */}
+      {SHAFT_WINDOW_XS.map((x) => (
+        <polygon
+          key={x}
+          points={`${x + 15},110 ${x + 95},110 ${x + 250},560 ${x + 90},560`}
+          fill="url(#factory-poster-beam)"
+          opacity="0.7"
+        />
       ))}
       <line x1="0" y1="258" x2="1200" y2="258" stroke={P.silver} strokeWidth="7" />
       <line x1="0" y1="242" x2="1200" y2="242" stroke={P.silverLight} strokeWidth="5" />
