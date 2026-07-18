@@ -47,20 +47,24 @@ function lerp(a: number, b: number, t: number): number {
 /**
  * Maps eased film progress (0–1) to the whole export-flight state:
  *
- *   LOAD    0.80→0.88  container slides up the ramp to the cargo door
- *   SWALLOW 0.88→0.91  container scales away while the door slides closed
- *   ROLL    0.90→0.945 plane accelerates down the platform (ease-in)
- *   CLIMB   0.945→1.0  quadratic lift-off toward the upper right, nose up
+ *   LOAD    0.845→0.9  container slides up the ramp to the cargo door
+ *   SWALLOW 0.90→0.925 container scales away while the door slides closed
+ *   ROLL    0.92→0.96  plane accelerates down the platform (ease-in)
+ *   CLIMB   0.955→1.0  quadratic lift-off toward the upper right, nose up
+ *
+ * The load is deliberately late: the camera only frames the export station
+ * from ~0.82, and the packing worker needs the container parked on-camera
+ * (film 0.82–0.845) before it departs.
  *
  * Non-finite or out-of-range progress clamps to the parked/final state.
  */
 export function computeExportFlight(progress: number): ExportFlightPose {
   const p = clamp01(progress);
 
-  const load = smoothstep(clamp01((p - 0.8) / 0.08));
-  const swallow = clamp01((p - 0.88) / 0.03);
-  const roll = clamp01((p - 0.9) / 0.045);
-  const climb = clamp01((p - 0.945) / 0.055);
+  const load = smoothstep(clamp01((p - 0.845) / 0.055));
+  const swallow = clamp01((p - 0.9) / 0.025);
+  const roll = clamp01((p - 0.92) / 0.04);
+  const climb = clamp01((p - 0.955) / 0.045);
 
   const plane =
     climb > 0
@@ -85,7 +89,7 @@ export function computeExportFlight(progress: number): ExportFlightPose {
     },
     doorT: swallow,
     plane,
-    contrailT: clamp01((p - 0.93) / 0.07),
+    contrailT: clamp01((p - 0.94) / 0.06),
     shadowFade: 1 - smoothstep(Math.min(1, climb * 1.5)),
   };
 }
@@ -96,6 +100,6 @@ export function computeExportFlight(progress: number): ExportFlightPose {
  * resampling of computeExportFlight across the contrail window.
  */
 export function flightPosition(t: number): { x: number; y: number; z: number } {
-  const { plane } = computeExportFlight(0.93 + 0.07 * clamp01(t));
+  const { plane } = computeExportFlight(0.94 + 0.06 * clamp01(t));
   return { x: plane.x, y: plane.y, z: plane.z };
 }

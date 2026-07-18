@@ -56,11 +56,19 @@ const STATION_LABELS = [
   { x: 1148, width: 86, row: 1, label: 'Bagging' }, // dropped a row so it clears the pelletizing pill
 ] as const;
 
-export function FactoryPoster() {
+type FactoryPosterProps = {
+  /** While true the packing worker vignette plays its loading loop; otherwise
+   * the worker stands idle. Driven by the parent's visibility observer so the
+   * loop never ticks offscreen. */
+  active?: boolean;
+};
+
+export function FactoryPoster({ active }: FactoryPosterProps) {
   return (
     <svg
       className="home-factory-poster"
       data-testid="home-factory-poster"
+      data-active={active ? 'true' : undefined}
       viewBox="0 0 1200 675"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden="true"
@@ -226,6 +234,59 @@ export function FactoryPoster() {
           </text>
         </g>
       ))}
+
+      {/* Packing vignette on the foreground floor band: parcel stack, staff
+          worker, and a corrugated shipping container (twin of the WebGL
+          export-vignette container). Kept inside x 866–1048 so the 4:3
+          mobile crop (slice trims to ~x 150–1050) never cuts it off, and
+          below y 606 to clear the station label pills. The worker/parcel
+          groups are CSS-animated while the svg has data-active — positions
+          are baked into geometry, so no transform attributes on those
+          groups. */}
+      <g className="poster-packing">
+        {/* Parcel stack the worker draws from. */}
+        <rect x="866" y="660" width="40" height="6" fill={P.inkSoft} />
+        <rect x="870" y="634" width="32" height="24" rx="3" fill={P.white} />
+        <rect x="870" y="644" width="32" height="4" fill={P.accent} />
+        <rect x="876" y="612" width="26" height="20" rx="3" fill={P.white} />
+        <rect x="876" y="620" width="26" height="4" fill={P.accent} />
+        {/* Staff worker: ink legs, overalls torso that leans at the hips,
+            hard hat, and a front arm that swings from the shoulder. */}
+        <g className="poster-worker">
+          <rect x="920" y="644" width="7" height="20" fill={P.ink} />
+          <rect x="933" y="644" width="7" height="20" fill={P.ink} />
+          <g className="poster-worker-torso">
+            <rect x="912" y="619" width="6" height="22" rx="3" fill={P.accentStrong} transform="rotate(28 915 622)" />
+            <rect x="914" y="616" width="32" height="32" rx="5" fill={P.accent} />
+            <rect x="920" y="616" width="5" height="14" fill={P.accentStrong} />
+            <rect x="935" y="616" width="5" height="14" fill={P.accentStrong} />
+            <rect x="924" y="630" width="12" height="9" rx="2" fill={P.accentStrong} />
+            <circle cx="928" cy="604" r="8" fill={P.sunbeam} />
+            <path d="M918 602 a10 10 0 0 1 20 0 Z" fill={P.white} />
+            <rect x="915" y="601" width="26" height="3" rx="1.5" fill={P.silverLight} />
+            <g className="poster-worker-arm">
+              <rect x="939" y="619" width="6" height="24" rx="3" fill={P.accent} />
+              <circle cx="942" cy="644" r="3.5" fill={P.sunbeam} />
+            </g>
+          </g>
+        </g>
+        {/* The parcel that travels from the stack into the container — rests
+            on top of the stack while idle. */}
+        <g className="poster-parcel">
+          <rect x="876" y="612" width="26" height="20" rx="3" fill={P.white} />
+          <rect x="876" y="620" width="26" height="4" fill={P.accent} />
+        </g>
+        {/* Shipping container with its left door open toward the worker. */}
+        <g className="poster-container">
+          <rect x="956" y="606" width="92" height="60" rx="4" fill={P.accentStrong} />
+          <rect x="956" y="606" width="92" height="5" fill={P.accent} />
+          <rect x="958" y="610" width="16" height="52" fill={P.ink} />
+          {[984, 996, 1008, 1020, 1032].map((x) => (
+            <line key={x} x1={x} y1="610" x2={x} y2="662" stroke={P.white} strokeWidth="3" opacity="0.15" />
+          ))}
+          <line x1="1040" y1="610" x2="1040" y2="662" stroke={P.white} strokeWidth="2" opacity="0.4" />
+        </g>
+      </g>
 
       {/* Export finale: cargo jet climbing out upper-right with a dashed
           contrail — the poster's version of the fly-out. */}

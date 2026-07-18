@@ -100,7 +100,7 @@ export function HomeFactoryScene({ copy }: HomeFactorySceneProps) {
     >
       <div className="home-factory-frame">
         <div className="home-factory-visual" role="img" aria-label={ui.factoryAria}>
-          {canRender3D ? <FactoryScene progressRef={progressRef} visible={visible} /> : <FactoryPoster />}
+          {canRender3D ? <FactoryScene progressRef={progressRef} visible={visible} /> : <FactoryPoster active={visible} />}
         </div>
         <div className="home-factory-caption">
           <p className="home-factory-caption-label">{ui.storytellingLabel}</p>

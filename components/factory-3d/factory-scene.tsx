@@ -25,6 +25,7 @@ import { Conveyor } from './machines/conveyor';
 import { Crusher } from './machines/crusher';
 import { ExportVignette } from './machines/export-vignette';
 import { Extruder } from './machines/extruder';
+import { PackingWorker } from './machines/packing-worker';
 import { Pelletizer } from './machines/pelletizer';
 import { WashDrum } from './machines/wash-drum';
 
@@ -197,6 +198,7 @@ export default function FactoryScene({ progressRef, visible }: FactorySceneProps
           <Pelletizer />
           <Bagging />
           <ExportVignette progressRef={progressRef} />
+          <PackingWorker progressRef={progressRef} />
           <CargoPlane progressRef={progressRef} />
         </group>
 

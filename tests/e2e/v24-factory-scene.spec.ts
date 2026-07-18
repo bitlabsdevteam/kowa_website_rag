@@ -97,6 +97,40 @@ test.describe('factory scene scrub', () => {
     );
   });
 
+  test('the packing worker idles until the film reaches the export beat', async ({ page }) => {
+    await page.goto('/');
+
+    const track = page.getByTestId('home-factory-scene');
+    await track.scrollIntoViewIfNeeded();
+    await expect(track).toHaveAttribute('data-mode', 'scene');
+
+    // data-factory-packing is the worker's activity gate (packing-worker.tsx),
+    // damp-eased like the camera — wait for it to settle rather than sleep.
+    const packingSettles = (expected: number) =>
+      page.waitForFunction(
+        ({ expected }) => {
+          const canvas = document.querySelector('[data-testid="factory-3d-scene"] canvas');
+          if (!canvas) return false;
+          const packing = Number.parseFloat(canvas.getAttribute('data-factory-packing') ?? '');
+          return Number.isFinite(packing) && Math.abs(packing - expected) < 0.1;
+        },
+        { expected },
+        { polling: 100 },
+      );
+
+    // Early in the film the worker just stands at the pallet.
+    await scrollToFilmProgress(page, 0.12);
+    await packingSettles(0);
+
+    // The export beat opens the gate and the packing loop runs.
+    await scrollToFilmProgress(page, 0.78);
+    await packingSettles(1);
+
+    // Once the container departs for the plane the worker stands down.
+    await scrollToFilmProgress(page, 0.95);
+    await packingSettles(0);
+  });
+
   test('the display title is gone but the section keeps its landmark name', async ({ page }) => {
     await page.goto('/');
 
@@ -143,6 +177,51 @@ test.describe('factory scene fallbacks', () => {
     // since the poster doesn't animate on scroll.
     await expect(page.locator('.home-factory-caption-label')).toHaveText(en.home.whatWeDo.storytellingLabel);
     await expect(page.locator('.home-factory-caption-hint')).toHaveCount(0);
+
+    await context.close();
+  });
+
+  test('the poster packing worker wakes on scroll-in and idles offscreen', async ({ browser }) => {
+    // Narrow viewport without reduced motion: the <900px gate alone forces
+    // poster mode, so the packing loop is allowed to run.
+    const context = await browser.newContext({ viewport: { width: 700, height: 900 } });
+    const page = await context.newPage();
+    await page.goto('/');
+
+    const track = page.getByTestId('home-factory-scene');
+    const poster = page.getByTestId('home-factory-poster');
+    await expect(track).toHaveAttribute('data-mode', 'poster');
+
+    // Before the visitor reaches the section the worker just stands there.
+    await expect(poster).not.toHaveAttribute('data-active', 'true');
+
+    await track.scrollIntoViewIfNeeded();
+    await expect(poster).toHaveAttribute('data-active', 'true');
+
+    // Scrolling back to the top parks the loop again (the observer toggles,
+    // it doesn't fire-once) so the animation never ticks offscreen.
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
+    await expect(poster).not.toHaveAttribute('data-active', 'true');
+
+    await context.close();
+  });
+
+  test('reduced motion keeps the packing worker idle even in view', async ({ browser }) => {
+    const context = await browser.newContext({ reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto('/');
+
+    const track = page.getByTestId('home-factory-scene');
+    await track.scrollIntoViewIfNeeded();
+    await expect(track).toHaveAttribute('data-mode', 'poster');
+
+    // The observer still sets data-active; the CSS reduced-motion reset is
+    // what guarantees the idle pose.
+    await expect(page.getByTestId('home-factory-poster')).toHaveAttribute('data-active', 'true');
+    const armAnimation = await page
+      .locator('.poster-worker-arm')
+      .evaluate((el) => getComputedStyle(el).animationName);
+    expect(armAnimation).toBe('none');
 
     await context.close();
   });

@@ -10929,6 +10929,110 @@ section.card,
   height: 100%;
 }
 
+/* Poster packing vignette: the worker idles until home-factory-scene.tsx
+   flags the poster with data-active (its visibility observer), then the
+   three groups play one synced 2.8s loading loop — bend to the stack, swing
+   to the container, parcel arcs across and fades to reset. transform-box:
+   fill-box is mandatory: without it SVG transform-origin percentages resolve
+   against the whole 1200x675 viewBox, not each group. Parcel translate
+   values are viewBox user units. */
+.poster-worker-torso,
+.poster-worker-arm,
+.poster-parcel {
+  transform-box: fill-box;
+}
+
+.poster-worker-torso {
+  transform-origin: 50% 100%;
+}
+
+.poster-worker-arm {
+  transform-origin: 50% 10%;
+}
+
+.poster-parcel {
+  transform-origin: 50% 50%;
+}
+
+.home-factory-poster[data-active='true'] .poster-worker-torso {
+  animation: poster-pack-lean 2.8s ease-in-out infinite;
+}
+
+.home-factory-poster[data-active='true'] .poster-worker-arm {
+  animation: poster-pack-arm 2.8s ease-in-out infinite;
+}
+
+.home-factory-poster[data-active='true'] .poster-parcel {
+  animation: poster-pack-parcel 2.8s ease-in-out infinite;
+}
+
+@keyframes poster-pack-lean {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(-8deg);
+  }
+  55%,
+  72% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes poster-pack-arm {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(34deg);
+  }
+  55%,
+  72% {
+    transform: rotate(-30deg);
+  }
+}
+
+/* Opacity is the one non-transform property here — a tiny element, and the
+   dip to 0 is what lets the parcel jump back to the stack invisibly. */
+@keyframes poster-pack-parcel {
+  0%,
+  18% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(34px, -26px);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(88px, -2px);
+    opacity: 1;
+  }
+  74%,
+  96% {
+    transform: translate(88px, -2px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* The poster is the reduced-motion surface (the observer still sets
+   data-active there), so this reset is what actually guarantees the worker
+   stays idle for those visitors. Selectors repeat the activation prefix
+   because media queries add no specificity of their own. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-poster[data-active='true'] .poster-worker-torso,
+  .home-factory-poster[data-active='true'] .poster-worker-arm,
+  .home-factory-poster[data-active='true'] .poster-parcel {
+    animation: none;
+  }
+}
+
 /* Storytelling caption: a glass card naming the scroll sequence and telling
    the visitor how it's driven. Static (no animated properties) — the frame's
    sticky pin and the canvas are the only moving parts (CLAUDE.md perf
