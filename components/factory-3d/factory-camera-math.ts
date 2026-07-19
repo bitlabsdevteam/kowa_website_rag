@@ -78,7 +78,9 @@ function clampProgress(progress: number): number {
 }
 
 /** Hermite smoothstep so every beat-to-beat move eases in and out — the
- * "Steadicam" feel, with no velocity discontinuity at the beats. */
+ * "Steadicam" feel, with no velocity discontinuity at the beats. The mobile
+ * SVG story pan (components/factory-svg/factory-story-math.ts) duplicates
+ * these two helpers — keep them in sync. */
 function smoothstep(t: number): number {
   return t * t * (3 - 2 * t);
 }

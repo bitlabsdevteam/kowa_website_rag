@@ -9,8 +9,9 @@ import en from '../../locales/en.json' with { type: 'json' };
 // (components/home/home-factory-scene.tsx + computeFactoryStage in
 // components/factory-3d/factory-camera-math.ts).
 
-// Mirrors the wrapper's scroll normalization (home-factory-scene.tsx
-// PINNED_FRACTION against the 320vh .home-factory-track / 100svh stage).
+// Mirrors the wrapper's scroll normalization (home-factory-scene.tsx measures
+// the 320svh .home-factory-track / 100svh stage; svh == vh in headless, so
+// the static ratio still holds here).
 const PINNED_FRACTION = (320 - 100) / 320;
 
 async function scrollToFilmProgress(page: Page, filmProgress: number): Promise<void> {

@@ -441,18 +441,18 @@
   },
   "home": {
     "business": {
-      "display": "PRODUCTS",
+      "display": "產品",
       "subtitle": "三條業務通道，一體化循環供應",
       "linkLabel": "查看業務"
     },
     "products": {
-      "display": "PRODUCTS",
+      "display": "產品",
       "subtitle": "循環供應鏈的最新產品",
       "linkLabel": "查看產品",
       "viewMoreLabel": "查看更多產品"
     },
     "whatWeDo": {
-      "display": "WHAT WE DO",
+      "display": "業務介紹",
       "subtitle": "Kowa 的業務範圍",
       "statement": "Kowa 在日本國內回收各類廢塑料並出口海外，出口的塑料經再加工後製成各類產品銷往全球。公司設立並營運再生工廠 G.P. Polymer，在推動出口的同時，也持續加強國內的再生加工。",
       "linksLabel": "了解 Kowa",
@@ -483,7 +483,7 @@
       }
     },
     "machines": {
-      "display": "MACHINES",
+      "display": "設備",
       "subtitle": "來自群馬工廠處理產線",
       "slides": [
         "銜接破碎工序的分揀與投料產線",
@@ -492,12 +492,12 @@
       ]
     },
     "mission": {
-      "display": "OUR MISSION",
+      "display": "我們的使命",
       "statement": "我們始終堅持從客戶的視角出發，妥善且高效地利用地球有限的資源，致力於為下一代留下更友善的綠色環境與永續循環。"
     }
   },
   "businessPage": {
-    "display": "BUSINESS",
+    "display": "業務",
     "subtitle": "業務介紹",
     "breadcrumbAria": "麵包屑導航",
     "breadcrumbHome": "TOP",

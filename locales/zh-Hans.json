@@ -441,18 +441,18 @@
   },
   "home": {
     "business": {
-      "display": "PRODUCTS",
+      "display": "产品",
       "subtitle": "三条业务通道，一体化循环供应",
       "linkLabel": "查看业务"
     },
     "products": {
-      "display": "PRODUCTS",
+      "display": "产品",
       "subtitle": "循环供应链的最新产品",
       "linkLabel": "查看产品",
       "viewMoreLabel": "查看更多产品"
     },
     "whatWeDo": {
-      "display": "WHAT WE DO",
+      "display": "业务介绍",
       "subtitle": "Kowa 的业务范围",
       "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
       "linksLabel": "了解 Kowa",
@@ -483,7 +483,7 @@
       }
     },
     "machines": {
-      "display": "MACHINES",
+      "display": "设备",
       "subtitle": "来自群马工厂处理产线",
       "slides": [
         "衔接破碎工序的分拣与投料产线",
@@ -492,12 +492,12 @@
       ]
     },
     "mission": {
-      "display": "OUR MISSION",
+      "display": "我们的使命",
       "statement": "我们始终坚持从客户的角度出发，妥善且高效地利用地球有限的资源，致力于为下一代留下更友善的绿色环境与可持续循环。"
     }
   },
   "businessPage": {
-    "display": "BUSINESS",
+    "display": "业务",
     "subtitle": "业务介绍",
     "breadcrumbAria": "面包屑导航",
     "breadcrumbHome": "TOP",

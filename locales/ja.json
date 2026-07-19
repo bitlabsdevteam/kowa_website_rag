@@ -441,18 +441,18 @@
   },
   "home": {
     "business": {
-      "display": "PRODUCTS",
+      "display": "製品",
       "subtitle": "3つの事業レーン、ひとつの循環サプライ",
       "linkLabel": "事業を見る"
     },
     "products": {
-      "display": "PRODUCTS",
+      "display": "製品",
       "subtitle": "循環サプライの最新プロダクト",
       "linkLabel": "製品を見る",
       "viewMoreLabel": "製品をもっと見る"
     },
     "whatWeDo": {
-      "display": "WHAT WE DO",
+      "display": "事業内容",
       "subtitle": "Kowaの事業内容",
       "statement": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。",
       "linksLabel": "Kowaを知る",
@@ -483,7 +483,7 @@
       }
     },
     "machines": {
-      "display": "MACHINES",
+      "display": "設備",
       "subtitle": "群馬工場の処理ラインより",
       "slides": [
         "破砕工程へつながる選別・投入ライン",
@@ -492,12 +492,12 @@
       ]
     },
     "mission": {
-      "display": "OUR MISSION",
+      "display": "私たちの使命",
       "statement": "私たちは常に顧客の視点に立ち、地球の限られた資源を有効かつ大切に扱いながら、持続可能で環境に優しい社会の実現を目指してまいります。"
     }
   },
   "businessPage": {
-    "display": "BUSINESS",
+    "display": "事業",
     "subtitle": "事業紹介",
     "breadcrumbAria": "パンくずリスト",
     "breadcrumbHome": "TOP",

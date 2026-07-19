@@ -2,7 +2,8 @@ import { expect, test } from '@playwright/test';
 
 test('v12 task5: popup chat answers a Japanese address question and shows citation metadata', async ({ page }) => {
   await page.goto('/');
-  await page.locator('#locale-select').selectOption('ja');
+  await page.locator('#locale-select').click();
+  await page.getByTestId('locale-option-ja').click();
   await page.getByTestId('landing-primary-cta').click();
 
   const input = page.locator('.chat-mini-input-row input');

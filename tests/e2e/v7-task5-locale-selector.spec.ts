@@ -1,15 +1,17 @@
 import { expect, test, type Page } from '@playwright/test';
 
 async function assertLocaleSelector(page: Page) {
-  const select = page.locator('#locale-select');
+  const trigger = page.locator('#locale-select');
 
-  await expect(select).toBeVisible();
-  await expect(select).toHaveValue('en');
+  await expect(trigger).toBeVisible();
+  await expect(trigger).toHaveText('EN');
 
-  await expect(select.locator('option[value="en"]')).toHaveText('EN');
-  await expect(select.locator('option[value="ja"]')).toHaveText('JP');
-  await expect(select.locator('option[value="zh-Hans"]')).toHaveText('SC');
-  await expect(select.locator('option[value="zh-Hant"]')).toHaveText('TC');
+  await trigger.click();
+  await expect(page.getByTestId('locale-option-en')).toHaveText('EN');
+  await expect(page.getByTestId('locale-option-ja')).toHaveText('JP');
+  await expect(page.getByTestId('locale-option-zh-Hans')).toHaveText('SC');
+  await expect(page.getByTestId('locale-option-zh-Hant')).toHaveText('TC');
+  await trigger.click();
 }
 
 test('v7 task5 locale selector is visible with EN default and EN/JP/SC/TC options on core pages', async ({ page }) => {

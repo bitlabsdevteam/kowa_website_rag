@@ -8,8 +8,9 @@ import en from '../../locales/en.json' with { type: 'json' };
 // only drives the camera, surfaced on the canvas as data-factory-progress
 // (components/factory-3d/factory-scene.tsx).
 
-// Mirrors the wrapper's scroll normalization (home-factory-scene.tsx
-// PINNED_FRACTION against the 320vh .home-factory-track / 100svh stage).
+// Mirrors the wrapper's scroll normalization (home-factory-scene.tsx measures
+// the 320svh .home-factory-track / 100svh stage; svh == vh in headless, so
+// the static ratio still holds here).
 const PINNED_FRACTION = (320 - 100) / 320;
 
 async function scrollToFilmProgress(page: Page, filmProgress: number): Promise<void> {
@@ -181,27 +182,28 @@ test.describe('factory scene fallbacks', () => {
     await context.close();
   });
 
-  test('the poster packing worker wakes on scroll-in and idles offscreen', async ({ browser }) => {
-    // Narrow viewport without reduced motion: the <900px gate alone forces
-    // poster mode, so the packing loop is allowed to run.
+  test('narrow viewports get the SVG story, whose packing worker wakes on scroll-in', async ({ browser }) => {
+    // Narrow viewport without reduced motion: the <900px gate now yields the
+    // scroll-panned SVG story, and its packing loop only runs on screen.
     const context = await browser.newContext({ viewport: { width: 700, height: 900 } });
     const page = await context.newPage();
     await page.goto('/');
 
     const track = page.getByTestId('home-factory-scene');
-    const poster = page.getByTestId('home-factory-poster');
-    await expect(track).toHaveAttribute('data-mode', 'poster');
+    const storySvg = page.locator('.factory-story-svg');
+    await expect(track).toHaveAttribute('data-mode', 'story');
+    await expect(page.getByTestId('home-factory-story')).toBeVisible();
 
     // Before the visitor reaches the section the worker just stands there.
-    await expect(poster).not.toHaveAttribute('data-active', 'true');
+    await expect(storySvg).not.toHaveAttribute('data-active', 'true');
 
     await track.scrollIntoViewIfNeeded();
-    await expect(poster).toHaveAttribute('data-active', 'true');
+    await expect(storySvg).toHaveAttribute('data-active', 'true');
 
     // Scrolling back to the top parks the loop again (the observer toggles,
     // it doesn't fire-once) so the animation never ticks offscreen.
     await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }));
-    await expect(poster).not.toHaveAttribute('data-active', 'true');
+    await expect(storySvg).not.toHaveAttribute('data-active', 'true');
 
     await context.close();
   });

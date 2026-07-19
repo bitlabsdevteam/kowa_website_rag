@@ -17,7 +17,8 @@ test('v18 task8: latin headlines render in Fraunces, body in Space Grotesk', asy
 
 test('v18 task8: Japanese locale keeps Noto Sans JP for headlines', async ({ page }) => {
   await page.goto('/');
-  await page.locator('#locale-select').selectOption('ja');
+  await page.locator('#locale-select').click();
+  await page.getByTestId('locale-option-ja').click();
 
   const heading = page.locator('[data-testid="landing-primary-box"] h1');
   await expect(heading).toBeVisible();

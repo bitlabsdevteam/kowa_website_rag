@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { KowaLogo } from '@/components/kowa-logo';
 
@@ -40,8 +40,12 @@ type TopMenuProps = {
   showBrandText?: boolean;
 };
 
+const LOCALE_ORDER: LocaleValue[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
+
 export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en', onLocaleChange, showBrandText = false }: TopMenuProps) {
   const [open, setOpen] = useState(false);
+  const [localeOpen, setLocaleOpen] = useState(false);
+  const localeControlRef = useRef<HTMLDivElement>(null);
   const closeMenu = () => setOpen(false);
 
   // Close the mobile drawer on Escape for keyboard users.
@@ -53,6 +57,35 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
+
+  // Close the locale dropdown on outside click/tap or Escape. It's a custom
+  // listbox (not a native <select>) because the native option popup
+  // mispositions itself on real mobile browsers when the trigger sits inside
+  // this drawer's animated, scrollable panel.
+  useEffect(() => {
+    if (!localeOpen) return undefined;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLocaleOpen(false);
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (localeControlRef.current && !localeControlRef.current.contains(event.target as Node)) {
+        setLocaleOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [localeOpen]);
+
+  const localeOptionLabel = (value: LocaleValue) => {
+    if (value === 'en') return labels.localeOptions.en;
+    if (value === 'ja') return labels.localeOptions.ja;
+    if (value === 'zh-Hans') return labels.localeOptions.zhHans;
+    return labels.localeOptions.zhHant;
+  };
 
   return (
     <nav className={`top-menu ${open ? 'is-open' : ''}`} aria-label={labels.navAria}>
@@ -116,20 +149,43 @@ export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en'
         </div>
 
         <div className="top-menu-actions">
-          <label className="locale-control" htmlFor="locale-select">
+          <div className={`locale-control ${localeOpen ? 'is-open' : ''}`} ref={localeControlRef}>
             <span>{localeLabel}</span>
-            <select
-              id="locale-select"
-              value={locale}
-              onChange={(event) => onLocaleChange?.(event.target.value as LocaleValue)}
-              disabled={!onLocaleChange}
-            >
-              <option value="en">{labels.localeOptions.en}</option>
-              <option value="ja">{labels.localeOptions.ja}</option>
-              <option value="zh-Hans">{labels.localeOptions.zhHans}</option>
-              <option value="zh-Hant">{labels.localeOptions.zhHant}</option>
-            </select>
-          </label>
+            <div className="locale-dropdown">
+              <button
+                type="button"
+                id="locale-select"
+                className="locale-dropdown-trigger"
+                aria-haspopup="listbox"
+                aria-expanded={localeOpen}
+                data-testid="locale-select"
+                disabled={!onLocaleChange}
+                onClick={() => setLocaleOpen((value) => !value)}
+              >
+                <span>{localeOptionLabel(locale)}</span>
+                <svg className="locale-dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+                  <path d="M1 1L5 5L9 1" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <ul className="locale-dropdown-list" role="listbox" aria-label={localeLabel}>
+                {LOCALE_ORDER.map((value) => (
+                  <li key={value} role="option" aria-selected={locale === value}>
+                    <button
+                      type="button"
+                      className="locale-dropdown-option"
+                      data-testid={`locale-option-${value}`}
+                      onClick={() => {
+                        onLocaleChange?.(value);
+                        setLocaleOpen(false);
+                      }}
+                    >
+                      {localeOptionLabel(value)}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

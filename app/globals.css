@@ -91,7 +91,7 @@ html:lang(zh) {
 
 .top-menu-link,
 .locale-control,
-.locale-control select,
+.locale-dropdown-trigger,
 .kowa-logo-text small,
 .kowa-logo-text strong {
   color: var(--color-text) !important;
@@ -109,12 +109,12 @@ html:lang(zh) {
   border-radius: 0 !important;
 }
 
-.locale-control select {
+.locale-dropdown-trigger {
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-  padding: 0 0 0 6px !important;
+  padding: 0 !important;
 }
 
 .auth-pill.accent,
@@ -612,17 +612,96 @@ body {
   background: transparent;
 }
 
-.locale-control span {
+.locale-control > span {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.locale-control select {
+/* Custom listbox, not a native <select>: on real mobile browsers the native
+   option popup mispositions itself when its trigger sits inside this
+   drawer's animated, scrollable panel, so the dropdown list is rendered
+   in-page instead. */
+.locale-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.locale-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 0;
   background: transparent;
   color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.locale-dropdown-trigger:disabled {
+  cursor: default;
+}
+
+.locale-dropdown-chevron {
+  color: var(--color-text-muted);
+  transition: transform 160ms ease;
+}
+
+.locale-control.is-open .locale-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.locale-dropdown-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 148px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 14px;
+  background: var(--color-surface-strong);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+  z-index: 60;
+}
+
+.locale-control.is-open .locale-dropdown-list {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.locale-dropdown-option {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  text-align: left;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.locale-dropdown-option:hover,
+.locale-dropdown-option:focus-visible {
+  background: rgba(45, 107, 73, 0.1);
+  color: var(--color-accent-strong);
+}
+
+.locale-dropdown-option[aria-selected='true'] {
+  font-weight: 700;
 }
 
 .auth-pill {
@@ -736,6 +815,13 @@ body {
 .reference-site > footer {
   position: relative;
   z-index: 1;
+}
+
+/* The header must win stacking against the full-bleed hero content below it
+   (both otherwise tie at z-index: 1 and DOM order lets the hero paint on
+   top), or its locale dropdown becomes unclickable on the homepage. */
+.reference-site > section.shell-header {
+  z-index: 20;
 }
 
 .reference-hero.cinematic-hero {
@@ -2797,7 +2883,7 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.locale-control select {
+.locale-dropdown-trigger {
   min-height: 36px;
   border-radius: 0;
   border: 0;
@@ -6415,6 +6501,15 @@ a:focus-visible {
     justify-content: flex-start;
   }
 
+  /* The locale control is the last row in the drawer, so its list would open
+     below the visible, scroll-clipped panel edge — anchor it upward instead. */
+  .top-menu .locale-dropdown-list {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: auto;
+  }
+
   /* The Partners submenu shows inline inside the drawer (no hover on touch).
      Scoped under .top-menu to outrank the later, unscoped base submenu rule. */
   .top-menu .top-menu-dropdown {
@@ -6617,7 +6712,7 @@ body {
   color: #ffffff;
 }
 
-.locale-control select,
+.locale-dropdown-trigger,
 .auth-pill {
   border-color: rgba(226, 232, 240, 0.12);
   background: rgba(255, 255, 255, 0.06);
@@ -10858,23 +10953,28 @@ section.card,
 }
 
 /* Factory diorama (between the OUR BUSINESS and PRODUCTS bands): a
-   full-bleed 320vh scroll track (same 100vw
+   full-bleed 320svh scroll track (same 100vw
    breakout as .hero-section--full-bleed) whose sticky full-viewport stage
    hosts the scroll-scrubbed Three.js recycling-line scene
    (components/factory-3d). The track height minus the viewport is the camera
-   journey's scroll runway — components/home/home-factory-scene.tsx
-   PINNED_FRACTION mirrors the track/stage heights set here, so change them
-   together. In poster mode (no WebGL, reduced motion, <900px) the track
-   collapses into a plain static full-width figure showing the FactoryPoster
-   SVG. The frame animates nothing itself: only the native sticky and the
-   WebGL canvas move (CLAUDE.md perf contract). */
+   journey's scroll runway — svh (not vh) on purpose, matching the frame's
+   100svh so the runway holds steady while mobile URL bars collapse.
+   components/home/home-factory-scene.tsx measures the live track/frame
+   heights for its pinned fraction (PINNED_FRACTION_FALLBACK only mirrors
+   these heights pre-measure — change them together). On narrow viewports
+   (story mode) the same pin hosts the scroll-panned SVG filmstrip
+   (components/factory-svg); in poster mode (no WebGL, reduced motion) the
+   track collapses into a plain static full-width figure showing the
+   FactoryPoster SVG. The frame animates nothing itself: only the native
+   sticky, the WebGL canvas, and the story strip's transform move (CLAUDE.md
+   perf contract). */
 .home-factory-track {
   position: relative;
   z-index: 1;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  height: 320vh;
+  height: 320svh;
 }
 
 .home-factory-track[data-mode='poster'] {
@@ -10929,6 +11029,32 @@ section.card,
   height: 100%;
 }
 
+/* Mobile story mode: the diorama rendered as an oversized filmstrip inside
+   the sticky frame, panned by factory-story.tsx writing translate3d on the
+   strip (transform-only — CLAUDE.md perf contract). The SVG's height sets
+   the overscan; its width follows from the 1200:675 viewBox aspect, giving
+   ~1.5–2 portrait-viewport widths of horizontal pan runway. */
+.factory-story {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.factory-story-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.factory-story-svg {
+  display: block;
+  height: 118svh;
+  width: auto;
+}
+
 /* Poster packing vignette: the worker idles until home-factory-scene.tsx
    flags the poster with data-active (its visibility observer), then the
    three groups play one synced 2.8s loading loop — bend to the stack, swing
@@ -10954,15 +11080,18 @@ section.card,
   transform-origin: 50% 50%;
 }
 
-.home-factory-poster[data-active='true'] .poster-worker-torso {
+.home-factory-poster[data-active='true'] .poster-worker-torso,
+.factory-story-svg[data-active='true'] .poster-worker-torso {
   animation: poster-pack-lean 2.8s ease-in-out infinite;
 }
 
-.home-factory-poster[data-active='true'] .poster-worker-arm {
+.home-factory-poster[data-active='true'] .poster-worker-arm,
+.factory-story-svg[data-active='true'] .poster-worker-arm {
   animation: poster-pack-arm 2.8s ease-in-out infinite;
 }
 
-.home-factory-poster[data-active='true'] .poster-parcel {
+.home-factory-poster[data-active='true'] .poster-parcel,
+.factory-story-svg[data-active='true'] .poster-parcel {
   animation: poster-pack-parcel 2.8s ease-in-out infinite;
 }
 
@@ -11028,7 +11157,10 @@ section.card,
 @media (prefers-reduced-motion: reduce) {
   .home-factory-poster[data-active='true'] .poster-worker-torso,
   .home-factory-poster[data-active='true'] .poster-worker-arm,
-  .home-factory-poster[data-active='true'] .poster-parcel {
+  .home-factory-poster[data-active='true'] .poster-parcel,
+  .factory-story-svg[data-active='true'] .poster-worker-torso,
+  .factory-story-svg[data-active='true'] .poster-worker-arm,
+  .factory-story-svg[data-active='true'] .poster-parcel {
     animation: none;
   }
 }
@@ -11145,15 +11277,32 @@ section.card,
   }
 }
 
+/* Narrow viewports: story mode keeps the sticky pin on a shorter 280svh
+   runway (the SVG pan needs fewer beats of dwell than the 3D flythrough);
+   poster mode — reduced motion or pre-hydration — collapses to a plain 4:3
+   figure. The story selectors carry [data-mode] so they beat the base rules
+   above without relying on order. */
 @media (max-width: 899px) {
   .home-factory-track {
     height: auto;
+  }
+
+  .home-factory-track[data-mode='story'] {
+    height: 280svh;
   }
 
   .home-factory-frame {
     position: relative;
     height: auto;
     aspect-ratio: 4 / 3;
+  }
+
+  .home-factory-track[data-mode='story'] .home-factory-frame {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    aspect-ratio: auto;
+    overflow: hidden;
   }
 
   .home-factory-caption {
@@ -11163,16 +11312,58 @@ section.card,
     max-width: none;
     padding: 12px 14px;
   }
+
+  /* Stage dialog on a phone frame: full-width card with side gutters,
+     pushed below the caption card so the two never overlap. */
+  .home-factory-annotation {
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 20px;
+    max-width: none;
+    transform: translate(0, 0);
+  }
+}
+
+/* The annotation keyframes center desktop cards via translate(-50%); on the
+   phone layout the card is gutter-pinned instead, so restate the pair with
+   no horizontal shift. */
+@media (max-width: 899px) {
+  @keyframes home-factory-annotation-in {
+    from {
+      opacity: 0;
+      transform: translate(0, 18px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes home-factory-annotation-out {
+    from {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    to {
+      opacity: 0;
+      transform: translate(0, 10px);
+    }
+  }
 }
 
 /* Belt-and-braces with the JS gate: reduced motion never keeps a pinned
-   scroll track, even if the scene somehow mounted. */
+   scroll track, even if the scene or story somehow mounted. The story
+   selectors are restated because their [data-mode] rules above carry higher
+   specificity than the bare classes. */
 @media (prefers-reduced-motion: reduce) {
-  .home-factory-track {
+  .home-factory-track,
+  .home-factory-track[data-mode='story'] {
     height: auto;
   }
 
-  .home-factory-frame {
+  .home-factory-frame,
+  .home-factory-track[data-mode='story'] .home-factory-frame {
     position: relative;
     height: auto;
     aspect-ratio: 16 / 9;
