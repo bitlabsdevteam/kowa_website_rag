@@ -11,7 +11,7 @@ import { useLocale } from '@/lib/use-locale';
 /** Gunma factory exterior — the G.P. Polymer regeneration line site. Bilingual
  * caption shown regardless of UI locale, matching the COMPANY_FACTS pattern. */
 const FACTORY_PHOTO = {
-  src: '/images/company/kowa-gunma-factory-exterior.jpg',
+  src: '/images/company/kowa-gunma-factory-street.jpg',
   jaEyebrow: '生産拠点',
   enEyebrow: 'Production Site',
   jaTitle: '群馬工場',
@@ -45,6 +45,7 @@ const RELATED_COMPANIES = [
 export default function CompanyProfilePage() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
+  const profile = copy.companyProfile;
 
   return (
     <main className="page shell">
@@ -142,6 +143,26 @@ export default function CompanyProfilePage() {
               </dd>
             </div>
           </dl>
+        </ScrollReveal>
+
+        <ScrollReveal variant="fade-up">
+          <section className="cp-timeline" aria-labelledby="cp-timeline-heading">
+            <p className="cp-timeline-eyebrow" id="cp-timeline-heading">
+              {profile.timelineLabel}
+            </p>
+            <p className="cp-timeline-intro">{profile.timelineIntro}</p>
+            <ol className="cp-timeline-list">
+              {profile.timeline.map((item) => (
+                <li key={`${item.year}-${item.title}`} className="cp-timeline-item">
+                  <div className="cp-timeline-year">{item.year}</div>
+                  <article className="cp-timeline-card">
+                    <h3>{item.title}</h3>
+                    <p>{item.detail}</p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </section>
         </ScrollReveal>
       </section>
 

@@ -91,7 +91,7 @@ html:lang(zh) {
 
 .top-menu-link,
 .locale-control,
-.locale-control select,
+.locale-dropdown-trigger,
 .kowa-logo-text small,
 .kowa-logo-text strong {
   color: var(--color-text) !important;
@@ -109,12 +109,12 @@ html:lang(zh) {
   border-radius: 0 !important;
 }
 
-.locale-control select {
+.locale-dropdown-trigger {
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
-  padding: 0 0 0 6px !important;
+  padding: 0 !important;
 }
 
 .auth-pill.accent,
@@ -335,7 +335,14 @@ html:lang(zh) {
   --color-text-muted: #586379;
   --color-accent: #2d6b49;
   --color-accent-strong: #1f5235;
+  /* Light leaf tint of the accent — type/CTA sitting on the photo-hero scrim. */
+  --color-accent-soft: #a3d9bd;
+  /* Deep forest base of the photo-hero scrim gradients (landing hero only). */
+  --color-hero-scrim: #0c1e15;
   --color-silver: #c3cad6;
+  /* Dusk grey-blue backdrop of the factory diorama band — mirrored by hand
+     into components/factory-3d/factory-palette.ts (WebGL can't read tokens). */
+  --color-factory-backdrop: #9fabbc;
   --interactive-focus-ring: 0 0 0 4px rgba(45, 107, 73, 0.16);
   --shadow-soft: 0 22px 60px rgba(21, 35, 63, 0.08);
   --shadow-card: 0 18px 34px rgba(21, 35, 63, 0.06);
@@ -536,21 +543,21 @@ body {
 }
 
 .kowa-logo-core {
-  fill: #edf5ef;
+  fill: #faf7f1;
 }
 
 .kowa-logo-ring {
-  fill: rgba(255, 255, 255, 0.6);
-  stroke: rgba(45, 107, 73, 0.2);
+  fill: rgba(255, 252, 246, 0.6);
+  stroke: rgba(169, 129, 61, 0.55);
   stroke-width: 1.2;
 }
 
 .kowa-logo-mark {
-  fill: url(#kowaLogoGold);
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #2d6b49;
+  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -605,17 +612,96 @@ body {
   background: transparent;
 }
 
-.locale-control span {
+.locale-control > span {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
-.locale-control select {
+/* Custom listbox, not a native <select>: on real mobile browsers the native
+   option popup mispositions itself when its trigger sits inside this
+   drawer's animated, scrollable panel, so the dropdown list is rendered
+   in-page instead. */
+.locale-dropdown {
+  position: relative;
+  display: inline-flex;
+}
+
+.locale-dropdown-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   border: 0;
   background: transparent;
   color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.locale-dropdown-trigger:disabled {
+  cursor: default;
+}
+
+.locale-dropdown-chevron {
+  color: var(--color-text-muted);
+  transition: transform 160ms ease;
+}
+
+.locale-control.is-open .locale-dropdown-chevron {
+  transform: rotate(180deg);
+}
+
+.locale-dropdown-list {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 148px;
+  margin: 0;
+  padding: 8px;
+  list-style: none;
+  border-radius: 14px;
+  background: var(--color-surface-strong);
+  border: 1px solid var(--color-line);
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 2px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 160ms ease;
+  z-index: 60;
+}
+
+.locale-control.is-open .locale-dropdown-list {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.locale-dropdown-option {
+  display: block;
+  width: 100%;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  text-align: left;
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.locale-dropdown-option:hover,
+.locale-dropdown-option:focus-visible {
+  background: rgba(45, 107, 73, 0.1);
+  color: var(--color-accent-strong);
+}
+
+.locale-dropdown-option[aria-selected='true'] {
+  font-weight: 700;
 }
 
 .auth-pill {
@@ -729,6 +815,13 @@ body {
 .reference-site > footer {
   position: relative;
   z-index: 1;
+}
+
+/* The header must win stacking against the full-bleed hero content below it
+   (both otherwise tie at z-index: 1 and DOM order lets the hero paint on
+   top), or its locale dropdown becomes unclickable on the homepage. */
+.reference-site > section.shell-header {
+  z-index: 20;
 }
 
 .reference-hero.cinematic-hero {
@@ -2716,11 +2809,11 @@ a:focus-visible {
 }
 
 .kowa-logo-mark {
-  fill: #1d2a3c;
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #c8a868;
+  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -2790,7 +2883,7 @@ a:focus-visible {
   text-transform: uppercase;
 }
 
-.locale-control select {
+.locale-dropdown-trigger {
   min-height: 36px;
   border-radius: 0;
   border: 0;
@@ -5831,6 +5924,194 @@ a:focus-visible {
   }
 }
 
+/* Company history timeline — company_profile page. */
+.cp-timeline {
+  position: relative;
+  margin-top: clamp(40px, 6vw, 72px);
+  padding-top: clamp(32px, 5vw, 56px);
+  border-top: 1px solid var(--color-line);
+  display: grid;
+  gap: 24px;
+  overflow: hidden;
+}
+
+.cp-timeline::after {
+  content: '';
+  position: absolute;
+  right: clamp(-60px, -4vw, -20px);
+  top: clamp(24px, 6vw, 72px);
+  width: min(440px, 46%);
+  aspect-ratio: 1;
+  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cp-timeline-eyebrow,
+.cp-timeline-intro,
+.cp-timeline-list {
+  position: relative;
+  z-index: 1;
+}
+
+.cp-timeline-eyebrow {
+  margin: 0;
+  color: var(--color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cp-timeline-intro {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--color-text-muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.cp-timeline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0;
+}
+
+.cp-timeline-item {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: start;
+  position: relative;
+  padding-bottom: 28px;
+}
+
+.cp-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 12px;
+  bottom: -10px;
+  width: 2px;
+  transform: translateX(-1px);
+  background: linear-gradient(180deg, var(--color-accent), rgba(45, 107, 73, 0.25));
+}
+
+.cp-timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.cp-timeline-item:last-child::before {
+  bottom: auto;
+  height: 16px;
+}
+
+.cp-timeline-year {
+  position: relative;
+  padding-top: 3px;
+  padding-right: 12px;
+  text-align: right;
+  color: var(--color-accent-strong);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+.cp-timeline-year::after {
+  content: '';
+  position: absolute;
+  left: 84px;
+  top: 8px;
+  width: 14px;
+  height: 14px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--color-canvas);
+  border: 2.5px solid var(--color-accent);
+  z-index: 2;
+  transition: background 0.28s ease, border-color 0.28s ease,
+    box-shadow 0.28s ease, transform 0.28s ease;
+}
+
+.cp-timeline-card {
+  padding: 6px 16px 6px 20px;
+  border-radius: 14px;
+  background: transparent;
+  transition: transform 0.28s ease, background 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.cp-timeline-card h3 {
+  margin: 0 0 4px;
+  color: var(--color-text);
+  font-size: 1.02rem;
+  font-weight: 700;
+  transition: color 0.28s ease;
+}
+
+.cp-timeline-item:hover .cp-timeline-card,
+.cp-timeline-item:focus-within .cp-timeline-card {
+  transform: translateX(6px);
+  background: rgba(45, 107, 73, 0.06);
+  box-shadow: 0 10px 26px -18px rgba(31, 82, 53, 0.5);
+}
+
+.cp-timeline-item:hover .cp-timeline-card h3,
+.cp-timeline-item:focus-within .cp-timeline-card h3 {
+  color: var(--color-accent-strong);
+}
+
+.cp-timeline-item:hover .cp-timeline-year,
+.cp-timeline-item:focus-within .cp-timeline-year {
+  transform: translateX(-2px);
+}
+
+.cp-timeline-item:hover .cp-timeline-year::after,
+.cp-timeline-item:focus-within .cp-timeline-year::after {
+  background: var(--color-accent);
+  border-color: var(--color-accent-strong);
+  box-shadow: 0 0 0 5px rgba(45, 107, 73, 0.14);
+  transform: translate(-50%, -50%) scale(1.12);
+}
+
+.cp-timeline-card p {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .cp-timeline-item {
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 16px;
+  }
+
+  .cp-timeline-item::before,
+  .cp-timeline-year::after {
+    left: 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cp-timeline-item:hover .cp-timeline-card,
+  .cp-timeline-item:focus-within .cp-timeline-card,
+  .cp-timeline-item:hover .cp-timeline-year,
+  .cp-timeline-item:focus-within .cp-timeline-year {
+    transform: none;
+  }
+
+  .cp-timeline-item:hover .cp-timeline-year::after,
+  .cp-timeline-item:focus-within .cp-timeline-year::after {
+    transform: translate(-50%, -50%);
+  }
+}
+
 .company-profile-intro-panel,
 .company-profile-facts-panel,
 .company-profile-statement-card,
@@ -6220,6 +6501,15 @@ a:focus-visible {
     justify-content: flex-start;
   }
 
+  /* The locale control is the last row in the drawer, so its list would open
+     below the visible, scroll-clipped panel edge — anchor it upward instead. */
+  .top-menu .locale-dropdown-list {
+    top: auto;
+    bottom: calc(100% + 8px);
+    left: 0;
+    right: auto;
+  }
+
   /* The Partners submenu shows inline inside the drawer (no hover on touch).
      Scoped under .top-menu to outrank the later, unscoped base submenu rule. */
   .top-menu .top-menu-dropdown {
@@ -6398,20 +6688,22 @@ body {
   color: rgba(236, 241, 247, 0.92);
 }
 
+/* Header sits on the light canvas (see the top-menu cleanup further down),
+   so the logo keeps the light treatment: forest mark + gold ring. */
 .kowa-logo-ring {
-  stroke: rgba(216, 191, 143, 0.75);
+  stroke: rgba(169, 129, 61, 0.55);
 }
 
 .kowa-logo-core {
-  fill: rgba(255, 255, 255, 0.04);
+  fill: rgba(255, 252, 246, 0.9);
 }
 
 .kowa-logo-mark {
-  fill: #f3f6fb;
+  fill: #1f5235;
 }
 
 .kowa-logo-accent {
-  fill: #e0c38f;
+  fill: url(#kowaLogoGold);
 }
 
 .top-menu-link:hover,
@@ -6420,7 +6712,7 @@ body {
   color: #ffffff;
 }
 
-.locale-control select,
+.locale-dropdown-trigger,
 .auth-pill {
   border-color: rgba(226, 232, 240, 0.12);
   background: rgba(255, 255, 255, 0.06);
@@ -9404,6 +9696,13 @@ html:lang(en) .reference-section-title {
   display: none;
 }
 
+/* Intro-title sentence on the landing page's business-story section types in
+   on load via components/ui/typewriter.tsx; cursor picks up the accent so it
+   reads as a live cue rather than stray punctuation. */
+.home-business-story-cursor {
+  color: var(--color-accent);
+}
+
 /* Hero headline: the typed tail picks up the forest-green accent so the
    rotating phrase reads as the emphasized clause. */
 .hero-title-typed {
@@ -10002,11 +10301,11 @@ html:lang(en) .reference-section-title {
 }
 
 .hero-section-media {
+  position: relative;
   width: 100%;
   min-height: 280px;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  overflow: hidden;
+  background: var(--color-canvas-strong);
 }
 
 @media (min-width: 768px) {
@@ -10034,6 +10333,176 @@ html:lang(en) .reference-section-title {
 @media (prefers-reduced-motion: reduce) {
   .hero-section-media {
     clip-path: none !important;
+  }
+}
+
+/* --- Hero media: full-bleed container-yard photo -----------------------------
+   The media pane stretches behind the copy (hero-section--full-bleed). The
+   photo is graded by a deep forest scrim that rises from the left so the
+   headline sits on quiet dark green while the jet and sun flare on the right
+   stay clear. Copy flips to light-on-photo with a soft leaf-green accent. */
+.hero-section--full-bleed {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  background: var(--color-hero-scrim);
+}
+
+.hero-section--full-bleed .hero-section-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  min-height: 0;
+  z-index: 0;
+  background: var(--color-hero-scrim);
+}
+
+.hero-section--full-bleed .hero-section-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-yard {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-yard-photo {
+  display: block;
+  position: absolute;
+  inset: -10% 0;
+  width: 100%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 64% 42%;
+  /* Far plane. Parallax lag: the photo trails the scroll (drifts down as the
+     page moves up), so it reads slower than the foreground copy. Pure
+     transform — stays off the raster path. -10% 0 / 120% gives ~90px of
+     overscan, comfortably covering the 54px drift. */
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * 54px), 0);
+  will-change: transform;
+}
+
+/* Gradient stops are --color-hero-scrim (#0c1e15) at fixed alphas, written as
+   rgba literals: color-mix() stops made this full-viewport paint expensive
+   enough to starve smooth scrolling on software rasterizers. */
+.hero-yard-scrim {
+  position: absolute;
+  /* Oversized so the mid-plane drift never exposes an ungraded strip. */
+  inset: -32px 0;
+  /* Mid plane: drifts opposite the far photo at a gentler rate, deepening the
+     depth read. A non-none transform still forces its own compositor layer —
+     without one this full-hero translucent overlay re-rasters every frame and
+     starves smooth scrolling on software rasterizers (headless test runs). */
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * 20px), 0);
+  background:
+    linear-gradient(
+      99deg,
+      rgba(12, 30, 21, 0.88) 0%,
+      rgba(12, 30, 21, 0.66) 40%,
+      rgba(12, 30, 21, 0.2) 72%,
+      rgba(12, 30, 21, 0.32) 100%
+    ),
+    linear-gradient(to top, rgba(12, 30, 21, 0.62) 0%, rgba(12, 30, 21, 0) 36%);
+}
+
+/* Near plane: the copy exits slightly faster than the scroll and fades, so it
+   leads the photo/scrim as the hero clears — opacity/transform only, per the
+   full-viewport performance contract. */
+.hero-section--full-bleed .hero-section-content {
+  transform: translate3d(0, calc(var(--hero-yard-drift, 0) * -26px), 0);
+  opacity: calc(1 - var(--hero-yard-drift, 0) * 0.28);
+  will-change: transform, opacity;
+}
+
+/* Light-on-photo copy. */
+.hero-section--full-bleed .hero-section-logo-text,
+.hero-section--full-bleed .hero-section-title {
+  color: #ffffff;
+}
+
+.hero-section--full-bleed .hero-section-slogan {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-section--full-bleed .hero-section-subtitle {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-section--full-bleed .hero-section-title-accent {
+  color: var(--color-accent-soft);
+}
+
+/* The accent line goes italic only where the display face has a true italic
+   (Latin); CJK display text stays upright. */
+html:lang(en) .hero-section--full-bleed .hero-section-title-accent {
+  font-style: italic;
+}
+
+.hero-section--full-bleed .hero-section-rule {
+  background: var(--color-accent-soft);
+}
+
+.hero-section--full-bleed .hero-section-cta {
+  color: var(--color-accent-soft);
+}
+
+.hero-section--full-bleed .hero-section-contact-grid {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-section--full-bleed .hero-section-contact-icon {
+  color: var(--color-accent-soft);
+}
+
+/* Full-bleed hero keeps the split hero's height without reserving a media
+   column: the copy takes the full row and caps its own measure. */
+@media (min-width: 768px) {
+  .hero-section--full-bleed .hero-section-content {
+    width: 100%;
+  }
+
+  .hero-section--full-bleed .hero-section-title,
+  .hero-section--full-bleed .hero-section-subtitle {
+    max-width: 34rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-section--full-bleed .hero-section-media {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-yard-photo {
+    transform: none !important;
+  }
+
+  /* Keep the scrim's own compositor layer (not none) so grading stays cheap. */
+  .hero-yard-scrim {
+    transform: translateZ(0) !important;
+  }
+
+  .hero-section--full-bleed .hero-section-content {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-section--full-bleed {
+    min-height: 82vh;
+  }
+
+  /* Stronger grade on small screens — the copy spans the whole photo. */
+  .hero-yard-scrim {
+    background: linear-gradient(
+      180deg,
+      rgba(12, 30, 21, 0.8) 0%,
+      rgba(12, 30, 21, 0.55) 55%,
+      rgba(12, 30, 21, 0.78) 100%
+    );
   }
 }
 
@@ -10251,7 +10720,190 @@ section.card,
   background: var(--color-accent-strong);
 }
 
+/* --- Home: full-bleed band breakout ----------------------------------------
+   The OUR BUSINESS / PRODUCTS bands and WHAT WE DO stretch edge-to-edge like
+   .hero-section--full-bleed (same 100vw breakout; the body's overflow-x: clip
+   absorbs the scrollbar overhang). Inner wrappers (.home-business-story-inner,
+   .segment-grid-inner, .home-about-inner) keep the text column at
+   var(--content). No overflow set here: .home-about contains sticky
+   children. */
+.home-business-parallax,
+.home-about {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* --- Home: OUR BUSINESS / PRODUCTS parallax bands ------------------------- */
+/* HomeBusinessParallax renders two independent bands. Each Band measures its
+   OWN scroll progress and exposes --biz-drift (-1 → 1) to just its subtree, so
+   the two sections read as visibly separate stages that drift on their own
+   timelines: a ghost display word behind each, the story's text layers, and
+   the card grid tilting on a perspective stage with per-card translateZ depth
+   (--card-depth, set inline). The tonal step between bands + the products
+   band's top rule replace the old single-block seam. */
+.home-business-band {
+  position: relative;
+  overflow: clip;
+  padding: clamp(56px, 8vw, 104px) 0;
+  perspective: 1200px;
+}
+
+.home-business-band--story {
+  background: var(--color-canvas);
+}
+
+.home-business-band--products {
+  background: var(--color-canvas-strong);
+  border-top: 1px solid var(--color-line);
+}
+
+.home-business-band-ghost {
+  position: absolute;
+  top: clamp(4px, 2vw, 28px);
+  left: 50%;
+  z-index: 0;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 16vw, 12rem);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(27, 42, 74, 0.06);
+  /* True 3D depth under the band's perspective: pushed back on Z with scale
+     compensation (1200 / (1200 + 180) ≈ 0.87, so ×1.15 restores apparent
+     size), so its -60px drift projects to ~-52px — genuine perspective
+     attenuation. Translate first so -50% centering isn't scaled. */
+  transform: translate3d(-50%, calc(var(--biz-drift, 0) * -60px), 0) translateZ(-180px) scale(1.15);
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+/* The band owns the section's padding + background, so the inner story/grid
+   drop their own vertical padding and backgrounds — no compounded seam — and
+   sit transparent above the watermark. */
+.home-business-band .home-business-story,
+.home-business-band .segment-grid {
+  position: relative;
+  z-index: 1;
+  padding: 0;
+  border-top: 0;
+  background: transparent;
+}
+
+/* Cards sit on a shared 3D stage: each carries --card-depth (set inline by
+   HomeBusinessGrid, 0→1 across the row) and drifts along Z + tilts on X as
+   the band's --biz-drift sweeps through the viewport, so cards read as
+   independently-depthed layers rather than a flat grid. Hover feedback stays
+   inside the tile: the photo zooms gently instead of the card lifting. */
+.home-business-band .segment-cards {
+  transform-style: preserve-3d;
+}
+
+.home-business-band .segment-card {
+  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 40px))
+    rotateX(calc(var(--biz-drift, 0) * -2deg));
+  will-change: transform;
+}
+
+.home-business-band .segment-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.home-business-band .segment-card-media img {
+  transition: transform 0.35s ease;
+}
+
+.home-business-band .segment-card:hover .segment-card-media img {
+  transform: scale(1.045);
+}
+
+@media (max-width: 859px) {
+  .home-business-band-ghost {
+    font-size: clamp(3.2rem, 17vw, 5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-business-band-ghost,
+  .home-business-band .segment-card-media img {
+    transform: none;
+    transition: none;
+  }
+
+  .home-business-band-ghost {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 /* --- Home: ABOUT block --------------------------------------------------- */
+/* Landing "Our Business" story band — moved here from the company profile
+   page as the scroll-driven narrative directly under the hero, ahead of the
+   business grid. Label, title, and paragraphs drift at staggered rates via
+   --biz-drift (inherited from HomeBusinessParallax) / --biz-depth for a
+   layered parallax read as the section crosses the viewport. */
+.home-business-story {
+  padding: clamp(40px, 7vw, 80px) 0;
+  background: var(--color-canvas);
+  text-align: center;
+  overflow: hidden;
+}
+
+.home-business-story-inner {
+  width: var(--content);
+  max-width: 52rem;
+  margin: 0 auto;
+  transform: translate3d(0, calc(var(--biz-drift, 0) * -18px), 0);
+  will-change: transform;
+}
+
+.home-business-story .section-heading-display {
+  transform: translate3d(0, calc(var(--biz-drift, 0) * 0.35 * -14px), 0);
+  will-change: transform;
+}
+
+.home-business-story-title {
+  margin: 14px auto 0;
+  max-width: 44rem;
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.4vw, 1.5rem);
+  line-height: 1.65;
+  transform: translate3d(0, calc(var(--biz-drift, 0) * 0.6 * -14px), 0);
+  will-change: transform;
+}
+
+.home-business-story-body {
+  display: grid;
+  gap: 18px;
+  margin-top: clamp(20px, 3vw, 32px);
+  text-align: left;
+}
+
+.home-business-story-paragraph {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 1.02rem;
+  line-height: 1.75;
+  transform: translate3d(0, calc(var(--biz-drift, 0) * var(--biz-depth, 1) * -14px), 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-business-story-inner,
+  .home-business-story .section-heading-display,
+  .home-business-story-title,
+  .home-business-story-paragraph {
+    transform: none;
+  }
+
+  .home-business-band .segment-card {
+    transform: none;
+  }
+}
+
 .home-about {
   padding: clamp(48px, 8vw, 96px) 0;
   border-top: 1px solid var(--color-line);
@@ -10260,26 +10912,480 @@ section.card,
 }
 
 .home-about-inner {
+  position: relative;
   width: var(--content);
   margin: 0 auto;
 }
 
-.home-about-statement {
-  max-width: 44rem;
-  margin: 18px auto 0;
-  color: var(--color-text);
-  font-size: 1.1rem;
-  line-height: 1.7;
+.about-pillars-label,
+.home-about .business-lines {
+  position: relative;
+  z-index: 1;
+}
+
+/* Landing "Machines" carousel — recycling-line photography, reuses the
+   card-fan carousel (components/ui/card-fan-carousel.tsx). */
+.home-machines {
+  padding: clamp(48px, 8vw, 96px) 0;
+  border-top: 1px solid var(--color-line);
+  background: var(--color-canvas);
+  text-align: center;
+}
+
+.home-machines-inner {
+  width: var(--content);
+  margin: 0 auto;
+}
+
+.home-machines-inner .card-fan,
+.home-machines-inner .card-fan-loading {
+  margin-top: 32px;
 }
 
 /* Editorial numbered list of Kowa's five business lines, sourced from
    copy.home.whatWeDo.categories (lib/product-media.ts PRODUCT_TOP_CATEGORY_ORDER). */
 .about-pillars-label {
-  margin: 48px 0 0;
+  margin: 0;
   color: var(--color-text-muted);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+/* Factory diorama (between the OUR BUSINESS and PRODUCTS bands): a
+   full-bleed 320svh scroll track (same 100vw
+   breakout as .hero-section--full-bleed) whose sticky full-viewport stage
+   hosts the scroll-scrubbed Three.js recycling-line scene
+   (components/factory-3d). The track height minus the viewport is the camera
+   journey's scroll runway — svh (not vh) on purpose, matching the frame's
+   100svh so the runway holds steady while mobile URL bars collapse.
+   components/home/home-factory-scene.tsx measures the live track/frame
+   heights for its pinned fraction (PINNED_FRACTION_FALLBACK only mirrors
+   these heights pre-measure — change them together). On narrow viewports
+   (story mode) the same pin hosts the scroll-panned SVG filmstrip
+   (components/factory-svg); in poster mode (no WebGL, reduced motion) the
+   track collapses into a plain static full-width figure showing the
+   FactoryPoster SVG. The frame animates nothing itself: only the native
+   sticky, the WebGL canvas, and the story strip's transform move (CLAUDE.md
+   perf contract). */
+.home-factory-track {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  height: 320svh;
+}
+
+.home-factory-track[data-mode='poster'] {
+  height: auto;
+}
+
+.home-factory-frame {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--color-factory-backdrop);
+}
+
+.home-factory-track[data-mode='poster'] .home-factory-frame {
+  /* relative (not static): still an unpinned, natural-flow box, but it must
+     stay a positioning root for .home-factory-visual/-caption below. */
+  position: relative;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* Cinematic vignette over the live scene only: a static radial gradient
+   (never animated — perf contract) that darkens the frame edges toward the
+   ink tone, deepening the 3D read without any postprocessing pass. */
+.home-factory-track[data-mode='scene'] .home-factory-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(120% 85% at 50% 45%, transparent 60%, rgba(21, 35, 63, 0.16) 100%);
+}
+
+/* Wraps just the scene/poster with the role="img" accessible name, so the
+   Storytelling caption below is exposed to screen readers as real text
+   instead of being folded into the image's name. */
+.home-factory-visual {
+  position: absolute;
+  inset: 0;
+}
+
+.factory-3d-scene {
+  position: absolute;
+  inset: 0;
+}
+
+.factory-3d-scene canvas,
+.home-factory-poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Mobile story mode: the diorama rendered as an oversized filmstrip inside
+   the sticky frame, panned by factory-story.tsx writing translate3d on the
+   strip (transform-only — CLAUDE.md perf contract). The SVG's height sets
+   the overscan; its width follows from the 1200:675 viewBox aspect, giving
+   ~1.5–2 portrait-viewport widths of horizontal pan runway. */
+.factory-story {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.factory-story-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+.factory-story-svg {
+  display: block;
+  height: 118svh;
+  width: auto;
+}
+
+/* Poster packing vignette: the worker idles until home-factory-scene.tsx
+   flags the poster with data-active (its visibility observer), then the
+   three groups play one synced 2.8s loading loop — bend to the stack, swing
+   to the container, parcel arcs across and fades to reset. transform-box:
+   fill-box is mandatory: without it SVG transform-origin percentages resolve
+   against the whole 1200x675 viewBox, not each group. Parcel translate
+   values are viewBox user units. */
+.poster-worker-torso,
+.poster-worker-arm,
+.poster-parcel {
+  transform-box: fill-box;
+}
+
+.poster-worker-torso {
+  transform-origin: 50% 100%;
+}
+
+.poster-worker-arm {
+  transform-origin: 50% 10%;
+}
+
+.poster-parcel {
+  transform-origin: 50% 50%;
+}
+
+.home-factory-poster[data-active='true'] .poster-worker-torso,
+.factory-story-svg[data-active='true'] .poster-worker-torso {
+  animation: poster-pack-lean 2.8s ease-in-out infinite;
+}
+
+.home-factory-poster[data-active='true'] .poster-worker-arm,
+.factory-story-svg[data-active='true'] .poster-worker-arm {
+  animation: poster-pack-arm 2.8s ease-in-out infinite;
+}
+
+.home-factory-poster[data-active='true'] .poster-parcel,
+.factory-story-svg[data-active='true'] .poster-parcel {
+  animation: poster-pack-parcel 2.8s ease-in-out infinite;
+}
+
+@keyframes poster-pack-lean {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(-8deg);
+  }
+  55%,
+  72% {
+    transform: rotate(6deg);
+  }
+}
+
+@keyframes poster-pack-arm {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  18% {
+    transform: rotate(34deg);
+  }
+  55%,
+  72% {
+    transform: rotate(-30deg);
+  }
+}
+
+/* Opacity is the one non-transform property here — a tiny element, and the
+   dip to 0 is what lets the parcel jump back to the stack invisibly. */
+@keyframes poster-pack-parcel {
+  0%,
+  18% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  45% {
+    transform: translate(34px, -26px);
+    opacity: 1;
+  }
+  70% {
+    transform: translate(88px, -2px);
+    opacity: 1;
+  }
+  74%,
+  96% {
+    transform: translate(88px, -2px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+}
+
+/* The poster is the reduced-motion surface (the observer still sets
+   data-active there), so this reset is what actually guarantees the worker
+   stays idle for those visitors. Selectors repeat the activation prefix
+   because media queries add no specificity of their own. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-poster[data-active='true'] .poster-worker-torso,
+  .home-factory-poster[data-active='true'] .poster-worker-arm,
+  .home-factory-poster[data-active='true'] .poster-parcel,
+  .factory-story-svg[data-active='true'] .poster-worker-torso,
+  .factory-story-svg[data-active='true'] .poster-worker-arm,
+  .factory-story-svg[data-active='true'] .poster-parcel {
+    animation: none;
+  }
+}
+
+/* Storytelling caption: a glass card naming the scroll sequence and telling
+   the visitor how it's driven. Static (no animated properties) — the frame's
+   sticky pin and the canvas are the only moving parts (CLAUDE.md perf
+   contract). */
+.home-factory-caption {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 2;
+  max-width: 22rem;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid var(--color-line);
+  background: rgba(255, 252, 246, 0.84);
+  backdrop-filter: blur(10px);
+}
+
+.home-factory-caption-label {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.home-factory-caption-hint {
+  margin: 6px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--color-text-muted);
+}
+
+/* Stage dialog: a cinematic title card, top-center of the frame, naming the
+   machine the tracking spotlight has settled on (scene mode only —
+   home-factory-scene.tsx remounts it per stage and briefly keeps the previous
+   card mounted with the --leaving modifier so the beats crossfade). Dark
+   glass derived from --color-hero-scrim (#0c1e15) so it reads as part of the
+   dusk-lit scene. Both animations touch opacity/transform only, on the
+   card's own compositor layer; the full-viewport canvas/frame stays free of
+   animated raster-bound properties (CLAUDE.md perf contract). */
+.home-factory-annotation {
+  position: absolute;
+  left: 50%;
+  top: 24px;
+  z-index: 2;
+  max-width: 22rem;
+  padding: 14px 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 252, 246, 0.18);
+  background: rgba(12, 30, 21, 0.72);
+  backdrop-filter: blur(10px);
+  text-align: center;
+  transform: translate(-50%, 0);
+  will-change: opacity, transform;
+  animation: home-factory-annotation-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Duration must stay in sync with ANNOTATION_EXIT_MS in
+   home-factory-scene.tsx, which unmounts the leaving card. */
+.home-factory-annotation--leaving {
+  pointer-events: none;
+  animation: home-factory-annotation-out 280ms ease-in both;
+}
+
+@keyframes home-factory-annotation-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -18px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+@keyframes home-factory-annotation-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+}
+
+.home-factory-annotation-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-accent-soft);
+}
+
+.home-factory-annotation-note {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(255, 252, 246, 0.85);
+}
+
+/* Belt-and-braces: the scene (and with it the stage dialog) never mounts
+   under reduced motion, but if it ever did, the cards must not animate. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-annotation,
+  .home-factory-annotation--leaving {
+    animation: none;
+  }
+}
+
+/* Narrow viewports: story mode keeps the sticky pin on a shorter 280svh
+   runway (the SVG pan needs fewer beats of dwell than the 3D flythrough);
+   poster mode — reduced motion or pre-hydration — collapses to a plain 4:3
+   figure. The story selectors carry [data-mode] so they beat the base rules
+   above without relying on order. */
+@media (max-width: 899px) {
+  .home-factory-track {
+    height: auto;
+  }
+
+  .home-factory-track[data-mode='story'] {
+    height: 280svh;
+  }
+
+  .home-factory-frame {
+    position: relative;
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+
+  .home-factory-track[data-mode='story'] .home-factory-frame {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    aspect-ratio: auto;
+    overflow: hidden;
+  }
+
+  .home-factory-caption {
+    top: 16px;
+    left: 16px;
+    right: 16px;
+    max-width: none;
+    padding: 12px 14px;
+  }
+
+  /* Stage dialog on a phone frame: full-width card with side gutters,
+     pushed below the caption card so the two never overlap. */
+  .home-factory-annotation {
+    left: 16px;
+    right: 16px;
+    top: auto;
+    bottom: 20px;
+    max-width: none;
+    transform: translate(0, 0);
+  }
+}
+
+/* The annotation keyframes center desktop cards via translate(-50%); on the
+   phone layout the card is gutter-pinned instead, so restate the pair with
+   no horizontal shift. */
+@media (max-width: 899px) {
+  @keyframes home-factory-annotation-in {
+    from {
+      opacity: 0;
+      transform: translate(0, 18px);
+    }
+    to {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes home-factory-annotation-out {
+    from {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+    to {
+      opacity: 0;
+      transform: translate(0, 10px);
+    }
+  }
+}
+
+/* Belt-and-braces with the JS gate: reduced motion never keeps a pinned
+   scroll track, even if the scene or story somehow mounted. The story
+   selectors are restated because their [data-mode] rules above carry higher
+   specificity than the bare classes. */
+@media (prefers-reduced-motion: reduce) {
+  .home-factory-track,
+  .home-factory-track[data-mode='story'] {
+    height: auto;
+  }
+
+  .home-factory-frame,
+  .home-factory-track[data-mode='story'] .home-factory-frame {
+    position: relative;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .business-line-index,
+  .business-line-title,
+  .business-line-desc,
+  .business-line-row::after {
+    transition: none;
+  }
+
+  .business-line-row:hover .business-line-index,
+  .business-line-row:hover .business-line-title,
+  .business-line-row:hover .business-line-desc,
+  .business-line-row[data-active='true'] .business-line-index,
+  .business-line-row[data-active='true'] .business-line-title,
+  .business-line-row[data-active='true'] .business-line-desc {
+    transform: none;
+  }
 }
 
 .business-lines {
@@ -10289,6 +11395,7 @@ section.card,
 }
 
 .business-line-row {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 6px 24px;
@@ -10296,7 +11403,6 @@ section.card,
   border-bottom: 1px solid var(--color-line);
   text-decoration: none;
   color: inherit;
-  transition: background 0.2s ease;
 }
 
 @media (min-width: 720px) {
@@ -10307,8 +11413,48 @@ section.card,
   }
 }
 
-.business-line-row:hover {
-  background: var(--surface-card);
+/* Elegant active/hover treatment — no flat panel fill. The row's text slides a
+   touch to the right and warms to the accent, while an accent hairline draws
+   in from the left over the divider. The row box (and its divider) stay put so
+   neighbours don't jump. */
+.business-line-index,
+.business-line-title,
+.business-line-desc {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-line-row::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.business-line-row:hover::after,
+.business-line-row[data-active='true']::after {
+  transform: scaleX(1);
+}
+
+.business-line-row:hover .business-line-index,
+.business-line-row:hover .business-line-title,
+.business-line-row:hover .business-line-desc,
+.business-line-row[data-active='true'] .business-line-index,
+.business-line-row[data-active='true'] .business-line-title,
+.business-line-row[data-active='true'] .business-line-desc {
+  transform: translateX(8px);
+}
+
+.business-line-row:hover .business-line-index,
+.business-line-row:hover .business-line-title,
+.business-line-row[data-active='true'] .business-line-index,
+.business-line-row[data-active='true'] .business-line-title {
+  color: var(--color-accent);
 }
 
 .business-line-index {
@@ -10324,6 +11470,23 @@ section.card,
   font-size: 1.15rem;
   color: var(--color-text);
   grid-column: 2;
+}
+
+/* Badge for lines without grounded photography yet (Foods, FFE). Non-italic,
+   muted pill so it reads as status metadata, not part of the display title. */
+.business-line-badge {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 2px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-style: normal;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  vertical-align: middle;
 }
 
 @media (min-width: 720px) {
@@ -10565,6 +11728,110 @@ section.card,
   display: inline-flex;
   color: var(--color-accent);
   font-size: 0.8rem;
+}
+
+/* Products & Services explainer — /products, below the photo carousel. */
+.products-services-surface {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(32px, 4.5vw, 52px);
+}
+
+/* Brand watermark filling the empty space beside the heading. Purely
+ * decorative, sits behind the content, and stays faint so card copy keeps
+ * its ≥4.5:1 contrast. */
+.products-services-surface::before {
+  content: '';
+  position: absolute;
+  top: clamp(-40px, -3vw, -16px);
+  right: clamp(-56px, -4vw, -24px);
+  width: clamp(220px, 34vw, 460px);
+  aspect-ratio: 1;
+  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.products-services-head,
+.products-services-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.products-services-head {
+  max-width: 60ch;
+}
+
+.products-services-title {
+  margin: 16px 0 0;
+  font-size: clamp(1.8rem, 2.8vw, 2.5rem);
+}
+
+.products-services-intro {
+  margin-top: 14px;
+  max-width: 56ch;
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.products-services-grid {
+  margin-top: clamp(32px, 4vw, 44px);
+  gap: 20px;
+}
+
+@media (min-width: 900px) {
+  .products-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.products-services-card {
+  padding: 26px 28px;
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  will-change: transform;
+}
+
+.products-services-card:hover {
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+}
+
+.products-services-card .offering-card-title {
+  transition: color 0.25s ease;
+}
+
+.products-services-card:hover .offering-card-title {
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .products-services-card {
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .products-services-card:hover {
+    transform: none;
+  }
+}
+
+/* Elevate title over body copy — the base .offering-card sizes (0.95rem
+   title / 0.85rem body) read too flat for this longer, denser service list. */
+.products-services-card .offering-card-title {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.products-services-card .offering-card-body {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.7;
 }
 
 .business-flow-strip {

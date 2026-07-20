@@ -21,6 +21,9 @@ export type ProductFamily =
   | 'pir-pellet'
   | 'pp-pellet'
   | 'ps-pellet'
+  | 'rpp-pellet'
+  | 'rhips-pellet'
+  | 'rabs-pellet'
   | 'general-goods-moisture-charcoal'
   | 'general-goods-canvas-tote'
   | 'myanmar-teak'
@@ -47,6 +50,9 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
   'pir-pellet': 'plastics',
   'pp-pellet': 'plastics',
   'ps-pellet': 'plastics',
+  'rpp-pellet': 'plastics',
+  'rhips-pellet': 'plastics',
+  'rabs-pellet': 'plastics',
   'general-goods-moisture-charcoal': 'general-goods',
   'general-goods-canvas-tote': 'general-goods',
   'myanmar-teak': 'timber',
@@ -54,6 +60,16 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
   'wood-flooring-bedroom': 'timber',
   'wood-flooring-living-room': 'timber',
   'wood-flooring-deck': 'timber',
+};
+
+/** Representative card-face photo per top category, shared by the home
+ * business grid and the WHAT WE DO media panel. Only Plastics, General Goods,
+ * and Timber have grounded photography today; Foods and FFE stay undefined so
+ * surfaces render an honest placeholder tile instead of a fabricated photo. */
+export const TOP_CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
+  plastics: '/images/products/gpps-pellet-1.jpg',
+  'general-goods': '/images/products/general-goods-1.jpg',
+  timber: '/images/products/timber-teak-flooring-atrium.jpg',
 };
 
 /** Most families are shot two ways: a primary card-face photo and a close-up detail. The Myanmar-teak family keeps its original three-shot set (lot / pile / macro). */
@@ -79,7 +95,7 @@ export type ProductMediaItem = {
 export const PRODUCT_MEDIA: ProductMediaItem[] = [
   {
     id: 'abs-crushed-primary',
-    title: 'ABS Crushed Scrap — Primary',
+    title: 'ABS Regrind — Primary',
     category: 'recycling-process',
     family: 'abs-crushed',
     view: 'primary',
@@ -88,7 +104,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'abs-crushed-detail',
-    title: 'ABS Crushed Scrap — Detail',
+    title: 'ABS Regrind — Detail',
     category: 'recycling-process',
     family: 'abs-crushed',
     view: 'detail',
@@ -97,7 +113,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hdpe-crushed-primary',
-    title: 'HDPE Crushed Scrap — Primary',
+    title: 'HDPE Regrind — Primary',
     category: 'recycling-process',
     family: 'hdpe-crushed',
     view: 'primary',
@@ -106,7 +122,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hdpe-crushed-detail',
-    title: 'HDPE Crushed Scrap — Detail',
+    title: 'HDPE Regrind — Detail',
     category: 'recycling-process',
     family: 'hdpe-crushed',
     view: 'detail',
@@ -115,7 +131,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hips-crushed-primary',
-    title: 'HIPS Crushed Scrap — Primary',
+    title: 'HIPS Regrind — Primary',
     category: 'recycling-process',
     family: 'hips-crushed',
     view: 'primary',
@@ -124,7 +140,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hips-crushed-detail',
-    title: 'HIPS Crushed Scrap — Detail',
+    title: 'HIPS Regrind — Detail',
     category: 'recycling-process',
     family: 'hips-crushed',
     view: 'detail',
@@ -133,7 +149,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pp-crushed-primary',
-    title: 'PP Crushed Scrap — Primary',
+    title: 'PP Regrind — Primary',
     category: 'recycling-process',
     family: 'pp-crushed',
     view: 'primary',
@@ -142,7 +158,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pp-crushed-detail',
-    title: 'PP Crushed Scrap — Detail',
+    title: 'PP Regrind — Detail',
     category: 'recycling-process',
     family: 'pp-crushed',
     view: 'detail',
@@ -151,7 +167,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'gpps-pellet-primary',
-    title: 'GPPS Regenerated Pellet — Primary',
+    title: 'GPPS Reprocessed Pellet — Primary',
     category: 'pellets-output',
     family: 'gpps-pellet',
     view: 'primary',
@@ -160,7 +176,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'gpps-pellet-detail',
-    title: 'GPPS Regenerated Pellet — Detail',
+    title: 'GPPS Reprocessed Pellet — Detail',
     category: 'pellets-output',
     family: 'gpps-pellet',
     view: 'detail',
@@ -169,7 +185,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hdpe-pellet-primary',
-    title: 'HDPE Regenerated Pellet — Primary',
+    title: 'HDPE Reprocessed Pellet — Primary',
     category: 'pellets-output',
     family: 'hdpe-pellet',
     view: 'primary',
@@ -178,7 +194,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'hdpe-pellet-detail',
-    title: 'HDPE Regenerated Pellet — Detail',
+    title: 'HDPE Reprocessed Pellet — Detail',
     category: 'pellets-output',
     family: 'hdpe-pellet',
     view: 'detail',
@@ -187,7 +203,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pc-pellet-primary',
-    title: 'PC Regenerated Pellet — Primary',
+    title: 'rPC Pellet (Bottle Grade) — Primary',
     category: 'pellets-output',
     family: 'pc-pellet',
     view: 'primary',
@@ -196,7 +212,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pc-pellet-detail',
-    title: 'PC Regenerated Pellet — Detail',
+    title: 'rPC Pellet (Bottle Grade) — Detail',
     category: 'pellets-output',
     family: 'pc-pellet',
     view: 'detail',
@@ -205,7 +221,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pcr-pellet-primary',
-    title: 'PCR Regenerated Pellet — Primary',
+    title: 'rPC Pellet (CD Grade) — Primary',
     category: 'pellets-output',
     family: 'pcr-pellet',
     view: 'primary',
@@ -214,7 +230,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pcr-pellet-detail',
-    title: 'PCR Regenerated Pellet — Detail',
+    title: 'rPC Pellet (CD Grade) — Detail',
     category: 'pellets-output',
     family: 'pcr-pellet',
     view: 'detail',
@@ -223,7 +239,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pir-pellet-primary',
-    title: 'PIR Regenerated Pellet — Primary',
+    title: 'Acrylic Reprocessed Pellet — Primary',
     category: 'pellets-output',
     family: 'pir-pellet',
     view: 'primary',
@@ -232,7 +248,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pir-pellet-detail',
-    title: 'PIR Regenerated Pellet — Detail',
+    title: 'Acrylic Reprocessed Pellet — Detail',
     category: 'pellets-output',
     family: 'pir-pellet',
     view: 'detail',
@@ -241,7 +257,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pp-pellet-primary',
-    title: 'PP Regenerated Pellet — Primary',
+    title: 'PP Reprocessed Pellet — Primary',
     category: 'pellets-output',
     family: 'pp-pellet',
     view: 'primary',
@@ -250,7 +266,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'pp-pellet-detail',
-    title: 'PP Regenerated Pellet — Detail',
+    title: 'PP Reprocessed Pellet — Detail',
     category: 'pellets-output',
     family: 'pp-pellet',
     view: 'detail',
@@ -259,7 +275,7 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'ps-pellet-primary',
-    title: 'PS Regenerated Pellet — Primary',
+    title: 'HIPS Reprocessed Pellet — Primary',
     category: 'pellets-output',
     family: 'ps-pellet',
     view: 'primary',
@@ -268,12 +284,39 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
   },
   {
     id: 'ps-pellet-detail',
-    title: 'PS Regenerated Pellet — Detail',
+    title: 'HIPS Reprocessed Pellet — Detail',
     category: 'pellets-output',
     family: 'ps-pellet',
     view: 'detail',
     src: '/images/products/ps-pellet-2.jpg',
     sourceFile: 'PS PELLET 1-2.jpg',
+  },
+  {
+    id: 'rpp-pellet-primary',
+    title: 'rPP Pellet — Primary',
+    category: 'pellets-output',
+    family: 'rpp-pellet',
+    view: 'primary',
+    src: '/images/products/rpp-pellet.jpg',
+    sourceFile: 'Pellets/rPP Pellet.jpg',
+  },
+  {
+    id: 'rhips-pellet-primary',
+    title: 'rHIPS Pellet — Primary',
+    category: 'pellets-output',
+    family: 'rhips-pellet',
+    view: 'primary',
+    src: '/images/products/rhips-pellet.jpg',
+    sourceFile: 'Pellets/rHIPS Pellet.jpg',
+  },
+  {
+    id: 'rabs-pellet-primary',
+    title: 'rABS Pellet — Primary',
+    category: 'pellets-output',
+    family: 'rabs-pellet',
+    view: 'primary',
+    src: '/images/products/rabs-pellet.jpg',
+    sourceFile: 'Pellets/rABS Pellet.jpg',
   },
   // The two supplied general-goods photos show two distinct products (a
   // moisture-control charcoal sachet and a canvas tote bag), not two views of

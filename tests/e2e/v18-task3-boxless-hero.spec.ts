@@ -70,7 +70,8 @@ test('v18 task3: locale switching still updates the boxless hero copy', async ({
   const hero = page.locator('[data-testid="landing-primary-box"]');
   await expect(hero).toContainText('ABOUT');
 
-  await page.locator('#locale-select').selectOption('ja');
+  await page.locator('#locale-select').click();
+  await page.getByTestId('locale-option-ja').click();
 
   await expect(hero).toContainText('会社情報');
   await page.screenshot({ path: 'tests/screenshots/task3-v18-03-locale-ja.png', fullPage: false });

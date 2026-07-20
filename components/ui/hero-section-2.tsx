@@ -38,7 +38,12 @@ interface HeroSectionProps {
     href: string;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
   };
-  backgroundImage: string;
+  /** Rendered inside the clip-path-revealed media pane beside the copy. */
+  media: React.ReactNode;
+  /** Stretch the media pane behind the copy as a full-bleed backdrop instead
+   * of a side-by-side split. The wipe reveal then sweeps across the whole
+   * hero. */
+  fullBleed?: boolean;
   contactInfo?: {
     website: string;
     phone: string;
@@ -64,11 +69,13 @@ const itemVariants = {
 };
 
 export const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
-  ({ className, logo, slogan, title, subtitle, callToAction, backgroundImage, contactInfo, ...props }, ref) => {
+  ({ className, logo, slogan, title, subtitle, callToAction, media, fullBleed, contactInfo, ...props }, ref) => {
     return (
       <motion.section
         ref={ref}
-        className={['hero-section', className].filter(Boolean).join(' ')}
+        className={['hero-section', fullBleed ? 'hero-section--full-bleed' : undefined, className]
+          .filter(Boolean)
+          .join(' ')}
         initial="hidden"
         animate="visible"
         variants={containerVariants}
@@ -130,11 +137,24 @@ export const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
 
         <motion.div
           className="hero-section-media"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-          initial={{ clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }}
-          animate={{ clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }}
-          transition={{ duration: 1.2, ease: 'circOut' }}
-        />
+          // Full-bleed backdrop fades and settles (opacity/transform stay on
+          // the compositor); animating clip-path over a viewport-sized photo
+          // re-rasters it every frame and tanks scrolling on software
+          // rasterizers.
+          initial={
+            fullBleed
+              ? { opacity: 0, scale: 1.045 }
+              : { clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)' }
+          }
+          animate={
+            fullBleed
+              ? { opacity: 1, scale: 1 }
+              : { clipPath: 'polygon(25% 0, 100% 0, 100% 100%, 0% 100%)' }
+          }
+          transition={fullBleed ? { duration: 1.4, ease: 'easeOut' } : { duration: 1.2, ease: 'circOut' }}
+        >
+          {media}
+        </motion.div>
       </motion.section>
     );
   },

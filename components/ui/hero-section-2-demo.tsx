@@ -17,7 +17,14 @@ export default function HeroSectionDemo() {
         }
         subtitle="We collect, sort, and regenerate plastics into clean raw material — then route it back into global supply chains from Tokyo, Japan."
         callToAction={{ text: 'See how we work', href: '#business' }}
-        backgroundImage="/hero-recycling.svg"
+        media={
+          // eslint-disable-next-line @next/next/no-img-element -- static demo asset
+          <img
+            src="/hero-recycling.svg"
+            alt=""
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        }
         contactInfo={{
           website: 'kowatrade.com',
           phone: '+81 3-0000-0000',

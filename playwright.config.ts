@@ -15,7 +15,20 @@ export default defineConfig({
       args: ['--use-angle=swiftshader'],
     },
   },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  projects: [
+    // Desktop runs every spec except the mobile-only story spec; the
+    // mobile-chromium project runs exactly that one (touch + phone viewport).
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+      testIgnore: '**/v28-factory-story-mobile.spec.ts',
+    },
+    {
+      name: 'mobile-chromium',
+      use: { ...devices['Pixel 7'] },
+      testMatch: '**/v28-factory-story-mobile.spec.ts',
+    },
+  ],
   webServer: {
     command: `npm run dev -- --hostname 127.0.0.1 --port ${PORT}`,
     url: BASE_URL,

@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react';
 
-import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
-import { HomeBusinessGrid } from '@/components/home/home-business-grid';
+import { HeroParallaxStage } from '@/components/home/hero-parallax-stage';
+import { HeroYardParallax } from '@/components/home/hero-yard-parallax';
+import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
 import { HomeWhatWeDo } from '@/components/home/home-what-we-do';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { HeroSection } from '@/components/ui/hero-section-2';
@@ -51,7 +52,8 @@ export function HomePageClient() {
         <TopMenu labels={copy.menu} brand={copy.brand} locale={locale} localeLabel={copy.menu.localeLabel} onLocaleChange={setLocale} />
       </section>
 
-      <HeroSection
+      <HeroParallaxStage>
+        <HeroSection
         id="about"
         data-testid="landing-primary-box"
         logo={{ text: copy.brand.name }}
@@ -76,16 +78,16 @@ export function HomePageClient() {
             }
           },
         }}
-        backgroundImage="/hero-recycling.svg"
-      />
+        fullBleed
+        media={<HeroYardParallax src="/images/company/container-yard.jpg" alt={copy.hero.visualAlt} />}
+        />
+      </HeroParallaxStage>
 
-      <ScrollReveal variant="fade-up" testId="reveal-business-head">
-        <HomeBusinessGrid locale={locale} copy={copy} />
-      </ScrollReveal>
+      {/* The 320vh factory scroll track renders inside HomeBusinessParallax,
+          between the OUR BUSINESS and PRODUCTS bands. */}
+      <HomeBusinessParallax locale={locale} copy={copy} />
 
-      <ScrollReveal variant="fade-up" testId="reveal-home-about">
-        <HomeWhatWeDo copy={copy} />
-      </ScrollReveal>
+      <HomeWhatWeDo copy={copy} />
 
       <LocalizedFooter copy={copy} />
     </main>

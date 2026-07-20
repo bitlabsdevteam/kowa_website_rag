@@ -22,19 +22,19 @@
   },
   "hero": {
     "eyebrow": "关于",
-    "title": "让资源与产业循环，传承给下一代。",
-    "titlePrefix": "让资源与产业循环，",
+    "title": "让资源，重获新生。",
+    "titlePrefix": "让资源，",
     "titleTyped": [
-      "传承给下一代。",
+      "重获新生。",
       "从塑料到树脂、机械。",
       "从东京连接全球供应链。",
       "构建可靠的循环供应链。"
     ],
-    "lead": "从国内回收到海外出口，広和让塑料持续循环，带来更洁净的供应链、更少的废弃、实实在在的资源再生。",
+    "lead": "通过塑料循环再生事业，为社会与环境的可持续发展做出贡献。",
     "body": "作为1994年成立的东京贸易伙伴，我们在日本各地采购废塑料与损耗料，通过 G.P. Polymer 再生产线再资源化，并在全球开展再生材料与树脂贸易、电池组支持及工业机械进出口。",
     "cta": "联系 Aya",
     "videoTitle": "Kowa 视频短片",
-    "visualAria": "Kowa 业务可视图",
+    "visualAria": "资源循环地球 — 缓缓旋转的线框球体象征广和的全球贸易循环，叠加在漂浮的粒子背景之上。",
     "visualAlt": "Kowa 业务概览图"
   },
   "business": {
@@ -69,20 +69,20 @@
     ]
   },
   "companyProfile": {
-    "title": "愿景",
-    "summary": "让有价值的资源永不被浪费。Kowa 致力于让塑料与资源持续循环，通过跨境的回收、再生与贸易，使我们所服务的每一条供应链更清洁、更具循环性，并能为子孙后代持续运转。",
-    "introLabel": "愿景",
-    "introTitle": "从日本国内回收到全球循环。",
-    "introBody": "旧版公司资料把 Kowa 定义为一家以塑料为核心的贸易与加工企业：在日本国内收集，在需要时进行再生处理，再把可用资源重新送回产业链。",
+    "title": "核心业务",
+    "summary": "我们在各地回收并加工日常生活中产生的各种废塑料，并将其出口至海外市场，包含马来西亚、印度、台湾、香港以及中国。",
+    "introLabel": "核心业务",
+    "introTitle": "我们在各地回收并加工日常生活中产生的各种废塑料，并将其出口至海外市场，包含马来西亚、印度、台湾、香港以及中国。",
+    "introBody": "我们在各地回收并加工日常生活中产生的各种废塑料，并将其出口至海外市场，包含马来西亚、印度、台湾、香港以及中国。这些塑料在当地经过重新加工后，转化为各式产品并销往全球。\n\n此外，我们也成立并运营自有的再生加工厂（GP Polymer 株式会社），不仅专注于出口，更致力于推动日本国内的循环再生。通过将向企业收购的废塑料与损耗料进行粉碎与再资源化，让珍贵的资源得以持续循环利用。\n\n我们所采购的废塑料已成为出口国当地产业不可或缺的重要原料，并以扩大就业机会、稳定居民生活等多元形式，实质贡献于当地社会。\n\n我们始终坚持从客户的角度出发，妥善且高效地利用地球有限的资源，致力于为下一代留下更友善的绿色环境与可持续循环。",
     "statementLabel": "资料原文",
     "statements": [
       {
         "language": "Japanese",
-        "text": "当社は生活環境で生まれる様々な廃プラスチックを国内で収集・加工し、主に東南アジア諸国へ輸出しています。輸出したプラスチックは再加工され、様々な製品となって世界へ出荷されます。また、再生工場であるジーピーポリマー株式会社を設立・稼働し、輸出だけでなく国内での再生加工にも力を入れています。企業から排出される廃プラスチックは、現地での雇用拡大や生活の安定にもつながっており、限りあるエナジー資源を有効に扱い、やさしい環境へ還元することを目指しています。"
+        "text": "当社は、日々の生活環境から発生する様々な規格外及び廃プラスチックを国内で回収・加工し、東南アジアをはじめとする海外市場へ輸出しています。これらは現地で再加工され、新たな製品として世界中へ出荷されています。さらに、自社再生工場（ジー・ピー・ポリマー株式会社）と合弁工場(ジー・イー・ティー株式会社)を設立・稼働させ、輸出に留まらず国内でのリサイクル事業にも注力しています。企業様から買い取らせていただいた廃棄プラスチックやロス材を粉砕・再資源化することで、価値ある資源の国内循環を実現しています。当社の事業は、輸出先における現地産業の発展に不可欠な存在となっており、雇用の拡大や生活の安定など、多角的な形で地域社会の発展に貢献しています。"
       },
       {
-        "language": "English",
-        "text": "We collect plastics domestically and export them overseas. The exported plastics are reprocessed into various products and shipped worldwide. Kowa has established and operates a crushing factory, G.P. Polymer, and is also focusing on remanufacturing in Japan. Loss materials and waste plastics purchased from companies are crushed and incorporated into recycling so valuable resources can circulate. We aim to use limited global resources effectively and pass this circulation on to the next generation."
+        "language": "Simplified Chinese",
+        "text": "我们在各地回收并加工日常生活中产生的各种废塑料，并将其出口至海外市场，包含马来西亚、印度、台湾、香港以及中国。这些塑料在当地经过重新加工后，转化为各式产品并销往全球。此外，我们也成立并运营自有的再生加工厂（GP Polymer 株式会社），不仅专注于出口，更致力于推动日本国内的循环再生。通过将向企业收购的废塑料与损耗料进行粉碎与再资源化，让珍贵的资源得以持续循环利用。我们所采购的废塑料已成为出口国当地产业不可或缺的重要原料，并以扩大就业机会、稳定居民生活等多元形式，实质贡献于当地社会。"
       }
     ],
     "focusLabel": "运营重点",
@@ -119,49 +119,54 @@
         "value": "+81-3-3455-1699"
       }
     ],
-    "timelineLabel": "沿革",
+    "timelineLabel": "公司沿革",
     "timelineTitle": "从贸易公司扩展到仓储与加工运营。",
     "timelineIntro": "这条时间线展示了 Kowa 如何逐步从商流业务扩展到仓库、自有工厂和大型塑料粉碎设备运营。",
     "timeline": [
       {
         "year": "1993",
         "title": "公司创立",
-        "detail": "以有限公司的形式设立広和通商。"
+        "detail": "成立广和通商有限公司。"
       },
       {
         "year": "1994",
-        "title": "改组为股份公司",
-        "detail": "资本金增至 1,000 万日元，并改组为股份公司。"
+        "title": "组织变更",
+        "detail": "增资至1000万日元，随着塑料原料进出口业务的开展，变更组织架构为广和通商股份有限公司。"
       },
       {
         "year": "2003",
-        "title": "群马仓储基地启动",
-        "detail": "群马自营流通仓库开始运作，成为北关东据点。"
+        "title": "群马物流仓库",
+        "detail": "作为北关东地区的据点，群马自有物流仓库正式投入运营。"
       },
       {
         "year": "2005",
-        "title": "富士仓库启动",
-        "detail": "富士流通仓库开始运作，成为东海地区据点。"
+        "title": "富士物流仓库",
+        "detail": "作为东海地区的据点，富士物流仓库正式投入运营。"
+      },
+      {
+        "year": "2007",
+        "title": "群马厂房与G.P. Polymer成立",
+        "detail": "在群马县伊势崎市购置厂房兼物流仓库，并成立 G.P. Polymer 股份有限公司。"
       },
       {
         "year": "2015",
-        "title": "资本金扩大",
-        "detail": "资本金增至 5,000 万日元。"
+        "title": "增资",
+        "detail": "增资至5000万日元。"
       },
       {
         "year": "2016",
-        "title": "群马加工工厂建成",
-        "detail": "群马加工工厂竣工，并导入第一套大型破碎/粉碎设备。"
+        "title": "群马加工厂竣工",
+        "detail": "群马加工工厂竣工，引进第一台大型破碎・粉碎机。"
       },
       {
         "year": "2017",
-        "title": "大型混合机导入",
-        "detail": "为扩充加工能力，新增大型工业混合机。"
+        "title": "螺带混合机导入",
+        "detail": "引进大型螺带混合机（Ribbon Mixer）。"
       },
       {
         "year": "2019",
-        "title": "第二套粉碎线导入",
-        "detail": "新增第二套大型破碎/粉碎设备。"
+        "title": "第二台破碎机导入",
+        "detail": "引进第二台大型破碎・粉碎机。"
       }
     ]
   },
@@ -436,23 +441,39 @@
   },
   "home": {
     "business": {
-      "display": "BUSINESS",
+      "display": "产品",
       "subtitle": "三条业务通道，一体化循环供应",
       "linkLabel": "查看业务"
     },
     "products": {
-      "display": "PRODUCTS",
+      "display": "产品",
       "subtitle": "循环供应链的最新产品",
       "linkLabel": "查看产品",
       "viewMoreLabel": "查看更多产品"
     },
     "whatWeDo": {
-      "display": "WHAT WE DO",
+      "display": "业务介绍",
       "subtitle": "Kowa 的业务范围",
       "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
       "linksLabel": "了解 Kowa",
       "pillarsLabel": "我们的产品类别",
       "historyLinkLabel": "查看完整历程 →",
+      "watermark": "KOWA",
+      "comingSoonLabel": "即将推出",
+      "factoryAria": "Kowa 塑料再生生产线的动画插图 — 回收、破碎、清洗、挤出、造粒，并装载至起飞的货机出口",
+      "storytellingLabel": "故事叙述",
+      "storytellingHint": "向下滚动，跟随从回收到出口的再生产线故事。",
+      "stages": {
+        "overview": { "title": "再生产线", "note": "一条连续的产线将回收塑料加工成可出口的再生原料。" },
+        "intake": { "title": "回收进料", "note": "回收的废塑料由传送带送入破碎机。" },
+        "crushing": { "title": "破碎", "note": "破碎机将分选后的塑料粉碎成碎片。" },
+        "washing": { "title": "清洗", "note": "碎片在清洗滚筒中翻滚洗净。" },
+        "line": { "title": "产线运转", "note": "洗净的碎片继续进入再生工序。" },
+        "extrusion": { "title": "挤出", "note": "加热带熔化碎片，熔条从模头挤出。" },
+        "pelletizing": { "title": "造粒与装袋", "note": "熔条被切成颗粒并装袋。" },
+        "export": { "title": "出口装运", "note": "袋装颗粒装载后发往海外。" },
+        "takeoff": { "title": "发往客户", "note": "再生原料启程运往海外买家。" }
+      },
       "categories": {
         "plastics": "国内回收的废塑料经分拣、破碎后，通过 G.P. Polymer 再生产线制成颗粒料，并完成出口。",
         "generalGoods": "依托与塑料业务相同的贸易与物流网络，开展日用百货等商品的跨境采购与流通。",
@@ -460,10 +481,23 @@
         "ffe": "为企业与产业客户采购并供应家具、装置及设备（FFE）。",
         "timber": "在政府许可下计划采伐的缅甸原木，经仰光合作工厂制材后直接进口的实木柚木地板。"
       }
+    },
+    "machines": {
+      "display": "设备",
+      "subtitle": "来自群马工厂处理产线",
+      "slides": [
+        "衔接破碎工序的分拣与投料产线",
+        "将废料处理为再研磨料的碎解机",
+        "输送至碎解仓的传送带"
+      ]
+    },
+    "mission": {
+      "display": "我们的使命",
+      "statement": "我们始终坚持从客户的角度出发，妥善且高效地利用地球有限的资源，致力于为下一代留下更友善的绿色环境与可持续循环。"
     }
   },
   "businessPage": {
-    "display": "BUSINESS",
+    "display": "业务",
     "subtitle": "业务介绍",
     "breadcrumbAria": "面包屑导航",
     "breadcrumbHome": "TOP",

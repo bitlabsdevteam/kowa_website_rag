@@ -84,9 +84,8 @@ test('v17 task7: locale switching still updates the hero copy', async ({ page })
   const foreground = page.locator('[data-testid="hero-parallax-foreground"]');
   await expect(foreground).toContainText('ABOUT');
 
-  // The locale selector has a stable id (no data-testid; TopMenu carries
-  // pre-existing uncommitted edits we must not touch in this task).
-  await page.locator('#locale-select').selectOption('ja');
+  await page.locator('#locale-select').click();
+  await page.getByTestId('locale-option-ja').click();
 
   await expect(foreground).toContainText('会社情報');
   await expect(foreground.getByRole('heading', { level: 1 })).toContainText('Kowa Trade & Commerce');

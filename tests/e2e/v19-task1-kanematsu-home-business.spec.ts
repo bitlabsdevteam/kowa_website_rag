@@ -45,15 +45,16 @@ test('v19 task1: /business renders header band, breadcrumb, three segments, and 
 test('v19 task1: locale switcher updates home What We Do section and /business copy without a full reload', async ({ page }) => {
   await page.goto('/');
   const homeSelect = page.locator('#locale-select');
-  await expect(homeSelect).toHaveValue('en');
+  await expect(homeSelect).toHaveText('EN');
   await expect(page.locator('#home-about .section-heading-display')).toHaveText('WHAT WE DO');
 
-  await homeSelect.selectOption('ja');
+  await homeSelect.click();
+  await page.getByTestId('locale-option-ja').click();
   await expect(page.locator('#home-about .section-heading-subtitle')).toHaveText('Kowaの事業内容');
   await expect(page.getByTestId('products-section').locator('.section-heading-subtitle')).toHaveText('循環サプライの最新プロダクト');
 
   await page.goto('/business');
   const businessSelect = page.locator('#locale-select');
-  await expect(businessSelect).toHaveValue('ja');
+  await expect(businessSelect).toHaveText('JP');
   await expect(page.locator('.page-header-band-subtitle')).toHaveText('事業紹介');
 });

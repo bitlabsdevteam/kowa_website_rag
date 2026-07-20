@@ -64,6 +64,16 @@ const Typewriter = ({
 
   const texts = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
+  // Reset all typing state whenever the source text changes (e.g. a locale
+  // switch). Without this, a non-looping instance that has finished typing
+  // never re-runs, so it keeps stale characters from the previous language.
+  useEffect(() => {
+    setDisplayText('');
+    setCurrentIndex(0);
+    setIsDeleting(false);
+    setCurrentTextIndex(0);
+  }, [texts]);
+
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout>;
 
