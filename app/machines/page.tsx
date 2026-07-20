@@ -139,7 +139,7 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
     selectorLabel: '機械ステージ',
     noteLabel: '出典メモ',
     noteBody:
-      '機械名はKowa旧サイトの Gunma Store / Factory ページと会社案内PDFを基準にしています。利用可能な資料にメーカー名や型番はないため、このページは機械種別レベルで記述しています。',
+      '機械名は広和旧サイトの Gunma Store / Factory ページと会社案内PDFを基準にしています。利用可能な資料にメーカー名や型番はないため、このページは機械種別レベルで記述しています。',
     cards: {
       'crushing-machine': {
         legacyLabel: 'Crushing Machine',
@@ -191,13 +191,13 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
     reasonLabel: '重要性',
   },
   'zh-Hans': {
-    intro: '整理 Kowa 群马仓库与工厂所使用设备的独立页面。',
+    intro: '整理广和群马仓库与工厂所使用设备的独立页面。',
     lead: '现在改成更安静的阅读方式。选择一个环节，只看这台设备最关键的说明。',
     stageTitle: '群马产线，逐环节呈现。',
     selectorLabel: '设备环节',
     noteLabel: '来源说明',
     noteBody:
-      '设备名称以 Kowa 旧版 Gunma Store / Factory 页面和公司简介 PDF 为基础。现有资料没有公开设备厂商与型号，因此这里保持在设备类型层级。',
+      '设备名称以广和旧版 Gunma Store / Factory 页面和公司简介 PDF 为基础。现有资料没有公开设备厂商与型号，因此这里保持在设备类型层级。',
     cards: {
       'crushing-machine': {
         legacyLabel: 'Crushing Machine',
@@ -249,13 +249,13 @@ const MACHINES_PAGE_COPY: Record<Locale, MachinesPageCopy> = {
     reasonLabel: '重要性',
   },
   'zh-Hant': {
-    intro: '整理 Kowa 群馬倉庫與工廠所使用設備的獨立頁面。',
+    intro: '整理廣和群馬倉庫與工廠所使用設備的獨立頁面。',
     lead: '現在改成更安靜的閱讀方式。選擇一個環節，只看這臺設備最關鍵的說明。',
     stageTitle: '群馬產線，逐環節呈現。',
     selectorLabel: '設備環節',
     noteLabel: '來源說明',
     noteBody:
-      '設備名稱以 Kowa 舊版 Gunma Store / Factory 頁面和公司簡介 PDF 為基礎。現有資料沒有公開設備廠商與型號，因此這裡保持在設備類型層級。',
+      '設備名稱以廣和舊版 Gunma Store / Factory 頁面和公司簡介 PDF 為基礎。現有資料沒有公開設備廠商與型號，因此這裡保持在設備類型層級。',
     cards: {
       'crushing-machine': {
         legacyLabel: 'Crushing Machine',

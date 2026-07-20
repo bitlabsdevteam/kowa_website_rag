@@ -11,7 +11,7 @@
     "onlineShop": "在線購物",
     "localeLabel": "語言",
     "navAria": "主導航",
-    "homeAria": "広和通商株式会社 首頁",
+    "homeAria": "廣和通商股份有限公司 首頁",
     "menuToggleLabel": "菜單",
     "localeOptions": {
       "en": "EN",
@@ -33,13 +33,13 @@
     "lead": "透過塑膠循環再生事業，為社會與環境的永續發展做出貢獻。",
     "body": "作為1994年成立的東京貿易伙伴，我們在日本各地採購廢塑料與損耗料，通過 G.P. Polymer 再生產線再資源化，並在全球開展再生材料與樹脂貿易、電池組支持及工業機械進出口。",
     "cta": "聯繫 Aya",
-    "videoTitle": "Kowa 視頻短片",
+    "videoTitle": "廣和視頻短片",
     "visualAria": "資源循環地球 — 緩緩旋轉的線框球體象徵廣和的全球貿易循環，疊加在漂浮的粒子背景之上。",
-    "visualAlt": "Kowa 業務概覽圖"
+    "visualAlt": "廣和業務概覽圖"
   },
   "business": {
     "title": "KOWA 的業務是什麼？",
-    "intro": "Kowa 以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
+    "intro": "廣和以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
     "flowTitle": "資源循環流程",
     "flowPhases": [
       {
@@ -121,7 +121,7 @@
     ],
     "timelineLabel": "公司沿革",
     "timelineTitle": "從貿易公司擴展到倉儲與加工運營。",
-    "timelineIntro": "這條時間線展示了 Kowa 如何逐步從商流業務擴展到倉庫、自有工廠和大型塑料粉碎設備運營。",
+    "timelineIntro": "這條時間線展示了廣和如何逐步從商流業務擴展到倉庫、自有工廠和大型塑料粉碎設備運營。",
     "timeline": [
       {
         "year": "1993",
@@ -197,7 +197,7 @@
     "addressLabel": "總公司",
     "address": "〒108-0073 東京都港區三田2-10-6 Reoma大廈5樓",
     "directionsLabel": "查看路線",
-    "mapTitle": "顯示広和通商位置的地圖（東京都港區三田）",
+    "mapTitle": "顯示廣和通商位置的地圖（東京都港區三田）",
     "stationsLabel": "最近車站",
     "stationsClosestBadge": "最近",
     "stationsApproxNote": "步行時間為大致估算。",
@@ -326,8 +326,8 @@
     }
   },
   "brand": {
-    "ariaLabel": "広和通商株式会社",
-    "name": "広和通商株式会社",
+    "ariaLabel": "廣和通商股份有限公司",
+    "name": "廣和通商股份有限公司",
     "location": ""
   },
   "chat": {
@@ -453,14 +453,14 @@
     },
     "whatWeDo": {
       "display": "業務介紹",
-      "subtitle": "Kowa 的業務範圍",
-      "statement": "Kowa 在日本國內回收各類廢塑料並出口海外，出口的塑料經再加工後製成各類產品銷往全球。公司設立並營運再生工廠 G.P. Polymer，在推動出口的同時，也持續加強國內的再生加工。",
-      "linksLabel": "了解 Kowa",
+      "subtitle": "廣和的業務範圍",
+      "statement": "廣和在日本國內回收各類廢塑料並出口海外，出口的塑料經再加工後製成各類產品銷往全球。公司設立並營運再生工廠 G.P. Polymer，在推動出口的同時，也持續加強國內的再生加工。",
+      "linksLabel": "了解廣和",
       "pillarsLabel": "我們的產品類別",
       "historyLinkLabel": "查看完整歷程 →",
       "watermark": "KOWA",
       "comingSoonLabel": "即將推出",
-      "factoryAria": "Kowa 塑膠再生產線的動畫插圖 — 回收、破碎、清洗、擠出、造粒，並裝載至起飛的貨機出口",
+      "factoryAria": "廣和塑膠再生產線的動畫插圖 — 回收、破碎、清洗、擠出、造粒，並裝載至起飛的貨機出口",
       "storytellingLabel": "故事敘述",
       "storytellingHint": "向下捲動，跟隨從回收到出口的再生產線故事。",
       "stages": {
@@ -502,7 +502,7 @@
     "breadcrumbAria": "麵包屑導航",
     "breadcrumbHome": "TOP",
     "breadcrumbCurrent": "業務介紹",
-    "intro": "Kowa 以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
+    "intro": "廣和以塑料循環再生為核心，將貿易、加工與進出口執行整合為一體化運營模式。",
     "segmentsLabel": "業務板塊",
     "offeringsProductsLabel": "查看產品",
     "offeringsMachinesLabel": "查看設備",

@@ -68,9 +68,9 @@ const CardFanCarousel = dynamic(() => import('@/components/ui/card-fan-carousel'
 
 const PRODUCT_INTRO: Record<Locale, string> = {
   en: 'Recovered scrap, regenerated pellets, and supply-ready resin: the materials Kowa moves through its circular supply.',
-  ja: '回収スクラップ、再生ペレット、供給可能な樹脂。Kowaが循環型サプライで扱う素材です。',
-  'zh-Hans': '回收废料、再生颗粒与可供应树脂，皆是 Kowa 在循环供应链中流转的材料。',
-  'zh-Hant': '回收廢料、再生顆粒與可供應樹脂，皆是 Kowa 在循環供應鏈中流轉的材料。',
+  ja: '回収スクラップ、再生ペレット、供給可能な樹脂。広和が循環型サプライで扱う素材です。',
+  'zh-Hans': '回收废料、再生颗粒与可供应树脂，皆是广和在循环供应链中流转的材料。',
+  'zh-Hant': '回收廢料、再生顆粒與可供應樹脂，皆是廣和在循環供應鏈中流轉的材料。',
 };
 
 function isProductTopCategory(value: string | null): value is ProductTopCategory {

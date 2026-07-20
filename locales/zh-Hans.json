@@ -11,7 +11,7 @@
     "onlineShop": "在线购物",
     "localeLabel": "语言",
     "navAria": "主导航",
-    "homeAria": "広和通商株式会社 首页",
+    "homeAria": "广和通商股份有限公司 首页",
     "menuToggleLabel": "菜单",
     "localeOptions": {
       "en": "EN",
@@ -33,13 +33,13 @@
     "lead": "通过塑料循环再生事业，为社会与环境的可持续发展做出贡献。",
     "body": "作为1994年成立的东京贸易伙伴，我们在日本各地采购废塑料与损耗料，通过 G.P. Polymer 再生产线再资源化，并在全球开展再生材料与树脂贸易、电池组支持及工业机械进出口。",
     "cta": "联系 Aya",
-    "videoTitle": "Kowa 视频短片",
+    "videoTitle": "广和视频短片",
     "visualAria": "资源循环地球 — 缓缓旋转的线框球体象征广和的全球贸易循环，叠加在漂浮的粒子背景之上。",
-    "visualAlt": "Kowa 业务概览图"
+    "visualAlt": "广和业务概览图"
   },
   "business": {
     "title": "KOWA 的业务是什么？",
-    "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
+    "intro": "广和以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
     "flowTitle": "资源循环流程",
     "flowPhases": [
       {
@@ -121,7 +121,7 @@
     ],
     "timelineLabel": "公司沿革",
     "timelineTitle": "从贸易公司扩展到仓储与加工运营。",
-    "timelineIntro": "这条时间线展示了 Kowa 如何逐步从商流业务扩展到仓库、自有工厂和大型塑料粉碎设备运营。",
+    "timelineIntro": "这条时间线展示了广和如何逐步从商流业务扩展到仓库、自有工厂和大型塑料粉碎设备运营。",
     "timeline": [
       {
         "year": "1993",
@@ -197,7 +197,7 @@
     "addressLabel": "总公司",
     "address": "〒108-0073 东京都港区三田2-10-6 Reoma大厦5楼",
     "directionsLabel": "查看路线",
-    "mapTitle": "显示広和通商位置的地图（东京都港区三田）",
+    "mapTitle": "显示广和通商位置的地图（东京都港区三田）",
     "stationsLabel": "最近车站",
     "stationsClosestBadge": "最近",
     "stationsApproxNote": "步行时间为大致估算。",
@@ -326,8 +326,8 @@
     }
   },
   "brand": {
-    "ariaLabel": "広和通商株式会社",
-    "name": "広和通商株式会社",
+    "ariaLabel": "广和通商股份有限公司",
+    "name": "广和通商股份有限公司",
     "location": ""
   },
   "chat": {
@@ -453,14 +453,14 @@
     },
     "whatWeDo": {
       "display": "业务介绍",
-      "subtitle": "Kowa 的业务范围",
-      "statement": "Kowa 在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
-      "linksLabel": "了解 Kowa",
+      "subtitle": "广和的业务范围",
+      "statement": "广和在日本国内回收各类废塑料并出口海外，出口的塑料经再加工后制成各类产品销往全球。公司设立并运营再生工厂 G.P. Polymer，在推动出口的同时，也持续加强国内的再生加工。",
+      "linksLabel": "了解广和",
       "pillarsLabel": "我们的产品类别",
       "historyLinkLabel": "查看完整历程 →",
       "watermark": "KOWA",
       "comingSoonLabel": "即将推出",
-      "factoryAria": "Kowa 塑料再生生产线的动画插图 — 回收、破碎、清洗、挤出、造粒，并装载至起飞的货机出口",
+      "factoryAria": "广和塑料再生生产线的动画插图 — 回收、破碎、清洗、挤出、造粒，并装载至起飞的货机出口",
       "storytellingLabel": "故事叙述",
       "storytellingHint": "向下滚动，跟随从回收到出口的再生产线故事。",
       "stages": {
@@ -502,7 +502,7 @@
     "breadcrumbAria": "面包屑导航",
     "breadcrumbHome": "TOP",
     "breadcrumbCurrent": "业务介绍",
-    "intro": "Kowa 以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
+    "intro": "广和以塑料循环再生为核心，将贸易、加工与进出口执行整合为一体化运营模式。",
     "segmentsLabel": "业务板块",
     "offeringsProductsLabel": "查看产品",
     "offeringsMachinesLabel": "查看设备",
