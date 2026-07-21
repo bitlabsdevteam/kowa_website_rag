@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, startTransition, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { type Locale } from '@/lib/site-copy';
 
@@ -57,11 +57,19 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   const setLocale = useCallback((next: Locale) => {
-    setLocaleState(next);
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(STORAGE_KEY, next);
       document.documentElement.lang = next;
     }
+    // The re-render this triggers walks the whole page (every consumer of
+    // useLocale), including heavy subtrees like the factory WebGL scene.
+    // startTransition keeps that off the interaction's critical path so the
+    // dropdown click itself (setLocaleOpen(false) in top-menu.tsx) still
+    // paints immediately instead of blocking on it — see the INP overlay
+    // that flagged button.locale-dropdown-option blocking for 312ms.
+    startTransition(() => {
+      setLocaleState(next);
+    });
   }, []);
 
   const value = useMemo<LocaleContextValue>(() => [locale, setLocale], [locale, setLocale]);
