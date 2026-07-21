@@ -1,7 +1,7 @@
 'use client';
 
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useEffect, useMemo, useRef } from 'react';
+import { memo, useEffect, useMemo, useRef } from 'react';
 import {
   AdditiveBlending,
   Color,
@@ -152,8 +152,10 @@ type FactorySceneProps = {
 /** The WHAT WE DO recycling-line diorama: a flat, editorial "paper-cut"
  * factory (MeshBasicMaterial only, no lights) staged in real depth layers —
  * background shell z −6…−3, machines z 0, foreground rail/dust z +2 — so the
- * scrolling camera produces true multi-layer parallax. */
-export default function FactoryScene({ progressRef, visible }: FactorySceneProps) {
+ * scrolling camera produces true multi-layer parallax. `memo`d like
+ * FactoryStory: neither prop changes on a locale switch, so this keeps the
+ * WebGL tree out of that unrelated re-render. */
+const FactoryScene = memo(function FactoryScene({ progressRef, visible }: FactorySceneProps) {
   return (
     <div className="factory-3d-scene" data-testid="factory-3d-scene" aria-hidden="true">
       <Canvas
@@ -207,4 +209,6 @@ export default function FactoryScene({ progressRef, visible }: FactorySceneProps
       </Canvas>
     </div>
   );
-}
+});
+
+export default FactoryScene;
