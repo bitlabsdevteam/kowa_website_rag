@@ -16,6 +16,19 @@ const SEGMENT_IMAGES = ['/images/products/gpps-pellet-1.jpg', '/images/products/
 /** Categories that lead to the machinery catalog rather than the product gallery. */
 const MACHINE_LINKED_CATEGORIES: ProductMediaCategory[] = ['machinery-equipment', 'factory-operations'];
 
+/** Non-machine categories mapped to their matching /products tab (and plastics
+ * sub-form where the category corresponds to crushed feedstock vs. regenerated
+ * pellet output). Keeps "View products" cards landing on the right catalog tab
+ * instead of the generic gallery. */
+const CATEGORY_PRODUCTS_HREF: Partial<Record<ProductMediaCategory, string>> = {
+  'resin-materials': '/products?category=plastics',
+  'commerce-distribution': '/products?category=plastics',
+  'recycling-process': '/products?category=plastics&form=crushed',
+  'pellets-output': '/products?category=plastics&form=pellet',
+  'timber-flooring': '/products?category=timber',
+  'general-goods': '/products?category=general-goods',
+};
+
 export default function BusinessPage() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
@@ -35,7 +48,7 @@ export default function BusinessPage() {
             key: categoryKey,
             title: category.label,
             body: category.summary,
-            href: toMachines ? '/machines' : '/products',
+            href: toMachines ? '/machines' : (CATEGORY_PRODUCTS_HREF[categoryKey] ?? '/products'),
             linkLabel: toMachines ? page.offeringsMachinesLabel : page.offeringsProductsLabel,
           };
         }),
