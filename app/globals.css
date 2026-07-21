@@ -10801,8 +10801,17 @@ section.card,
   transform-style: preserve-3d;
 }
 
+/* The 3D depth/tilt lives on the decorative media tile, not the <a> itself:
+   a transformed element inside a perspective + overflow:clip ancestor can
+   fail Chromium's click hit-testing (pointer lands on the parent grid
+   instead of the link), so the interactive anchor stays flat while its
+   inner tile carries the parallax transform. */
 .home-business-band .segment-card {
-  transition: box-shadow 0.25s ease, transform 0.2s ease;
+  transition: box-shadow 0.25s ease;
+}
+
+.home-business-band .segment-card-media {
+  transition: transform 0.2s ease;
   transform: translateZ(calc(var(--biz-drift, 0) * var(--card-depth, 0) * 40px))
     rotateX(calc(var(--biz-drift, 0) * -2deg));
   will-change: transform;
