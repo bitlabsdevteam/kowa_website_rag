@@ -172,7 +172,7 @@ function localizeText(
       grounded_low_1: '該回答有資料依據，但置信度較低，請結合引用信息確認細節。',
       grounded_low_2: '如果您需要報價或採購溝通，請告訴我產品、市場和時間要求。',
       unknown_1: '您可以詢問廣和的成立時間、地址、聯繫方式或業務範圍。',
-      unknown_2: '也可以諮詢再生塑料、樹脂貿易、設備或國際物流支持。',
+      unknown_2: '也可以諮詢再生塑膠、樹脂貿易、設備或國際物流支持。',
       qualification_done: '目前的聯繫信息已足夠在下一階段準備轉交辦公室團隊。',
       qualification_need: '為了準確轉交給廣和辦公室團隊，請提供以下信息：',
       established: `廣和成立於 ${value}。`,

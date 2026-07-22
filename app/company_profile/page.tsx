@@ -5,11 +5,12 @@ import Image from 'next/image';
 import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { LocalizedFooter } from '@/components/localized-footer';
 import { TopMenu } from '@/components/top-menu';
-import { SITE_COPY } from '@/lib/site-copy';
+import { type Locale, SITE_COPY } from '@/lib/site-copy';
 import { useLocale } from '@/lib/use-locale';
 
-/** Gunma factory exterior — the G.P. Polymer regeneration line site. Bilingual
- * caption shown regardless of UI locale, matching the COMPANY_FACTS pattern. */
+/** Gunma factory exterior — the G.P. Polymer regeneration line site. Caption
+ * shown in the visitor's own locale, plus an English line underneath for
+ * non-English locales (matching the COMPANY_FACTS bilingual pattern). */
 const FACTORY_PHOTO = {
   src: '/images/company/kowa-gunma-factory-street.jpg',
   jaEyebrow: '生産拠点',
@@ -17,7 +18,16 @@ const FACTORY_PHOTO = {
   jaTitle: '群馬工場',
   enTitle: 'Gunma Factory',
   jaCaption: 'ジーピーポリマー株式会社の再生ラインを擁する、資源循環の現場。',
-  enCaption: 'Home to the G.P. Polymer regeneration line — where collected material re-enters Kowa’s circular supply.',
+  enCaption: 'Home to the G.P. Polymer regeneration line, where collected material re-enters Kowa’s circular supply.',
+  zhHantCaption: '擁有 G.P. Polymer 再生產線的所在地，回收物料在此重新進入廣和的資源循環供應鏈。',
+  zhHansCaption: '拥有 G.P. Polymer 再生产线的所在地，回收物料在此重新进入广和的资源循环供应链。',
+};
+
+const FACTORY_CAPTION_BY_LOCALE: Record<Locale, string> = {
+  ja: FACTORY_PHOTO.jaCaption,
+  en: FACTORY_PHOTO.enCaption,
+  'zh-Hant': FACTORY_PHOTO.zhHantCaption,
+  'zh-Hans': FACTORY_PHOTO.zhHansCaption,
 };
 
 /** Core corporate facts, shown bilingually (JA / EN) regardless of UI locale. */
@@ -46,6 +56,8 @@ export default function CompanyProfilePage() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
   const profile = copy.companyProfile;
+
+  const factoryPrimaryCaption = FACTORY_CAPTION_BY_LOCALE[locale];
 
   return (
     <main className="page shell">
@@ -89,10 +101,12 @@ export default function CompanyProfilePage() {
               </figcaption>
             </div>
             <p className="cp-factory-caption-body">
-              <span lang="ja">{FACTORY_PHOTO.jaCaption}</span>
-              <span className="cp-factory-caption-en" lang="en">
-                {FACTORY_PHOTO.enCaption}
-              </span>
+              <span lang={locale}>{factoryPrimaryCaption}</span>
+              {locale !== 'en' && (
+                <span className="cp-factory-caption-en" lang="en">
+                  {FACTORY_PHOTO.enCaption}
+                </span>
+              )}
             </p>
           </figure>
         </ScrollReveal>

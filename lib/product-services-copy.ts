@@ -147,7 +147,7 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '規格外塑膠處理',
-        body: '各種PE、PC、EVA、ABS、PP、PVC、PS、PA、PET、PMMA、ACRYLIC（丙烯酸樹脂）、PPS、PBT、POM、LCP、PPO、PPE、HDPE、LDPE等其他樹脂的廢舊塑料加工與循環利用。',
+        body: '各種PE、PC、EVA、ABS、PP、PVC、PS、PA、PET、PMMA、ACRYLIC（丙烯酸樹脂）、PPS、PBT、POM、LCP、PPO、PPE、HDPE、LDPE等其他樹脂的廢舊塑膠加工與循環利用。',
       },
       {
         title: '資源塑膠回收再生',
@@ -158,7 +158,7 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
         body: '各種熱固性樹脂、熱塑性樹脂、通用塑膠、工程塑膠等的破碎、粉碎加工及資源化再利用。',
       },
       {
-        title: '再生塑料裝袋',
+        title: '再生塑膠裝袋',
         body: '提供耗費人力的各種原料重新裝袋、顆粒噸袋換裝袋、紙袋換裝等服務。配備大容量不鏽鋼物斗缸，可同時進行1.5噸規格噸袋的換裝作業。',
       },
       {
