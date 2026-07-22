@@ -5,7 +5,7 @@
 | Need | Sakura product | Minimum plan | Why |
 |---|---|---|---|
 | App runtime (Next.js SSR + API routes) | **さくらのVPS** (VPS) | **2GB plan** (3 vCPU / 2GB RAM / 100GB SSD) | This app is *not* static — see "Why not shared rental server" below |
-| Contact-form SMTP relay | **さくらのメールボックス** (mail-only add-on) | Cheapest tier (~¥110/mo, 12-month term) | Gives you an authenticated `smtp.sakura.ad.jp` account without needing a full mail-hosting rental server |
+| Contact-form SMTP relay | **さくらのメールボックス** (mail-only add-on) | Cheapest tier (~¥110/mo, 12-month term) | Gives you an authenticated `smtp.sakura.ne.jp` account without needing a full mail-hosting rental server |
 | Domain | Existing (or さくらのドメイン if new) | — | Point DNS A record at the VPS, MX at the mailbox service |
 
 Estimated minimum recurring cost: **~¥1,850–¥2,100/month** (VPS 2GB + mailbox), before domain renewal and TLS (TLS is free via Let's Encrypt on the VPS).
@@ -65,7 +65,7 @@ Instead, use Sakura's own mailbox product as an **authenticated SMTP relay**:
 
 1. Add **さくらのメールボックス** (mail-only service, separate from the VPS) — cheapest tier is enough since you only need 1 mailbox for the relay account (e.g. `noreply@kowatrade.com` or `contact@kowatrade.com`).
 2. Point your domain's MX record at that mailbox service (only if you also want to *receive* replies there — if a different system already receives mail for the domain, you can skip MX and just use the mailbox purely for outbound SMTP auth).
-3. From the Next.js API route handling the contact form (`app/api/...`), send via `smtp.sakura.ad.jp:587` using SMTP AUTH (STARTTLS) with `nodemailer` or similar, using the mailbox's username/password as env vars.
+3. From the Next.js API route handling the contact form (`app/api/...`), send via `smtp.sakura.ne.jp:587` using SMTP AUTH (STARTTLS) with `nodemailer` or similar, using the mailbox's username/password as env vars.
 
 ### What you need to tell Sakura / set up in their control panel
 
@@ -76,14 +76,14 @@ Instead, use Sakura's own mailbox product as an **authenticated SMTP relay**:
    - **DKIM**: enable DKIM signing for the domain in the mailbox control panel; add the generated DKIM TXT record to your DNS
    - **DMARC** (recommended, optional but improves deliverability): a `_dmarc` TXT record, e.g. `v=DMARC1; p=quarantine; rua=mailto:you@kowatrade.com`
 4. Note the **SMTP connection details** they issue:
-   - Host: `smtp.sakura.ad.jp`
+   - Host: `smtp.sakura.ne.jp`
    - Port: `587` (STARTTLS) — do not use 25
    - Auth: username = full mail address (or the mailbox login ID they assign), password = the mailbox password
 5. Confirm **outbound send-rate limits** on the mailbox plan you pick (shared mail infra typically caps messages/hour to control abuse) — ask support what the cap is on the tier you choose, since contact-form volume plus any transactional mail (e.g. admin notifications) needs to stay under it.
 
 ### Env vars to add (per this repo's convention — never commit these)
 ```
-SMTP_HOST=smtp.sakura.ad.jp
+SMTP_HOST=smtp.sakura.ne.jp
 SMTP_PORT=587
 SMTP_USER=noreply@kowatrade.com
 SMTP_PASS=<mailbox password>

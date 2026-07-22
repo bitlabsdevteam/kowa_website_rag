@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { checkAndConsumeRateLimit } from '@/lib/assistant/store';
 import { sendContactEmail } from '@/lib/email/resend';
+import { isSmtpRelayConfigured, sendContactEmailViaSmtp } from '@/lib/email/smtp';
 
 type ContactRequest = {
   companyName?: string;
@@ -39,7 +40,11 @@ export async function POST(request: Request) {
   }
 
   try {
-    await sendContactEmail({ companyName, email, query });
+    if (isSmtpRelayConfigured()) {
+      await sendContactEmailViaSmtp({ companyName, email, query });
+    } else {
+      await sendContactEmail({ companyName, email, query });
+    }
     return NextResponse.json({ ok: true });
   } catch (error) {
     return NextResponse.json(

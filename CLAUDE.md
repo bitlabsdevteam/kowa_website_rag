@@ -87,3 +87,7 @@ SSH is the only inbound traffic allowed by default (Sakura packet filter); openi
 ## Security & Config
 Required env vars (keep `.env` local, never commit):
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `DIFY_API_KEY`, `DIFY_BASE_URL`.
+
+**Contact form (`app/api/contact/route.ts`)** always delivers to the existing **`kowa@kowatrade.com`** inbox (`CONTACT_TO_EMAIL`, default set in `.env.example`) — never repoint this to a new/placeholder address. Sending can go through either provider, selected automatically by `isSmtpRelayConfigured()` in `lib/email/smtp.ts`:
+- **Resend** (`lib/email/resend.ts`) — default when `SMTP_HOST` is unset; needs `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`.
+- **Sakura mailbox SMTP relay** (`smtp.sakura.ne.jp:587`, STARTTLS via `nodemailer`) — used when `SMTP_HOST` is set; needs `SMTP_HOST`/`SMTP_PORT`/`SMTP_USER`/`SMTP_PASS`/`SMTP_FROM`. `SMTP_FROM` is `kowa@kowatrade.com` (mail is sent and received on the same Kowa mailbox). See `web_hosting.md` for the Sakura mailbox provisioning steps (SPF/DKIM records, mailbox creation).
