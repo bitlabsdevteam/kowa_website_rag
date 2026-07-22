@@ -36,6 +36,30 @@ test.describe('hero container-yard photo backdrop', () => {
     await page.waitForTimeout(800);
     await page.screenshot({ path: 'tests/screenshots/v22-01-hero-yard.png', fullPage: false });
   });
+
+  test('narrow mobile viewports shift the crop right to keep the plane in frame', async ({ page }) => {
+    // object-fit: cover overflows far more on phone-narrow/tall boxes than on
+    // desktop/laptop — the shared 64% desktop anchor used to clip ~200px off
+    // the right (the plane's nose). Below 768px the anchor should shift to 92%.
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+
+    const photo = page.getByTestId('hero-yard').locator('img.hero-yard-photo');
+    await expect(photo).toBeVisible();
+    await expect(photo).toHaveCSS('object-position', '92% 42%');
+
+    await page.waitForTimeout(300);
+    await page.screenshot({ path: 'tests/screenshots/v22-02-hero-yard-mobile.png', fullPage: false });
+  });
+
+  test('desktop object-position is unchanged by the mobile crop fix', async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto('/');
+
+    const photo = page.getByTestId('hero-yard').locator('img.hero-yard-photo');
+    await expect(photo).toBeVisible();
+    await expect(photo).toHaveCSS('object-position', '64% 42%');
+  });
 });
 
 test.describe('our business / products parallax', () => {

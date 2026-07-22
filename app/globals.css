@@ -10495,6 +10495,13 @@ html:lang(en) .hero-section--full-bleed .hero-section-title-accent {
     min-height: 82vh;
   }
 
+  /* Narrow/tall mobile boxes overflow object-fit: cover far more than desktop,
+     so the shared 64% anchor no longer keeps the plane/sun flare in frame —
+     shift right to compensate. */
+  .hero-yard-photo {
+    object-position: 92% 42%;
+  }
+
   /* Stronger grade on small screens — the copy spans the whole photo. */
   .hero-yard-scrim {
     background: linear-gradient(
