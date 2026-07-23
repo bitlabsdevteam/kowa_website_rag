@@ -537,27 +537,9 @@ body {
   gap: 12px;
 }
 
-.kowa-logo svg {
+.kowa-logo img {
   width: 52px;
   height: 52px;
-}
-
-.kowa-logo-core {
-  fill: #faf7f1;
-}
-
-.kowa-logo-ring {
-  fill: rgba(255, 252, 246, 0.6);
-  stroke: rgba(169, 129, 61, 0.55);
-  stroke-width: 1.2;
-}
-
-.kowa-logo-mark {
-  fill: #1f5235;
-}
-
-.kowa-logo-accent {
-  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -2793,27 +2775,9 @@ a:focus-visible {
   gap: 10px;
 }
 
-.kowa-logo svg {
+.kowa-logo img {
   width: 44px;
   height: 44px;
-}
-
-.kowa-logo-core {
-  fill: #faf7f1;
-}
-
-.kowa-logo-ring {
-  fill: transparent;
-  stroke: rgba(169, 129, 61, 0.55);
-  stroke-width: 1.6;
-}
-
-.kowa-logo-mark {
-  fill: #1f5235;
-}
-
-.kowa-logo-accent {
-  fill: url(#kowaLogoGold);
 }
 
 .kowa-logo-text {
@@ -5942,7 +5906,7 @@ a:focus-visible {
   top: clamp(24px, 6vw, 72px);
   width: min(440px, 46%);
   aspect-ratio: 1;
-  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  background: url('/images/logo/kowa-logo.png') no-repeat center / contain;
   opacity: 0.05;
   pointer-events: none;
   z-index: 0;
@@ -6686,24 +6650,6 @@ body {
 .kowa-logo-text small,
 .kowa-logo-text strong {
   color: rgba(236, 241, 247, 0.92);
-}
-
-/* Header sits on the light canvas (see the top-menu cleanup further down),
-   so the logo keeps the light treatment: forest mark + gold ring. */
-.kowa-logo-ring {
-  stroke: rgba(169, 129, 61, 0.55);
-}
-
-.kowa-logo-core {
-  fill: rgba(255, 252, 246, 0.9);
-}
-
-.kowa-logo-mark {
-  fill: #1f5235;
-}
-
-.kowa-logo-accent {
-  fill: url(#kowaLogoGold);
 }
 
 .top-menu-link:hover,
@@ -11763,7 +11709,7 @@ section.card,
   right: clamp(-56px, -4vw, -24px);
   width: clamp(220px, 34vw, 460px);
   aspect-ratio: 1;
-  background: url('/images/logo/kowa-logo-monochrome.svg') no-repeat center / contain;
+  background: url('/images/logo/kowa-logo.png') no-repeat center / contain;
   opacity: 0.05;
   pointer-events: none;
   z-index: 0;
