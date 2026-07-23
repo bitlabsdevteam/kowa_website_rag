@@ -318,7 +318,7 @@ export const PRODUCT_SHOWCASE_COPY: Record<Locale, ProductShowcaseCopy> = {
       'recycling-process': {
         label: '再生處理',
         eyebrow: '加工通道',
-        summary: '通過分揀與粉碎，把邊角料和廢塑料轉化為可再利用原料。',
+        summary: '通過分揀與粉碎，把邊角料和廢塑膠轉化為可再利用原料。',
         points: ['按樹脂特性分揀', '粉碎與預處理', '循環材料回收'],
         accent: 'sea',
       },

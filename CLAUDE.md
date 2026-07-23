@@ -72,6 +72,22 @@ Canonical tokens live in `:root` in `app/globals.css` as `--color-*`; the short 
 - Conventional commits: `feat(scope): …`, `fix(scope): …`, `docs: …`, `chore: …`.
 - PRs include: summary, linked task, test evidence, and screenshots for UI changes.
 
+## Hosting / Infrastructure
+Production deploy target is a **Sakura VPS (v5)**, service code `113801641248`:
+- OS: Ubuntu 24.04 amd64
+- Zone: Osaka Zone 3 (大阪第3)
+- Plan: 8G — 6 vCore, 8GB RAM, 400GB SSD, ¥7,480/month
+- Hostname: `os3-318-48513.vs.sakura.ne.jp`
+- IPv4: `49.212.128.17`
+- IPv6: `2403:3a00:202:1204:49:212:128:17`
+- Contract state: currently in trial period (お試し期間中) — auto-converts to a paid contract after the trial ends; scale-up is unavailable during the trial.
+
+SSH is the only inbound traffic allowed by default (Sakura packet filter); opening other ports requires an explicit packet-filter change in the Sakura control panel. Treat root access on this box as production — no ad-hoc changes outside deploy tooling.
+
 ## Security & Config
 Required env vars (keep `.env` local, never commit):
 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `DIFY_API_KEY`, `DIFY_BASE_URL`.
+
+**Contact form (`app/api/contact/route.ts`)** always delivers to the existing **`kowa@kowatrade.com`** inbox (`CONTACT_TO_EMAIL`, default set in `.env.example`) — never repoint this to a new/placeholder address. Sending can go through either provider, selected automatically by `isSmtpRelayConfigured()` in `lib/email/smtp.ts`:
+- **Resend** (`lib/email/resend.ts`) — default when `SMTP_HOST` is unset; needs `RESEND_API_KEY` + `CONTACT_FROM_EMAIL`.
+- **Sakura mailbox SMTP relay** (`smtp.sakura.ne.jp:587`, STARTTLS via `nodemailer`) — used when `SMTP_HOST` is set; needs `SMTP_HOST`/`SMTP_PORT`/`SMTP_USER`/`SMTP_PASS`/`SMTP_FROM`. `SMTP_FROM` is `kowa@kowatrade.com` (mail is sent and received on the same Kowa mailbox). See `web_hosting.md` for the Sakura mailbox provisioning steps (SPF/DKIM records, mailbox creation).
