@@ -5,12 +5,12 @@ test('v7 task4 renders reusable logo mark + wordmark and stays responsive', asyn
 
   const brand = page.getByRole('link', { name: 'Kowa Trade and Commerce home' });
   const logo = brand.locator('.kowa-logo');
-  const logoSvg = logo.locator('svg');
+  const logoImage = logo.locator('img');
   const logoWordmark = logo.locator('.kowa-logo-text strong');
   const logoSubline = logo.locator('.kowa-logo-text small');
 
   await expect(brand).toBeVisible();
-  await expect(logoSvg).toBeVisible();
+  await expect(logoImage).toBeVisible();
   await expect(logoWordmark).toHaveText('Kowa Trade & Commerce');
   await expect(logoSubline).toHaveCount(0);
 
@@ -20,7 +20,7 @@ test('v7 task4 renders reusable logo mark + wordmark and stays responsive', asyn
   await page.goto('/');
 
   await expect(brand).toBeVisible();
-  await expect(logoSvg).toBeVisible();
+  await expect(logoImage).toBeVisible();
   await expect(logoSubline).toHaveCount(0);
 
   const brandBox = await brand.boundingBox();
