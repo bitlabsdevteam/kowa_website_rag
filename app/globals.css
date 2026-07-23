@@ -2764,7 +2764,7 @@ a:focus-visible {
 
 .top-menu-brand {
   display: inline-flex;
-  flex: 1;
+  flex: 0 0 auto;
   align-items: center;
   text-decoration: none;
 }
@@ -2800,10 +2800,11 @@ a:focus-visible {
 
 .top-menu-links {
   display: flex;
-  flex: 0 0 auto;
+  flex: 1;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: space-between;
+  gap: 22px;
 }
 
 .top-menu-link {
@@ -2827,7 +2828,7 @@ a:focus-visible {
 
 .top-menu-actions {
   display: inline-flex;
-  flex: 1;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: flex-end;
   gap: 0;
