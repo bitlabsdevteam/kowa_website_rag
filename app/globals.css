@@ -2800,11 +2800,11 @@ a:focus-visible {
 
 .top-menu-links {
   display: flex;
-  flex: 1;
+  flex: 0 1 auto;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 22px;
+  justify-content: center;
+  gap: 18px;
 }
 
 .top-menu-link {
@@ -2832,6 +2832,7 @@ a:focus-visible {
   align-items: center;
   justify-content: flex-end;
   gap: 0;
+  margin-left: auto;
 }
 
 .locale-control {
