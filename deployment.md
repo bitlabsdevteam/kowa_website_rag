@@ -12,6 +12,14 @@ Execution runbook for moving this site from your **local machine** to the **alre
 
 ---
 
+## Current Situation
+
+- **Live site today** — `kowatrade.com` runs on **Sakura Rental Server (Standard plan)** (details: ① Domain table below).
+- **Deploy target** — the new Next.js site is being deployed to **Sakura VPS (v5), 8G plan, OS03 (Ubuntu 24.04)**, IP `49.212.128.17` (details: ② VPS table below).
+- **Cutover has not happened yet.** The VPS is provisioned but not yet confirmed reachable — an SSH attempt to `ubuntu@49.212.128.17` timed out at the network level (not an auth rejection). Before any deploy work proceeds, confirm in the Sakura VPS control panel that the instance is **started** (new instances ship stopped) and that the packet filter's SSH rule allows the current source IP.
+
+---
+
 ## Prerequisites — what you already have
 
 ### ① Domain — currently on さくらのレンタルサーバ (Standard plan)
@@ -23,6 +31,11 @@ Execution runbook for moving this site from your **local machine** to the **alre
 | 初期ドメイン (initial/default domain) | `kowa-trade.sakura.ne.jp` |
 | ホスト名 (host name) | `www2897.sakura.ne.jp` |
 | Confirmed live DNS (via `dig`/`whois`) | NS: `NS1.DNS.NE.JP` / `NS2.DNS.NE.JP` (Sakura's own DNS — no registrar change needed); apex A: `49.212.198.107`; MX: `10 kowatrade.com.`; SPF: `v=spf1 a:www2897.sakura.ne.jp mx ~all` |
+| Service code | `112400574564` |
+| Usage period | 2012/12/27 – 2027/03/31 |
+| Next billing date | **2027/03/10** |
+| Payment method | Bank transfer / 12-month lump sum |
+| Status | Currently in use |
 
 `www2897.sakura.ne.jp` and `kowa-trade.sakura.ne.jp` both resolve to `49.212.198.107` — same rental-server box, two names for it. This matters for the MX handling in Step 7.
 
@@ -36,8 +49,17 @@ Execution runbook for moving this site from your **local machine** to the **alre
 | Service code | `113801641248` |
 | Hostname | `os3-318-48513.vs.sakura.ne.jp` |
 | IPv4 | `49.212.128.17` |
+| IPv4 gateway | `49.212.128.1` |
+| IPv4 netmask | `255.255.254.0` |
+| Primary DNS | `210.224.163.3` |
+| Secondary DNS | `210.224.163.4` |
 | IPv6 | `2403:3a00:202:1204:49:212:128:17` |
-| Trial period | Free through **2026-08-06**; official billing starts **2026-08-07** — **scale-up (RAM/CPU) is unavailable during trial** |
+| IPv6 hostname | `49.212.128.17.v6.sakura.ne.jp` |
+| IPv6 gateway | `fe80::1` |
+| IPv6 prefix length | `64` |
+| IPv6 DNS | `2403:3a00::1` |
+| Trial period | Free through **2026-08-05**; first credit-card charge processes **2026-08-06** — **scale-up (RAM/CPU) is unavailable during trial** |
+| Payment method | Credit card / monthly payment (post-trial) |
 | Initial SSH password | Set by whoever completed signup — get this from the client/whoever ran through provisioning. Sakura does not store/reset it; if lost, OS reinstall is the only recovery path. |
 
 **Admin SSH username:** Sakura's own manual states the admin username varies by OS image. For Ubuntu, it is `ubuntu`. If the OS image on this box is ever changed/reinstalled, re-check [Sakura's admin-user login manual](https://manual.sakura.ad.jp/vps/support/info/administrative-userl-login.html) before assuming `ubuntu` still applies.
@@ -260,7 +282,7 @@ This step is fully reversible, has zero effect on the website, and can be done w
       - pre-issue the apex cert earlier via a **DNS-01** challenge if a zero-downtime cutover (no HTTP-only window) is required.
    5. **Verify externally** (not from the VPS itself): `dig +short A kowatrade.com` shows the new IP, `curl -I https://kowatrade.com` and `https://www.kowatrade.com` return 200 over valid TLS, and 2–3 redirect-map paths resolve correctly on the live apex.
    6. **Rollback plan**: if anything is wrong, re-point the apex A record back to the legacy IP `49.212.198.107` (there is no legacy AAAA record, so nothing to roll back there) — with the lowered TTL this takes effect in minutes.
-   7. Only after external verification passes, decommission/stop the legacy rental server contract.
+   7. **Do not decommission the legacy rental server contract after cutover.** It is prepaid annually (Service Code `112400574564`, bank transfer / 12-month lump sum, paid through **2027/03/31**, next billing **2027/03/10**) — stopping it early doesn't save money before that date and likely forfeits the lump-sum payment. More importantly, it stays load-bearing after cutover: `kowa-trade.sakura.ne.jp` is the MX target (Step 7's mail-decoupling step above) and hosts the mailbox behind `SMTP_HOST=smtp.sakura.ne.jp` / `kowa@kowatrade.com` used by the contact form (`CLAUDE.md`). Keep it running as the mail host and DNS rollback target; the real decision point is **before 2027-03-10** (auto-renews otherwise unless cancelled).
    8. Restore the apex TTL to a normal value (e.g. 3600s) a day or two after cutover is confirmed stable.
 
 > Sakura's own hostname `os3-318-48513.vs.sakura.ne.jp` cannot get a Let's Encrypt cert for public use (Sakura controls that DNS zone) — it's only useful for reachability testing (`curl`/SSH), not for serving the site.
@@ -288,7 +310,8 @@ This step is fully reversible, has zero effect on the website, and can be done w
   git pull
   docker compose up --build -d
   ```
-- **Trial period**: free through **2026-08-06**; converts to a paid contract automatically starting **2026-08-07**. Scale-up (more RAM/CPU) is unavailable until the trial ends — if the site needs more headroom before then, that upgrade has to wait.
+- **Trial period**: free through **2026-08-05**; first credit-card charge processes automatically on **2026-08-06**. Scale-up (more RAM/CPU) is unavailable until the trial ends — if the site needs more headroom before then, that upgrade has to wait.
+- **Legacy rental server contract**: prepaid through **2027/03/31** (bank transfer / 12-month lump sum, next billing 2027/03/10, Service Code `112400574564`). Keep it running post-cutover — see Step 7.6.7 for why (mail host, DNS rollback target).
 - **Backups**: there's no managed database on this box — Supabase holds persistent data externally. The main backup surface here is the production `.env` file (and any locally stored uploads, if added later); keep a secure copy of `.env` outside the server (e.g. a password manager or encrypted secrets store), since it's gitignored and exists nowhere else.
 - **SSH lockout recovery**: if key-only SSH ever locks you out after Step 1, use the VPS control panel's VNC/serial console to log in directly — the only alternative is a full OS reinstall.
 

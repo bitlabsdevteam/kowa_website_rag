@@ -1,3 +1,6 @@
+// Not currently called by the contact form — components/contact-form.tsx now hands off to the
+// visitor's local mail client via a mailto: link instead of POSTing here. Kept in place in case
+// server-side relay delivery is reactivated later.
 import { NextResponse } from 'next/server';
 
 import { checkAndConsumeRateLimit } from '@/lib/assistant/store';

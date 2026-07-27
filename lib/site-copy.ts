@@ -88,7 +88,6 @@ type ContactPageSection = {
   emailLabel: string;
   queryLabel: string;
   submitLabel: string;
-  sendingLabel: string;
   successMessage: string;
   errorMessage: string;
   locationEyebrow: string;
@@ -277,6 +276,7 @@ export type SiteCopy = {
       plasticsForms: {
         pellet: string;
         crushed: string;
+        machinery: string;
         tabListAriaLabel: string;
       };
       empty: {

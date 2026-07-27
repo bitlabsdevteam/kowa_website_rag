@@ -5770,14 +5770,15 @@ a:focus-visible {
   color: rgba(243, 239, 231, 0.82);
 }
 
-.cp-factory-caption-body {
+.cp-factory .cp-factory-caption-body {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  max-width: 60ch;
+  width: 100%;
   margin: 0 auto;
+  padding: 0 clamp(12px, 3vw, 24px);
   text-align: center;
-  font-size: 0.95rem;
+  font-size: clamp(0.72rem, 2.4vw, 0.95rem);
   line-height: 1.55;
 }
 
@@ -5787,7 +5788,7 @@ a:focus-visible {
 
 .cp-factory-caption-en {
   color: var(--color-text-muted);
-  font-size: 0.88rem;
+  font-size: clamp(0.66rem, 2.1vw, 0.88rem);
 }
 
 @media (max-width: 560px) {
@@ -10344,15 +10345,15 @@ html:lang(en) .reference-section-title {
      without one this full-hero translucent overlay re-rasters every frame and
      starves smooth scrolling on software rasterizers (headless test runs). */
   transform: translate3d(0, calc(var(--hero-yard-drift, 0) * 20px), 0);
-  background:
-    linear-gradient(
-      99deg,
-      rgba(12, 30, 21, 0.88) 0%,
-      rgba(12, 30, 21, 0.66) 40%,
-      rgba(12, 30, 21, 0.2) 72%,
-      rgba(12, 30, 21, 0.32) 100%
-    ),
-    linear-gradient(to top, rgba(12, 30, 21, 0.62) 0%, rgba(12, 30, 21, 0) 36%);
+  /* Grade lives only behind the copy column (~34rem, matching the content's
+     max-width) so the rest of the photo — containers, jet, sun flare — reads
+     at native brightness instead of being washed by a full-frame scrim. */
+  background: linear-gradient(
+    90deg,
+    rgba(12, 30, 21, 0.7) 0,
+    rgba(12, 30, 21, 0.52) 420px,
+    rgba(12, 30, 21, 0) 720px
+  );
 }
 
 /* Near plane: the copy exits slightly faster than the scroll and fades, so it
@@ -10364,7 +10365,16 @@ html:lang(en) .reference-section-title {
   will-change: transform, opacity;
 }
 
-/* Light-on-photo copy. */
+/* Light-on-photo copy. With the scrim now localized behind the copy column
+   (not washing the full photo), a soft shadow carries the rest of the
+   legibility load — cheap for a few text nodes, unlike darkening the photo. */
+.hero-section--full-bleed .hero-section-logo-text,
+.hero-section--full-bleed .hero-section-title,
+.hero-section--full-bleed .hero-section-slogan,
+.hero-section--full-bleed .hero-section-subtitle {
+  text-shadow: 0 1px 24px rgba(12, 30, 21, 0.55);
+}
+
 .hero-section--full-bleed .hero-section-logo-text,
 .hero-section--full-bleed .hero-section-title {
   color: #ffffff;
@@ -10450,13 +10460,15 @@ html:lang(en) .hero-section--full-bleed .hero-section-title-accent {
     object-position: 92% 42%;
   }
 
-  /* Stronger grade on small screens — the copy spans the whole photo. */
+  /* Copy spans the full width on mobile, so there's no clean side to leave
+     ungraded — grade decays from the top (where the copy sits) instead of
+     washing the whole frame; text-shadow above carries the rest. */
   .hero-yard-scrim {
     background: linear-gradient(
       180deg,
-      rgba(12, 30, 21, 0.8) 0%,
-      rgba(12, 30, 21, 0.55) 55%,
-      rgba(12, 30, 21, 0.78) 100%
+      rgba(12, 30, 21, 0.62) 0%,
+      rgba(12, 30, 21, 0.15) 55%,
+      rgba(12, 30, 21, 0) 75%
     );
   }
 }
