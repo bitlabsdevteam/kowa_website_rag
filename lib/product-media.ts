@@ -78,12 +78,12 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
 };
 
 /** Representative card-face photo per top category, shared by the home
- * business grid and the WHAT WE DO media panel. Plastics, General Goods,
- * Foods, and Timber have grounded photography today; FFE stays undefined so
- * that surface renders an honest placeholder tile instead of a fabricated photo. */
+ * business grid and the WHAT WE DO media panel. Plastics, Foods, and Timber
+ * have grounded photography today; FFE and General Goods stay undefined
+ * (the General Goods photos on file are not of Kowa's actual products) so
+ * those surfaces render an honest placeholder tile instead of a fabricated photo. */
 export const TOP_CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
   plastics: '/images/products/gpps-pellet-1.jpg',
-  'general-goods': '/images/products/general-goods-1.jpg',
   foods: '/images/products/foods-matcha.jpg',
   timber: '/images/products/timber-teak-flooring-atrium.jpg',
 };

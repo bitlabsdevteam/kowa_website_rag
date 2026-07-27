@@ -16,11 +16,11 @@ import { useLocale } from '@/lib/use-locale';
 
 /** Families photographed per top-level category. Categories absent from this
  * map have no grounded photography yet and render the "catalog in
- * preparation" empty state instead of fabricated products (currently just
- * FFE). Plastics is further split into "crushed" / "pellet" sub-tabs — see
- * `PLASTICS_FAMILIES_BY_FORM` below — so it's intentionally absent here. */
+ * preparation" empty state instead of fabricated products (currently FFE and
+ * General Goods — the General Goods photos on file are not of Kowa's actual
+ * products). Plastics is further split into "crushed" / "pellet" sub-tabs —
+ * see `PLASTICS_FAMILIES_BY_FORM` below — so it's intentionally absent here. */
 const CATEGORY_FAMILIES: Partial<Record<ProductTopCategory, ProductFamily[]>> = {
-  'general-goods': ['general-goods-moisture-charcoal', 'general-goods-canvas-tote'],
   foods: ['foods-matcha', 'foods-herbs', 'foods-snacks', 'foods-seasonings'],
   timber: ['myanmar-teak', 'wood-flooring-office', 'wood-flooring-bedroom', 'wood-flooring-living-room', 'wood-flooring-deck'],
 };
@@ -94,11 +94,11 @@ function ProductsPageContent() {
   );
 
   // One card per product family. The card face shows the clean "primary"
-  // view photo, with just the product name shown below. Plastics, General
-  // Goods, Foods, and Timber have grounded photography today (see
-  // CATEGORY_FAMILIES / PLASTICS_FAMILIES_BY_FORM above); FFE is defined as a
-  // tab but has no grounded photography yet (see lib/product-media.ts —
-  // PRODUCT_FAMILY_TOP_CATEGORY), so it renders an honest "catalog in
+  // view photo, with just the product name shown below. Plastics, Foods, and
+  // Timber have grounded photography today (see CATEGORY_FAMILIES /
+  // PLASTICS_FAMILIES_BY_FORM above); FFE and General Goods are defined as
+  // tabs but have no grounded photography to show (see lib/product-media.ts —
+  // PRODUCT_FAMILY_TOP_CATEGORY), so they render an honest "catalog in
   // preparation" state instead of fabricated products.
   const cards = useMemo<CardItem[]>(() => {
     const order = activeCategory === 'plastics' ? PLASTICS_FAMILIES_BY_FORM[activePlasticsForm] : CATEGORY_FAMILIES[activeCategory];
