@@ -188,9 +188,8 @@
     "emailLabel": "电子邮箱",
     "queryLabel": "咨询内容",
     "submitLabel": "发送信息",
-    "sendingLabel": "发送中…",
-    "successMessage": "感谢您的留言，信息已发送。我们的团队将尽快与您联系。",
-    "errorMessage": "抱歉，信息发送失败。请稍后再试。",
+    "successMessage": "您的邮件应用应已打开并填好了留言内容——请在其中点击发送，即可送达 kowa@kowatrade.com。",
+    "errorMessage": "留言内容过长，邮件应用无法自动打开。请缩短内容，或直接发送邮件至 kowa@kowatrade.com。",
     "locationEyebrow": "到访我们",
     "locationTitle": "东京办公室",
     "locationLead": "位于港区中心地带，距田町站与三田站均为步行可达。",
@@ -276,7 +275,8 @@
       "tabListAriaLabel": "浏览产品分类",
       "plasticsForms": {
         "pellet": "颗粒",
-        "crushed": "破碎",
+        "crushed": "粉碎",
+        "machinery": "机械",
         "tabListAriaLabel": "按形态浏览塑料产品"
       },
       "empty": {

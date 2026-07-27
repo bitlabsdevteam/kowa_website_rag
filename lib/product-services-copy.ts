@@ -18,15 +18,15 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
     label: 'Capabilities',
     title: 'Products & Services',
     intro:
-      'An import trading company capable of presenting a wide range of production equipment, food processing machinery, crushing/shredding machinery, and various machine tools, spanning from high-end to middle-end models.',
+      'An import trading company capable of presenting a wide range of production equipment, food processing machinery, grinding/shredding machinery, and various machine tools, spanning from high-end to middle-end models.',
     services: [
       {
         title: 'Plastic Materials',
         body: 'Purchase and sales of plastic pellet materials, including various resins, and engineering plastics. Sales of post-consumer recycled (PCR) plastic pellets (PP, ABS, PS).',
       },
       {
-        title: 'Crushing and Shredding of Defective Molded Products',
-        body: 'Crushing and shredding of defective molded resin products, including various types of PE, PC, EVA, ABS, PP, PVC, PS, PA, PET, ACRYLIC, PPS, PBT, POM, LCP, PPO, PPE, HDPE, LDPE, and others.',
+        title: 'Grinding and Shredding of Defective Molded Products',
+        body: 'Grinding and shredding of defective molded resin products, including various types of PE, PC, EVA, ABS, PP, PVC, PS, PA, PET, ACRYLIC, PPS, PBT, POM, LCP, PPO, PPE, HDPE, LDPE, and others.',
       },
       {
         title: 'Processing of Off-Spec Plastics',
@@ -34,11 +34,11 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: 'Recycling of Plastic Resources',
-        body: 'Sorting, crushing, and shredding by raw material type for various items such as fuel tanks, car bumpers, scrap plastics, molding losses, PVC tapes, packaging materials, containers, water tanks, and films. We purchase mixed plastics that are difficult to process.',
+        body: 'Sorting, grinding, and shredding by raw material type for various items such as fuel tanks, car bumpers, scrap plastics, molding losses, PVC tapes, packaging materials, containers, water tanks, and films. We purchase mixed plastics that are difficult to process.',
       },
       {
-        title: 'Plastic Shredding and Crushing Services',
-        body: 'Crushing, shredding, processing, and recycling of various thermosetting resins, thermoplastic resins, commodity plastics, engineering plastics, and more.',
+        title: 'Plastic Shredding and Grinding Services',
+        body: 'Grinding, shredding, processing, and recycling of various thermosetting resins, thermoplastic resins, commodity plastics, engineering plastics, and more.',
       },
       {
         title: 'Repackaging Recycled Plastics',
@@ -50,22 +50,22 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: 'Industrial Machinery and Equipment',
-        body: "An import trading company capable of presenting a wide range of production equipment, food processing machinery, crushing/shredding machinery, and various machine tools, spanning from high-end to middle-end models. We always look at things from the customer's perspective, striving to provide machinery and equipment that meet their specific needs to ensure total satisfaction.",
+        body: "An import trading company capable of presenting a wide range of production equipment, food processing machinery, grinding/shredding machinery, and various machine tools, spanning from high-end to middle-end models. We always look at things from the customer's perspective, striving to provide machinery and equipment that meet their specific needs to ensure total satisfaction.",
       },
     ],
   },
   ja: {
     label: '取扱事業',
     title: '取扱製品・サービス',
-    intro: '設備機械、食品加工機械、破粉砕機械、各種工作機械の輸入、ハイエンドマシンからミドルエンドマシンを含めて、ワイドレンジにプレゼンできる商社。',
+    intro: '設備機械、食品加工機械、粉砕機械、各種工作機械の輸入、ハイエンドマシンからミドルエンドマシンを含めて、ワイドレンジにプレゼンできる商社。',
     services: [
       {
         title: 'プラスチック原料販売',
         body: '各種熱硬化性樹脂、熱可塑性樹脂、汎用プラスチック、エンジニアリングプラスチックなどのプラスチックペレット原料の買取及び販売。ポストコンシューマーリサイクルプラスチック（PP,ABS,PS)ペレットの販売。',
       },
       {
-        title: '成形不良品破砕、粉砕',
-        body: '各種PE, PC, EVA, ABS,PP, PVC, PS, PA, PET,ACRYLIC, PPS, PBT,POM, LCP, PPO, PPE, HDPE, LDPE, その他成形不良品樹脂の破砕、粉砕。',
+        title: '成形不良品粉砕',
+        body: '各種PE, PC, EVA, ABS,PP, PVC, PS, PA, PET,ACRYLIC, PPS, PBT,POM, LCP, PPO, PPE, HDPE, LDPE, その他成形不良品樹脂の粉砕。',
       },
       {
         title: '規格外プラスチック処理',
@@ -73,11 +73,11 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '資源プラスチックリサイクル',
-        body: '各種燃料タンク、車バンパー、廃材プラスチック、成型ロス品、PVCテープ、包装材、容器、水タンク、フィルム類など、原料の種類ごとに分別して破砕、粉砕。処理しにくい混合プラスチックの買取。',
+        body: '各種燃料タンク、車バンパー、廃材プラスチック、成型ロス品、PVCテープ、包装材、容器、水タンク、フィルム類など、原料の種類ごとに分別して粉砕。処理しにくい混合プラスチックの買取。',
       },
       {
-        title: 'プラスチック粉砕、破砕',
-        body: '各種熱硬化性樹脂、熱可塑性樹脂、汎用プラスチック、エンジニアリングプラスチックなどの破砕、粉砕　加工、再資源化。',
+        title: 'プラスチック粉砕',
+        body: '各種熱硬化性樹脂、熱可塑性樹脂、汎用プラスチック、エンジニアリングプラスチックなどの粉砕加工、再資源化。',
       },
       {
         title: '再生プラスチックの加工',
@@ -89,22 +89,22 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '各種産業設備機械',
-        body: '設備機械、食品加工機械、破粉砕機械、各種工作機械の輸入、ハイエンドマシンからミドルエンドマシンを含めて、ワイドレンジにプレゼンできる商社。常にお客様の視点で物事を考え、お客様の需要に合う設備機械をご提供し、満足して頂けるように心掛けて参ります。',
+        body: '設備機械、食品加工機械、粉砕機械、各種工作機械の輸入、ハイエンドマシンからミドルエンドマシンを含めて、ワイドレンジにプレゼンできる商社。常にお客様の視点で物事を考え、お客様の需要に合う設備機械をご提供し、満足して頂けるように心掛けて参ります。',
       },
     ],
   },
   'zh-Hans': {
     label: '服务与产品',
     title: '服务与产品',
-    intro: '作为一家进口商社，我们拥有广泛的产品线，涵盖生产设备、食品加工机械、破碎与粉碎机械以及各类机床，能够为您提供从高端到中端机型的多样化方案。',
+    intro: '作为一家进口商社，我们拥有广泛的产品线，涵盖生产设备、食品加工机械、粉碎机械以及各类机床，能够为您提供从高端到中端机型的多样化方案。',
     services: [
       {
         title: '塑料原料销售',
         body: '各种热固性树脂、热塑性树脂、通用塑料、工程塑料等塑料颗粒原料的收购与销售。消费后再生塑料（PCR塑料：PP、ABS、PS）颗粒的销售。',
       },
       {
-        title: '不良品破碎・粉碎',
-        body: '各种PE、PC、EVA、ABS、PP、PVC、PS、PA、PET、ACRYLIC（丙烯酸树脂）、PPS、PBT、POM、LCP、PPO、PPE、HDPE、LDPE等注塑不良品树脂的破碎与粉碎。',
+        title: '不良品粉碎',
+        body: '各种PE、PC、EVA、ABS、PP、PVC、PS、PA、PET、ACRYLIC（丙烯酸树脂）、PPS、PBT、POM、LCP、PPO、PPE、HDPE、LDPE等注塑不良品树脂的粉碎。',
       },
       {
         title: '规格外塑料处理',
@@ -112,11 +112,11 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '资源塑料回收再生',
-        body: '针对各种燃料箱、汽车保险杠、废旧塑料、注塑损耗件、PVC胶带、包装材料、容器、水箱、薄膜类等，按原料种类进行分类破碎与粉碎。收购难以处理的混合塑料。',
+        body: '针对各种燃料箱、汽车保险杠、废旧塑料、注塑损耗件、PVC胶带、包装材料、容器、水箱、薄膜类等，按原料种类进行分类粉碎。收购难以处理的混合塑料。',
       },
       {
-        title: '塑料粉碎・破碎加工',
-        body: '各种热固性树脂、热塑性树脂、通用塑料、工程塑料等的破碎、粉碎加工及资源化再利用。',
+        title: '塑料粉碎加工',
+        body: '各种热固性树脂、热塑性树脂、通用塑料、工程塑料等的粉碎加工及资源化再利用。',
       },
       {
         title: '再生塑料加工',
@@ -128,21 +128,21 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '各类工业设备机械',
-        body: '作为一家进口商社，我们拥有广泛的产品线，涵盖生产设备、食品加工机械、破碎与粉碎机械以及各类机床，能够为您提供从高端到中端机型的多样化方案。我们始终站在客户的立场思考，致力于提供符合客户需求的设备机械，竭诚让每位客户满意。',
+        body: '作为一家进口商社，我们拥有广泛的产品线，涵盖生产设备、食品加工机械、粉碎机械以及各类机床，能够为您提供从高端到中端机型的多样化方案。我们始终站在客户的立场思考，致力于提供符合客户需求的设备机械，竭诚让每位客户满意。',
       },
     ],
   },
   'zh-Hant': {
     label: '核心產品與服務',
     title: '核心產品與服務',
-    intro: '作為一家進口商社，我們擁有廣泛的產品線，涵蓋生產設備、食品加工機械、破碎與粉碎機械以及各類工具機，能夠為您提供從高端到中端機型的多樣化方案。',
+    intro: '作為一家進口商社，我們擁有廣泛的產品線，涵蓋生產設備、食品加工機械、粉碎機械以及各類工具機，能夠為您提供從高端到中端機型的多樣化方案。',
     services: [
       {
         title: '塑膠原料銷售',
         body: '各種熱固性樹脂、熱塑性樹脂、通用塑膠、工程塑膠等塑膠顆粒原料的收購與銷售。再生塑膠（PCR)以及塑膠顆粒(PP、ABS、PS）的銷售。',
       },
       {
-        title: '不良品破碎・粉碎',
+        title: '不良品粉碎',
         body: '各種PE、PC、EVA、ABS、PP、PVC、PS、PA、PET、ACRYLIC（丙烯酸樹脂）、PPS、PBT、POM、LCP、PPO、PPE、HDPE、LDPE等注塑不良品樹脂的粉碎加工。',
       },
       {
@@ -151,11 +151,11 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '資源塑膠回收再生',
-        body: '針對各種燃料箱、汽車保險桿、廢舊塑膠、注塑損耗件、PVC膠帶、包裝材料、容器、水箱、薄膜類等，按種類進行分類破碎與粉碎。收購難以處理的混合塑膠。',
+        body: '針對各種燃料箱、汽車保險桿、廢舊塑膠、注塑損耗件、PVC膠帶、包裝材料、容器、水箱、薄膜類等，按種類進行分類粉碎。收購難以處理的混合塑膠。',
       },
       {
-        title: '塑膠粉碎・破碎加工',
-        body: '各種熱固性樹脂、熱塑性樹脂、通用塑膠、工程塑膠等的破碎、粉碎加工及資源化再利用。',
+        title: '塑膠粉碎加工',
+        body: '各種熱固性樹脂、熱塑性樹脂、通用塑膠、工程塑膠等的粉碎加工及資源化再利用。',
       },
       {
         title: '再生塑膠裝袋',
@@ -167,7 +167,7 @@ export const PRODUCT_SERVICES_COPY: Record<Locale, ProductServicesCopy> = {
       },
       {
         title: '各類工業設備機械',
-        body: '作為一家進口商社，我們擁有廣泛的產品線，涵蓋生產設備、食品加工機械、破碎與粉碎機械以及各類工具機，能夠為您提供從高端到中端機型的多樣化方案。我們始終站在客戶的立場思考，致力於提供符合客戶需求的設備機械，竭誠讓每位客戶滿意。',
+        body: '作為一家進口商社，我們擁有廣泛的產品線，涵蓋生產設備、食品加工機械、粉碎機械以及各類工具機，能夠為您提供從高端到中端機型的多樣化方案。我們始終站在客戶的立場思考，致力於提供符合客戶需求的設備機械，竭誠讓每位客戶滿意。',
       },
     ],
   },

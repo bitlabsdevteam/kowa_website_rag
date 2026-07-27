@@ -6,7 +6,8 @@ export type ProductMediaCategory =
   | 'machinery-equipment'
   | 'commerce-distribution'
   | 'timber-flooring'
-  | 'general-goods';
+  | 'general-goods'
+  | 'foods';
 
 /** Plastics families are named by resin type + form (crushed scrap or regenerated pellet); plus the Myanmar-teak timber family and one general-goods family. */
 export type ProductFamily =
@@ -26,11 +27,18 @@ export type ProductFamily =
   | 'rabs-pellet'
   | 'general-goods-moisture-charcoal'
   | 'general-goods-canvas-tote'
+  | 'foods-matcha'
+  | 'foods-herbs'
+  | 'foods-snacks'
+  | 'foods-seasonings'
   | 'myanmar-teak'
   | 'wood-flooring-office'
   | 'wood-flooring-bedroom'
   | 'wood-flooring-living-room'
-  | 'wood-flooring-deck';
+  | 'wood-flooring-deck'
+  | 'machinery-grinder'
+  | 'machinery-food-machine'
+  | 'machinery-production-line';
 
 /** Top-level business-line categories shown as tabs on the products page. */
 export type ProductTopCategory = 'plastics' | 'general-goods' | 'foods' | 'ffe' | 'timber';
@@ -55,20 +63,28 @@ export const PRODUCT_FAMILY_TOP_CATEGORY: Record<ProductFamily, ProductTopCatego
   'rabs-pellet': 'plastics',
   'general-goods-moisture-charcoal': 'general-goods',
   'general-goods-canvas-tote': 'general-goods',
+  'foods-matcha': 'foods',
+  'foods-herbs': 'foods',
+  'foods-snacks': 'foods',
+  'foods-seasonings': 'foods',
   'myanmar-teak': 'timber',
   'wood-flooring-office': 'timber',
   'wood-flooring-bedroom': 'timber',
   'wood-flooring-living-room': 'timber',
   'wood-flooring-deck': 'timber',
+  'machinery-grinder': 'plastics',
+  'machinery-food-machine': 'plastics',
+  'machinery-production-line': 'plastics',
 };
 
 /** Representative card-face photo per top category, shared by the home
- * business grid and the WHAT WE DO media panel. Only Plastics, General Goods,
- * and Timber have grounded photography today; Foods and FFE stay undefined so
- * surfaces render an honest placeholder tile instead of a fabricated photo. */
+ * business grid and the WHAT WE DO media panel. Plastics, Foods, and Timber
+ * have grounded photography today; FFE and General Goods stay undefined
+ * (the General Goods photos on file are not of Kowa's actual products) so
+ * those surfaces render an honest placeholder tile instead of a fabricated photo. */
 export const TOP_CATEGORY_IMAGE: Partial<Record<ProductTopCategory, string>> = {
   plastics: '/images/products/gpps-pellet-1.jpg',
-  'general-goods': '/images/products/general-goods-1.jpg',
+  foods: '/images/products/foods-matcha.jpg',
   timber: '/images/products/timber-teak-flooring-atrium.jpg',
 };
 
@@ -339,6 +355,44 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     src: '/images/products/general-goods-2.jpg',
     sourceFile: 'General Goods2.jpg',
   },
+  // Four food-category photos supplied directly (Google Drive "Food
+  // Pictures"), one representative shot per category rather than per SKU.
+  {
+    id: 'foods-matcha-primary',
+    title: 'Matcha — Primary',
+    category: 'foods',
+    family: 'foods-matcha',
+    view: 'primary',
+    src: '/images/products/foods-matcha.jpg',
+    sourceFile: 'Foods/Matcha.png',
+  },
+  {
+    id: 'foods-herbs-primary',
+    title: 'Herbs — Primary',
+    category: 'foods',
+    family: 'foods-herbs',
+    view: 'primary',
+    src: '/images/products/foods-herbs.jpg',
+    sourceFile: 'Foods/HERB.png',
+  },
+  {
+    id: 'foods-snacks-primary',
+    title: 'Snacks — Primary',
+    category: 'foods',
+    family: 'foods-snacks',
+    view: 'primary',
+    src: '/images/products/foods-snacks.jpg',
+    sourceFile: 'Foods/snacks.png',
+  },
+  {
+    id: 'foods-seasonings-primary',
+    title: 'Seasonings — Primary',
+    category: 'foods',
+    family: 'foods-seasonings',
+    view: 'primary',
+    src: '/images/products/foods-seasonings.jpg',
+    sourceFile: 'Foods/seasoning.png',
+  },
   // Three photos sourced from the Myanmar Teak flooring supplier catalog
   // (Wood Catalog.pdf): finished flooring in a residential atrium (used as
   // the card face, "pile" view), tagged raw log intake at the Myanmar log
@@ -409,5 +463,44 @@ export const PRODUCT_MEDIA: ProductMediaItem[] = [
     view: 'primary',
     src: '/images/products/wood-flooring-deck.jpg',
     sourceFile: 'Wood Product Picture/Wood4.jpg',
+  },
+  // Machinery photos supplied directly (public/images/Machinary/). The two
+  // grinder shots are two views of the same heavy-duty grinder; food machine
+  // and production line are each a single representative photo.
+  {
+    id: 'machinery-grinder-primary',
+    title: 'Heavy-duty Grinder — Primary',
+    category: 'machinery-equipment',
+    family: 'machinery-grinder',
+    view: 'primary',
+    src: '/images/products/machinery-grinder-1.jpg',
+    sourceFile: 'Machinary/heavy-duty grinder　１.jpg',
+  },
+  {
+    id: 'machinery-grinder-detail',
+    title: 'Heavy-duty Grinder — Detail',
+    category: 'machinery-equipment',
+    family: 'machinery-grinder',
+    view: 'detail',
+    src: '/images/products/machinery-grinder-2.jpg',
+    sourceFile: 'Machinary/heavy-duty grinder２.jpg',
+  },
+  {
+    id: 'machinery-food-machine-primary',
+    title: 'Food Machines — Primary',
+    category: 'machinery-equipment',
+    family: 'machinery-food-machine',
+    view: 'primary',
+    src: '/images/products/machinery-food-machine.jpg',
+    sourceFile: 'Machinary/食品機械（Food Machine）.jpg',
+  },
+  {
+    id: 'machinery-production-line-primary',
+    title: 'Production Line Machines — Primary',
+    category: 'machinery-equipment',
+    family: 'machinery-production-line',
+    view: 'primary',
+    src: '/images/products/machinery-production-line.jpg',
+    sourceFile: 'Machinary/Production Line Machines.jpg',
   },
 ];

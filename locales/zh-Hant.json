@@ -188,9 +188,8 @@
     "emailLabel": "電子郵箱",
     "queryLabel": "諮詢內容",
     "submitLabel": "發送信息",
-    "sendingLabel": "發送中…",
-    "successMessage": "感謝您的留言，信息已發送。我們的團隊將盡快與您聯繫。",
-    "errorMessage": "抱歉，信息發送失敗。請稍後再試。",
+    "successMessage": "您的郵件應用應已開啟並填好了留言內容——請在其中點擊發送，即可送達 kowa@kowatrade.com。",
+    "errorMessage": "留言內容過長，郵件應用無法自動開啟。請縮短內容，或直接發送郵件至 kowa@kowatrade.com。",
     "locationEyebrow": "到訪我們",
     "locationTitle": "東京辦公室",
     "locationLead": "位於港區中心地帶，距田町站與三田站均為步行可達。",
@@ -276,7 +275,8 @@
       "tabListAriaLabel": "瀏覽產品分類",
       "plasticsForms": {
         "pellet": "顆粒",
-        "crushed": "破碎",
+        "crushed": "粉碎",
+        "machinery": "機械",
         "tabListAriaLabel": "按形態瀏覽塑膠產品"
       },
       "empty": {

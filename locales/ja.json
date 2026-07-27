@@ -188,9 +188,8 @@
     "emailLabel": "メールアドレス",
     "queryLabel": "お問い合わせ内容",
     "submitLabel": "送信する",
-    "sendingLabel": "送信中…",
-    "successMessage": "ありがとうございます。メッセージを送信しました。担当者よりご連絡いたします。",
-    "errorMessage": "申し訳ございません。送信できませんでした。時間をおいて再度お試しください。",
+    "successMessage": "メールアプリが起動し、メッセージが入力された状態になっているはずです。そちらから送信ボタンを押して kowa@kowatrade.com へお送りください。",
+    "errorMessage": "メッセージが長すぎるため、メールアプリを自動で開けませんでした。内容を短くするか、kowa@kowatrade.com へ直接メールをお送りください。",
     "locationEyebrow": "アクセス",
     "locationTitle": "東京オフィス",
     "locationLead": "港区の中心に位置し、田町駅・三田駅から徒歩圏内です。",
@@ -276,7 +275,8 @@
       "tabListAriaLabel": "製品カテゴリーを選択",
       "plasticsForms": {
         "pellet": "ペレット",
-        "crushed": "破砕",
+        "crushed": "粉砕",
+        "machinery": "機械",
         "tabListAriaLabel": "樹脂を形状で選択"
       },
       "empty": {

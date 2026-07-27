@@ -17,10 +17,10 @@ const FACTORY_PHOTO = {
   enEyebrow: 'Production Site',
   jaTitle: '群馬工場',
   enTitle: 'Gunma Factory',
-  jaCaption: 'ジーピーポリマー株式会社の再生ラインを擁する、資源循環の現場。',
-  enCaption: 'Home to the G.P. Polymer regeneration line, where collected material re-enters Kowa’s circular supply.',
-  zhHantCaption: '擁有 G.P. Polymer 再生產線的所在地，回收物料在此重新進入廣和的資源循環供應鏈。',
-  zhHansCaption: '拥有 G.P. Polymer 再生产线的所在地，回收物料在此重新进入广和的资源循环供应链。',
+  jaCaption: 'G.P. Polymerの再生ライン拠点。',
+  enCaption: 'G.P. Polymer’s line, circular supply.',
+  zhHantCaption: 'G.P. Polymer 再生產線據點。',
+  zhHansCaption: 'G.P. Polymer 再生产线据点。',
 };
 
 const FACTORY_CAPTION_BY_LOCALE: Record<Locale, string> = {
@@ -48,8 +48,8 @@ const COMPANY_FACTS = [
 
 /** Affiliated / group companies, shown bilingually under the corporate facts. */
 const RELATED_COMPANIES = [
-  { ja: 'ジーピーポリマー株式会社', en: 'G.P. Polymer Co., Ltd.' },
-  { ja: 'ジーイーティ株式会社', en: 'Green EcoTechnology Co., Ltd. (G.E.T)' },
+  { ja: 'ジー・イー・ティ株式会社', en: 'Green Eco technology Co.,LTD' },
+  { ja: 'ジー・ピー・ポリマー株式会社', en: 'G.P. Polymer Co.,LTD' },
 ];
 
 export default function CompanyProfilePage() {

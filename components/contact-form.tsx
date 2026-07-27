@@ -6,7 +6,10 @@ import type { SiteCopy } from '@/lib/site-copy';
 
 type ContactCopy = SiteCopy['contactPage'];
 
-type SubmitStatus = 'idle' | 'submitting' | 'success' | 'error';
+type SubmitStatus = 'idle' | 'handoff' | 'too-long';
+
+const CONTACT_MAILTO_ADDRESS = 'kowa@kowatrade.com';
+const MAILTO_URL_LENGTH_LIMIT = 1900;
 
 export function ContactForm({ copy }: { copy: ContactCopy }) {
   const [companyName, setCompanyName] = useState('');
@@ -14,31 +17,21 @@ export function ContactForm({ copy }: { copy: ContactCopy }) {
   const [query, setQuery] = useState('');
   const [status, setStatus] = useState<SubmitStatus>('idle');
 
-  const submitting = status === 'submitting';
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus('submitting');
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ companyName, email, query }),
-      });
+    const normalizedQuery = query.replace(/\r?\n/g, '\r\n');
+    const subject = `New contact form inquiry: ${companyName}`;
+    const body = `New contact form inquiry\r\n\r\nCompany: ${companyName}\r\nEmail: ${email}\r\n\r\nQuery:\r\n${normalizedQuery}`;
+    const mailtoUrl = `mailto:${CONTACT_MAILTO_ADDRESS}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-      if (!response.ok) {
-        setStatus('error');
-        return;
-      }
-
-      setStatus('success');
-      setCompanyName('');
-      setEmail('');
-      setQuery('');
-    } catch {
-      setStatus('error');
+    if (mailtoUrl.length > MAILTO_URL_LENGTH_LIMIT) {
+      setStatus('too-long');
+      return;
     }
+
+    window.location.href = mailtoUrl;
+    setStatus('handoff');
   }
 
   return (
@@ -56,7 +49,6 @@ export function ContactForm({ copy }: { copy: ContactCopy }) {
           value={companyName}
           onChange={(event) => setCompanyName(event.target.value)}
           required
-          disabled={submitting}
         />
       </label>
 
@@ -69,7 +61,6 @@ export function ContactForm({ copy }: { copy: ContactCopy }) {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
           required
-          disabled={submitting}
         />
       </label>
 
@@ -82,20 +73,19 @@ export function ContactForm({ copy }: { copy: ContactCopy }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           required
-          disabled={submitting}
         />
       </label>
 
-      <button type="submit" className="field-button" disabled={submitting}>
-        {submitting ? copy.sendingLabel : copy.submitLabel}
+      <button type="submit" className="field-button">
+        {copy.submitLabel}
       </button>
 
-      {status === 'success' ? (
+      {status === 'handoff' ? (
         <p className="contact-form-feedback contact-form-feedback--success" role="status">
           {copy.successMessage}
         </p>
       ) : null}
-      {status === 'error' ? (
+      {status === 'too-long' ? (
         <p className="contact-form-feedback contact-form-feedback--error" role="alert">
           {copy.errorMessage}
         </p>

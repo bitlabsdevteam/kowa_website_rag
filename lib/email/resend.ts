@@ -1,3 +1,6 @@
+// Not currently wired up — the contact form hands off to the visitor's local mail client via
+// mailto: (components/contact-form.tsx) instead of calling app/api/contact. Kept for possible
+// future re-use if server-side relay delivery is reactivated.
 import { Resend } from 'resend';
 
 export type ContactEmailPayload = {

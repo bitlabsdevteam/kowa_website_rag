@@ -12,6 +12,7 @@ coverage/
 *.key
 *.p12
 *.crt
+credential.md
 
 # Logs
 npm-debug.log*
