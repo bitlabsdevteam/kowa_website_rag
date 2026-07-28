@@ -111,6 +111,8 @@ Sakura VPS ships with the control-panel **packet filter** allowing only SSH inbo
 
 ## Step 3 — Runtime: install Docker (primary path)
 
+> **This box does not currently use Docker** — see "Observed runtime" under Step 9 for what's actually running.
+
 The repo already ships a `Dockerfile` + `docker-compose.yml` targeting this exact flow (`docker_compose.sh build|up|down` locally) — reuse it in production for local/prod parity.
 
 ```bash
@@ -304,7 +306,9 @@ This step is fully reversible, has zero effect on the website, and can be done w
 
 ## Step 9 — Ongoing ops
 
-- **Deploying an update**:
+> **This box does not currently use Docker** — the "Deploying an update" commands below assume the Docker path from Step 3. See "Observed runtime" immediately after this list for what's actually running and the correct update recipe.
+
+- **Deploying an update** (Docker path, not currently in use on this box):
   ```bash
   cd /opt/kowa_website_rag
   git pull
@@ -314,6 +318,34 @@ This step is fully reversible, has zero effect on the website, and can be done w
 - **Legacy rental server contract**: prepaid through **2027/03/31** (bank transfer / 12-month lump sum, next billing 2027/03/10, Service Code `112400574564`). Keep it running post-cutover — see Step 7.6.7 for why (mail host, DNS rollback target).
 - **Backups**: there's no managed database on this box — Supabase holds persistent data externally. The main backup surface here is the production `.env` file (and any locally stored uploads, if added later); keep a secure copy of `.env` outside the server (e.g. a password manager or encrypted secrets store), since it's gitignored and exists nowhere else.
 - **SSH lockout recovery**: if key-only SSH ever locks you out after Step 1, use the VPS control panel's VNC/serial console to log in directly — the only alternative is a full OS reinstall.
+
+---
+
+## Observed runtime (confirmed 2026-07-28): PM2 + Nginx, not Docker
+
+A live probe of the box on this date found neither the Docker path above nor the systemd path in `scripts/deploy/bootstrap_vps.sh`/`deploy.sh` actually in use. What's really running:
+
+- **Docker is not installed** on the box.
+- The app runs as a **PM2** process named `kowa_website_rag` (`pm2 status` / `pm2 show kowa_website_rag`), executing `npm run start` (Next.js prod server) with cwd `/opt/kowa_website_rag`, listening on `127.0.0.1:3000`.
+- **Nginx** reverse-proxies port 80 → `127.0.0.1:3000` (`/etc/nginx/sites-enabled/kowa_website_rag`, `server_name _;` — catch-all default server, no TLS configured yet).
+- The domain has **not** been cut over — `dig +short kowatrade.com A` still resolves to the legacy rental server `49.212.198.107`, not this VPS. Traffic to this box today is verification-only.
+- No `/opt/kowa_website_rag/.env` file exists on the box. The app still returns HTTP 200, so required env vars are either supplied another way or genuinely missing (degrading Supabase/Dify-dependent features silently) — worth checking before relying on any env-gated feature here.
+
+**Actual update recipe for this box** (until it's migrated to the Docker or systemd path, or this note is updated to reflect a migration):
+
+```bash
+cd /opt/kowa_website_rag
+git status                        # check for local diffs (e.g. auto-generated next-env.d.ts) before pulling
+git checkout -- next-env.d.ts     # discard if it's the only diff — it's Next.js build output, not real changes
+git fetch origin
+git merge --ff-only origin/main
+npm ci
+npm run build
+pm2 restart kowa_website_rag
+pm2 status                        # confirm online, 0 unstable restarts
+curl -I http://127.0.0.1:3000     # confirm 200
+pm2 logs kowa_website_rag --lines 40 --nostream   # confirm no startup errors
+```
 
 ---
 
