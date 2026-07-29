@@ -23,9 +23,28 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: 'Kowa Trade & Commerce',
+  title: 'Kowa Trade and Commerce',
   description: 'Kowa Trade and Commerce corporate website with multilingual company information and an Aya assistant.',
 };
+
+// Runs before hydration so a returning visitor's stored locale is reflected in
+// `<html lang>` on the very first frame. Without this, the page briefly (and,
+// for the initial paint, entirely) reports lang="en" while a JA/ZH visitor's
+// browser renders JA/ZH DOM content read from localStorage, which is exactly
+// the mismatch that made Chrome auto-translate the page and rewrite the
+// company name in the tab title. Chrome-specific; Safari's translate is
+// user-initiated and doesn't act on this signal, but the mislabel itself is
+// worth fixing for every browser and for screen readers.
+const SET_INITIAL_LANG_SCRIPT = `
+(function () {
+  try {
+    var stored = window.localStorage.getItem('kowa-locale');
+    if (stored) {
+      document.documentElement.lang = stored;
+    }
+  } catch (e) {}
+})();
+`;
 
 // Explicit mobile viewport: scale to device width, allow user zoom (accessibility),
 // and tint the browser chrome to match the cream canvas.
@@ -41,7 +60,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       data-scroll-behavior="smooth"
       className={`${inter.variable} ${notoSansJp.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: SET_INITIAL_LANG_SCRIPT }} />
+      </head>
       <body>
         <LocaleProvider>{children}</LocaleProvider>
       </body>

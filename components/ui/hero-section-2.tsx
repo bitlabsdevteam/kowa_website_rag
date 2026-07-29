@@ -88,7 +88,7 @@ export const HeroSection = React.forwardRef<HTMLElement, HeroSectionProps>(
                 <>
                   {logo.url && <img src={logo.url} alt={logo.alt ?? ''} className="hero-section-logo" />}
                   <span>
-                    {logo.text && <span className="hero-section-logo-text">{logo.text}</span>}
+                    {logo.text && <span className="hero-section-logo-text" translate="no">{logo.text}</span>}
                     {slogan && <p className="hero-section-slogan">{slogan}</p>}
                   </span>
                 </>

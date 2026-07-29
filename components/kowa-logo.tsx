@@ -9,7 +9,7 @@ type KowaLogoProps = {
 
 export function KowaLogo({ ariaLabel, name, location, showText = false }: KowaLogoProps) {
   return (
-    <span className="kowa-logo" aria-label={ariaLabel}>
+    <span className="kowa-logo" aria-label={ariaLabel} translate="no">
       <Image
         src="/images/logo/kowa-logo.png"
         alt=""

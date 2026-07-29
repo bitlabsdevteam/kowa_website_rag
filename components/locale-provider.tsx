@@ -2,10 +2,17 @@
 
 import { createContext, startTransition, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { type Locale } from '@/lib/site-copy';
+import { SITE_COPY, type Locale } from '@/lib/site-copy';
 
 const STORAGE_KEY = 'kowa-locale';
 const SUPPORTED: readonly Locale[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
+
+// Keeps the browser tab title in step with the locale's actual brand copy
+// (locales/*.json `brand.ariaLabel`) instead of the static English default
+// baked into app/layout.tsx metadata.
+function applyDocumentTitle(locale: Locale) {
+  document.title = SITE_COPY[locale].brand.ariaLabel;
+}
 
 function isLocale(value: string | null): value is Locale {
   return value !== null && (SUPPORTED as readonly string[]).includes(value);
@@ -42,6 +49,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
       setLocaleState(stored);
     }
     document.documentElement.lang = stored ?? locale;
+    applyDocumentTitle(stored ?? locale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -50,6 +58,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
       if (event.key === STORAGE_KEY && isLocale(event.newValue)) {
         setLocaleState(event.newValue);
         document.documentElement.lang = event.newValue;
+        applyDocumentTitle(event.newValue);
       }
     };
     window.addEventListener('storage', onStorage);
@@ -60,6 +69,7 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem(STORAGE_KEY, next);
       document.documentElement.lang = next;
+      applyDocumentTitle(next);
     }
     // The re-render this triggers walks the whole page (every consumer of
     // useLocale), including heavy subtrees like the factory WebGL scene.
