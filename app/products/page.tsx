@@ -80,6 +80,17 @@ function isProductTopCategory(value: string | null): value is ProductTopCategory
   return PRODUCT_TOP_CATEGORY_ORDER.includes(value as ProductTopCategory);
 }
 
+/** The grinder family shows two photographed views as separate cards (see
+ * `showAllViews` below); its JA copy already numbers them ("大型粉砕機１＆２"),
+ * so split titles reuse that same base name per view instead of inventing
+ * new copy. [primary, detail] order matches PRODUCT_MEDIA's grinder entries. */
+const MACHINERY_GRINDER_VIEW_TITLES: Record<Locale, [string, string]> = {
+  en: ['Heavy-duty Grinder 1', 'Heavy-duty Grinder 2'],
+  ja: ['大型粉砕機１', '大型粉砕機２'],
+  'zh-Hans': ['大型粉碎机 1', '大型粉碎机 2'],
+  'zh-Hant': ['大型粉碎機 1', '大型粉碎機 2'],
+};
+
 function ProductsPageContent() {
   const [locale, setLocale] = useLocale();
   const copy = useMemo(() => SITE_COPY[locale], [locale]);
@@ -105,17 +116,37 @@ function ProductsPageContent() {
     if (!order) return [];
 
     const families = PRODUCT_FAMILY_COPY[locale];
+    // Machinery shows every photographed view (e.g. both grinder shots) as its
+    // own card, since it's a small equipment gallery rather than a swatch
+    // catalog — other forms keep one representative card per family.
+    const showAllViews = activeCategory === 'plastics' && activePlasticsForm === 'machinery';
 
-    return order.map((familyKey) => {
+    return order.flatMap((familyKey) => {
       const family = families[familyKey];
       const items = PRODUCT_MEDIA.filter((m) => m.family === familyKey);
+
+      if (showAllViews) {
+        return items.map((item) => {
+          const title =
+            familyKey === 'machinery-grinder'
+              ? MACHINERY_GRINDER_VIEW_TITLES[locale][item.view === 'detail' ? 1 : 0]
+              : family.title;
+
+          return {
+            imgUrl: item.src,
+            alt: title,
+            title,
+          };
+        });
+      }
+
       const pile = items.find((m) => m.view === 'primary' || m.view === 'pile') ?? items[0];
 
-      return {
+      return [{
         imgUrl: pile.src,
         alt: family.title,
         title: family.title,
-      };
+      }];
     });
   }, [locale, activeCategory, activePlasticsForm]);
 
