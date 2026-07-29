@@ -2234,6 +2234,12 @@ a:focus-visible {
   margin: 0 auto;
   padding: 24px 0 56px;
   display: grid;
+  /* Explicit track (not the default `auto`) caps sizing at the container's own
+     width. Without it, WebKit lets the hero's 100vw full-bleed breakout blow
+     out this grid's intrinsic track size, stretching every sibling — incl. the
+     header — to full viewport width and misplacing/clipping its content
+     (Safari-only; Chromium sizes the auto track correctly). */
+  grid-template-columns: minmax(0, 1fr);
   gap: 26px;
 }
 

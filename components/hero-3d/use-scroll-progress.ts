@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, type RefObject } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 
 /**
  * Normalizes how far an element has been scrolled through: 0 while its top is
@@ -93,4 +93,64 @@ export function useScrollProgress(targetRef?: RefObject<HTMLElement | null>): nu
   }, [targetRef]);
 
   return progress;
+}
+
+/**
+ * Same scroll-through measurement as useScrollProgress, but writes the result
+ * straight onto a DOM custom property via ref instead of React state — for
+ * consumers that only feed the number into CSS. Skipping the setState means
+ * scrolling never triggers a React commit, which matters most on WebKit:
+ * scroll-linked JS competes with Safari's own scroll handling for the frame
+ * budget, so trimming per-frame work (no reconciliation, no extra render
+ * pass) removes headroom Chrome/Edge didn't need but Safari does.
+ */
+export function useScrollProgressStyleVar(
+  targetRef: RefObject<HTMLElement | null>,
+  styleRef: RefObject<HTMLElement | null>,
+  varName: string,
+  transform?: (progress: number) => number,
+): void {
+  const transformRef = useRef(transform);
+  transformRef.current = transform;
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const write = (value: number) => {
+      styleRef.current?.style.setProperty(varName, String(value));
+    };
+
+    if (reducedMotion.matches) {
+      write(0);
+      return undefined;
+    }
+
+    let frame = 0;
+
+    const measure = () => {
+      frame = 0;
+      const target = targetRef.current;
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      const progress = computeScrollProgress(rect.top, rect.height);
+      write(transformRef.current ? transformRef.current(progress) : progress);
+    };
+
+    const requestMeasure = () => {
+      if (frame === 0) {
+        frame = window.requestAnimationFrame(measure);
+      }
+    };
+
+    measure();
+    window.addEventListener('scroll', requestMeasure, { passive: true });
+    window.addEventListener('resize', requestMeasure, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', requestMeasure);
+      window.removeEventListener('resize', requestMeasure);
+      if (frame !== 0) {
+        window.cancelAnimationFrame(frame);
+      }
+    };
+  }, [targetRef, styleRef, varName]);
 }
