@@ -6,8 +6,10 @@ import { ScrollReveal } from '@/components/hero-3d/scroll-reveal';
 import { HomeBusinessGrid } from '@/components/home/home-business-grid';
 import { HomeBusinessStory } from '@/components/home/home-business-story';
 import { HomeFactoryScene } from '@/components/home/home-factory-scene';
-import { useScrollProgress } from '@/components/hero-3d/use-scroll-progress';
+import { useScrollProgressStyleVar } from '@/components/hero-3d/use-scroll-progress';
 import type { Locale, SiteCopy } from '@/lib/site-copy';
+
+const toDrift = (progress: number) => (progress - 0.5) * 2;
 
 type HomeBusinessParallaxProps = {
   locale: Locale;
@@ -29,16 +31,10 @@ type BandProps = {
  * Reduced motion pins progress at 0 and the CSS resets every transform. */
 function Band({ variant, ghost, testId, children }: BandProps) {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const progress = useScrollProgress(wrapRef);
-  const drift = (progress - 0.5) * 2;
+  useScrollProgressStyleVar(wrapRef, wrapRef, '--biz-drift', toDrift);
 
   return (
-    <div
-      ref={wrapRef}
-      className={`home-business-band home-business-band--${variant}`}
-      data-testid={testId}
-      style={{ '--biz-drift': drift } as React.CSSProperties}
-    >
+    <div ref={wrapRef} className={`home-business-band home-business-band--${variant}`} data-testid={testId}>
       <p className="home-business-band-ghost" aria-hidden="true">
         {ghost}
       </p>
