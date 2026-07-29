@@ -151,7 +151,7 @@ export const Footer7 = ({
         <div className="footer7-brand-col">
           <Link href="/" className="footer7-brand" aria-label={brand.ariaLabel}>
             <KowaLogo ariaLabel={brand.ariaLabel} name={brand.name} location={brand.location ?? ''} showText={false} />
-            <span className="footer7-title">{brand.name}</span>
+            <span className="footer7-title" translate="no">{brand.name}</span>
           </Link>
           <p className="footer7-desc">{description}</p>
           <ul className="footer7-social" aria-label={socialGroupAria}>

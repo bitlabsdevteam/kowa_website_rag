@@ -72,6 +72,30 @@ html:lang(zh) {
   --font-display: var(--font-sans), 'Hiragino Sans', 'Yu Gothic', sans-serif;
 }
 
+/* CJK line breaking: the UA default treats every Han/Hiragana/Katakana
+   character as its own break opportunity, so unspaced Japanese/Chinese prose
+   can split mid-word (e.g. 廃プラス|チック). `keep-all` restores whole-word
+   breaking for CJK runs while leaving Latin text (URLs, inline English)
+   unaffected; `line-break: strict` keeps kinsoku punctuation rules on. */
+html:lang(ja) p,
+html:lang(ja) h1,
+html:lang(ja) h2,
+html:lang(ja) h3,
+html:lang(ja) h4,
+html:lang(zh) p,
+html:lang(zh) h1,
+html:lang(zh) h2,
+html:lang(zh) h3,
+html:lang(zh) h4 {
+  word-break: keep-all;
+  line-break: strict;
+  overflow-wrap: break-word;
+  /* On very narrow columns a keep-all run can still be forced to break; this
+     keeps a trailing 、/。 hanging off the line instead of orphaned alone at
+     the start of the next one (WebKit only — a harmless no-op elsewhere). */
+  hanging-punctuation: allow-end;
+}
+
 /* Final light-theme cleanup to override older dark corporate styles */
 .shell::before,
 .hero-panel::after,
@@ -5491,6 +5515,13 @@ a:focus-visible {
 
 .footer7-brand-col {
   display: grid;
+  /* Explicit track (not the default `auto`) lets the grid item below shrink
+     to the column's own width. Without it, `.footer7-desc`'s min-width:auto
+     sizes to its min-content contribution — which, once `word-break: keep-all`
+     makes unspaced ja/zh copy a single unbreakable run, is far wider than
+     `max-width` — so WebKit lets the paragraph overflow past this column and
+     into the nav groups (Chromium/Firefox size the auto track correctly). */
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-content: start;
   max-width: 44ch;
@@ -10858,6 +10889,7 @@ section.card,
 
 .home-business-story-body {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   margin-top: clamp(20px, 3vw, 32px);
   text-align: left;
@@ -11378,7 +11410,7 @@ section.card,
 .business-line-row {
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 6px 24px;
   padding: 22px 0;
   border-bottom: 1px solid var(--color-line);
@@ -11388,7 +11420,7 @@ section.card,
 
 @media (min-width: 720px) {
   .business-line-row {
-    grid-template-columns: 4rem 14rem 1fr;
+    grid-template-columns: 4rem 14rem minmax(0, 1fr);
     align-items: baseline;
     gap: 8px 32px;
   }
