@@ -17,10 +17,10 @@ const FACTORY_PHOTO = {
   enEyebrow: 'Production Site',
   jaTitle: '群馬工場',
   enTitle: 'Gunma Factory',
-  jaCaption: 'G.P. Polymerの再生ライン拠点。',
-  enCaption: 'G.P. Polymer’s line, circular supply.',
-  zhHantCaption: 'G.P. Polymer 再生產線據點。',
-  zhHansCaption: 'G.P. Polymer 再生产线据点。',
+  jaCaption: 'ジー・ピー・ポリマー株式会社の再生ライン拠点。',
+  enCaption: 'G.P. Polymer Co.,LTD — circular supply line.',
+  zhHantCaption: 'G.P. Polymer Co.,LTD 再生產線據點。',
+  zhHansCaption: 'G.P. Polymer Co.,LTD 再生产线据点。',
 };
 
 const FACTORY_CAPTION_BY_LOCALE: Record<Locale, string> = {
