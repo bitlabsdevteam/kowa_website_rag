@@ -202,7 +202,14 @@ export default function CardFanCarousel({
       const wasVisible = previouslyVisible.has(cardIndex);
 
       if (slot !== undefined) {
-        const { x, y, rot, scale, zIndex } = config(slot);
+        const { x, y, rot, scale, zIndex: slotZIndex } = config(slot);
+        // Even-sized fans straddle their geometric centre between two slots
+        // with identical |offset|, so they also tie on zIndex — without this
+        // bump, CSS resolves the tie by DOM order (later card index wins),
+        // which can paint a non-centred card over the one the caption below
+        // names as selected. Nudging the actual centred card's index above
+        // its tied twin keeps caption and topmost visual in sync.
+        const zIndex = cardIndex === centerIndex ? slotZIndex + 1 : slotZIndex;
         const target = {
           x: `${x * multiplier}rem`,
           y: `${y * hMult}rem`,
@@ -233,10 +240,10 @@ export default function CardFanCarousel({
     prevVisible.current = new Set(visibleMap.keys());
 
     // Hover interactions
-    const visibleEntries: { el: HTMLElement; slot: number }[] = [];
+    const visibleEntries: { el: HTMLElement; slot: number; isCenterCard: boolean }[] = [];
     cardElements.forEach((el, i) => {
       const slot = visibleMap.get(i);
-      if (slot !== undefined) visibleEntries.push({ el, slot });
+      if (slot !== undefined) visibleEntries.push({ el, slot, isCenterCard: i === centerIndex });
     });
     visibleEntries.sort((a, b) => a.slot - b.slot);
 
@@ -248,7 +255,7 @@ export default function CardFanCarousel({
       const mult = getResponsiveMultiplier(window.innerWidth);
       const hM = getHeightMultiplier(window.innerWidth);
 
-      visibleEntries.forEach(({ el, slot }) => {
+      visibleEntries.forEach(({ el, slot, isCenterCard }) => {
         const base = config(slot);
         let targetX = base.x * mult;
         let targetY = base.y * hM;
@@ -292,7 +299,7 @@ export default function CardFanCarousel({
           ease: 'elastic.out(1,.75)',
           overwrite: 'auto',
         });
-        gsap.set(el, { zIndex: base.zIndex });
+        gsap.set(el, { zIndex: isCenterCard ? base.zIndex + 1 : base.zIndex });
       });
     };
 
