@@ -1052,6 +1052,9 @@ body {
 .products-merch-copy,
 .machines-spotlight-head {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this head to its h2/lead's
+     max-content width instead of its own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -1623,11 +1626,17 @@ body {
 
 .location-map {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this implicit column to its
+     content's max-content width instead of this section's own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(22px, 3vw, 36px);
 }
 
 .location-map-intro {
   display: grid;
+  /* Same fix, one level deeper: the lead paragraph's max-content width was
+     escaping this grid's own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   max-width: 52ch;
 }
@@ -1961,6 +1970,10 @@ body {
 .news-card {
   padding: 24px;
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this card to its excerpt's
+     max-content width instead of its own grid-track box, running CJK
+     excerpt copy off the viewport instead of wrapping. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
 }
 
@@ -2158,7 +2171,9 @@ body {
   .products-guidance-strip,
   .machines-spotlight,
   .company-profile-hero {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr): bare 1fr sizes to content's max-content width in
+       WebKit instead of collapsing to the available width. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .reference-card-grid,
@@ -3374,6 +3389,9 @@ a:focus-visible {
 
 .stack-list {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this implicit column to its
+     content's max-content width instead of its own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -3777,6 +3795,9 @@ a:focus-visible {
 
 .machines-source-note {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this note to its copy's
+     max-content width instead of its own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
   padding: 24px 26px;
   background:
@@ -4000,6 +4021,9 @@ a:focus-visible {
 
 .machines-spotlight-copy {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this card to its head/lead's
+     max-content width instead of its own grid-track box. */
+  grid-template-columns: minmax(0, 1fr);
   align-content: center;
   gap: 22px;
   padding: 30px 30px 28px;
@@ -4007,6 +4031,9 @@ a:focus-visible {
 
 .machines-spotlight-head {
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this head to its h2/lead's
+     max-content width instead of its own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 12px;
 }
 
@@ -6436,20 +6463,24 @@ a:focus-visible {
     align-items: flex-start;
   }
 
-  /* .products-page-head specifically: align-items: flex-start above makes
-     WebKit size this column's paragraph child by shrink-to-fit instead of
-     the flex container's own box, letting the CJK intro copy run off the
-     viewport instead of wrapping. stretch forces a definite cross size so
-     the text wraps correctly; scoped narrowly so the other flex-start
-     siblings above (non-text-bearing) are unaffected. */
-  .products-page-head {
+  /* .products-page-head and .machines-return-panel specifically: align-items:
+     flex-start above makes WebKit size this column's text child by
+     shrink-to-fit instead of the flex container's own box, letting CJK copy
+     run off the viewport instead of wrapping. stretch forces a definite
+     cross size so the text wraps correctly; scoped narrowly so the other
+     flex-start siblings above (non-text-bearing) are unaffected. */
+  .products-page-head,
+  .machines-return-panel {
     align-items: stretch;
   }
 
   .products-merch-hero,
   .machines-intro-grid,
   .machines-spotlight {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr): a bare 1fr track sizes to its content's max-content
+       width in WebKit instead of collapsing to the available width, running
+       CJK copy off the viewport instead of wrapping. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .products-carousel-stage {
@@ -7461,7 +7492,10 @@ body {
   .machines-intro-grid,
   .machines-spotlight,
   .machines-selector-list {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr): a later duplicate of this same breakpoint's rule above
+       used a bare 1fr and won the cascade (later in source, equal
+       specificity), undoing that fix — keep both in sync. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .corporate-hero-summary {
@@ -7655,7 +7689,9 @@ body {
 
 @media (max-width: 1120px) {
   .machines-support-grid {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr): same WebKit auto-track blowout as above — the source
+       note's CJK copy was escaping this grid's own box. */
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .company-profile-facts-band {
@@ -8180,6 +8216,10 @@ html:lang(en) .reference-section-title {
   --cine-deep: #f4f6f8;
   position: relative;
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this band to its widest child's
+     (the stage head's) max-content width instead of its own box, running
+     CJK stage copy off the viewport instead of wrapping. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 22px;
   margin-inline: -30px;
   padding: 34px 30px 30px !important;
@@ -11711,7 +11751,10 @@ section.card,
   width: var(--content);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, 1fr): a bare 1fr track sizes to its widest offering card's
+     max-content width in WebKit, running CJK segment copy off the viewport
+     instead of wrapping. Same class of bug as .business-flow-list above. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 32px;
 }
 
