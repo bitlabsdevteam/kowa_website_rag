@@ -68,6 +68,9 @@ Canonical tokens live in `:root` in `app/globals.css` as `--color-*`; the short 
 - Chat UI must clearly show conversation state: loading, answer, and source/citation metadata when available.
 - Keep information architecture clear: high-level context on `/`, deeper content on dedicated pages, non-blocking popup chat.
 
+## Cross-Browser Verification (Non-Negotiable)
+Any UI-affecting change — new feature, fix, or adjustment — must be verified working in **Chrome, Edge, and Safari** before it is considered done. This includes layout, animation/motion (hero scene, scroll-reveal, glass/backdrop effects), forms, and the chatbot UI. A change is not "passed" if it only checks out in one engine (WebKit vs. Blink differences have already caused regressions in this project — see `--color-hero-scrim` performance contract and prior i18n/CJK line-breaking fixes). Use the `claude-in-chrome` tools or manual verification across all three browsers; note in the PR/summary which browsers were checked.
+
 ## Commit & PR Rules
 - Conventional commits: `feat(scope): …`, `fix(scope): …`, `docs: …`, `chore: …`.
 - PRs include: summary, linked task, test evidence, and screenshots for UI changes.
