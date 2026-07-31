@@ -9074,8 +9074,29 @@ html:lang(en) .reference-section-title {
   align-items: center;
   text-align: center;
   gap: 10px;
+  width: 100%;
   max-width: 62ch;
   margin: 0 auto;
+  /* .pgallery-head is a grid item of the `.card.product-grid` section, so
+     with `width: auto` it should stretch to the grid track's width. In
+     WebKit, once `word-break: keep-all` (see html:lang(ja/zh) rule above)
+     makes the unspaced CJK intro copy near-unbreakable, the item instead
+     sizes itself up to `max-width` regardless of the (narrower) track,
+     overflowing the card (WebKit only — Chromium/Firefox stretch it
+     correctly). An explicit `width: 100%` forces it back to the track's
+     actual width; min-width: 0 lets it shrink below the text's min-content. */
+  min-width: 0;
+}
+
+/* Children are cross-axis flex items under `align-items: center`, which
+   sizes each to fit-content — a shrink-to-fit formula whose floor is the
+   box's own intrinsic min-content, not overridable by CSS min-width. With
+   `word-break: keep-all` making the CJK intro's min-content wide, that
+   floor wins over the (narrower) available width in WebKit. Forcing
+   width: 100% makes each child fill the row instead of shrink-wrapping. */
+.pgallery-head > * {
+  width: 100%;
+  min-width: 0;
 }
 
 .pgallery-head .page-title {
@@ -11718,6 +11739,12 @@ section.card,
 
 .offering-card {
   display: block;
+  /* Grid item of .offering-cards; defaults to min-width: auto (min-content).
+     word-break: keep-all (html:lang(ja/zh) rule) makes the CJK body copy
+     near-unbreakable, so its min-content can exceed the 1fr track/viewport
+     width and blow out the grid column (WebKit only — Chromium/Firefox
+     clamp it; same pattern as .pgallery-head above). */
+  min-width: 0;
   padding: 18px 20px;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-card);
