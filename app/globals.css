@@ -9167,6 +9167,16 @@ html:lang(en) .reference-section-title {
   min-width: 0;
 }
 
+/* The eyebrow badge isn't a wrapping text block like the h1/lead above — it's
+   a short fixed-label pill. The width: 100% rule above (needed for the CJK
+   title/lead) also stretches it to the full row, inflating "PRODUCTS"/"产品"
+   into a near-full-width outline instead of a compact badge. Restore its own
+   fit-content sizing. */
+.pgallery-head > .eyebrow {
+  width: fit-content;
+  align-self: center;
+}
+
 .pgallery-head .page-title {
   margin: 0;
 }
