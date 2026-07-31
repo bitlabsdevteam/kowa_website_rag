@@ -1481,6 +1481,10 @@ body {
 
 .contact-page-intro {
   display: grid;
+  /* Same WebKit auto-track blowout as .contact-page-layout above, one level
+     deeper: without minmax(0, 1fr) the lead paragraph's max-content width
+     escapes this grid's own box. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-content: start;
 }
@@ -1604,7 +1608,10 @@ body {
 
 @media (max-width: 860px) {
   .contact-page-layout {
-    grid-template-columns: 1fr;
+    /* minmax(0, 1fr): a bare 1fr track sizes to its content's max-content
+       width in WebKit instead of the container's own box, letting the CJK
+       lead copy run off the viewport instead of wrapping. */
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -5683,6 +5690,12 @@ a:focus-visible {
 
 .company-profile-surface {
   display: grid;
+  /* minmax(0, 1fr), not the implicit auto track: WebKit sizes an unconstrained
+     grid track to its content's max-content width, letting the centered hero
+     (and its unbreakable CJK legal name) blow out past this surface's own
+     box on narrow viewports instead of wrapping. See the `.page` rule below
+     for the same fix applied one level up. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 28px;
 }
 
@@ -5935,6 +5948,11 @@ a:focus-visible {
   padding-top: clamp(32px, 5vw, 56px);
   border-top: 1px solid var(--color-line);
   display: grid;
+  /* minmax(0, 1fr): without it WebKit sizes this implicit single-column
+     track to its widest descendant's max-content width (the intro copy or
+     a timeline entry's detail text), running CJK copy off the viewport
+     instead of wrapping — same fix as .company-profile-surface above. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
   overflow: hidden;
 }
@@ -6416,6 +6434,16 @@ a:focus-visible {
   .machines-return-panel {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  /* .products-page-head specifically: align-items: flex-start above makes
+     WebKit size this column's paragraph child by shrink-to-fit instead of
+     the flex container's own box, letting the CJK intro copy run off the
+     viewport instead of wrapping. stretch forces a definite cross size so
+     the text wraps correctly; scoped narrowly so the other flex-start
+     siblings above (non-text-bearing) are unaffected. */
+  .products-page-head {
+    align-items: stretch;
   }
 
   .products-merch-hero,
@@ -11896,7 +11924,10 @@ section.card,
 .business-flow-list {
   margin-top: 32px;
   display: grid;
-  grid-template-columns: 1fr;
+  /* minmax(0, 1fr): a bare 1fr track lets WebKit size the single-column list
+     to its widest step's max-content width, running the CJK step detail off
+     the viewport instead of wrapping. */
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
   counter-reset: flow-step;
 }
