@@ -9253,10 +9253,6 @@ html:lang(en) .reference-section-title {
   text-align: center;
   max-width: 52ch;
   margin: 40px auto;
-  padding: 32px 24px;
-  border: 1px dashed var(--color-line);
-  border-radius: 16px;
-  background: #f8fbf8;
 }
 
 .products-category-empty-title {
@@ -9266,6 +9262,7 @@ html:lang(en) .reference-section-title {
 
 .products-category-empty .body-copy {
   margin: 0;
+  white-space: pre-line;
 }
 
 .products-category-empty-cta {
