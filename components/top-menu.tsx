@@ -42,7 +42,7 @@ type TopMenuProps = {
 
 const LOCALE_ORDER: LocaleValue[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
 
-export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'en', onLocaleChange, showBrandText = false }: TopMenuProps) {
+export function TopMenu({ labels, brand, localeLabel = 'Language', locale = 'ja', onLocaleChange, showBrandText = false }: TopMenuProps) {
   const [open, setOpen] = useState(false);
   const [localeOpen, setLocaleOpen] = useState(false);
   const localeControlRef = useRef<HTMLDivElement>(null);

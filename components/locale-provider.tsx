@@ -8,7 +8,7 @@ const STORAGE_KEY = 'kowa-locale';
 const SUPPORTED: readonly Locale[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
 
 // Keeps the browser tab title in step with the locale's actual brand copy
-// (locales/*.json `brand.ariaLabel`) instead of the static English default
+// (locales/*.json `brand.ariaLabel`) instead of the static Japanese default
 // baked into app/layout.tsx metadata.
 function applyDocumentTitle(locale: Locale) {
   document.title = SITE_COPY[locale].brand.ariaLabel;
@@ -34,14 +34,14 @@ const LocaleContext = createContext<LocaleContextValue | null>(null);
  * App-wide locale state. Mounted once in the root layout, which does NOT remount
  * during client-side navigation — so the selected language persists across page
  * changes. Without this, each page re-derived locale from scratch (defaulting to
- * 'en' then reading localStorage after mount), causing a visible English→stored
+ * 'ja' then reading localStorage after mount), causing a visible Japanese→stored
  * language flip on every navigation that read like a page refresh.
  */
 export function LocaleProvider({ children }: { children: React.ReactNode }) {
-  // Server render and first client render both use 'en' to avoid hydration
+  // Server render and first client render both use 'ja' to avoid hydration
   // mismatch; the stored value is applied once after mount (one-time only,
   // since this provider then stays mounted for the whole session).
-  const [locale, setLocaleState] = useState<Locale>('en');
+  const [locale, setLocaleState] = useState<Locale>('ja');
 
   useEffect(() => {
     const stored = readStoredLocale();

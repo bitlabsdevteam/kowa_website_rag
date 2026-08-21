@@ -16,8 +16,8 @@ export default defineConfig({
     },
   },
   projects: [
-    // Desktop runs every spec except the mobile-only story spec; the
-    // mobile-chromium project runs exactly that one (touch + phone viewport).
+    // Desktop runs every spec except the mobile-only story spec; mobile
+    // projects run the touch/phone story in both browser engines.
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
@@ -28,11 +28,21 @@ export default defineConfig({
       use: { ...devices['Pixel 7'] },
       testMatch: '**/v28-factory-story-mobile.spec.ts',
     },
+    {
+      name: 'webkit',
+      use: { ...devices['Desktop Safari'] },
+      testIgnore: '**/v28-factory-story-mobile.spec.ts',
+    },
+    {
+      name: 'mobile-webkit',
+      use: { ...devices['iPhone 13'] },
+      testMatch: '**/v28-factory-story-mobile.spec.ts',
+    },
   ],
   webServer: {
     command: `npm run dev -- --hostname 127.0.0.1 --port ${PORT}`,
     url: BASE_URL,
-    reuseExistingServer: false,
+    reuseExistingServer: true,
     timeout: 120_000,
   },
 });

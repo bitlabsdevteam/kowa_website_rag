@@ -8,7 +8,7 @@ const COMMERCIAL_INTENT_KEYWORDS: Array<[AssistantIntent, string[]]> = [
   ['logistics', ['shipping', 'shipment', 'logistics', 'delivery', 'export', 'import', 'customs', '物流', '配送', '輸出', '輸入', '报关', '出口', '进口']],
 ];
 
-export function detectAssistantLanguage(input: string, fallback: AssistantLanguage = 'en'): AssistantLanguage {
+export function detectAssistantLanguage(input: string, fallback: AssistantLanguage = 'ja'): AssistantLanguage {
   if (/[\u3040-\u30ff]/.test(input)) return 'ja';
   if (/[這來們為請問產業聯繫報採購樹脂塑]/.test(input)) return 'zh-Hant';
   if (/[这来们为请问产业联系报采购树脂塑]/.test(input)) return 'zh-Hans';

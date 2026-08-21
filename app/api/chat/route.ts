@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'message is required' }, { status: 400 });
   }
 
-  const session = createAssistantSessionRecord({ locale: 'en', entryPage: '/#assistant', channel: 'website' });
+  const session = createAssistantSessionRecord({ locale: body.locale ?? 'ja', entryPage: '/#assistant', channel: 'website' });
   const assistant = await runAssistantTurn({
     sessionId: session.sessionId,
     conversationId: session.conversationId,
