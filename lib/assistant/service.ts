@@ -313,7 +313,7 @@ export function createAssistantSessionRecord(input: AssistantSessionRequest): As
   return createAssistantSession({
     ...input,
     entryPage,
-    language: input.locale ?? 'en',
+    language: input.locale ?? 'ja',
     channel: input.channel ?? 'website',
   });
 }
@@ -349,7 +349,7 @@ export async function runAssistantTurn(input: AssistantTurnRequest): Promise<Ass
     const created = createAssistantSession({
       sessionId: input.sessionId,
       conversationId: input.conversationId,
-      language: input.locale ?? 'en',
+      language: input.locale ?? 'ja',
       channel: 'website',
     });
     session = getAssistantSession(created.sessionId);

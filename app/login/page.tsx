@@ -7,11 +7,13 @@ import { LocalizedFooter } from '@/components/localized-footer';
 import { LocalizedTopMenu } from '@/components/localized-top-menu';
 import { setLocalAdminAuth } from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
 export default function LoginPage() {
-  const site = SITE_COPY.en;
-  const copy = SITE_COPY.en.loginPage;
+  const [locale] = useLocale();
+  const site = SITE_COPY[locale];
+  const copy = site.loginPage;
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

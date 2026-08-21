@@ -1,5 +1,6 @@
 export type ChatRequest = {
   message: string;
+  locale?: 'en' | 'ja' | 'zh-Hans' | 'zh-Hant';
 };
 
 export type Citation = {

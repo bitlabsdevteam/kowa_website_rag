@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 
 // Runs before hydration so a returning visitor's stored locale is reflected in
 // `<html lang>` on the very first frame. Without this, the page briefly (and,
-// for the initial paint, entirely) reports lang="en" while a JA/ZH visitor's
+// for the initial paint, entirely) reports lang="ja" while a JA/ZH visitor's
 // browser renders JA/ZH DOM content read from localStorage, which is exactly
 // the mismatch that made Chrome auto-translate the page and rewrite the
 // company name in the tab title. The `notranslate` class, `translate="no"`
@@ -49,8 +49,10 @@ const SET_INITIAL_LANG_SCRIPT = `
 (function () {
   try {
     var stored = window.localStorage.getItem('kowa-locale');
-    if (stored) {
+    if (stored === 'en' || stored === 'ja' || stored === 'zh-Hans' || stored === 'zh-Hant') {
       document.documentElement.lang = stored;
+    } else {
+      document.documentElement.lang = 'ja';
     }
   } catch (e) {}
 })();
@@ -67,7 +69,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
-      lang="en"
+      lang="ja"
       translate="no"
       data-scroll-behavior="smooth"
       className={`notranslate ${inter.variable} ${notoSansJp.variable}`}

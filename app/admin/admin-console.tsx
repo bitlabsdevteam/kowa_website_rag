@@ -12,6 +12,7 @@ import {
   writeLocalAdminSources,
 } from '@/lib/admin-auth';
 import { SITE_COPY } from '@/lib/site-copy';
+import { useLocale } from '@/lib/use-locale';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 
 type SourceRecord = {
@@ -27,7 +28,8 @@ type SourceRecord = {
 type GateState = 'loading' | 'denied' | 'allowed';
 
 export function AdminConsole() {
-  const copy = SITE_COPY.en.adminPage;
+  const [locale] = useLocale();
+  const copy = SITE_COPY[locale].adminPage;
   const [gate, setGate] = useState<GateState>('loading');
   const [sources, setSources] = useState<SourceRecord[]>([]);
   const [queueItems, setQueueItems] = useState<AdminQueueItem[]>([]);
