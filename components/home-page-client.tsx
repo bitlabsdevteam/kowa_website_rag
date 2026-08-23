@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { HeroParallaxStage } from '@/components/home/hero-parallax-stage';
 import { HeroYardParallax } from '@/components/home/hero-yard-parallax';
 import { HomeBusinessParallax } from '@/components/home/home-business-parallax';
@@ -41,10 +39,6 @@ export function HomePageClient() {
   const [locale, setLocale] = useLocale();
   const copy = SITE_COPY[locale];
   const ui = HOME_UI[locale];
-
-  useEffect(() => {
-    document.documentElement.lang = locale;
-  }, [locale]);
 
   return (
     <main className="page shell reference-site">

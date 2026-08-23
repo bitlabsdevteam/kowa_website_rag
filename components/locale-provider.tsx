@@ -3,27 +3,19 @@
 import { createContext, startTransition, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { SITE_COPY, type Locale } from '@/lib/site-copy';
-
-const STORAGE_KEY = 'kowa-locale';
-const SUPPORTED: readonly Locale[] = ['en', 'ja', 'zh-Hans', 'zh-Hant'];
+import {
+  LOCALE_POLICY_VERSION_KEY,
+  LOCALE_POLICY_VERSION,
+  LOCALE_STORAGE_KEY,
+  migrateStoredLocale,
+  isLocale,
+} from '@/lib/locale-policy';
 
 // Keeps the browser tab title in step with the locale's actual brand copy
 // (locales/*.json `brand.ariaLabel`) instead of the static Japanese default
 // baked into app/layout.tsx metadata.
 function applyDocumentTitle(locale: Locale) {
   document.title = SITE_COPY[locale].brand.ariaLabel;
-}
-
-function isLocale(value: string | null): value is Locale {
-  return value !== null && (SUPPORTED as readonly string[]).includes(value);
-}
-
-function readStoredLocale(): Locale | null {
-  if (typeof window === 'undefined') {
-    return null;
-  }
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-  return isLocale(stored) ? stored : null;
 }
 
 type LocaleContextValue = [Locale, (next: Locale) => void];
@@ -44,18 +36,18 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
   const [locale, setLocaleState] = useState<Locale>('ja');
 
   useEffect(() => {
-    const stored = readStoredLocale();
-    if (stored && stored !== locale) {
-      setLocaleState(stored);
+    const migratedLocale = migrateStoredLocale(window.localStorage);
+    if (migratedLocale !== locale) {
+      setLocaleState(migratedLocale);
     }
-    document.documentElement.lang = stored ?? locale;
-    applyDocumentTitle(stored ?? locale);
+    document.documentElement.lang = migratedLocale;
+    applyDocumentTitle(migratedLocale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     const onStorage = (event: StorageEvent) => {
-      if (event.key === STORAGE_KEY && isLocale(event.newValue)) {
+      if (event.key === LOCALE_STORAGE_KEY && isLocale(event.newValue)) {
         setLocaleState(event.newValue);
         document.documentElement.lang = event.newValue;
         applyDocumentTitle(event.newValue);
@@ -67,7 +59,8 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
   const setLocale = useCallback((next: Locale) => {
     if (typeof window !== 'undefined') {
-      window.localStorage.setItem(STORAGE_KEY, next);
+      window.localStorage.setItem(LOCALE_STORAGE_KEY, next);
+      window.localStorage.setItem(LOCALE_POLICY_VERSION_KEY, LOCALE_POLICY_VERSION);
       document.documentElement.lang = next;
       applyDocumentTitle(next);
     }

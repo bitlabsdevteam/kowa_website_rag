@@ -48,12 +48,18 @@ export const metadata: Metadata = {
 const SET_INITIAL_LANG_SCRIPT = `
 (function () {
   try {
-    var stored = window.localStorage.getItem('kowa-locale');
-    if (stored === 'en' || stored === 'ja' || stored === 'zh-Hans' || stored === 'zh-Hant') {
-      document.documentElement.lang = stored;
-    } else {
-      document.documentElement.lang = 'ja';
+    var localeKey = 'kowa-locale';
+    var versionKey = 'kowa-locale-version';
+    var policyVersion = 'ja-default-v1';
+    var stored = window.localStorage.getItem(localeKey);
+    var validLocale = stored === 'en' || stored === 'ja' || stored === 'zh-Hans' || stored === 'zh-Hant';
+    var locale = validLocale ? stored : 'ja';
+    if (window.localStorage.getItem(versionKey) !== policyVersion && locale === 'en') {
+      locale = 'ja';
     }
+    window.localStorage.setItem(localeKey, locale);
+    window.localStorage.setItem(versionKey, policyVersion);
+    document.documentElement.lang = locale;
   } catch (e) {}
 })();
 `;
